@@ -808,13 +808,4 @@ function status_sukses($outp, $gagal_saja=false)
 		$CI->session->success = $outp ? 1 : -1;
 }
 
-function kembali()
-{
-	// Kembali ke halaman sebelumnya
-	redirect($_SERVER['HTTP_REFERER']);
-}
-
-
-
-
 ?>

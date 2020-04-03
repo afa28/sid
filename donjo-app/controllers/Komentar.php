@@ -1,6 +1,8 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Komentar extends Admin_Controller {
+class Komentar extends Admin_Controller 
+{
+	private $_kembali;
 
 	public function __construct()
 	{
@@ -8,8 +10,8 @@ class Komentar extends Admin_Controller {
 		session_start();
 		$this->load->model('header_model');
 		$this->load->model('web_komentar_model');
-		$this->modul = 'komentar';
 		$this->modul_ini = 13;
+		$this->_kembali = $_SERVER['HTTP_REFERER'];
 	}
 
 	public function clear()
@@ -17,7 +19,7 @@ class Komentar extends Admin_Controller {
 		unset($_SESSION['cari']);
 		unset($_SESSION['filter_status']);
 		$_SESSION['filter_user'] = 0;
-		redirect($this->modul);
+		redirect('komentar');
 	}
 
 	public function index($p=1, $o=0)
@@ -51,35 +53,35 @@ class Komentar extends Admin_Controller {
 
 		$this->load->view('header', $header);
 		$this->load->view('nav', $nav);
-		$this->load->view($this->modul.'/table', $data);
+		$this->load->view('komentar/table', $data);
 		$this->load->view('footer');
 	}
 
 	public function balas($id='')
 	{
-		$data['form_action'] 	= site_url($this->modul."/insert/".$id);
+		$data['form_action'] 	= site_url("komentar/insert/".$id);
 
-		$this->load->view($this->modul.'/modal_balas', $data);
+		$this->load->view('komentar/modal_balas', $data);
 	}
 
 	public function ubah($id='')
 	{
 		$data['komentar'] 		= $this->web_komentar_model->get_komentar($id);
-		$data['form_action'] 	= site_url($this->modul."/update/".$id);
+		$data['form_action'] 	= site_url("komentar/update/".$id);
 
-		$this->load->view($this->modul.'/modal_balas', $data);
+		$this->load->view('komentar/modal_balas', $data);
 	}
 
 	public function insert($id='')
 	{
 		$this->web_komentar_model->insert($id);
-		redirect($this->modul);
+		redirect('komentar');
 	}
 
 	public function update($id='')
 	{
 		$this->web_komentar_model->update($id);
-		redirect($this->modul);
+		redirect('komentar');
 	}
 	
 	public function search()
@@ -88,7 +90,7 @@ class Komentar extends Admin_Controller {
 		if ($cari != '')
 			$_SESSION['cari'] = $cari;
 		else unset($_SESSION['cari']);
-		redirect($this->modul);
+		redirect('komentar');
 	}
 
 	public function filter()
@@ -97,33 +99,33 @@ class Komentar extends Admin_Controller {
 		if ($filter != 0)
 			$_SESSION['filter_status'] = $filter;
 		else unset($_SESSION['filter_status']);
-		redirect($this->modul);
+		redirect('komentar');
 	}
 
 	public function filter_user()
 	{
 		$filter_user = $this->input->post('filter_user');
 		$_SESSION['filter_user'] = $filter_user;
-		redirect($this->modul);
+		redirect('komentar');
 	}
 
-	public function delete($p=1, $o=0, $id='')
+	public function delete($id='')
 	{
-		$this->redirect_hak_akses('h', $this->modul."/index/$p/$o");
+		$this->redirect_hak_akses('h', $this->_kembali);
 		$this->web_komentar_model->delete($id);
-		redirect($this->modul.'/index/$p/$o');
+		redirect($this->_kembali);
 	}
 
-	public function delete_all($p=1, $o=0)
+	public function delete_all()
 	{
-		$this->redirect_hak_akses('h', $this->modul."/index/$p/$o");
+		$this->redirect_hak_akses('h', $this->_kembali);
 		$this->web_komentar_model->delete_all();
-		redirect($this->modul."/index/$p/$o");
+		redirect($this->_kembali);
 	}
 
 	public function status($id='', $status)
 	{
 		$this->web_komentar_model->komentar_lock($id, $status);
-		kembali();
+		redirect($this->_kembali);
 	}
 }
