@@ -303,5 +303,15 @@
 		$data['sinergi_program'] = $this->get_setting('sinergi_program');
 	 	$data['widget_keuangan'] = $this->keuangan_grafik_model->widget_keuangan();
 	}
+
+	public function get_file()
+	{
+		$list_widget = array();
+		foreach ($list_widget as $widget){
+			$list_widget[] = str_replace('themes/', '', $tema);
+		}
+		return $list_tema;
+	}
+
 }
 ?>

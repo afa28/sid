@@ -44,8 +44,14 @@
 							</div>
    			 			<?php if ($widget['jenis_widget'] AND $widget['jenis_widget'] ==2) $statis = true; ?>
 								<div id="statis" class="form-group" <?php if (!$statis): ?>style="display:none;"<?php endif; ?>>
-								<label class="col-sm-4 control-label" for="isi-statis">Nama File Widget (.php)</label>
+								<label class="col-sm-4 control-label" for="isi-statis">Nama File Widget</label>
 								<div class="col-sm-6">
+									<select id="jenis_widget" name="jenis_widget" class="form-control input-sm">
+										<option value="">-- Pilih Jenis Widget --</option>
+										<?php foreach ($variable as $key):?>
+											<option value="2" <?php if ($widget['jenis_widget'] == 2): ?>selected<?php endif; ?>>Statis</option>
+										<?php endforeach;?>
+									</select>
 									<input id="isi-statis" name="isi-statis" class="form-control input-sm" type="text" placeholder="Judul Widget" value="<?= $widget['isi']?>"></input>
 								</div>
 							</div>

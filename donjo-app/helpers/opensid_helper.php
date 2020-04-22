@@ -818,4 +818,22 @@ function status_sukses($outp, $gagal_saja=false)
 		$CI->session->success = $outp ? 1 : -1;
 }
 
+function daftar_file($dir)
+{
+	$list_file = array();
+	if(is_dir($dir))
+	{
+		if($handle = opendir($dir))
+		{
+			//daftar file dalam folder
+			while(($file = readdir($handle)) !== false)
+			{
+				$list_file[] = $file;
+			}
+			closedir($handle);
+		}
+	}
+	return $list_file;
+}
+
 ?>
