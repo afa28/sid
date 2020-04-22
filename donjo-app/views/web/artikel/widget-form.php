@@ -46,13 +46,25 @@
 								<div id="statis" class="form-group" <?php if (!$statis): ?>style="display:none;"<?php endif; ?>>
 								<label class="col-sm-4 control-label" for="isi-statis">Nama File Widget</label>
 								<div class="col-sm-6">
-									<select id="jenis_widget" name="jenis_widget" class="form-control input-sm">
-										<option value="">-- Pilih Jenis Widget --</option>
-										<?php foreach ($variable as $key):?>
-											<option value="2" <?php if ($widget['jenis_widget'] == 2): ?>selected<?php endif; ?>>Statis</option>
+									<select id="isi-statis" name="isi-statis" class="form-control input-sm required">
+										<option value="">-- Pilih Widget --</option>
+										<?php 
+										$tema_aktif = 'Create-Theme';
+
+										$widget_sistem = glob('donjo-app/views/widgets/*.php');
+										$widget_desa = glob('desa/themes/Create-Theme/widgets/*.php');
+										$widget_semua = array_merge($widget_sistem, $widget_desa);
+										
+										foreach($widget_semua as $widget):
+											if($tema_aktif !== 'klasik' OR $tema_aktif !== 'hadakewa'){
+												$widget = str_replace('desa/themes/Create-Theme/widgets/', '', $widget);
+											}
+											$widget = str_replace('donjo-app/views/widgets/', '', $widget);
+											?>
+											<option value="<?=$widget?>"><?=$widget?></option>	
 										<?php endforeach;?>
 									</select>
-									<input id="isi-statis" name="isi-statis" class="form-control input-sm" type="text" placeholder="Judul Widget" value="<?= $widget['isi']?>"></input>
+									<!--<input id="isi-statis" name="isi-statis" class="form-control input-sm" type="text" placeholder="Judul Widget" value=""></input>-->
 								</div>
 							</div>
 						</div>
