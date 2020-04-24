@@ -49,8 +49,8 @@
 									<?php if($list_widget):?>
 									<select id="isi-statis" name="isi-statis" class="form-control input-sm required">
 										<option value="">-- Pilih Widget --</option>
-										<?php foreach($list_widget as $widget):?>
-											<option value="<?=$widget?>"><?=$widget?></option>	
+										<?php foreach($list_widget as $list):?>
+											<option value="<?=$list?>" <?php selected($list, $widget['isi']); ?>><?=$list?></option>
 										<?php endforeach;?>
 									</select>
 									<?php else:?>
