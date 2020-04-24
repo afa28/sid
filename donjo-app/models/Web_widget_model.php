@@ -306,24 +306,15 @@
 
 	public function list_widget()
 	{
-		//$tema_aktif = $this->db->select('value')->where('key', 'web_theme')	->get('setting_aplikasi')->row()->value;
-
-		$tema_aktif = 'Create-Theme';
-
-		$widget_sistem = glob('donjo-app/views/widgets/*.php');
-		$widget_desa = glob('desa/themes/'.$tema_aktif.'/widget/*.php');
-		$widget_semua = array_merge($widget_sistem, $widget_desa);
+		$widget_desa = glob(LOKASI_WIDGET.'*.php');
 		$list_widget = array();
-		foreach ($widget_desa as $widget){
-			//if($tema_aktif !== 'klasik' OR $tema_aktif !== 'hadakewa'){
-				$widget = str_replace('desa/'.$tema_aktif.'/widget/', '', $widget);
-			//}
-			$widget = str_replace('donjo-app/views/widgets/', '', $widget);
 			
+		foreach ($widget_desa as $widget){
+			$widget = str_replace(LOKASI_WIDGET, '', $widget);
 			$list_widget[] = $widget;
 		}
 
-		return $list_widget;
+		return $list_widget;	
 	}
 }
 ?>
