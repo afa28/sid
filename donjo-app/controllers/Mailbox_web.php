@@ -35,7 +35,6 @@ class Mailbox_web extends Web_Controller
 	{
 		$this->mailbox_model->insert_web();
 		$this->session->unset_userdata('success');
-		redirect('first/mandiri/1/3/2');
 	}
 
 	public function baca_pesan($kat = 1, $id)

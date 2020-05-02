@@ -168,7 +168,7 @@ class Mailbox_model extends CI_Model {
 		}
 	}
 
-	public function insert()
+	public function insert($post)
 	{
 		$data = array(
 				'id_pengirim' => $_SESSION['user'],
@@ -181,9 +181,9 @@ class Mailbox_model extends CI_Model {
 				'created_at' => date('Y-m-d H:i:s'),
 				'updated_at' => date('Y-m-d H:i:s')
 				);
+
 		$outp = $this->db->insert('kotak_pesan', $data);
-		if ($outp) $_SESSION['success'] = 1;
-		else $_SESSION['success'] = -1;
+		status_sukses($outp);
 	}
 
 	public function list_menu()
