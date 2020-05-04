@@ -7,7 +7,7 @@
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
-		<form method='post' action=<?= site_url("zip/extract") ?> enctype='multipart/form-data'>
+		<form id="validasi" action="<?= $form_action?>" method="POST" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="box box-info">
@@ -71,11 +71,11 @@
 									<i class="fa fa-star"></i>
 								</button>
 								<!--<a href="" class="btn btn-success btn-sm disabled"  title="Active"><i class="fa fa-star"></i>Active</a>-->
-								<a href="<?= site_url("tema/edit/" . $nama . '/' . $kat) ?>" class="btn btn-primary btn-sm"  title="Edit"><i class="fa fa-pencil"></i></a>
+								<a href="<?= site_url("tema/edit/" . $nama) ?>" class="btn btn-primary btn-sm"  title="Edit"><i class="fa fa-pencil"></i></a>
 								<button type="button" class="btn btn-danger btn-sm disabled">
 									<i class="fa fa-trash-o"></i>
 								</button>
-								<a href="<?= site_url("tema/backup/" . $nama . '/' . $kat) ?>" class="btn bg-navy btn-sm"  title="Backup"><i class="fa fa-download"></i></a>
+								<a href="<?= site_url("tema/backup/" . $nama) ?>" class="btn bg-navy btn-sm"  title="Backup"><i class="fa fa-download"></i></a>
 							</div>
 						</div>
 					</div>
@@ -84,14 +84,14 @@
 			<?php
 			$no = 1;
 			foreach ($list_tema as $tema) :
-				$tema = explode('/', $tema);
+				$cut = explode('/', $tema);
 
-				if($tema[0] != 'desa'):
-					$nama = $tema[0];
+				if($cut[0] != 'desa'):
+					$nama = $cut[0];
 					$lokasi = 'themes/'.$nama;
 				else:
-					$nama = $tema[1];
-					$lokasi = $tema[0].'/themes/'.$nama;
+					$nama = $cut[1];
+					$lokasi = $cut[0].'/themes/'.$nama;
 				endif;
 
 				if($nama != $this->theme):
@@ -123,14 +123,14 @@
 								</div>
 								<div class="text-center">
 									<div class="btn-group">
-										<a href="" class="btn btn-success btn-sm"  title="Active"><i class="fa fa-star"></i></a>
-										<a href="<?= site_url("tema/edit/" . $nama) ?>" class="btn btn-primary btn-sm"  title="Edit"><i class="fa fa-pencil"></i></a>
+										<a href="<?= site_url("tema/change/" . $tema) ?>" class="btn btn-success btn-sm"  title="Active"><i class="fa fa-star"></i></a>
+										<a href="<?= site_url("tema/edit/" . $tema) ?>" class="btn btn-primary btn-sm"  title="Edit"><i class="fa fa-pencil"></i></a>
 										<?php if($lokasi == 'themes'):?>
 											<button type="button" class="btn btn-danger btn-sm disabled">
 												<i class="fa fa-trash-o"></i>
 											</button>
 											<?php else : ?>
-												<a href="#" data-href="<?= site_url("tema/delete/" . $nama) ?>" class="btn btn-danger btn-sm"  title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+												<a href="#" data-href="<?= site_url("tema/delete/" . $tema) ?>" class="btn btn-danger btn-sm"  title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 											<?php endif;?>
 											<a href="<?= site_url("tema/backup/" . $nama) ?>" class="btn bg-navy btn-sm"  title="Backup"><i class="fa fa-download"></i></a>
 										</div>

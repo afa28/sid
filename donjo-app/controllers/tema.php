@@ -29,13 +29,9 @@ class Tema extends Admin_Controller
 	}
 
 	//hapus folder dan file
-	public function delete($themes, $kat)
+	public function delete($folder, $tema)
 	{
-		if($kat == 0) {
-			$folder = 'desa/themes/'.$themes;
-		} else{
-			$folder = 'themes/'.$themes;
-		}
+		$folder = $folder.'themes'.$tema;
 
 		delete_files($folder, true , false, 1);
 
@@ -43,17 +39,31 @@ class Tema extends Admin_Controller
 	}
 
 	//ganti tema
-	public function ganti_tema($the, $mes=null)
+	public function change($folder, $tema = NULL)
 	{
-		if($mes == NULL)
+		if($tema != NULL){
+			$themes = $folder.'/'.$tema;
+		}
+		else
 		{
-			$themes = $the;
-		}else{
-			$themes = $the.'/'.$mes;
+			$themes = $folder;
 		}
 
-		$this->db->query("UPDATE setting_aplikasi SET value = '".$themes."'  WHERE `key` = 'web_theme'");
+		$this->db->where('key', 'web_theme')->update('setting_aplikasi', array('value' => $themes));
 
 		redirect('tema');
 	}
+
+	/*
+	public function _cek($folder, $tema)
+	{
+
+		if($tema != 'klasik' OR $tema != 'hadakewa')
+		{
+
+		}
+		return $tema;
+	}
+	*/
+
 }
