@@ -14,7 +14,7 @@ class Migrasi_2005_ke_2006 extends CI_model {
 		rename('desa/upload/widget', 'desa/upload/widgets');
 		// Arahkan semua widget statis ubahan desa ke folder desa/widgets
 		$list_widgets = $this->db->where('jenis_widget', 2)->get('widget')->result_array();
-		foreach ($list_widgets as $widgets) 
+		foreach ($list_widgets as $widgets)
 		{
 			$ganti = str_replace('desa/widget', 'desa/widgets', $widgets['isi']); // Untuk versi 20.04-pasca ke atas
 			$cek = explode('/', $ganti); // Untuk versi 20.04 ke bawah
@@ -25,6 +25,8 @@ class Migrasi_2005_ke_2006 extends CI_model {
 		}
   	// Sesuaikan dengan sql_mode STRICT_TRANS_TABLES
 		$this->db->query("ALTER TABLE outbox MODIFY COLUMN CreatorID text NULL");
+
+		$this->tema();
 	}
 
 	private function grup_akses_covid19()
@@ -44,5 +46,36 @@ class Migrasi_2005_ke_2006 extends CI_model {
 			$this->db->query($sql);
 		}
 	}
-	
+
+	// Pengaturan tema
+	private function tema()
+	{
+		// Tambah Modul Pengunjung pada Admin WEB
+		$data = array(
+				'id' => 205,
+				'modul' => 'Tema',
+				'url' => 'tema',
+				'aktif' => 1,
+				'ikon' => 'fa-object-group',
+				'urut' => 6,
+				'level' => 2,
+				'hidden' => 0,
+				'ikon_kecil' => 'fa-object-group',
+				'parent' => 11
+				);
+		$sql = $this->db->insert_string('setting_modul', $data);
+		$sql .= " ON DUPLICATE KEY UPDATE
+				modul = VALUES(modul),
+				url = VALUES(url),
+				aktif = VALUES(aktif),
+				ikon = VALUES(ikon),
+				urut = VALUES(urut),
+				level = VALUES(level),
+				hidden = VALUES(hidden),
+				ikon_kecil = VALUES(ikon_kecil),
+				parent = VALUES(parent)
+				";
+		$this->db->query($sql);
+	}
+
 }
