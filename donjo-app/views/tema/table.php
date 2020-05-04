@@ -1,8 +1,8 @@
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>File Manager </h1>
+		<h1>Pengaturan Tema</h1>
 		<ol class="breadcrumb">
-			<li><a href="<?= site_url('hom_sid') ?>"><i class="fa fa-home"></i> Home</a></li>
+			<li><a href="<?= site_url('hom_sid') ?>"><i class="fa fa-home"></i>Home</a></li>
 			<li class="active">Pengaturan Tema</li>
 		</ol>
 	</section>
@@ -17,18 +17,6 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="box-header with-border">
-									<h3 class="box-title"><strong>Themes</strong></h3>
-								</div>
-								<div class="box-body">
-
-									<div class="row">
-										<div class="col-sm-12 col-md-4">
-											<select class="form-control input-sm" name="folder_themes">
-												<option value="update_web">Upadate/Patch</option>
-												<option value="upload_theme">Upload Themes</option>
-											</select>
-										</div>
-									</div>
 									<form method='post' action=<?= site_url("zip/extract") ?> enctype='multipart/form-data'>
 										<div class="row">
 											<div class="col-sm-12">
@@ -59,6 +47,9 @@
 										</div>
 									</form>
 								</div>
+								<div class="box-body">
+
+								</div>
 							</div>
 						</div>
 					</div>
@@ -83,7 +74,7 @@
 						<div class="box-body box-profile">
 							<img class="img-responsive" src="<?= base_url() ?>
 							<?= ($kat == 0) ? 'desa/themes/' : 'themes/' ?>
-							<?= $nama . '/thumbnail.jpg' ?>" alt=" <?= $nama ?>">
+							<?= $nama . '/thumbnail.png' ?>" alt=" <?= $nama ?>">
 						</div>
 						<div class="row">
 							<div class="col-sm-12">
@@ -99,18 +90,18 @@
 					</div>
 				</div>
 				<!--Tema Standar dan Tidak Aktif-->
-				<?php if($tema_aktif !='sederhana'){ ?>
+				<?php if($tema_aktif !='hadakewa'){ ?>
 					<div class="col-md-4 col-xs-12 col-center">
 						<div class="box box-info">
 							<div class="box-body box-profile">
-								<img class="img-responsive" src="<?= base_url().'themes/sederhana/thumbnail.jpg' ?>" alt="Sederhana" >
+								<img class="img-responsive" src="<?= base_url().'themes/hadakewa/thumbnail.png' ?>" alt="hadakewa" >
 							</div>
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="form-group">
-										<label for="file" class="col-md-4 col-lg-4 control-label" align="left"><b>Sederhana</b></label>
+										<label for="file" class="col-md-4 col-lg-4 control-label" align="left"><b>hadakewa</b></label>
 										<div class="col-sm-12 col-md-8 col-lg-8">
-											<a href="<?= site_url("file_manager/ganti_tema/sederhana") ?>" class="btn btn-block btn-primary btn-sm"><i class="fa fa-lock"></i> Standar</a>
+											<a href="<?= site_url("tema/ganti_tema/hadakewa") ?>" class="btn btn-block btn-primary btn-sm"><i class="fa fa-lock"></i> Standar</a>
 										</div>
 									</div>
 									<br>
@@ -132,28 +123,28 @@
 					$kat = 1; //themes
 				}
 				?>
-				<?php if($tema_aktif != $data AND $data !='sederhana'){ ?>
+				<?php if($tema_aktif != $data AND $data !='hadakewa'){ ?>
 					<div class="col-md-4 col-xs-12 col-center">
 						<div class="box box-info">
 							<div class="box-body box-profile">
 								<img class="img-responsive" src="<?= base_url() ?>
 								<?= ($kat == 0) ? 'desa/themes/' : 'themes/' ?>
-								<?= $nama . '/thumbnail.jpg' ?>" alt=" <?= $nama ?>" >
+								<?= $nama . '/thumbnail.png' ?>" alt=" <?= $nama ?>" >
 							</div>
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="form-group">
 										<label for="file" class="col-md-4 col-lg-4 control-label" align="left"><b><?= ucwords($nama); ?></b></label>
-										<?php if ($data == 'sederhana') { ?>
+										<?php if ($data == 'hadakewa') { ?>
 											<div class="col-sm-12 col-md-8 col-lg-8">
-												<a href="<?= site_url("file_manager/ganti_tema/" . $data) ?>" class="btn btn-block btn-primary btn-sm"><i class="fa fa-lock"></i> Standar</a>
+												<a href="<?= site_url("tema/ganti_tema/" . $data) ?>" class="btn btn-block btn-primary btn-sm"><i class="fa fa-lock"></i> Standar</a>
 											</div>
 										<?php } else { ?>
 											<div class="col-sm-12 col-md-3 col-lg-4">
-												<a href="<?= site_url("file_manager/ganti_tema/" . $data) ?>" class="btn btn-block btn-success btn-sm"><i class="fa fa-lock"></i> Aktifkan</a>
+												<a href="<?= site_url("tema/ganti_tema/" . $data) ?>" class="btn btn-block btn-success btn-sm"><i class="fa fa-lock"></i> Aktifkan</a>
 											</div>
 											<div class="col-sm-12 col-md-3 col-lg-4">
-												<a href="<?= site_url("file_manager/delete/" . $nama . '/' . $kat) ?>" class="btn btn-block btn-danger btn-sm"><i class="fa fa-trash-o"></i> Hapus</a>
+												<a href="<?= site_url("tema/delete/" . $nama . '/' . $kat) ?>" class="btn btn-block btn-danger btn-sm"><i class="fa fa-trash-o"></i> Hapus</a>
 											</div>
 										<?php }  ?>
 									</div>
