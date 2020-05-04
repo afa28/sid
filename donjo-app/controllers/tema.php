@@ -18,7 +18,6 @@ class Tema extends Admin_Controller
 	public function index()
 	{
 		$data['list_tema'] = $this->theme_model->list_all();
-		$data['tema_aktif'] = $this->theme_model->active();
 		$this->setting_model->load_options();
 
 		$header = $this->header_model->get_data();

@@ -21,15 +21,5 @@
 		return $list_tema;
 	}
 
-	public function active()
-	{
-		$sql = "SELECT * FROM setting_aplikasi WHERE `key` = 'web_theme'";
-		$query = $this->db->query($sql);
-		if ($query->num_rows()>0){
-			$data = $query->row_array();
-		}
-			return $data['value'];
-	}
-
 }
 ?>
