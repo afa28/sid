@@ -125,7 +125,7 @@
 									<div class="btn-group">
 										<a href="<?= site_url("tema/change/" . $tema) ?>" class="btn btn-success btn-sm"  title="Active"><i class="fa fa-star"></i></a>
 										<a href="<?= site_url("tema/edit/" . $tema) ?>" class="btn btn-primary btn-sm"  title="Edit"><i class="fa fa-pencil"></i></a>
-										<?php if($lokasi == 'themes'):?>
+										<?php if($nama == 'klasik' OR $nama == 'hadakewa'):?>
 											<button type="button" class="btn btn-danger btn-sm disabled">
 												<i class="fa fa-trash-o"></i>
 											</button>
