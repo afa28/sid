@@ -65,7 +65,7 @@
 															<?=$data['tahun_anggaran']?>
 															<?php if (count($data['desa_ganda']) > 1): ?>
 																<span style="padding-left: 5px;">(Berisi data dari beberapa desa. Bersihkan dulu data desa ganda.)</span>
-															<?php endif; ?>																
+															<?php endif; ?>
 														</td>
 														<td><?=tgl_indo_out($data['tanggal_impor'])?></td>
 													</tr>
