@@ -31,8 +31,8 @@ class Tema extends Admin_Controller
 	//hapus folder dan file
 	public function delete($tema)
 	{
-		$this->_delete_directory($tema);
-
+		//$this->delete_directory($tema);
+		@delete_folder(VIEWPATH.'desa/themes/'.$tema);
 		//delete_file($path, true, false, 1);
 
 		redirect('tema');
@@ -54,17 +54,17 @@ class Tema extends Admin_Controller
 		redirect('tema');
 	}
 
-	public function _delete_directory($folder_name)
+	public function delete_directory($folder_name)
 	{
 		$this->load->helper('file');
 
 		$dir_path = 'desa/themes/'.$folder_name;
 		$del_path = './desa/themes/'.$folder_name.'/';
 
-		if(is_dr($dir_path))
+		if(is_dir($dir_path))
 		{
-			delete_files($del_path, true);
-			rmdir($del_path);
+			delete_files($del_path, true, false, 1);
+			rmdir($dir_path);
 
 			return true;
 		}
