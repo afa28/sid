@@ -34,9 +34,9 @@ class Tema extends Admin_Controller
 		$folder = $folder.'themes'.$tema;
 
 		//@delete_folder(FCPATH . 'contoh');
-		if (file_exists(FCPATH.'desa/themes/'.$tema))
+		if (file_exists(FCPATH.'contoh'))
 		{
-			echo "<allert>sfsfddsgss</allert>";
+			@delete_folder(FCPATH . 'contoh');
 		}
 
 
@@ -61,16 +61,22 @@ class Tema extends Admin_Controller
 		redirect('tema');
 	}
 
-	/*
-	public function _cek($folder, $tema)
+	public function _delete_directory($folder_name)
 	{
+		$this->load->helper('file');
 
-		if($tema != 'klasik' OR $tema != 'hadakewa')
+		$dir_path = 'desa/themes/'.$folder_name;
+		$del_path = './desa/themes/'.$folder_name.'/';
+
+		if(is_dr($dir_path))
 		{
+			delete_files($del_path, true);
+			rmdir($del_path);
 
+			return true;
 		}
-		return $tema;
+
+		return false;
 	}
-	*/
 
 }
