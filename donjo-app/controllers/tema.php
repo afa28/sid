@@ -33,7 +33,12 @@ class Tema extends Admin_Controller
 	{
 		$folder = $folder.'themes'.$tema;
 
-		@delete_folder(FCPATH . 'contoh');
+		//@delete_folder(FCPATH . 'contoh');
+		if (file_exists(FCPATH.'desa/themes/'.$tema))
+		{
+			echo "<allert>sfsfddsgss</allert>";
+		}
+
 
 		//delete_file($path, true, false, 1);
 
