@@ -130,7 +130,7 @@
 												<i class="fa fa-trash-o"></i>
 											</button>
 											<?php else : ?>
-												<a href="#" data-href="<?= site_url("tema/delete/" . $tema) ?>" class="btn btn-danger btn-sm"  title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+												<a href="#" data-href="<?= site_url("tema/delete/" . $nama) ?>" class="btn btn-danger btn-sm"  title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 											<?php endif;?>
 											<a href="<?= site_url("tema/backup/" . $nama) ?>" class="btn bg-navy btn-sm"  title="Backup"><i class="fa fa-download"></i></a>
 										</div>
