@@ -31,14 +31,7 @@ class Tema extends Admin_Controller
 	//hapus folder dan file
 	public function delete($tema)
 	{
-		$folder = $folder.'themes'.$tema;
-
-		//@delete_folder(FCPATH . 'contoh');
-		if (file_exists(FCPATH.'contoh'))
-		{
-			@delete_folder(FCPATH . 'contoh');
-		}
-
+		$this->_delete_directory($tema);
 
 		//delete_file($path, true, false, 1);
 
