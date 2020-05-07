@@ -27,6 +27,8 @@ class Tema extends Admin_Controller
 
 		$data['list_tema'] = array_merge(array(0 => $active), $list);
 
+		$data['form_action'] = site_url('tema/isntall');
+
 		$header = $this->header_model->get_data();
 
 		$this->load->view('header', $header);
@@ -66,7 +68,7 @@ class Tema extends Admin_Controller
 			$lokasi = 'themes/'.$folder;
 		}
 
-		$this->zip->read_dir($lokasi);
+		$this->zip->read_dir($lokasinama_berkas.'/');
 		$this->zip->archive(FClokasi.'/assets/themes/'.$nama_berkas);
 		$this->zip->download($nama_berkas);
 	}
@@ -74,12 +76,13 @@ class Tema extends Admin_Controller
 	// Upload dan Install tema
 	public function install()
 	{
-		$config['upload_path']		= './themes/';
+		$config['upload_path']		= './assets/themes/';
 		$config['allowed_types']	= 'zip';
+		$config['max_size'] 			= '5120'; // max_size in kb (5 MB)
 
 		$this->load->library('upload', $config);
 
-		if(!$this->upload->do_upload('zip_file'))
+		if(!$this->upload->do_upload('file_themes'))
 		{
 			$response = array('error' => $this->upload->display_errors());
 		}
@@ -94,6 +97,9 @@ class Tema extends Admin_Controller
 			{
 				$zip->extractTo(FCPATH.'/desa/themes/');
 				$zip->close();
+
+				// Hapus file upload setelah di extrack
+				unlink(FCPATH.$full_path);
 			}
 
 			$response = array('success' => 'Tema berhasil di tambahkan');
