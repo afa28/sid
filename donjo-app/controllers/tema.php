@@ -1,4 +1,4 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if(!defined('BASElokasi')) exit('No direct script access allowed');
 
 class Tema extends Admin_Controller
 {
@@ -28,19 +28,7 @@ class Tema extends Admin_Controller
 		$this->load->view('footer');
 	}
 
-	//hapus folder dan file
-	public function delete($tema)
-	{
-		//delete_files("desa/themes/".$tema."/", TRUE);
-		//rmdir("desa/themes/lupa/");
-		//$this->delete_directory($tema);
-		@delete_folder(FCPATH.'desa/themes/'.$tema);
-		//delete_file($path, true, false, 1);
-
-		redirect('tema');
-	}
-
-	//ganti tema
+	// Ganti Tema
 	public function change($folder, $tema = NULL)
 	{
 		if($tema != NULL){
@@ -55,18 +43,50 @@ class Tema extends Admin_Controller
 
 		redirect('tema');
 	}
+	
+	// Backup Tema
+	function backup($folder, $tema = NULL)
+	{		
+		$this->load->library('zip');
+		
+		if($tema != NULL){			
+			$nama_berkas = $tema;
+			$lokasi = $folder.'/themes/'.$tema;
+		}
+		else
+		{
+			$nama_berkas = $folder;
+			$lokasi = 'themes/'.$folder;
+		}
+
+		$this->zip->read_dir($lokasi);
+		$this->zip->archive(FClokasi.'/assets/backup/'.$nama_berkas);
+		$this->zip->download($nama_berkas);
+	}
+
+	//hapus folder dan file
+	public function delete($tema)
+	{
+		//delete_files("desa/themes/".$tema."/", TRUE);
+		//rmdir("desa/themes/lupa/");
+		//$this->delete_directory($tema);
+		@delete_folder(FClokasi.'desa/themes/'.$tema);
+		//delete_file($lokasi, true, false, 1);
+
+		redirect('tema');
+	}
 
 	public function delete_directory($folder_name)
 	{
 		$this->load->helper('file');
 
-		$dir_path = 'desa/themes/'.$folder_name;
-		$del_path = './desa/themes/'.$folder_name.'/';
+		$dir_lokasi = 'desa/themes/'.$folder_name;
+		$del_lokasi = './desa/themes/'.$folder_name.'/';
 
-		if(is_dir($dir_path))
+		if(is_dir($dir_lokasi))
 		{
-			delete_files($del_path, true, false, 1);
-			rmdir($dir_path);
+			delete_files($del_lokasi, true, false, 1);
+			rmdir($dir_lokasi);
 
 			return true;
 		}
