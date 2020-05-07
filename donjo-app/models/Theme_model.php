@@ -6,8 +6,8 @@
 	}
 
 	/*
-	 * Tema sistem ada di subfolder themes/
-	 * Tema buatan sistem ada di subfolder desa/themes/
+	| Tema sistem ada di subfolder themes/
+	| Tema buatan sistem ada di subfolder desa/themes/
 	*/
 	public function list_all()
 	{
@@ -21,6 +21,9 @@
 		return $list_tema;
 	}
 
+	/*
+	| Tema aktif
+	*/
 	public function active()
 	{
 		$active = $this->db->select('value')

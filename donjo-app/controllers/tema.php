@@ -17,13 +17,15 @@ class Tema extends Admin_Controller
 
 	public function index()
 	{
-		$active = array(0 => $this->theme_model->active());
+		$active = $this->theme_model->active();
 		$list = $this->theme_model->list_all();
 
-		$list_themes = array_merge($active, $list);
-		//$list_themes = array_unshift($active, $list);
+		if (($cari = array_search($active, $list)) !== false)
+		{
+			array_splice($list, $cari, 1);
+		}
 
-		$data['list_tema'] = $list_themes;
+		$data['list_tema'] = array_merge(array(0 => $active), $list);
 
 		$header = $this->header_model->get_data();
 
@@ -36,7 +38,7 @@ class Tema extends Admin_Controller
 	// Ganti Tema
 	public function change($folder, $tema = NULL)
 	{
-		if($tema != NULL){
+		if($tema !== NULL){
 			$themes = $folder.'/'.$tema;
 		}
 		else
@@ -50,11 +52,11 @@ class Tema extends Admin_Controller
 	}
 
 	// Backup Tema
-	function backup($folder, $tema = NULL)
+	public function backup($folder, $tema = NULL)
 	{
 		$this->load->library('zip');
 
-		if($tema != NULL){
+		if($tema !== NULL){
 			$nama_berkas = $tema;
 			$lokasi = $folder.'/themes/'.$tema;
 		}
@@ -65,11 +67,45 @@ class Tema extends Admin_Controller
 		}
 
 		$this->zip->read_dir($lokasi);
-		$this->zip->archive(FClokasi.'/assets/backup/'.$nama_berkas);
+		$this->zip->archive(FClokasi.'/assets/themes/'.$nama_berkas);
 		$this->zip->download($nama_berkas);
 	}
 
-	//hapus folder dan file
+	// Upload dan Install tema
+	public function install()
+	{
+		$config['upload_path']		= './themes/';
+		$config['allowed_types']	= 'zip';
+
+		$this->load->library('upload', $config);
+
+		if(!$this->upload->do_upload('zip_file'))
+		{
+			$response = array('error' => $this->upload->display_errors());
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+			$full_path = $data['upload_data']['full_path'];
+
+			$zip = new ZipArchive;
+
+			if ($zip->open($full_path) === TRUE)
+			{
+				$zip->extractTo(FCPATH.'/uploads/');
+				$zip->close();
+			}
+
+			$response = array('success' => 'Tema berhasil di tambahkan');
+		}
+
+		$this->load->view('file_upload_result', $params);
+	}
+
+
+
+
+	// Hapus folder dan file
 	public function delete($tema)
 	{
 		//delete_files("desa/themes/".$tema."/", TRUE);

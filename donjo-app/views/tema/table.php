@@ -39,7 +39,7 @@
 				</div>
 			</div>
 		</form>
-		<div class="row"><!-- Untuk Tema Yg Active -->
+		<div class="row">
 			<?php
 			$no = 0;
 			//echo var_dump($list_tema);
@@ -87,29 +87,36 @@
 								</div>
 								<div class="text-center">
 									<div class="btn-group">
-										<a href="<?= site_url("tema/change/" . $tema) ?>" class="btn btn-success btn-sm"  title="Active"><i class="fa fa-star"></i></a>
-										<a href="<?= site_url("tema/edit/" . $tema) ?>" class="btn btn-primary btn-sm"  title="Edit"><i class="fa fa-pencil"></i></a>
-										<?php if($nama == 'klasik' OR $nama == 'hadakewa'):?>
-											<button type="button" class="btn btn-danger btn-sm disabled">
-												<i class="fa fa-trash-o"></i>
+										<?php if($nama != $this->theme):?>
+											<a href="<?= site_url("tema/change/" . $tema) ?>" class="btn btn-success btn-sm"  title="Active"><i class="fa fa-star"></i></a>
+										<?php else:?>
+											<button type="button" class="btn btn-success btn-sm disabled">
+												<i class="fa fa-star"></i>
 											</button>
+										<?php endif;?>
+										<?php if($nama == $this->theme OR ($nama == 'klasik' OR $nama == 'hadakewa')):?>
+												<button type="button" class="btn btn-danger btn-sm disabled">
+													<i class="fa fa-trash-o"></i>
+												</button>
 											<?php else : ?>
-												<a href="#" data-href="<?= site_url("tema/delete/" . $nama) ?>" class="btn btn-danger btn-sm"  title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+													<a href="#" data-href="<?= site_url("tema/delete/" . $nama) ?>" class="btn btn-danger btn-sm"  title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 											<?php endif;?>
+											<a href="<?= site_url("tema/edit/" . $tema) ?>" class="btn btn-primary btn-sm"  title="Edit"><i class="fa fa-pencil"></i></a>
+
 											<a href="<?= site_url("tema/backup/" . $nama) ?>" class="btn bg-navy btn-sm"  title="Backup"><i class="fa fa-download"></i></a>
+											</div>
 										</div>
 									</div>
 								</div>
+								<?php if($no % 3 == 0):?>
+								</div>
+								<div class="row">
+								<?php endif;?>
 							</div>
-							<?php if($no % 3 == 0):?>
-							</div>
-							<div class="row">
-							<?php endif;?>
-						</div>
-					<?php endif;
-				endforeach; ?>
+						<?php endif;
+					endforeach; ?>
+				</div>
 			</div>
 		</div>
 	</section>
-</div>
-<?php $this->load->view('global/confirm_delete');?>
+	<?php $this->load->view('global/confirm_delete');?>
