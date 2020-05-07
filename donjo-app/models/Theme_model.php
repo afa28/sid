@@ -21,12 +21,6 @@
 		return $list_tema;
 	}
 
-<<<<<<< HEAD
-	public function change($themes)
-	{
-		$this->db->where('key', 'web_theme')->update('setting_aplikasi', array('value' => $themes));
-	}
-
 	public function active()
 	{
 		$active = $this->db->select('value')
@@ -35,8 +29,5 @@
 
 		return $active;
 	}
-
-=======
->>>>>>> parent of 910d67f5... s'pg;skg;ks
 }
 ?>

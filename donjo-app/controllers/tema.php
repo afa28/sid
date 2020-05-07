@@ -1,4 +1,4 @@
-<?php if(!defined('BASElokasi')) exit('No direct script access allowed');
+<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Tema extends Admin_Controller
 {
@@ -17,8 +17,13 @@ class Tema extends Admin_Controller
 
 	public function index()
 	{
-		$data['list_tema'] = $this->theme_model->list_all();
-		$this->setting_model->load_options();
+		$active = array(0 => $this->theme_model->active());
+		$list = $this->theme_model->list_all();
+
+		$list_themes = array_merge($active, $list);
+		//$list_themes = array_unshift($active, $list);
+
+		$data['list_tema'] = $list_themes;
 
 		$header = $this->header_model->get_data();
 
@@ -43,13 +48,13 @@ class Tema extends Admin_Controller
 
 		redirect('tema');
 	}
-	
+
 	// Backup Tema
 	function backup($folder, $tema = NULL)
-	{		
+	{
 		$this->load->library('zip');
-		
-		if($tema != NULL){			
+
+		if($tema != NULL){
 			$nama_berkas = $tema;
 			$lokasi = $folder.'/themes/'.$tema;
 		}

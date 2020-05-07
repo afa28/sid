@@ -40,49 +40,9 @@
 			</div>
 		</form>
 		<div class="row"><!-- Untuk Tema Yg Active -->
-			<div class="col-md-4 col-xs-12">
-				<div class="box box-danger"> <!-- <div class="box box-danger">  -->
-					<div class="box-header with-border">
-						<center><h3 class="box-title text-center"><?= $this->theme ?></h3></center>
-					</div>
-					<div class="box-body">
-						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-							<div class="carousel-inner">
-								<div class="item active">
-									<img class="img-responsive" src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/thumbnail/1.png'; ?>" alt="First slide">
-								</div>
-								<div class="item">
-									<img class="img-responsive" src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/thumbnail/2.png'; ?>" alt="First slide">
-								</div>
-								<div class="item">
-									<img class="img-responsive" src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/thumbnail/3.png'; ?>" alt="First slide">
-								</div>
-								<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-									<span class="fa fa-angle-left"></span>
-								</a>
-								<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-									<span class="fa fa-angle-right"></span>
-								</a>
-							</div>
-						</div>
-						<div class="text-center">
-							<div class="btn-group">
-								<button type="button" class="btn btn-success btn-sm disabled">
-									<i class="fa fa-star"></i>
-								</button>
-								<!--<a href="" class="btn btn-success btn-sm disabled"  title="Active"><i class="fa fa-star"></i>Active</a>-->
-								<a href="<?= site_url("tema/edit/" . $nama) ?>" class="btn btn-primary btn-sm"  title="Edit"><i class="fa fa-pencil"></i></a>
-								<button type="button" class="btn btn-danger btn-sm disabled">
-									<i class="fa fa-trash-o"></i>
-								</button>
-								<a href="<?= site_url("tema/backup/" . $nama) ?>" class="btn bg-navy btn-sm"  title="Backup"><i class="fa fa-download"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 			<?php
-			$no = 1;
+			$no = 0;
+			//echo var_dump($list_tema);
 			foreach ($list_tema as $tema) :
 				$cut = explode('/', $tema);
 
@@ -94,10 +54,14 @@
 					$lokasi = $cut[0].'/themes/'.$nama;
 				endif;
 
-				if($nama != $this->theme AND file_exists(FCPATH.$lokasi.'/template.php')):
+				if(file_exists(FCPATH.$lokasi.'/template.php')):
 					$no++; ?>
 					<div class="col-md-4 col-xs-12">
-						<div class="box box-info"> <!-- <div class="box box-danger">  -->
+						<?php if($nama != $this->theme):?>
+							<div class="box box-info">;
+						<?php else:?>
+							<div class="box box-danger">;
+						<?php endif;?>
 							<div class="box-header with-border">
 								<center><h3 class="box-title"><?= ucwords($nama) ?></h3></center>
 							</div>
