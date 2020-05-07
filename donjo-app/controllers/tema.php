@@ -31,8 +31,10 @@ class Tema extends Admin_Controller
 	//hapus folder dan file
 	public function delete($tema)
 	{
+		//delete_files("desa/themes/".$tema."/", TRUE);
+		//rmdir("desa/themes/lupa/");
 		//$this->delete_directory($tema);
-		@delete_folder(VIEWPATH.'desa/themes/'.$tema);
+		@delete_folder(FCPATH.'desa/themes/'.$tema);
 		//delete_file($path, true, false, 1);
 
 		redirect('tema');
