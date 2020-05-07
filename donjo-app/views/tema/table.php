@@ -94,7 +94,7 @@
 					$lokasi = $cut[0].'/themes/'.$nama;
 				endif;
 
-				if($nama != $this->theme):
+				if($nama != $this->theme AND file_exists(FCPATH.$lokasi.'/template.php')):
 					$no++; ?>
 					<div class="col-md-4 col-xs-12">
 						<div class="box box-info"> <!-- <div class="box box-danger">  -->
