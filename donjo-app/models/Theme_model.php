@@ -21,7 +21,7 @@
 		return $list_tema;
 	}
 
-	public function ganti($themes)
+	public function change($themes)
 	{
 		$this->db->where('key', 'web_theme')->update('setting_aplikasi', array('value' => $themes));
 	}

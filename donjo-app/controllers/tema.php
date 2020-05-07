@@ -39,7 +39,7 @@ class Tema extends Admin_Controller
 			$themes = $folder;
 		}
 
-		$this->theme_model->change($themes);
+		$this->db->where('key', 'web_theme')->update('setting_aplikasi', array('value' => $themes));
 
 		redirect('tema');
 	}
