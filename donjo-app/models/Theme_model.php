@@ -21,5 +21,19 @@
 		return $list_tema;
 	}
 
+	public function ganti($themes)
+	{
+		$this->db->where('key', 'web_theme')->update('setting_aplikasi', array('value' => $themes));
+	}
+
+	public function active()
+	{
+		$active = $this->db->select('value')
+			->where('key', 'web_theme')
+			->get('setting_aplikasi')->row()->value;
+
+		return $active;
+	}
+
 }
 ?>
