@@ -92,14 +92,14 @@ class Tema extends Admin_Controller
 
 			if ($zip->open($full_path) === TRUE)
 			{
-				$zip->extractTo(FCPATH.'/uploads/');
+				$zip->extractTo(FCPATH.'/desa/themes/');
 				$zip->close();
 			}
 
 			$response = array('success' => 'Tema berhasil di tambahkan');
 		}
 
-		$this->load->view('file_upload_result', $params);
+		redirect('tema');
 	}
 
 

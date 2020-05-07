@@ -7,7 +7,8 @@
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
-		<form id="validasi" action="<?= $form_action?>" method="POST" enctype="multipart/form-data">
+		<div id="alert-timeout" class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible"><button type="button" class="close" data-dismiss="alert"><span>×</span></button>hgjgjgj</div>
+		<?= form_open_multipart('unzip/upload'); ?>
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="box box-info">
@@ -20,7 +21,7 @@
 											<div class="col-sm-12 col-md-8 col-lg-8">
 												<div class="input-group input-group-sm">
 													<input type="text" class="form-control" id="file_path2">
-													<input type="file" class="hidden" id="file2" name="tema">
+													<input type="file" class="hidden" id="file2" name="file_tema">
 													<span class="input-group-btn">
 														<button type="button" class="btn btn-info btn-flat" id="file_browser"><i class="fa fa-search"></i> Browse</button>
 													</span>
