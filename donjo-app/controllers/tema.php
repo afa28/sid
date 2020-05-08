@@ -30,7 +30,7 @@ class Tema extends Admin_Controller
 
 		$data['list_tema'] = array_merge(array(0 => $active), $list);
 
-		$data['form_action'] = site_url('tema/isntall');
+		$data['form_action'] = site_url('tema/install');
 
 		$header = $this->header_model->get_data();
 
@@ -38,6 +38,25 @@ class Tema extends Admin_Controller
 		$this->load->view('nav', $nav);
 		$this->load->view('tema/table', $data);
 		$this->load->view('footer');
+	}
+
+	public function detail($folder, $tema = NULL)
+	{
+		if($tema !== NULL){
+			$themes = $folder.'/'.$tema;
+		}
+		else
+		{
+			$themes = $folder;
+		}
+
+		// Load File Image dan Read
+
+		$data['nama_tema'] = 'coba';
+		$data['form_action'] = site_url('tema/install/'.$themes);
+
+
+		$this->load->view('tema/detail', $data);
 	}
 
 	// Ganti Tema
