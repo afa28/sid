@@ -7,7 +7,8 @@
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
-		<div id="alert-timeout" class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible"><button type="button" class="close" data-dismiss="alert"><span>×</span></button>hgjgjgj</div>
+		<?= $this->session->flashdata('msg');
+						?>
 		<form id="validasi" action="<?= $form_action?>" method="POST" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-sm-12">

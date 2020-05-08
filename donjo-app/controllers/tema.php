@@ -90,7 +90,7 @@ class Tema extends Admin_Controller
 
 		if(!$this->upload->do_upload('file_themes'))
 		{
-			$response = array('error' => $this->upload->display_errors());
+			$this->session->set_flashdata('msg', 'Error : '.$this->upload->display_errors());
 		}
 		else
 		{
@@ -105,10 +105,9 @@ class Tema extends Admin_Controller
 				$zip->close();
 
 				// Hapus file upload setelah di extrack
-				unlink(FCPATH.$full_path);
+				delete_files($this->temp_file, TRUE);
 			}
-
-			$response = array('success' => 'Tema berhasil di tambahkan');
+			$this->session->set_flashdata('msg','Tema berhasil di tambahkan');
 		}
 
 		redirect('tema');
