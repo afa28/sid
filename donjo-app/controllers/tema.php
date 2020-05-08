@@ -76,7 +76,7 @@ class Tema extends Admin_Controller
 		$this->zip->download($name);
 
 		// Hapus file upload setelah di extrack
-		unlink($this->temp_file.$name);
+		delete_files($this->temp_file, TRUE);
 	}
 
 	// Upload dan Install tema
