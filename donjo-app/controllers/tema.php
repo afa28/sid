@@ -44,16 +44,19 @@ class Tema extends Admin_Controller
 	{
 		if($tema !== NULL){
 			$themes = $folder.'/'.$tema;
+			$lokasi = $folder.'/themes/'.$tema.'/';
 		}
 		else
 		{
 			$themes = $folder;
+			$lokasi = '/themes/'.$folder.'/';
 		}
 
 		// Load File Image dan Read
 
-		$data['nama_tema'] = 'coba';
-		$data['form_action'] = site_url('tema/install/'.$themes);
+		$data['nama']					= $themes;
+		$data['lokasi']				= $lokasi;
+		$data['form_action']	= site_url('tema/install/'.$themes);
 
 
 		$this->load->view('tema/detail', $data);
