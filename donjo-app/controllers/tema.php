@@ -3,6 +3,8 @@
 class Tema extends Admin_Controller
 {
 
+	private $temp_file;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -10,6 +12,7 @@ class Tema extends Admin_Controller
 		$this->load->model('theme_model');
 		$this->load->library('session');
 		$this->load->helper("file");
+		$this->temp_file = FCPATH.'assets/themes/';
 
 		$this->modul_ini = 11;
 		$this->sub_modul_ini = 205;
@@ -59,24 +62,27 @@ class Tema extends Admin_Controller
 		$this->load->library('zip');
 
 		if($tema !== NULL){
-			$nama_berkas = $tema;
-			$lokasi = $folder.'/themes/'.$tema;
+			$name = $tema.'.zip';
+			$lokasi = $folder.'/themes/'.$tema.'/';
 		}
 		else
 		{
-			$nama_berkas = $folder;
-			$lokasi = 'themes/'.$folder;
+			$name = $folder.'.zip';
+			$lokasi = 'themes/'.$folder.'/';
 		}
 
-		$this->zip->read_dir($lokasinama_berkas.'/');
-		$this->zip->archive(FClokasi.'/assets/themes/'.$nama_berkas);
-		$this->zip->download($nama_berkas);
+		$this->zip->read_dir($lokasi, FALSE);
+		$this->zip->archive($this->temp_file.$name);
+		$this->zip->download($name);
+
+		// Hapus file upload setelah di extrack
+		unlink($this->temp_file.$name);
 	}
 
 	// Upload dan Install tema
 	public function install()
 	{
-		$config['upload_path']		= './assets/themes/';
+		$config['upload_path']		= $this->temp_file;
 		$config['allowed_types']	= 'zip';
 		$config['max_size'] 			= '5120'; // max_size in kb (5 MB)
 

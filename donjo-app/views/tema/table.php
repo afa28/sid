@@ -104,7 +104,7 @@
 											<?php endif;?>
 											<a href="<?= site_url("tema/edit/" . $tema) ?>" class="btn btn-primary btn-sm"  title="Edit"><i class="fa fa-pencil"></i></a>
 
-											<a href="<?= site_url("tema/backup/" . $nama) ?>" class="btn bg-navy btn-sm"  title="Backup"><i class="fa fa-download"></i></a>
+											<a href="<?= site_url("tema/backup/" . $tema) ?>" class="btn bg-navy btn-sm"  title="Backup"><i class="fa fa-download"></i></a>
 											</div>
 										</div>
 									</div>
