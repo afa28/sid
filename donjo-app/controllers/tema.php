@@ -49,7 +49,7 @@ class Tema extends Admin_Controller
 		else
 		{
 			$themes = $folder;
-			$lokasi = '/themes/'.$folder.'/';
+			$lokasi = 'themes/'.$folder.'/';
 		}
 
 		// Load File Image dan Read
@@ -57,7 +57,6 @@ class Tema extends Admin_Controller
 		$data['nama']					= $themes;
 		$data['lokasi']				= $lokasi;
 		$data['form_action']	= site_url('tema/install/'.$themes);
-
 
 		$this->load->view('tema/detail', $data);
 	}

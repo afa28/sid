@@ -68,25 +68,7 @@
 								<center><h3 class="box-title"><?= ucwords($nama) ?></h3></center>
 							</div>
 							<div class="box-body">
-								<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-									<div class="carousel-inner">
-										<div class="item active">
-											<img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/1.png'; ?>" alt="<?= $nama ?>-1">
-										</div>
-										<div class="item">
-											<img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/2.png'; ?>" alt="<?= $nama ?>-2">
-										</div>
-										<div class="item">
-											<img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/3.png'; ?>" alt="<?= $nama ?>-3">
-										</div>
-										<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-											<span class="fa fa-angle-left"></span>
-										</a>
-										<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-											<span class="fa fa-angle-right"></span>
-										</a>
-									</div>
-								</div>
+								<img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/1.png'; ?>" alt="<?= $nama ?>-1"/>
 								<div class="text-center">
 									<div class="btn-group">
 										<?php if($nama != $this->theme):?>

@@ -1,24 +1,33 @@
 <form action="<?= $form_action?>" method="post" id="validasi">
 	<div class='modal-body'>
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-sm-9">
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 					<div class="carousel-inner">
-						<div class="item active">
-							<img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/1.png'; ?>" alt="<?= $nama ?>-1">
-						</div>
-						<div class="item">
-							<img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/2.png'; ?>" alt="<?= $nama ?>-2">
-						</div>
-						<div class="item">
-							<img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/3.png'; ?>" alt="<?= $nama ?>-3">
-						</div>
-						<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-							<span class="fa fa-angle-left"></span>
-						</a>
-						<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-							<span class="fa fa-angle-right"></span>
-						</a>
+						<?php
+						$no = 0;
+						foreach (glob($lokasi.'thumbnail/*.png') as $thumb):
+						$no++;
+
+						if($no==1):
+							$active='active';
+						else:
+							$active='';
+						endif;
+						?>
+							<div class="item <?= $active ?>">
+								<img class="img-responsive" src="<?= base_url().$thumb; ?>" alt="<?= $nama?>"/>
+							</div>
+						<?php endforeach;?>
+
+						<?php if($no>1):?>
+							<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+								<span class="fa fa-angle-left"></span>
+							</a>
+							<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+								<span class="fa fa-angle-right"></span>
+							</a>
+						<?php endif;?>
 					</div>
 				</div>
 				<div class="text-center">
@@ -40,9 +49,6 @@
 								<a href="<?= site_url('tema/edit/' . $tema) ?>" class="btn btn-primary btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
 
 								<a href="<?= site_url('tema/backup/' . $tema) ?>" class="btn bg-navy btn-sm" title="Backup"><i class="fa fa-download"></i></a>
-
-								<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn bg-olive btn-flat btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Detail Tema <?= $nama ?>" title="Detail Tema <?= $nama ?>"><i class="fa fa-eye"></i></a>
-
 							</div>
 						</div>
 					</div>
