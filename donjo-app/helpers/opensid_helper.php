@@ -887,8 +887,8 @@ function convertToBytes(string $from): ?int {
 		}
 	}
 
-	function delete_folder($path)
-	{
+function delete_folder($path)
+{
 
 	if (!file_exists($path))
 	{
