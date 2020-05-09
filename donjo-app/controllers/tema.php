@@ -134,8 +134,9 @@ class Tema extends Admin_Controller
 	// Sterilkan folder temp dari file
 	public function clear()
 	{
-		@delete_folder($this->temp_file);
-		//mkdir($this->temp_file, 0, true);
+		delete_folder($this->temp_file);
+		mkdir($this->temp_file, 0, true);
+		redirect('tema');
 	}
 	// Hapus folder dan file
 	public function delete($tema)
