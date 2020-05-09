@@ -135,7 +135,7 @@ class Tema extends Admin_Controller
 	public function clear()
 	{
 		@delete_folder($this->temp_file);
-		rmdir('coba_aja');
+		//mkdir($this->temp_file, 0, true);
 	}
 	// Hapus folder dan file
 	public function delete($tema)
