@@ -96,8 +96,7 @@ class Tema extends Admin_Controller
 		$this->zip->archive($this->temp_file.$name);
 		$this->zip->download($name);
 
-		// Hapus file upload setelah di extrack
-		delete_files($this->temp_file, TRUE);
+		unlink($this->temp_file.$name);
 	}
 
 	// Upload dan Install tema
@@ -133,9 +132,6 @@ class Tema extends Admin_Controller
 
 		redirect('tema');
 	}
-
-
-
 
 	// Hapus folder dan file
 	public function delete($tema)
