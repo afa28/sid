@@ -47,8 +47,9 @@ class Tema extends Admin_Controller
 		$this->load->view('footer');
 	}
 
-	public function detail($folder_extract, $tema = NULL)
+	public function detail($folder, $tema = NULL)
 	{
+		$this->themes($folder_extract, $tema);
 
 		$data['nama']					= $themes;
 		$data['lokasi']				= $lokasi;
