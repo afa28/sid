@@ -887,4 +887,60 @@ function convertToBytes(string $from): ?int {
 		}
 	}
 
+	function delete_folder($path)
+	{
+
+	if (!file_exists($path))
+	{
+		return false;
+	}
+
+	if (is_file($path) || is_link($path))
+	{
+		return unlink($path);
+	}
+
+	$stack = array($path);
+
+	while ($entry = array_pop($stack))
+	{
+		if (is_link($entry))
+		{
+			unlink($entry);
+			continue;
+		}
+
+		if (@rmdir($entry))
+		{
+			continue;
+		}
+
+		$stack[] = $entry;
+		$dh = opendir($entry);
+
+		while (false !== $child = readdir($dh))
+		{
+			if ($child === '.' || $child === '..')
+			{
+				continue;
+			}
+
+			$child = $entry . DIRECTORY_SEPARATOR . $child;
+
+			if (is_dir($child) && !is_link($child))
+			{
+				$stack[] = $child;
+			}
+			else
+			{
+				unlink($child);
+			}
+		}
+
+		closedir($dh);
+	}
+
+	return true;
+}
+
 ?>

@@ -95,8 +95,6 @@ class Tema extends Admin_Controller
 		$this->zip->read_dir($lokasi, FALSE);
 		$this->zip->archive($this->temp_file.$name);
 		$this->zip->download($name);
-
-		unlink($this->temp_file.$name);
 	}
 
 	// Upload dan Install tema
@@ -133,6 +131,12 @@ class Tema extends Admin_Controller
 		redirect('tema');
 	}
 
+	// Sterilkan folder temp dari file
+	public function clear()
+	{
+		@delete_folder($this->temp_file);
+		rmdir('coba_aja');
+	}
 	// Hapus folder dan file
 	public function delete($tema)
 	{
