@@ -3,7 +3,11 @@
 class Tema extends Admin_Controller
 {
 
-	private $temp_file;
+	private $temp_folder; // Penyimpanan tema sementara
+	private $file_name; // Nama file tema (.zip)
+	private $folder_extract; // Folder extrack tema (desa/themes/)
+	private $themes_name; // Nama tema untuk DB
+	private $folder_themes; // Folder peyimpanan tema (themes/ atau desa/themes/)
 
 	public function __construct()
 	{
@@ -11,8 +15,11 @@ class Tema extends Admin_Controller
 		$this->load->model('header_model');
 		$this->load->model('theme_model');
 		$this->load->library('session');
+		$this->load->library('zip');
 		$this->load->helper("file");
-		$this->temp_file = FCPATH.'assets/themes/';
+		$this->temp_folder = FCPATH.'assets/themes/';
+		$this->folder_extract = FCPATH.'desa/themes/';
+		$this->clear();
 
 		$this->modul_ini = 11;
 		$this->sub_modul_ini = 205;
@@ -40,19 +47,8 @@ class Tema extends Admin_Controller
 		$this->load->view('footer');
 	}
 
-	public function detail($folder, $tema = NULL)
+	public function detail($folder_extract, $tema = NULL)
 	{
-		if($tema !== NULL){
-			$themes = $folder.'/'.$tema;
-			$lokasi = $folder.'/themes/'.$tema.'/';
-		}
-		else
-		{
-			$themes = $folder;
-			$lokasi = 'themes/'.$folder.'/';
-		}
-
-		// Load File Image dan Read
 
 		$data['nama']					= $themes;
 		$data['lokasi']				= $lokasi;
@@ -62,45 +58,29 @@ class Tema extends Admin_Controller
 	}
 
 	// Ganti Tema
-	public function change($folder, $tema = NULL)
+	public function change($folder_extract, $tema = NULL)
 	{
-		if($tema !== NULL){
-			$themes = $folder.'/'.$tema;
-		}
-		else
-		{
-			$themes = $folder;
-		}
+		$this->themes($folder_extract, $tema);
 
-		$this->db->where('key', 'web_theme')->update('setting_aplikasi', array('value' => $themes));
+		$this->db->where('key', 'web_theme')->update('setting_aplikasi', array('value' => $this->themes_name));
 
 		redirect('tema');
 	}
 
 	// Backup Tema
-	public function backup($folder, $tema = NULL)
+	public function backup($folder_extract, $tema = NULL)
 	{
-		$this->load->library('zip');
-
-		if($tema !== NULL){
-			$name = $tema.'.zip';
-			$lokasi = $folder.'/themes/'.$tema.'/';
-		}
-		else
-		{
-			$name = $folder.'.zip';
-			$lokasi = 'themes/'.$folder.'/';
-		}
+		$this->themes($folder_extract, $tema);
 
 		$this->zip->read_dir($lokasi, FALSE);
-		$this->zip->archive($this->temp_file.$name);
-		$this->zip->download($name);
+		$this->zip->archive($this->temp_folder.$this->file_name);
+		$this->zip->download($this->file_name);
 	}
 
 	// Upload dan Install tema
 	public function install()
 	{
-		$config['upload_path']		= $this->temp_file;
+		$config['upload_path']		= $this->temp_folder;
 		$config['allowed_types']	= 'zip';
 		$config['max_size'] 			= '5120'; // max_size in kb (5 MB)
 
@@ -119,11 +99,8 @@ class Tema extends Admin_Controller
 
 			if ($zip->open($full_path) === TRUE)
 			{
-				$zip->extractTo(FCPATH.'/desa/themes/');
+				$zip->extractTo($this->folder_extract);
 				$zip->close();
-
-				// Hapus file upload setelah di extrack
-				delete_files($this->temp_file, TRUE);
 			}
 			$this->session->set_flashdata('msg','Tema berhasil di tambahkan');
 		}
@@ -131,41 +108,41 @@ class Tema extends Admin_Controller
 		redirect('tema');
 	}
 
-	// Sterilkan folder temp dari file
+	// Sterilkan folder_extract temp dari file
 	public function clear()
 	{
-		delete_folder($this->temp_file);
-		mkdir($this->temp_file, 0, true);
-		redirect('tema');
+		delete_folder($this->temp_folder);
+		mkdir($this->temp_folder, 0, true);
 	}
-	// Hapus folder dan file
+
+	// Sterilkan folder_extract temp dari file
+	public function themes($folder, $tema = NULL)
+	{
+		if($tema !== NULL)
+		{
+			$this->file_name = $tema.'.zip';
+			$this->themes_name = $folder.'/'.$tema;
+			$this->folder_themes = $folder.'/themes/'.$folder.'/';
+		}
+		else
+		{
+			$this->file_name = $folder.'.zip';
+			$this->themes_name = $folder;
+			$this->folder_themes = 'themes/'.$folder.'/';
+		}
+	}
+
+
+	// Hapus folder_extract dan file
 	public function delete($tema)
 	{
 		//delete_files("desa/themes/".$tema."/", TRUE);
 		//rmdir("desa/themes/lupa/");
 		//$this->delete_directory($tema);
-		@delete_folder(FClokasi.'desa/themes/'.$tema);
+		delete_folder($this->folder_extract.$tema);
 		//delete_file($lokasi, true, false, 1);
 
 		redirect('tema');
-	}
-
-	public function delete_directory($folder_name)
-	{
-		$this->load->helper('file');
-
-		$dir_lokasi = 'desa/themes/'.$folder_name;
-		$del_lokasi = './desa/themes/'.$folder_name.'/';
-
-		if(is_dir($dir_lokasi))
-		{
-			delete_files($del_lokasi, true, false, 1);
-			rmdir($dir_lokasi);
-
-			return true;
-		}
-
-		return false;
 	}
 
 }
