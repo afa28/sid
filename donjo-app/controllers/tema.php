@@ -84,25 +84,27 @@ class Tema extends Admin_Controller
 		$config['upload_path']		= $this->temp_folder;
 		$config['allowed_types']	= 'zip';
 		$config['max_size'] 			= '5120'; // max_size in kb (5 MB)
+		$config['file_name'] 			= $_FILES['file']['name'];
 
 		$this->load->library('upload', $config);
 
-		if(!$this->upload->do_upload('file_themes'))
+		if($this->upload->do_upload('file'))
 		{
-			$this->session->set_flashdata('msg', 'Error : '.$this->upload->display_errors());
+			$this->session->set_flashdata('msg', $this->upload->display_errors());
 		}
 		else
 		{
-			$data = array('upload_data' => $this->upload->data());
-			$full_path = $data['upload_data']['full_path'];
+			$uploadData = $this->upload->data();
+			$filename = $uploadData['file_name'];
 
 			$zip = new ZipArchive;
 
-			if ($zip->open($full_path) === TRUE)
+			if ($zip->open($this->$temp_folder.$filename) === TRUE)
 			{
 				$zip->extractTo($this->folder_extract);
 				$zip->close();
 			}
+
 			$this->session->set_flashdata('msg','Tema berhasil di tambahkan');
 		}
 
@@ -116,8 +118,7 @@ class Tema extends Admin_Controller
 		mkdir($this->temp_folder, 0, true);
 	}
 
-	// Sterilkan folder_extract temp dari file
-	public function themes($folder, $tema = NULL)
+	private function themes($folder, $tema = NULL)
 	{
 		if($tema !== NULL)
 		{
@@ -134,14 +135,10 @@ class Tema extends Admin_Controller
 	}
 
 
-	// Hapus folder_extract dan file
+	// Hapus tema (Tema bawaan tdk dpt dihapus)
 	public function delete($tema)
 	{
-		//delete_files("desa/themes/".$tema."/", TRUE);
-		//rmdir("desa/themes/lupa/");
-		//$this->delete_directory($tema);
 		delete_folder($this->folder_extract.$tema);
-		//delete_file($lokasi, true, false, 1);
 
 		redirect('tema');
 	}

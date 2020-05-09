@@ -7,9 +7,8 @@
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
-		<?= $this->session->flashdata('msg');
-						?>
-		<form id="validasi" action="<?= $form_action?>" method="POST" enctype="multipart/form-data">
+		<?= $this->session->flashdata('msg'); ?>
+		<form method="post" action="<?= $form_action ?>" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="box box-info">
@@ -21,8 +20,8 @@
 											<label for="file" class="col-md-2 col-lg-2 control-label">Tema .zip:</label>
 											<div class="col-sm-12 col-md-8 col-lg-8">
 												<div class="input-group input-group-sm">
-													<input type="text" class="form-control" id="file_path2">
-													<input type="file" class="hidden" id="file" name="file_tema">
+													<input type='text' class="form-control" id="file_path" name="userfile">
+													<input type="file" name='file' class="hidden" id="file" name="userfile" accept="application/sql">
 													<span class="input-group-btn">
 														<button type="button" class="btn btn-info btn-flat" id="file_browser"><i class="fa fa-search"></i> Browse</button>
 													</span>
@@ -83,7 +82,7 @@
 													<i class="fa fa-trash-o"></i>
 												</button>
 											<?php else : ?>
-													<a href="#" data-href="<?= site_url('tema/delete/' . $tema) ?>" class="btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+													<a href="#" data-href="<?= site_url('tema/delete/' . $nama) ?>" class="btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 											<?php endif;?>
 
 											<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn btn-primary btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Detail Tema <?= ucwords($nama) ?>" title="Detail Tema <?= ucwords($nama) ?>"><i class="fa fa-eye"></i></a>
