@@ -91,7 +91,7 @@
 
 											<a href="<?= site_url('tema/backup/' . $tema) ?>" class="btn bg-navy btn-sm" title="Backup"><i class="fa fa-download"></i></a>
 
-											<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn bg-olive btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Detail Tema <?= $nama ?>" title="Detail Tema <?= $nama ?>"><i class="fa fa-eye"></i></a>
+											<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn bg-olive btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Detail Tema <?= $nama ?>" title="Detail"><i class="fa fa-eye"></i></a>
 											</div>
 										</div>
 									</div>

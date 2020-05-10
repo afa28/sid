@@ -3,10 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Install extends CI_Controller
 {
-	// Upload dan Install tema
+
 	public function index()
 	{
-		// Set preference
+
 		$temp_folder	=	FCPATH.'assets/themes/';
 		$folder_extract	=	FCPATH.'desa/themes/';
 
@@ -48,4 +48,5 @@ class Install extends CI_Controller
 
 		redirect('tema');
 	}
+
 }
