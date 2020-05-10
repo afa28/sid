@@ -4,7 +4,6 @@ class Tema extends Admin_Controller
 {
 
 	private $temp_folder; // Penyimpanan tema sementara
-	private $file_name; // Nama file tema (.zip)
 	private $folder_extract; // Folder extrack tema (desa/themes/)
 	private $themes_name; // Nama tema untuk DB
 	private $folder_themes; // Folder peyimpanan tema (themes/ atau desa/themes/)
@@ -53,9 +52,10 @@ class Tema extends Admin_Controller
 	{
 		$this->themes($folder, $tema);
 
-		$data['nama']					= $themes;
-		$data['lokasi']				= $lokasi;
-		$data['form_action']	= site_url('tema/install/'.$themes);
+		$data['nama']					= $this->themes_name;
+		$data['lokasi']				= $this->folder_themes;
+		$data['detail']				= $this->readme();
+		//$data['form_action']	= site_url('install'.$themes);
 
 		$this->load->view('tema/detail', $data);
 	}
@@ -76,8 +76,8 @@ class Tema extends Admin_Controller
 		$this->themes($tipe, $tema);
 
 		$this->zip->read_dir($this->folder_themes, FALSE);
-		$this->zip->archive($this->temp_folder.$this->file_name);
-		$this->zip->download($this->file_name);
+		$this->zip->archive($this->temp_folder.$this->themes_name.'.zip');
+		$this->zip->download($this->themes_name.'.zip');
 	}
 
 	// Sterilkan folder_extract temp dari file
@@ -97,7 +97,6 @@ class Tema extends Admin_Controller
 			$lokasi = '';
 		}
 
-		$this->file_name		=	$tema.'.zip';
 		$this->themes_name	=	$tema;
 		$this->folder_themes=	$lokasi.'themes/'.$tema;
 	}
@@ -108,6 +107,18 @@ class Tema extends Admin_Controller
 		delete_folder($this->folder_extract.$tema.'/');
 
 		redirect('tema');
+	}
+
+	public function readme()
+	{
+		$lines = file($this->folder_themes.'/readme.txt');
+
+		foreach ($lines as $line_num => $line)
+		{
+			$data .= $line.'<br />';
+		}
+
+		return $data;
 	}
 
 }

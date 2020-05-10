@@ -2,11 +2,12 @@
 	<div class='modal-body'>
 		<div class="row">
 			<div class="col-sm-9">
+				<p><?= $detail ?> </p>
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 					<div class="carousel-inner">
 						<?php
 						$no = 0;
-						foreach (glob($lokasi.'thumbnail/*.png') as $thumb):
+						foreach (glob($lokasi.'/thumbnail/*.png') as $thumb):
 						$no++;
 
 						if($no==1):
@@ -32,14 +33,14 @@
 				</div>
 				<div class="text-center">
 					<div class="btn-group">
-						<?php if($nama != $this->theme):?>
+						<?php if($tema != $active):?>
 							<a href="<?= site_url('tema/change/' . $tema) ?>" class="btn btn-success btn-sm" title="Active"><i class="fa fa-star"></i></a>
 							<?php else:?>
 								<button type="button" class="btn btn-success btn-sm disabled">
 									<i class="fa fa-star"></i>
 								</button>
 							<?php endif;?>
-							<?php if($nama == $this->theme OR ($nama == 'klasik' OR $nama == 'hadakewa')):?>
+							<?php if($tema == $active OR ($tema == 'klasik' OR $tema == 'hadakewa')):?>
 								<button type="button" class="btn btn-danger btn-sm disabled">
 									<i class="fa fa-trash-o"></i>
 								</button>
