@@ -81,60 +81,34 @@ class Tema extends Admin_Controller
 	// Upload dan Install tema
 	public function install()
 	{
+		$config['upload_path']="./contoh/";
+		$config['allowed_types']='gif|jpg|png|zip';
+		$config['encrypt_name'] = TRUE;
 
-		if($this->input->post('submit') != NULL )
+		$this->load->library('upload',$config);
+		if($this->upload->do_upload("file"))
 		{
+			$data = array('upload_data' => $this->upload->data());
 
-			if(!empty($_FILES['file']['name']))
-			{
-				// Set preference
-				$folder = 'desa/themes/';
+			$judul= $this->input->post('userfile');
+			$image= $data['upload_data']['file_name'];
+		}
 
-				$config['upload_path'] =  $folder;
-				$config['allowed_types'] = 'zip';
-				$config['max_size'] = '5120'; // max_size in kb (5 MB)
-				$config['file_name'] = $_FILES['file']['name'];
+		redirect('tema');
+	}
 
-				// Load upload library
-				$this->load->library('upload',$config);
+	function do_upload()
+	{
+		$config['upload_path']="./contoh";
+		$config['allowed_types']='gif|jpg|png';
+		$config['encrypt_name'] = TRUE;
 
-				// File upload
-				if($this->upload->do_upload('file'))
-				{
-					// Get data about the file
-					$uploadData = $this->upload->data();
-					$filename = $uploadData['file_name'];
-					$link = $folder.$filename;
+		$this->load->library('upload',$config);
+		if($this->upload->do_upload("file")){
+			$data = array('upload_data' => $this->upload->data());
 
-					## Extract the zip file ---- start
-					$zip = new ZipArchive;
-					$res = $zip->open($link);
-					if ($res === TRUE) {
-
-					// Unzip path
-						$extractpath = $folder;
-
-					// Extract file
-						$zip->extractTo($extractpath);
-						$zip->close();
-
-						$this->session->set_flashdata('msg','Upload & Extract successfully.');
-					}
-					else
-					{
-						$this->session->set_flashdata('msg','Failed to extract.');
-					}
-				}
-				else
-				{
-					$this->session->set_flashdata('msg','Failed to upload');
-				}
-			}
-			else
-			{
-				$this->session->set_flashdata('msg','Failed to upload');
-			}
-			redirect('tema');
+			$judul= $this->input->post('judul');
+			$image= $data['upload_data']['file_name'];
 		}
 	}
 

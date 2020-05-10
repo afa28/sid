@@ -29,7 +29,7 @@
 											</div>
 											<div class="col-sm-12 col-md-2 col-lg-2">
 												<button type="submit" name="submit" value="Upload & Extract" class="btn btn-block btn-success btn-sm"><i class="fa fa-spin fa-refresh"></i> Upload</button>
-											</div>
+												</div>
 										</div>
 										<br><br>
 									</td>
