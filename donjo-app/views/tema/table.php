@@ -43,7 +43,6 @@
 		<div class="row">
 			<?php
 			$no = 0;
-			//echo var_dump($list_tema);
 			foreach ($list_tema as $tema) :
 				$cut = explode('/', $tema);
 
@@ -62,49 +61,49 @@
 					$no++; ?>
 					<div class="col-md-4 col-xs-12">
 						<?php if($tema != $active):?>
-							<div class="box box-info">;
-						<?php else:?>
-							<div class="box box-danger">;
-						<?php endif;?>
-							<div class="box-header with-border">
-								<center><h3 class="box-title"><b><?= ucwords($nama) ?></b></h3></center>
-							</div>
-							<div class="box-body">
-								<img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/1.png'; ?>" alt="<?= $nama ?>-1"/>
-								<div class="text-center">
-									<div class="btn-group">
-										<?php if($tema != $active):?>
-											<a href="<?= site_url('tema/change/' . $tema) ?>" class="btn btn-success btn-sm" title="Active"><i class="fa fa-star"></i></a>
-										<?php else:?>
-											<button type="button" class="btn btn-success btn-sm disabled">
-												<i class="fa fa-star"></i>
-											</button>
-										<?php endif;?>
-										<?php if($tema == $active OR ($tema == 'klasik' OR $tema == 'hadakewa')):?>
-												<button type="button" class="btn btn-danger btn-sm disabled">
-													<i class="fa fa-trash-o"></i>
-												</button>
-											<?php else : ?>
-													<a href="#" data-href="<?= site_url('tema/delete/' . $nama) ?>" class="btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
-											<?php endif;?>
-											<a href="<?= site_url('tema/edit/' . $tema) ?>" class="btn btn-primary btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
+							<div class="box box-info">
+								<?php else:?>
+									<div class="box box-danger">
+									<?php endif;?>
+									<div class="box-header with-border">
+										<center><h3 class="box-title"><b><?= ucwords($nama) ?></b></h3></center>
+									</div>
+									<span class="mailbox-attachment-icon has-img"><img src="<?= base_url().$lokasi.'/thumbnail/1.png'; ?>"></span>
+									<div class="box-body">
+										<div class="text-center">
+											<div class="btn-group">
+												<?php if($tema != $active):?>
+													<a href="<?= site_url('tema/change/' . $tema) ?>" class="btn btn-success btn-sm" title="Active"><i class="fa fa-star"></i></a>
+													<?php else:?>
+														<button type="button" class="btn btn-success btn-sm disabled">
+															<i class="fa fa-star"></i>
+														</button>
+													<?php endif;?>
+													<?php if($tema == $active OR ($tema == 'klasik' OR $tema == 'hadakewa')):?>
+														<button type="button" class="btn btn-danger btn-sm disabled">
+															<i class="fa fa-trash-o"></i>
+														</button>
+														<?php else : ?>
+															<a href="#" data-href="<?= site_url('tema/delete/' . $nama) ?>" class="btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+														<?php endif;?>
+														<a href="<?= site_url('tema/edit/' . $tema) ?>" class="btn btn-primary btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
 
-											<a href="<?= site_url('tema/backup/' . $tema) ?>" class="btn bg-navy btn-sm" title="Backup"><i class="fa fa-download"></i></a>
+														<a href="<?= site_url('tema/backup/' . $tema) ?>" class="btn bg-navy btn-sm" title="Backup"><i class="fa fa-download"></i></a>
 
-											<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn bg-olive btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Detail Tema <?= $nama ?>" title="Detail"><i class="fa fa-eye"></i></a>
+														<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn bg-olive btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Detail Tema <?= $nama ?>" title="Detail"><i class="fa fa-eye"></i></a>
+													</div>
+												</div>
 											</div>
 										</div>
+										<?php if($no % 3 == 0):?>
+										</div>
+										<div class="row">
+										<?php endif;?>
 									</div>
-								</div>
-								<?php if($no % 3 == 0):?>
-								</div>
-								<div class="row">
-								<?php endif;?>
-							</div>
-						<?php endif;
-					endforeach; ?>
+								<?php endif;
+							endforeach; ?>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</section>
-	<?php $this->load->view('global/confirm_delete');?>
+			</section>
+			<?php $this->load->view('global/confirm_delete');?>
