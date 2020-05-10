@@ -47,13 +47,16 @@
 			foreach ($list_tema as $tema) :
 				$cut = explode('/', $tema);
 
-				if($cut[0] != 'desa'):
-					$nama = $cut[0];
-					$lokasi = 'themes/'.$nama;
-				else:
-					$nama = $cut[1];
-					$lokasi = $cut[0].'/themes/'.$nama;
-				endif;
+				$set_lok = $cut[0].'/';
+
+				if($cut[1] == NULL)
+				{
+					$cut[1] = $cut[0];
+					$set_lok = '';
+				}
+
+				$nama = $cut[1];
+				$lokasi = $set_lok.'themes/'.$nama;
 
 				if(file_exists(FCPATH.$lokasi.'/template.php')):
 					$no++; ?>
