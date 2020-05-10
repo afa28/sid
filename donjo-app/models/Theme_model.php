@@ -32,5 +32,14 @@
 
 		return $active;
 	}
+
+	/*
+	| Ganti Tema
+	*/
+	public function change($tema)
+	{
+		$this->db->where('key', 'web_theme')->update('setting_aplikasi', array('value' => $tema));
+	}
+
 }
 ?>

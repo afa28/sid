@@ -7,7 +7,7 @@ class zip extends CI_Controller
 	public function install()
 	{
 			// Set preference
-		$folder = 'desa/themes/';
+		$folder = FCPATH.'desa/themess/';
 
 		if (!file_exists($folder))
 		{

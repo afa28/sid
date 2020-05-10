@@ -16,11 +16,10 @@ class Tema extends Admin_Controller
 		$this->load->model('theme_model');
 		$this->load->library('session');
 		$this->load->library('zip');
-		$this->load->helper("file");
+		$this->load->helper('file');
 		$this->temp_folder = FCPATH.'assets/themes/';
 		$this->folder_extract = FCPATH.'desa/themes/';
 		$this->clear();
-		$this->load->helper(array('form', 'url', 'download'));
 
 		$this->modul_ini = 11;
 		$this->sub_modul_ini = 205;
@@ -60,11 +59,13 @@ class Tema extends Admin_Controller
 	}
 
 	// Ganti Tema
-	public function change($folder_extract, $tema = NULL)
+	public function change($folder, $tema = NULL)
 	{
-		$this->themes($folder_extract, $tema);
+		$this->themes($folder, $tema);
 
-		$this->db->where('key', 'web_theme')->update('setting_aplikasi', array('value' => $this->themes_name));
+		$change = str_replace('themes/', '', $this->folder_themes);
+
+		$this->theme_model->change($change);
 
 		redirect('tema');
 	}
@@ -74,7 +75,7 @@ class Tema extends Admin_Controller
 	{
 		$this->themes($folder, $tema);
 
-		$this->zip->read_dir($lokasi, FALSE);
+		$this->zip->read_dir($this->folder_themes, FALSE);
 		$this->zip->archive($this->temp_folder.$this->file_name);
 		$this->zip->download($this->file_name);
 	}
@@ -100,14 +101,14 @@ class Tema extends Admin_Controller
 		if($tema !== NULL)
 		{
 			$this->file_name = $tema.'.zip';
-			$this->themes_name = $folder.'/'.$tema;
-			$this->folder_themes = $folder.'/themes/'.$folder.'/';
+			$this->themes_name = $tema;
+			$this->folder_themes = $folder.'/themes/'.$tema;
 		}
 		else
 		{
 			$this->file_name = $folder.'.zip';
 			$this->themes_name = $folder;
-			$this->folder_themes = 'themes/'.$folder.'/';
+			$this->folder_themes = 'themes/'.$folder;
 		}
 	}
 
