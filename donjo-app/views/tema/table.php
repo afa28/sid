@@ -7,9 +7,10 @@
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
-		<?= $this->session->flashdata('msg'); ?>
-		<?php echo form_open_multipart('tema/install');?>
-		<div class="row">
+		<?= $this->session->flashdata('msg');
+						?>
+		<form id="validasi" action="<?= $form_action?>" method="POST" enctype="multipart/form-data">
+			<div class="row">
 				<div class="col-sm-12">
 					<div class="box box-info">
 						<table class="table table-bordered table-hover">
@@ -19,12 +20,17 @@
 										<div class="form-group">
 											<label for="file" class="col-md-2 col-lg-2 control-label">Tema .zip:</label>
 											<div class="col-sm-12 col-md-8 col-lg-8">
-												<input type="file" name="gambar">
-												<button type="submit">Upload Gambar</button>
+												<div class="input-group input-group-sm">
+													<input type='text' class="form-control" id="file_path" name="userfile">
+																			<input type="file" name='file' class="hidden" id="file" name="userfile">
+																			<span class="input-group-btn">
+																				<button type="button" class="btn btn-info btn-flat" id="file_browser"><i class="fa fa-search"></i> Browse</button>
+																			</span>
+																		</div>
 											</div>
 											<div class="col-sm-12 col-md-2 col-lg-2">
 												<button type="submit" name="submit" value="Upload & Extract" class="btn btn-block btn-success btn-sm"><i class="fa fa-spin fa-refresh"></i> Upload</button>
-												</div>
+											</div>
 										</div>
 										<br><br>
 									</td>
@@ -34,7 +40,7 @@
 					</div>
 				</div>
 			</div>
-		<?php echo form_close(); ?>
+		</form>
 		<div class="row">
 			<?php
 			$no = 0;
@@ -77,10 +83,13 @@
 													<i class="fa fa-trash-o"></i>
 												</button>
 											<?php else : ?>
-													<a href="#" data-href="<?= site_url('tema/delete/' . $nama) ?>" class="btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+													<a href="#" data-href="<?= site_url('tema/delete/' . $tema) ?>" class="btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
 											<?php endif;?>
+											<a href="<?= site_url('tema/edit/' . $tema) ?>" class="btn btn-primary btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
 
-											<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn btn-primary btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Detail Tema <?= ucwords($nama) ?>" title="Detail Tema <?= ucwords($nama) ?>"><i class="fa fa-eye"></i></a>
+											<a href="<?= site_url('tema/backup/' . $tema) ?>" class="btn bg-navy btn-sm" title="Backup"><i class="fa fa-download"></i></a>
+
+											<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn bg-olive btn-flat btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Detail Tema <?= $nama ?>" title="Detail Tema <?= $nama ?>"><i class="fa fa-eye"></i></a>
 											</div>
 										</div>
 									</div>
