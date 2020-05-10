@@ -7,8 +7,7 @@
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
-		<?= $this->session->flashdata('msg');
-						?>
+		<?= $this->session->flashdata('msg'); ?>
 		<form id="validasi" action="<?= $form_action?>" method="POST" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-sm-12">

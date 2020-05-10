@@ -16,10 +16,11 @@ class Tema extends Admin_Controller
 		$this->load->model('theme_model');
 		$this->load->library('session');
 		$this->load->library('zip');
+		$this->load->helper("file");
 		$this->temp_folder = FCPATH.'assets/themes/';
 		$this->folder_extract = FCPATH.'desa/themes/';
 		$this->clear();
-		$this->load->helper(array('form', 'file', 'url'));
+		$this->load->helper(array('form', 'url', 'download'));
 
 		$this->modul_ini = 11;
 		$this->sub_modul_ini = 205;
@@ -37,7 +38,7 @@ class Tema extends Admin_Controller
 
 		$data['list_tema'] = array_merge(array(0 => $active), $list);
 
-		$data['form_action'] = site_url('zip/extract');
+		$data['form_action'] = site_url('zip/install');
 
 		$header = $this->header_model->get_data();
 
@@ -85,6 +86,36 @@ class Tema extends Admin_Controller
 		$this->do_upload();
 
 		redirect('tema');
+	}
+
+	public function do_upload(){
+
+		$config['upload_path'] = 'uploads';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg|html|pdf';
+		$config['max_size'] = 0;
+		$config['max_width']  = 0;
+		$config['max_height']  = 0;
+		$config['file_ext_tolower']  = TRUE;
+		$config['overwrite']  = FALSE;
+		$config['max_filename']  = 0;
+		$config['encrypt_name']  = TRUE;
+		$config['remove_spaces']  = TRUE;
+		$config['detect_mime']  = TRUE;
+		$config['mod_mime_fix']  = TRUE;
+
+//Alternately you can set preferences by calling the initialize function. Useful if you auto-load the class:
+
+		$this->upload->initialize($config);
+
+
+		if (!$this->upload->do_upload('userfile'))
+		{
+			$error = array('error' => $this->upload->display_errors());
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+		}
 	}
 
 	// Sterilkan folder_extract temp dari file
