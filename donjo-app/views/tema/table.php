@@ -60,15 +60,18 @@
 				if(file_exists(FCPATH.$lokasi.'/template.php')):
 					$no++; ?>
 					<div class="col-md-4 col-xs-12">
-						<?php if($tema != $active):?>
-							<div class="box box-info">
+						<?php if($tema == $active):?>
+							<div class="box box-danger">
 								<?php else:?>
-									<div class="box box-danger">
+									<div class="box box-info">
 									<?php endif;?>
-									<div class="box-header with-border">
-										<center><h3 class="box-title"><b><?= ucwords($nama) ?></b></h3></center>
+									<div class="box-header with-border text-center">
+										<h3 class="box-title text-center"><b><?= ucwords($nama) ?></b></h3>
+										<?php if($tema == 'klasik' OR $tema == 'hadakewa'):?>
+											<small><code>(System)</code></small>
+										<?php endif;?>
 									</div>
-									<span class="mailbox-attachment-icon has-img"><img src="<?= base_url().$lokasi.'/thumbnail/1.png'; ?>"></span>
+									<span class="mailbox-attachment-icon has-img"><img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/1.png'; ?>"></span>
 									<div class="box-body">
 										<div class="text-center">
 											<div class="btn-group">
