@@ -38,6 +38,8 @@
 	*/
 	public function change($tema)
 	{
+		$tema = str_replace('themes/', '', $tema);
+
 		$this->db->where('key', 'web_theme')->update('setting_aplikasi', array('value' => $tema));
 	}
 

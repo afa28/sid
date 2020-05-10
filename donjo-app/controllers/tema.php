@@ -47,7 +47,7 @@ class Tema extends Admin_Controller
 		$this->load->view('footer');
 	}
 
-	public function detail($folder, $tema = NULL)
+	public function detail($tipe, $tema = NULL)
 	{
 		$this->themes($folder, $tema);
 
@@ -59,21 +59,19 @@ class Tema extends Admin_Controller
 	}
 
 	// Ganti Tema
-	public function change($folder, $tema = NULL)
+	public function change($tipe, $tema = NULL)
 	{
-		$this->themes($folder, $tema);
+		$this->themes($tipe, $tema);
 
-		$change = str_replace('themes/', '', $this->folder_themes);
-
-		$this->theme_model->change($change);
+		$this->theme_model->change($this->folder_themes);
 
 		redirect('tema');
 	}
 
 	// Backup Tema
-	public function backup($folder, $tema = NULL)
+	public function backup($tipe, $tema = NULL)
 	{
-		$this->themes($folder, $tema);
+		$this->themes($tipe, $tema);
 
 		$this->zip->read_dir($this->folder_themes, FALSE);
 		$this->zip->archive($this->temp_folder.$this->file_name);
@@ -96,26 +94,25 @@ class Tema extends Admin_Controller
 		mkdir($this->temp_folder, 0, true);
 	}
 
-	private function themes($folder, $tema = NULL)
+	private function themes($tipe, $tema = NULL)
 	{
-		if($tema !== NULL)
+		$lokasi = 'desa/';
+
+		if($tema === NULL)
 		{
-			$this->file_name = $tema.'.zip';
-			$this->themes_name = $tema;
-			$this->folder_themes = $folder.'/themes/'.$tema;
+			$tema = $tipe;
+			$lokasi = '';
 		}
-		else
-		{
-			$this->file_name = $folder.'.zip';
-			$this->themes_name = $folder;
-			$this->folder_themes = 'themes/'.$folder;
-		}
+
+		$this->file_name		=	$tema.'.zip';
+		$this->themes_name	=	$tema;
+		$this->folder_themes=	$lokasi.'themes/'.$tema;
 	}
 
 	// Hapus tema (Tema bawaan tdk dpt dihapus)
 	public function delete($tema)
 	{
-		delete_folder($this->folder_extract.$tema);
+		delete_folder($this->folder_extract.$tema.'/');
 
 		redirect('tema');
 	}
