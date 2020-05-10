@@ -11,7 +11,7 @@ class zip extends CI_Controller
 
 		if (!file_exists($folder))
 		{
-			$folder = 'themes/';
+			mkdir($folder, 0, true);
 		}
 
 		$config['upload_path'] =  $folder;
