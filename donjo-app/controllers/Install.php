@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class zip extends CI_Controller
+class Install extends CI_Controller
 {
-	// Upload and Extract zip file
-	public function install()
+	// Upload dan Install tema
+	public function index()
 	{
 		// Set preference
 		$folder_upload	=	FCPATH.'assets/themes/';

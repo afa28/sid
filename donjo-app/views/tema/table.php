@@ -61,7 +61,7 @@
 				if(file_exists(FCPATH.$lokasi.'/template.php')):
 					$no++; ?>
 					<div class="col-md-4 col-xs-12">
-						<?php if($lokasi != $this->theme_folder.'/'.$this->theme):?>
+						<?php if($tema != $active):?>
 							<div class="box box-info">;
 						<?php else:?>
 							<div class="box box-danger">;
@@ -73,14 +73,14 @@
 								<img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/1.png'; ?>" alt="<?= $nama ?>-1"/>
 								<div class="text-center">
 									<div class="btn-group">
-										<?php if($nama != $this->theme):?>
+										<?php if($tema != $active):?>
 											<a href="<?= site_url('tema/change/' . $tema) ?>" class="btn btn-success btn-sm" title="Active"><i class="fa fa-star"></i></a>
 										<?php else:?>
 											<button type="button" class="btn btn-success btn-sm disabled">
 												<i class="fa fa-star"></i>
 											</button>
 										<?php endif;?>
-										<?php if($nama == $this->theme OR ($lokasi == 'themes/klasik' OR $lokasi == 'themes/hadakewa')):?>
+										<?php if($tema == $active OR ($tema == 'klasik' OR $tema == 'hadakewa')):?>
 												<button type="button" class="btn btn-danger btn-sm disabled">
 													<i class="fa fa-trash-o"></i>
 												</button>
@@ -91,7 +91,7 @@
 
 											<a href="<?= site_url('tema/backup/' . $tema) ?>" class="btn bg-navy btn-sm" title="Backup"><i class="fa fa-download"></i></a>
 
-											<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn bg-olive btn-flat btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Detail Tema <?= $nama ?>" title="Detail Tema <?= $nama ?>"><i class="fa fa-eye"></i></a>
+											<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn bg-olive btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Detail Tema <?= $nama ?>" title="Detail Tema <?= $nama ?>"><i class="fa fa-eye"></i></a>
 											</div>
 										</div>
 									</div>

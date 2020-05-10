@@ -35,9 +35,11 @@ class Tema extends Admin_Controller
 			array_splice($list, $cari, 1);
 		}
 
+		$data['active'] = $active;
 		$data['list_tema'] = array_merge(array(0 => $active), $list);
 
-		$data['form_action'] = site_url('tema/install');
+
+		$data['form_action'] = site_url('install');
 
 		$header = $this->header_model->get_data();
 
@@ -76,60 +78,6 @@ class Tema extends Admin_Controller
 		$this->zip->read_dir($this->folder_themes, FALSE);
 		$this->zip->archive($this->temp_folder.$this->file_name);
 		$this->zip->download($this->file_name);
-	}
-
-	// Upload dan Install tema
-	// Upload and Extract zip file
-	public function install()
-	{
-		// Set preference
-		$folder_upload	=	FCPATH.'assets/themes/';
-		$folder_extract	=	FCPATH.'desa/themes/';
-
-		if (!file_exists($folder_extract))
-		{
-			mkdir($folder_extract, 0, true);
-		}
-
-		$config['upload_path'] =  $folder_upload;
-		$config['allowed_types'] = 'zip';
-		$config['max_size'] = '5120'; // max_size in kb (5 MB)
-		$config['file_name'] = $_FILES['file']['name'];
-
-		// Load upload library
-		$this->load->library('upload',$config);
-
-		// File upload
-		if($this->upload->do_upload('file') AND !empty($_FILES['file']['name']))
-		{
-			// Get data about the file
-			$uploadData = $this->upload->data();
-			$filename = $uploadData['file_name'];
-			$link = $folder_upload.$filename;
-
-			## Extract the zip file ---- start
-			$zip = new ZipArchive;
-			$res = $zip->open($link);
-			if ($res === TRUE)
-			{
-
-				// Extract file
-				$zip->extractTo($folder_extract);
-				$zip->close();
-
-				$this->session->set_flashdata('msg','Upload & Extract successfully.');
-			}
-			else
-			{
-				$this->session->set_flashdata('msg','Failed to extract.');
-			}
-		}
-		else
-		{
-			$this->session->set_flashdata('msg','Failed to upload');
-		}
-
-		redirect('tema');
 	}
 
 	// Sterilkan folder_extract temp dari file
