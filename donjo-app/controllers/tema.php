@@ -49,7 +49,7 @@ class Tema extends Admin_Controller
 
 	public function detail($folder, $tema = NULL)
 	{
-		$this->themes($folder_extract, $tema);
+		$this->themes($folder, $tema);
 
 		$data['nama']					= $themes;
 		$data['lokasi']				= $lokasi;
@@ -111,7 +111,6 @@ class Tema extends Admin_Controller
 			$this->folder_themes = 'themes/'.$folder;
 		}
 	}
-
 
 	// Hapus tema (Tema bawaan tdk dpt dihapus)
 	public function delete($tema)

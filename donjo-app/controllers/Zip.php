@@ -6,47 +6,42 @@ class zip extends CI_Controller
 	// Upload and Extract zip file
 	public function install()
 	{
-			// Set preference
-		$folder = FCPATH.'desa/themess/';
+		// Set preference
+		$folder_upload	=	FCPATH.'assets/themes/';
+		$folder_extract	=	FCPATH.'desa/themes/';
 
-		if (!file_exists($folder))
+		if (!file_exists($folder_extract))
 		{
-			mkdir($folder, 0, true);
+			mkdir($folder_extract, 0, true);
 		}
 
-		$config['upload_path'] =  $folder;
+		$config['upload_path'] =  $folder_upload;
 		$config['allowed_types'] = 'zip';
 		$config['max_size'] = '5120'; // max_size in kb (5 MB)
 		$config['file_name'] = $_FILES['file']['name'];
 
-			// Load upload library
+		// Load upload library
 		$this->load->library('upload',$config);
 
-			// File upload
+		// File upload
 		if($this->upload->do_upload('file') AND !empty($_FILES['file']['name']))
 		{
-				// Get data about the file
+			// Get data about the file
 			$uploadData = $this->upload->data();
 			$filename = $uploadData['file_name'];
-			$link = $folder.$filename;
+			$link = $folder_upload.$filename;
 
-				## Extract the zip file ---- start
+			## Extract the zip file ---- start
 			$zip = new ZipArchive;
 			$res = $zip->open($link);
-			if ($res === TRUE) {
+			if ($res === TRUE)
+			{
 
-					// Unzip path
-				$extractpath = $folder;
-
-					// Extract file
-				$zip->extractTo($extractpath);
+				// Extract file
+				$zip->extractTo($folder_extract);
 				$zip->close();
 
 				$this->session->set_flashdata('msg','Upload & Extract successfully.');
-
-				if(file_exists($link)){
-					unlink($link);
-				}
 			}
 			else
 			{

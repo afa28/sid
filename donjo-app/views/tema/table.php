@@ -77,7 +77,7 @@
 												<i class="fa fa-star"></i>
 											</button>
 										<?php endif;?>
-										<?php if($nama == $this->theme OR ($nama == 'klasik' OR $nama == 'hadakewa')):?>
+										<?php if($nama == $this->theme OR ($lokasi == 'themes/klasik' OR $lokasi == 'themes/hadakewa')):?>
 												<button type="button" class="btn btn-danger btn-sm disabled">
 													<i class="fa fa-trash-o"></i>
 												</button>
