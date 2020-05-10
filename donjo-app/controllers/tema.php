@@ -81,34 +81,61 @@ class Tema extends Admin_Controller
 	// Upload dan Install tema
 	public function install()
 	{
-		$config['upload_path']		= $this->temp_folder;
-		$config['allowed_types']	= 'zip';
-		$config['max_size'] 			= '5120'; // max_size in kb (5 MB)
-		$config['file_name'] 			= $_FILES['file']['name'];
 
-		$this->load->library('upload', $config);
-
-		if($this->upload->do_upload('file'))
+		if($this->input->post('submit') != NULL )
 		{
-			$this->session->set_flashdata('msg', $this->upload->display_errors());
-		}
-		else
-		{
-			$uploadData = $this->upload->data();
-			$filename = $uploadData['file_name'];
 
-			$zip = new ZipArchive;
-
-			if ($zip->open($this->$temp_folder.$filename) === TRUE)
+			if(!empty($_FILES['file']['name']))
 			{
-				$zip->extractTo($this->folder_extract);
-				$zip->close();
+				// Set preference
+				$folder = 'desa/themes/';
+
+				$config['upload_path'] =  $folder;
+				$config['allowed_types'] = 'zip';
+				$config['max_size'] = '5120'; // max_size in kb (5 MB)
+				$config['file_name'] = $_FILES['file']['name'];
+
+				// Load upload library
+				$this->load->library('upload',$config);
+
+				// File upload
+				if($this->upload->do_upload('file'))
+				{
+					// Get data about the file
+					$uploadData = $this->upload->data();
+					$filename = $uploadData['file_name'];
+					$link = $folder.$filename;
+
+					## Extract the zip file ---- start
+					$zip = new ZipArchive;
+					$res = $zip->open($link);
+					if ($res === TRUE) {
+
+					// Unzip path
+						$extractpath = $folder;
+
+					// Extract file
+						$zip->extractTo($extractpath);
+						$zip->close();
+
+						$this->session->set_flashdata('msg','Upload & Extract successfully.');
+					}
+					else
+					{
+						$this->session->set_flashdata('msg','Failed to extract.');
+					}
+				}
+				else
+				{
+					$this->session->set_flashdata('msg','Failed to upload');
+				}
 			}
-
-			$this->session->set_flashdata('msg','Tema berhasil di tambahkan');
+			else
+			{
+				$this->session->set_flashdata('msg','Failed to upload');
+			}
+			redirect('tema');
 		}
-
-		redirect('tema');
 	}
 
 	// Sterilkan folder_extract temp dari file

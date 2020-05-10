@@ -8,7 +8,7 @@
 	</section>
 	<section class="content" id="maincontent">
 		<?= $this->session->flashdata('msg'); ?>
-		<form method="post" action="<?= $form_action ?>" enctype="multipart/form-data">
+		<form method="post" action="<?= site_url("tema/install") ?>" enctype="multipart/form-data" />
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="box box-info">
