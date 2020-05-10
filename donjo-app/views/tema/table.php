@@ -21,11 +21,11 @@
 											<div class="col-sm-12 col-md-8 col-lg-8">
 												<div class="input-group input-group-sm">
 													<input type='text' class="form-control" id="file_path" name="userfile">
-																			<input type="file" name='file' class="hidden" id="file" name="userfile">
-																			<span class="input-group-btn">
-																				<button type="button" class="btn btn-info btn-flat" id="file_browser"><i class="fa fa-search"></i> Browse</button>
-																			</span>
-																		</div>
+													<input type="file" name='file' class="hidden" id="file" name="userfile">
+													<span class="input-group-btn">
+														<button type="button" class="btn btn-info btn-flat" id="file_browser"><i class="fa fa-search"></i> Browse</button>
+													</span>
+												</div>
 											</div>
 											<div class="col-sm-12 col-md-2 col-lg-2">
 												<button type="submit" name="submit" value="Upload & Extract" class="btn btn-block btn-success btn-sm"><i class="fa fa-spin fa-refresh"></i> Upload</button>
