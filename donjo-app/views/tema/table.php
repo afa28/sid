@@ -8,8 +8,8 @@
 	</section>
 	<section class="content" id="maincontent">
 		<?= $this->session->flashdata('msg'); ?>
-		<form method="post" action="<?= site_url("tema/install") ?>" enctype="multipart/form-data" />
-			<div class="row">
+		<?php echo form_open_multipart('tema/install');?>
+		<div class="row">
 				<div class="col-sm-12">
 					<div class="box box-info">
 						<table class="table table-bordered table-hover">
@@ -19,13 +19,8 @@
 										<div class="form-group">
 											<label for="file" class="col-md-2 col-lg-2 control-label">Tema .zip:</label>
 											<div class="col-sm-12 col-md-8 col-lg-8">
-												<div class="input-group input-group-sm">
-													<input type='text' class="form-control" id="file_path" name="userfile">
-													<input type="file" name='file' class="hidden" id="file" name="userfile" accept="application/sql">
-													<span class="input-group-btn">
-														<button type="button" class="btn btn-info btn-flat" id="file_browser"><i class="fa fa-search"></i> Browse</button>
-													</span>
-												</div>
+												<input type="file" name="gambar">
+												<button type="submit">Upload Gambar</button>
 											</div>
 											<div class="col-sm-12 col-md-2 col-lg-2">
 												<button type="submit" name="submit" value="Upload & Extract" class="btn btn-block btn-success btn-sm"><i class="fa fa-spin fa-refresh"></i> Upload</button>
@@ -39,7 +34,7 @@
 					</div>
 				</div>
 			</div>
-		</form>
+		<?php echo form_close(); ?>
 		<div class="row">
 			<?php
 			$no = 0;

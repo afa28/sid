@@ -20,6 +20,7 @@ class Tema extends Admin_Controller
 		$this->temp_folder = FCPATH.'assets/themes/';
 		$this->folder_extract = FCPATH.'desa/themes/';
 		$this->clear();
+		$this->load->helper(array('form', 'url'));
 
 		$this->modul_ini = 11;
 		$this->sub_modul_ini = 205;
@@ -81,35 +82,26 @@ class Tema extends Admin_Controller
 	// Upload dan Install tema
 	public function install()
 	{
-		$config['upload_path']="./contoh/";
-		$config['allowed_types']='gif|jpg|png|zip';
-		$config['encrypt_name'] = TRUE;
 
-		$this->load->library('upload',$config);
-		if($this->upload->do_upload("file"))
+		// setting konfigurasi upload
+		$config['upload_path'] = 'contoh/';
+		$config['allowed_types'] = 'gif|jpg|png';
+
+		// load library upload
+		$this->load->library('upload', $config);
+		if (!$this->upload->do_upload('gambar'))
 		{
-			$data = array('upload_data' => $this->upload->data());
-
-			$judul= $this->input->post('userfile');
-			$image= $data['upload_data']['file_name'];
+			$error = $this->upload->display_errors();
+			// menampilkan pesan error
+			$this->session->set_flashdata('msg', $error);
+		}
+		else
+		{
+			$result = $this->upload->data();
+			$this->session->set_flashdata('msg', $result);
 		}
 
 		redirect('tema');
-	}
-
-	function do_upload()
-	{
-		$config['upload_path']="./contoh";
-		$config['allowed_types']='gif|jpg|png';
-		$config['encrypt_name'] = TRUE;
-
-		$this->load->library('upload',$config);
-		if($this->upload->do_upload("file")){
-			$data = array('upload_data' => $this->upload->data());
-
-			$judul= $this->input->post('judul');
-			$image= $data['upload_data']['file_name'];
-		}
 	}
 
 	// Sterilkan folder_extract temp dari file
