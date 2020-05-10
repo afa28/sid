@@ -61,13 +61,13 @@
 				if(file_exists(FCPATH.$lokasi.'/template.php')):
 					$no++; ?>
 					<div class="col-md-4 col-xs-12">
-						<?php if($nama != $this->theme):?>
+						<?php if($lokasi != $this->theme_folder.'/'.$this->theme):?>
 							<div class="box box-info">;
 						<?php else:?>
 							<div class="box box-danger">;
 						<?php endif;?>
 							<div class="box-header with-border">
-								<center><h3 class="box-title"><?= ucwords($nama) ?></h3></center>
+								<center><h3 class="box-title"><b><?= ucwords($nama) ?></b></h3></center>
 							</div>
 							<div class="box-body">
 								<img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/1.png'; ?>" alt="<?= $nama ?>-1"/>
