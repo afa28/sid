@@ -50,12 +50,12 @@ class Tema extends Admin_Controller
 	{
 		$this->themes($folder, $tema);
 
+		$data['active'] = $this->theme_model->active();
 		$data['nama']		=	$this->themes_name;
 		$data['lokasi']	=	$this->folder_themes.'/thumbnail/';
 		$data['readme']	=	$this->readme();
 		$data['tipe']		=	$tipe;
 		$data['tema']		=	$tema;
-
 
 		$this->load->view('tema/detail', $data);
 	}
@@ -80,7 +80,24 @@ class Tema extends Admin_Controller
 		$this->zip->download($this->themes_name.'.zip');
 	}
 
-	// Sterilkan folder_extract temp dari file
+	// Costumize Tema
+	public function costumize($tipe, $tema = NULL)
+	{
+		$this->themes($tipe, $tema);
+
+		$data['lokasi']	=	$this->folder_themes;
+		$data['list_setting']	=	$this->theme_model->list_setting();
+		$data['form_action']	=	site_url('insert');
+
+		$header = $this->header_model->get_data();
+
+		$this->load->view('header', $header);
+		$this->load->view('nav', $nav);
+		$this->load->view('tema/form', $data);
+		$this->load->view('footer');
+	}
+
+	// Sterilkan folder temp dari file
 	public function clear()
 	{
 		delete_folder($this->temp_folder);

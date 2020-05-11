@@ -66,12 +66,18 @@
 		<div class="modal-footer">
 			<div class="form-group">
 				<center>
-					<a href="<?= site_url('tema/change/'.$tipe.'/'.$tema) ?>" class="btn btn-social btn-success btn-sm" title="Active"><i class='fa fa-check'></i> Active</a>
-					<a href="<?= site_url('tema/edit/'.$tipe.'/'.$tema) ?>" class="btn btn-social btn-info btn-sm" title="Edit"><i class='fa fa-pencil'></i> Edit</a>
-					<a href="<?= site_url('tema/costumize/'.$tipe.'/'.$tema) ?>" class="btn btn-social btn-primary btn-sm" title="Costumize"><i class='fa fa-gears'></i> Costumize</a>
-					<a href="<?= site_url('tema/backup/'.$tipe.'/'.$tema) ?>" class="btn btn-social bg-navy btn-sm" title="Backup"><i class='fa fa-download'></i> Backup</a>
-				</center>
+					<?php if($tipe.'/'.$tema != $active):?>
+						<a href="<?= site_url('tema/change/'.$tipe.'/'.$tema) ?>" class="btn btn-social btn-success btn-sm" title="Active"><i class='fa fa-check'></i> Active</a>
+						<?php else:?>
+							<button class="btn btn-social btn-success btn-sm" disabled>
+								<i class='fa fa-star'></i> Active
+							</button>
+						<?php endif;?>
+						<a href="<?= site_url('tema/edit/'.$tipe.'/'.$tema) ?>" class="btn btn-social btn-info btn-sm" title="Edit"><i class='fa fa-pencil'></i> Edit</a>
+						<a href="<?= site_url('tema/costumize/'.$tipe.'/'.$tema) ?>" class="btn btn-social btn-primary btn-sm" title="Costumize"><i class='fa fa-gears'></i> Costumize</a>
+						<a href="<?= site_url('tema/backup/'.$tipe.'/'.$tema) ?>" class="btn btn-social bg-navy btn-sm" title="Backup"><i class='fa fa-download'></i> Backup</a>
+					</center>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>

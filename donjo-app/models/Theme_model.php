@@ -43,5 +43,11 @@
 		$this->db->where('key', 'web_theme')->update('setting_aplikasi', array('value' => $tema));
 	}
 
+	public function list_setting()
+	{
+		$data = $this->db->where('kategori', 'themes')->get('setting_aplikasi')->result();
+
+		return $data;
+	}
 }
 ?>
