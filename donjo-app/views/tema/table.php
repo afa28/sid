@@ -61,7 +61,7 @@
 					$no++; ?>
 					<div class="col-md-4 col-xs-12">
 						<?php if($tema == $active):?>
-							<div class="box box-danger">
+							<div class="box box-success">
 								<?php else:?>
 									<div class="box box-info">
 									<?php endif;?>
@@ -74,39 +74,24 @@
 									<span class="mailbox-attachment-icon has-img"><img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/1.png'; ?>"></span>
 									<div class="box-body">
 										<div class="text-center">
-											<div class="btn-group">
-												<?php if($tema != $active):?>
-													<a href="<?= site_url('tema/change/' . $tema) ?>" class="btn btn-success btn-sm" title="Active"><i class="fa fa-star"></i></a>
-													<?php else:?>
-														<button type="button" class="btn btn-success btn-sm disabled">
-															<i class="fa fa-star"></i>
-														</button>
-													<?php endif;?>
-													<?php if($tema == $active OR ($tema == 'klasik' OR $tema == 'hadakewa')):?>
-														<button type="button" class="btn btn-danger btn-sm disabled">
-															<i class="fa fa-trash-o"></i>
-														</button>
-														<?php else : ?>
-															<a href="#" data-href="<?= site_url('tema/delete/' . $nama) ?>" class="btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
-														<?php endif;?>
-														<a href="<?= site_url('tema/edit/' . $tema) ?>" class="btn btn-primary btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
-
-														<a href="<?= site_url('tema/backup/' . $tema) ?>" class="btn bg-navy btn-sm" title="Backup"><i class="fa fa-download"></i></a>
-
-														<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn bg-olive btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Detail Tema <?= $nama ?>" title="Detail"><i class="fa fa-eye"></i></a>
-													</div>
-												</div>
+											<?php if($tema != $active):?>
+												<a href="<?= site_url('tema/change/' . $tema) ?>" class="btn btn-social btn-success btn-sm"><i class='fa fa-check'></i> Active</a>
+												<?php else:?>
+													<button class="btn btn-social btn-success btn-sm" disabled><i class='fa fa-star'></i> Active</button>
+												<?php endif;?>
+												<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn btn-social btn-primary btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Tema <?= ucwords($nama) ?>" title="Detail"><i class='fa fa-eye'></i> Detail</a>
 											</div>
 										</div>
-										<?php if($no % 3 == 0):?>
-										</div>
-										<div class="row">
-										<?php endif;?>
 									</div>
-								<?php endif;
-							endforeach; ?>
-						</div>
+									<?php if($no % 3 == 0):?>
+									</div>
+									<div class="row">
+									<?php endif;?>
+								</div>
+							<?php endif;
+						endforeach; ?>
 					</div>
 				</div>
-			</section>
-			<?php $this->load->view('global/confirm_delete');?>
+			</div>
+		</section>
+		<?php $this->load->view('global/confirm_delete');?>
