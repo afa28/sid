@@ -58,8 +58,8 @@
 <div class="modal-footer">
 	<center>
 		<a href="<?= site_url('tema/change/' . $tema) ?>" class="btn btn-social btn-success btn-sm"><i class='fa fa-check'></i> Active</a>
-		<a href="<?= site_url('tema/edit/' . $tema) ?>" class="btn btn-social btn-primary btn-sm"><i class='fa fa-cog'></i> Costumize</a>
-		<a href="<?= site_url('tema/edit/' . $tema) ?>" class="btn btn-social btn-danger btn-sm"><i class='fa fa-trash-o'></i> Delete</a>
-		<a href="<?= site_url('tema/edit/' . $tema) ?>" class="btn btn-social bg-navy btn-sm"><i class='fa fa-download'></i> Backup</a>
+		<a href="<?= site_url('tema/edit/' . $tema) ?>" class="btn btn-social btn-info btn-sm"><i class='fa fa-pencil'></i> Edit</a>
+		<a href="<?= site_url('tema/costumize/' . $tema) ?>" class="btn btn-social btn-primary btn-sm"><i class='fa fa-cog'></i> Costumize</a>
+		<a href="<?= site_url('tema/backup/' . $tema) ?>" class="btn btn-social bg-navy btn-sm"><i class='fa fa-download'></i> Backup</a>
 	</center>
 </div>
