@@ -17,7 +17,7 @@
 								<tr>
 									<td style="padding-top:20px;padding-bottom:10px;">
 										<div class="form-group">
-											<label for="file" class="col-md-2 col-lg-2 control-label">Tema .zip:</label>
+											<label for="file" class="col-md-2 col-lg-2 control-label">Themes <code>.zip</code></label>
 											<div class="col-sm-12 col-md-8 col-lg-8">
 												<div class="input-group input-group-sm">
 													<input type='text' class="form-control" id="file_path" name="userfile">
@@ -28,7 +28,7 @@
 												</div>
 											</div>
 											<div class="col-sm-12 col-md-2 col-lg-2">
-												<button type="submit" name="submit" value="Upload & Extract" class="btn btn-block btn-success btn-sm"><i class="fa fa-spin fa-refresh"></i> Upload</button>
+												<button type="submit" name="submit" value="Upload & Extract" class="btn btn-block btn-success btn-sm" title="Install"><i class="fa fa-spin fa-refresh"></i> Install</button>
 											</div>
 										</div>
 										<br><br>
@@ -71,24 +71,32 @@
 											<small><code>(System)</code></small>
 										<?php endif;?>
 									</div>
-									<span class="mailbox-attachment-icon has-img"><img class="img-responsive" src="<?= base_url().$lokasi.'/thumbnail/1.png'; ?>"></span>
+									<span class="mailbox-attachment-icon has-img">
+										<?php
+										if(file_exists(FCPATH.$lokasi.'/thumbnail/')):
+											$assets = site_url($lokasi.'/thumbnail/1.png');
+										else:
+											$assets = site_url('assets/images/404-image-not-found.jpg');
+										endif;
+										?>
+										<img class="img-responsive" src="<?= $assets; ?>" />
+									</span>
 									<div class="box-body">
 										<div class="text-center">
 											<?php if($tema != $active):?>
-												<a href="<?= site_url('tema/change/' . $tema) ?>" class="btn btn-social btn-success btn-sm"><i class='fa fa-check'></i> Active</a>
+												<a href="<?= site_url('tema/change/'.$tema) ?>" class="btn btn-social btn-success btn-sm"><i class='fa fa-check'></i> Active</a>
 												<?php else:?>
 													<button class="btn btn-social btn-success btn-sm" disabled>
 														<i class='fa fa-star'></i> Active
 													</button>
 												<?php endif;?>
-												<a href="<?= site_url('tema/detail/' . $tema) ?>" class="btn btn-social btn-primary btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Tema <?= ucwords($nama) ?>" title="Detail"><i class='fa fa-eye'></i> Detail</a>
-
+												<a href="<?= site_url('tema/detail/'.$tema) ?>" class="btn btn-social btn-primary btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Tema <?= ucwords($nama) ?>" title="Detail"><i class='fa fa-eye'></i> Detail</a>
 												<?php if($tema == $active OR ($tema == 'klasik' OR $tema == 'hadakewa')):?>
 													<button class="btn btn-social btn-danger btn-sm" disabled>
 														<i class='fa fa-trash-o'></i> Delete
 													</button>
 													<?php else : ?>
-														<a href="#" data-href="<?= site_url('tema/delete/' . $nama) ?>" class="btn btn-social btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class='fa fa-trash-o'></i> Delete</a>
+														<a href="#" data-href="<?= site_url('tema/delete/'.$nama) ?>" class="btn btn-social btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirm-delete" title="Delete"><i class='fa fa-trash-o'></i> Delete</a>
 													<?php endif;?>
 												</div>
 											</div>

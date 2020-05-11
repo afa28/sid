@@ -36,8 +36,6 @@ class Tema extends Admin_Controller
 
 		$data['active'] = $active;
 		$data['list_tema'] = array_merge(array(0 => $active), $list);
-
-
 		$data['form_action'] = site_url('install');
 
 		$header = $this->header_model->get_data();
@@ -52,10 +50,12 @@ class Tema extends Admin_Controller
 	{
 		$this->themes($folder, $tema);
 
-		$data['nama']					= $this->themes_name;
-		$data['lokasi']				= $this->folder_themes;
-		$data['detail']				= $this->readme();
-		//$data['form_action']	= site_url('install'.$themes);
+		$data['nama']		=	$this->themes_name;
+		$data['lokasi']	=	$this->folder_themes.'/thumbnail/';
+		$data['readme']	=	$this->readme();
+		$data['tipe']		=	$tipe;
+		$data['tema']		=	$tema;
+
 
 		$this->load->view('tema/detail', $data);
 	}
@@ -111,14 +111,21 @@ class Tema extends Admin_Controller
 
 	public function readme()
 	{
-		$lines = file($this->folder_themes.'/readme.txt');
+		$readme = $this->folder_themes.'/readme.txt';
 
-		foreach ($lines as $line_num => $line)
+		if(file_exists($readme))
 		{
-			$data .= $line.'<br />';
+			$lines = file($readme);
+
+			foreach ($lines as $line_num => $line)
+			{
+				$data .= $line.'<br />';
+			}
+
+			return $data;
 		}
 
-		return $data;
+		return false;
 	}
 
 }
