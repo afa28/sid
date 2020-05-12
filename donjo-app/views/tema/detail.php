@@ -29,7 +29,7 @@
 							<div class="carousel-inner">
 								<?php
 								$no = 0;
-								foreach (glob($lokasi.'/thumbnail/*.png') as $thumb):
+								foreach (glob($path.'/thumbnail/*.png') as $thumb):
 									$no++;
 									?>
 									<div class="item <?php ($no==1) and print('active') ?>">
@@ -74,11 +74,11 @@
 						</button>
 					<?php endif;?>
 					<a href="<?= site_url('tema/edit/'.$save_db) ?>" class="btn btn-social btn-info btn-sm" title="Edit"><i class='fa fa-pencil'></i> Edit</a>
-					<?php if(file_exists($lokasi.'/setting.php')):?>
+					<?php if(file_exists($path.'/setting.php')):?>
 					<a href="<?= site_url(FCPATH.'tema/costumize/'.$save_db) ?>" class="btn btn-social btn-primary btn-sm" title="Costumize"><i class='fa fa-gears'></i> Costumize</a>
 					<?php else:?>
 					<button class="btn btn-social btn-primary btn-sm" title="Tidak Ada Pengaturan Pada <?= ucwords($tema);?> Ini" disabled>
-							<i class='fa fa-gears'></i> Costumize <?= FCPATH.$lokasi.'/setting.php'?>
+							<i class='fa fa-gears'></i> Costumize <?= FCPATH.$path.'/setting.php'?>
 						</button>
 					<?php endif;?>
 					<a href="<?= site_url('tema/backup/'.$save_db) ?>" class="btn btn-social bg-navy btn-sm" title="Backup"><i class='fa fa-download'></i> Backup</a>
