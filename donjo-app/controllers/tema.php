@@ -2,7 +2,7 @@
 
 class Tema extends Admin_Controller
 {
-
+	private $active; // Tema aktif
 	private $temp_folder; // Penyimpanan tema sementara
 	private $folder_extract; // Folder extrack tema (desa/themes/)
 	private $themes_name; // Nama tema untuk DB
@@ -18,6 +18,7 @@ class Tema extends Admin_Controller
 		$this->load->helper('file');
 		$this->temp_folder = FCPATH.'assets/themes/';
 		$this->folder_extract = FCPATH.'desa/themes/';
+		$this->active = $this->theme_model->active();
 		$this->clear();
 
 		$this->modul_ini = 11;
@@ -26,7 +27,7 @@ class Tema extends Admin_Controller
 
 	public function index()
 	{
-		$active = $this->theme_model->active();
+		$active = $this->active;
 		$list = $this->theme_model->list_all();
 
 		if (($cari = array_search($active, $list)) !== false)
@@ -50,12 +51,11 @@ class Tema extends Admin_Controller
 	{
 		$this->themes($folder, $tema);
 
-		$data['active'] = $this->theme_model->active();
-		$data['nama']		=	$this->themes_name;
-		$data['lokasi']	=	$this->folder_themes;
+		$data['active'] = $this->active;
+		$data['themes']	=	$this->themes_name;
+		$data['path']		=	$this->folder_themes;
 		$data['readme']	=	$this->readme();
-		$data['tipe']		=	$tipe;
-		$data['tema']		=	$tema;
+		$data['save_db']=	str_replace('themes/', '', $this->folder_themes);
 
 		$this->load->view('tema/detail', $data);
 	}
