@@ -56,7 +56,7 @@
 					<?php if ($readme):?>
 						<?= $readme ?>
 					<?php else:?>
-						<h4> Tidak ada deskripsi mengenai tema <?= ucwords($nama)?></h4>
+						<h4> Tidak ada deskripsi mengenai tema <?= ucwords($themes)?></h4>
 					<?php endif;?>
 				</div>
 			</div>
@@ -69,7 +69,7 @@
 			<?php if($save_db != $active):?>
 				<a href="<?= site_url('tema/change/'.$save_db) ?>" class="btn btn-social btn-success btn-sm" title="Active"><i class='fa fa-check'></i> Active</a>
 				<?php else:?>
-					<button class="btn btn-social btn-success btn-sm" title="Tema <?= ucwords($tema);?> Sudah Aktif" disabled>
+					<button class="btn btn-social btn-success btn-sm" title="Tema <?= ucwords($themes);?> Sudah Aktif" disabled>
 						<i class='fa fa-star'></i> Active
 					</button>
 				<?php endif;?>
@@ -77,7 +77,7 @@
 				<?php if(file_exists(FCPATH.$path.'/setting.php')):?>
 				<a href="<?= site_url('tema/costumize/'.$save_db) ?>" class="btn btn-social btn-primary btn-sm" title="Costumize"><i class='fa fa-gears'></i> Costumize</a>
 				<?php else:?>
-				<button class="btn btn-social btn-primary btn-sm" title="Tidak Ada Pengaturan Pada <?= ucwords($tema);?> Ini" disabled>
+				<button class="btn btn-social btn-primary btn-sm" title="Tidak Ada Pengaturan Pada <?= ucwords($themes);?>" disabled>
 						<i class='fa fa-gears'></i> Costumize
 					</button>
 				<?php endif;?>

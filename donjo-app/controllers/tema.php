@@ -7,6 +7,7 @@ class Tema extends Admin_Controller
 	private $folder_extract; // Folder extrack tema (desa/themes/)
 	private $themes_name; // Nama tema untuk DB
 	private $folder_themes; // Folder peyimpanan tema (themes/ atau desa/themes/)
+	private $setting_themes; // Folder upload file themes (background/header/dll)
 
 	public function __construct()
 	{
@@ -85,7 +86,9 @@ class Tema extends Admin_Controller
 	{
 		$this->themes($tipe, $tema);
 
-		$data['path']	=	$this->folder_themes;
+		$data['themes']				=	$this->themes_name;
+		$data['path']					=	$this->folder_themes;
+		$data['setting']			=	$this->setting_themes;
 		$data['list_setting']	=	$this->theme_model->list_setting();
 		$data['form_action']	=	site_url('insert');
 
@@ -107,15 +110,18 @@ class Tema extends Admin_Controller
 	private function themes($tipe, $tema = NULL)
 	{
 		$lokasi = 'desa/';
+		$setting = 'desa/themes/images/';
 
 		if($tema === NULL)
 		{
 			$tema = $tipe;
 			$lokasi = '';
+			$setting = 'desa/css/'.$tema.'/images/';
 		}
 
-		$this->themes_name	=	$tema;
-		$this->folder_themes=	$lokasi.'themes/'.$tema;
+		$this->themes_name		=	$tema;
+		$this->folder_themes	=	$lokasi.'themes/'.$tema;
+		$this->setting_themes	=	$setting;
 	}
 
 	// Hapus tema (Tema bawaan tdk dpt dihapus)
