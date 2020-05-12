@@ -47,9 +47,9 @@ class Tema extends Admin_Controller
 		$this->load->view('footer');
 	}
 
-	public function detail($tipe, $tema = '')
+	public function detail($tipe, $tema = NULL)
 	{
-		$this->themes($folder, $tema);
+		$this->themes($tipe, $tema);
 
 		$data['active'] = $this->active;
 		$data['themes']	=	$this->themes_name;
@@ -61,7 +61,7 @@ class Tema extends Admin_Controller
 	}
 
 	// Ganti Tema
-	public function change($tipe, $tema = '')
+	public function change($tipe, $tema = NULL)
 	{
 		$this->themes($tipe, $tema);
 
@@ -71,7 +71,7 @@ class Tema extends Admin_Controller
 	}
 
 	// Backup Tema
-	public function backup($tipe, $tema = '')
+	public function backup($tipe, $tema = NULL)
 	{
 		$this->themes($tipe, $tema);
 
@@ -81,11 +81,11 @@ class Tema extends Admin_Controller
 	}
 
 	// Costumize Tema
-	public function costumize($tipe, $tema = '')
+	public function costumize($tipe, $tema = NULL)
 	{
 		$this->themes($tipe, $tema);
 
-		$data['lokasi']	=	$this->folder_themes;
+		$data['path']	=	$this->folder_themes;
 		$data['list_setting']	=	$this->theme_model->list_setting();
 		$data['form_action']	=	site_url('insert');
 
@@ -104,11 +104,11 @@ class Tema extends Admin_Controller
 		mkdir($this->temp_folder, 0, true);
 	}
 
-	private function themes($tipe, $tema = '')
+	private function themes($tipe, $tema = NULL)
 	{
 		$lokasi = 'desa/';
 
-		if($tema === '')
+		if($tema === NULL)
 		{
 			$tema = $tipe;
 			$lokasi = '';

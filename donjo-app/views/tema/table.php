@@ -55,9 +55,9 @@
 				}
 
 				$nama = $cut[1];
-				$lokasi = $set_lok.'themes/'.$nama;
+				$path = $set_lok.'themes/'.$cut[1];
 
-				if(file_exists(FCPATH.$lokasi.'/template.php')):
+				if(file_exists(FCPATH.$path.'/template.php')):
 					$no++; ?>
 					<div class="col-md-4 col-xs-12">
 						<?php if($tema == $active):?>
@@ -73,8 +73,8 @@
 									</div>
 									<span class="mailbox-attachment-icon has-img">
 										<?php
-										if(file_exists(FCPATH.$lokasi.'/thumbnail/')):
-											$assets = site_url($lokasi.'/thumbnail/1.png');
+										if(file_exists(FCPATH.$path.'/thumbnail/')):
+											$assets = site_url($path.'/thumbnail/1.png');
 										else:
 											$assets = site_url('assets/images/404-image-not-found.jpg');
 										endif;
