@@ -86,13 +86,13 @@
 											<?php if($tema != $active):?>
 												<a href="<?= site_url('tema/change/'.$tema) ?>" class="btn btn-social btn-success btn-sm"><i class='fa fa-check'></i> Active</a>
 												<?php else:?>
-													<button class="btn btn-social btn-success btn-sm" disabled>
+													<button class="btn btn-social btn-success btn-sm" title="Tema <?= ucwords($nama)?> Sudah Aktif" disabled>
 														<i class='fa fa-star'></i> Active
 													</button>
 												<?php endif;?>
 												<a href="<?= site_url('tema/detail/'.$tema) ?>" class="btn btn-social btn-primary btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Tema <?= ucwords($nama) ?>" title="Detail"><i class='fa fa-eye'></i> Detail</a>
 												<?php if($tema == $active OR ($tema == 'klasik' OR $tema == 'hadakewa')):?>
-													<button class="btn btn-social btn-danger btn-sm" disabled>
+													<button class="btn btn-social btn-danger btn-sm" title="Tema System / Aktif Tidak Dapat Dihapus" disabled>
 														<i class='fa fa-trash-o'></i> Delete
 													</button>
 													<?php else : ?>

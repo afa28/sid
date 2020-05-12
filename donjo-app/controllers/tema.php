@@ -52,7 +52,7 @@ class Tema extends Admin_Controller
 
 		$data['active'] = $this->theme_model->active();
 		$data['nama']		=	$this->themes_name;
-		$data['lokasi']	=	$this->folder_themes.'/thumbnail/';
+		$data['lokasi']	=	$this->folder_themes;
 		$data['readme']	=	$this->readme();
 		$data['tipe']		=	$tipe;
 		$data['tema']		=	$tema;
@@ -141,8 +141,6 @@ class Tema extends Admin_Controller
 
 			return $data;
 		}
-
-		return false;
 	}
 
 }
