@@ -1,8 +1,8 @@
 <div class="col-md-4">
 	<div class="box box-primary">
 		<div class="box-body box-profile">
-			<img class="img-responsive" src="<?= site_url($setting.'img1.jpg')?>" alt="Background">
-			<p class="text-center text-bold">Background <?= $setting?></p>
+			<img class="img-responsive" src="<?= site_url($setting.'background.jpg')?>" alt="Background">
+			<p class="text-center text-bold">Background</p>
 			<span class="help-block text-center"><code>(Kosongkan, jika background tidak berubah)</code></span>
 			<div class="input-group input-group-sm">
 				<input type="text" class="form-control" id="file_path" >
@@ -15,13 +15,28 @@
 	</div>
 	<div class="box box-primary">
 		<div class="box-body box-profile">
-			<img class="img-responsive" src="<?= site_url($setting.'bg_header.jpg')?>" alt="Header">
+			<img class="img-responsive" src="<?= site_url($setting.'header.jpg')?>" alt="Header">
 			<br/>
 			<p class="text-center text-bold">Header</p>
 			<span class="help-block text-center"><code>(Kosongkan, jika header tidak berubah)</code></span>
 			<div class="input-group input-group-sm">
 				<input type="text" class="form-control" id="file_path" >
 				<input type="file" class="hidden" id="file" name="header">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-info btn-flat"  id="browser"><i class="fa fa-search"></i> Browse</button>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="box box-primary">
+		<div class="box-body box-profile">
+			<img class="img-responsive" src="<?= site_url($setting.'siteman.jpg')?>" alt="background-siteman">
+			<br/>
+			<p class="text-center text-bold">Background Siteman</p>
+			<span class="help-block text-center"><code>(Kosongkan, jika background siteman tidak berubah)</code></span>
+			<div class="input-group input-group-sm">
+				<input type="text" class="form-control" id="file_path" >
+				<input type="file" class="hidden" id="file" name="siteman">
 				<span class="input-group-btn">
 					<button type="button" class="btn btn-info btn-flat"  id="browser"><i class="fa fa-search"></i> Browse</button>
 				</span>
