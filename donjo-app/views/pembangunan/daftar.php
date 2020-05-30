@@ -26,13 +26,13 @@
 										<form id="mainform" name="mainform" action="" method="post">
 											<div class="row">
 												<div class="col-sm-12">
-                                                    <table class="table table-striped table-bordered" id="tabel_data" data-url="<?= site_url('pembangunan/list_data')?>">
+                                                    <table class="table table-striped table-bordered" id="tabel_data" data-url="<?= site_url('pembangunan/')?>">
                                                         <div class="table-responsive">
                                                             <thead class="bg-gray disabled color-palette">
                                                                 <tr>
-                                                                    <th width="1%"><input type="checkbox" id="checkall"</th>
-                                                                    <th width="1%">No</th>
-                                                                    <th width="5%">Aksi</th>
+                                                                    <th><input type="checkbox" id="checkall"</th>
+                                                                    <th>No</th>
+                                                                    <th>Aksi</th>
                                                                     <th>Judul</th>
                                                                     <th>Harga</th>
                                                                     <th>Waktu Pengerjaan</th>

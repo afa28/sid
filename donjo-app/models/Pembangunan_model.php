@@ -8,7 +8,7 @@
         //$this->table = 'pembangunan';
     }
 
-    public function getData($id = null)
+    public function get($id = null)
     {
         if ($id === null)
             return $this->db->get('pembangunan')->result_array();
@@ -16,23 +16,24 @@
             return $this->db->get_where('pembangunan',['id' => $id])->result_array();
     }
 
-    public function deleteData($id)
+    public function delete($id)
     {
         $this->db->delete('pembangunan', ['id' => $id]);
         
         return $this->db->affected_rows();
     }
 
-    public function createData($data)
+    public function create($data)
     {
-        $this->db->insert('pembangunan',$data);
+        $this->db->insert('pembangunan', $data);
 
         return $this->db->affected_rows();
     }
 
-    public function updateData($data,$id){
-        $this->db->update('pembangunan',$data,['id' => $id]);
-        
+    public function update($data, $id)
+    {
+        $this->db->update('pembangunan', $data, ['id' => $id]);
+
         return $this->db->affected_rows();
     }
 
