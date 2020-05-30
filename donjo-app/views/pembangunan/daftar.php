@@ -30,9 +30,9 @@
                                                         <div class="table-responsive">
                                                             <thead class="bg-gray disabled color-palette">
                                                                 <tr>
-                                                                    <th><input type="checkbox" id="checkall"/</th>
-                                                                    <th>No</th>
-                                                                    <th>Aksi</th>
+                                                                    <th width="1%"><input type="checkbox" id="checkall"</th>
+                                                                    <th width="1%">No</th>
+                                                                    <th width="5%">Aksi</th>
                                                                     <th>Judul</th>
                                                                     <th>Harga</th>
                                                                     <th>Harga</th>
@@ -80,7 +80,7 @@
                         html += 
                         '<tr>'+
                             '<td><input type="checkbox" name="id_cb[]" value="'+data[i].id+'" /></td>'+
-                            '<td>'+no+'</td>'+
+                            '<td class="text-center">'+no+'</td>'+
                             '<td nowrap>'+
                             '<a href="javascript:;" class="btn bg-orange btn-flat btn-sm item_edit" title="Ubah" data="'+data[i].id+'"><i class="fa fa-edit"></i></a>'+
                             '&nbsp'+
@@ -96,7 +96,9 @@
                     $('#load_data').html(html);
 
                     $('#tabel_data').dataTable({
-                        "pageLength": 10,
+                        'processing': true,
+                        'pageLength': 10,
+                        'order': [],
                         'columnDefs': [
                             {
                                 "searchable": false,
@@ -114,19 +116,7 @@
                 }
             });
         }
-        //ADD
-        saveAdd();
 
-        //UPDATE
-        getEdit($('#load_data'));
-        //Simpan Edit Data
-        saveEdit();
-
-        //SALIN TEMPLATE DATA
-        salinData();
-
-        //MISC
-        tools();
     });
 </script>
 
