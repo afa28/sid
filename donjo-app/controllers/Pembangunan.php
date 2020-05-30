@@ -9,6 +9,7 @@ class Pembangunan extends Admin_Controller {
 		parent::__construct();
         $this->modul_ini = 209;
         $this->load->model('header_model');
+        $this->load->model('pembangunan_model', 'pembangunan');
         $this->header = $this->header_model->get_data();
     }
 
@@ -20,7 +21,7 @@ class Pembangunan extends Admin_Controller {
     }
 
     function list_data(){
-		$data = $this->db->get('pembangunan')->result_array();
+		$data = $this->pembangunan->getData();
         
         echo json_encode($data);
     }

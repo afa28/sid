@@ -35,8 +35,8 @@
                                                                     <th width="5%">Aksi</th>
                                                                     <th>Judul</th>
                                                                     <th>Harga</th>
-                                                                    <th>Harga</th>
-                                                                    <th>Harga</th>
+                                                                    <th>Waktu Pengerjaan</th>
+                                                                    <th>Tahun Anggaran</th>
                                                                     <th>Harga</th>
                                                                 </tr>
 															</thead>
@@ -60,9 +60,6 @@
 
 <?php $this->load->view('global/confirm_delete');?>
 
-<?php if (file_exists(FCPATH . 'assets/js/modul/'.$this->controller.'.js')): ?>
-	<script src="<?= base_url('assets/js/modul/'.$this->controller.'.js')?>" type="text/javascript" ></script> 
-<?php endif ?>
 
 
 

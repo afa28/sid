@@ -43,6 +43,12 @@
 		<script src="<?= base_url()?>assets/js/numeral.min.js"></script>
 		<!-- Script-->
 		<script src="<?= base_url()?>assets/js/script.js"></script>
+		
+		<!-- Script Js Permodul-->
+		<?php $path = 'assets/js/modul/'.$this->controller.'.js';?>
+		<?php if (file_exists(FCPATH . $path)): ?>
+			<script src="<?= base_url($path)?>"></script> 
+		<?php endif ?>
 
 		<!-- NOTIFICATION-->
 		<script type="text/javascript">
