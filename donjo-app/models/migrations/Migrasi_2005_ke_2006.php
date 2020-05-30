@@ -147,7 +147,7 @@ class Migrasi_2005_ke_2006 extends CI_model {
 				'status' => [
 					'type' => 'tinyint',
 					'constraint' => 1,
-					'default' => 0
+					'default' => 1
 				],
 
 				'log' => [
@@ -258,21 +258,19 @@ class Migrasi_2005_ke_2006 extends CI_model {
 			$this->dbforge->create_table($tabel, TRUE);
 		}
 
-		if (!$this->db->table_exists('setting_modul'))
-		{
+		
 			$data = [
-				'id' => '209',
+				'id' => 209,
 				'modul' => 'Pembangunan',
 				'url' => 'pembangunan',
-				'aktif' => '1',
+				'aktif' => 1,
 				'ikon' => 'fa-institution',
-				'urut' => '',
-				'level' => '2',
-				'parent' => '0',
-				'hidden' => '0',
-				'ikon_kecil' => 'fa-institution'
+				'urut' => 9,
+				'level' => 2,
+				'hidden' => 0,
+				'ikon_kecil' => 'fa-institution',
+				'parent' => 0
 			];
-
 			$sql = $this->db->insert_string('setting_modul', $data);
 			$sql .= " ON DUPLICATE KEY UPDATE
 				id = VALUES(id),
@@ -286,9 +284,7 @@ class Migrasi_2005_ke_2006 extends CI_model {
 				ikon_kecil = VALUES(ikon_kecil),
 				parent = VALUES(parent)";
 
-			$this->db->query($sql);
-		}
-		
+			$this->db->query($sql);	
 	}
 
 }
