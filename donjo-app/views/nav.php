@@ -74,28 +74,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<ul class="sidebar-menu" data-widget="tree">
 			<li class="header">MENU UTAMA</li>
+			<!--
+				1. Hapus $admin = ['tema']; jika semua folder sudah terkelompokkan
+				2. Ganti (in_array($mod['url'], $admin) ? ADMIN.$mod['url'] : $mod['url']) menjadi $mod['url']
 
-			<?php foreach ($modul AS $mod): ?>
-				<?php if ($this->CI->cek_hak_akses('b', $mod['url'])): ?>
+				$admin adalah list modul yg sudah dikelompokkan ke folder admin
+			-->
+			<?php $admin = ['tema']; ?>
+			<?php foreach ($modul AS $mod):
+				if ($this->CI->cek_hak_akses('b', $mod['url'])): ?>
 					<?php if (count($mod['submodul'])==0): ?>
-						<li class="<?= jecho($this->modul_ini, $mod['id'], 'active'); ?>">
-							<a href="<?= site_url("$mod[url]"); ?>">
-								<i class="fa <?= $mod['ikon']; ?> <?= jecho($this->modul_ini, $mod['id'], 'text-aqua'); ?>"></i><span><?= $mod['modul']; ?></span>
+						<li class="<?php ($this->modul_ini==$mod['id']) and print('active')?>">
+							<a href="<?= site_url()?><?= (in_array($mod['url'], $admin) ? ADMIN.$mod['url'] : $mod['url']);?>">
+								<i class="fa <?= $mod['ikon']?> <?php ($this->modul_ini==$mod['id']) and print('text-aqua')?>"></i> <span><?=$mod['modul']?></span>
 								<span class="pull-right-container"></span>
 							</a>
 						</li>
 					<?php else : ?>
-						<li class="treeview <?= jecho($this->modul_ini, $mod['id'], 'active'); ?>">
-							<a href="<?= site_url("$mod[url]"); ?>">
-								<i class="fa <?= $mod['ikon']; ?> <?= jecho($this->modul_ini, $mod['id'], 'text-aqua'); ?>"></i><span><?= $mod['modul']; ?></span>
+						<li class="treeview <?php ($this->modul_ini==$mod['id']) and print('active')?>">
+							<a href="<?= site_url()?><?= (in_array($mod['url'], $admin) ? ADMIN.$mod['url'] : $mod['url']);?>">
+								<i class="fa <?= $mod['ikon']?> <?php ($this->modul_ini==$mod['id']) and print('text-aqua')?>"></i> <span><?=$mod['modul']?></span>
 								<span class="pull-right-container"><i class='fa fa-angle-left pull-right'></i></span>
 							</a>
 							<ul class="treeview-menu <?= jecho($this->modul_ini, $mod['id'], 'active'); ?>">
 								<?php foreach ($mod['submodul'] as $submod): ?>
-									<li class="<?= jecho($this->sub_modul_ini, $submod['id'], 'active'); ?>">
-										<a href="<?= site_url("$submod[url]"); ?>">
-											<i class="fa <?= ($submod['ikon'] != NULL) ? $submod['ikon'] : 'fa-circle-o'; ?> <?= jecho($this->sub_modul_ini, $submod['id'], 'text-red'); ?>"></i>
-											<?= $submod['modul']; ?>
+									<li class="<?php ($this->sub_modul_ini==$submod['id']) and print('active')?>">
+										<a href="<?= site_url()?><?= (in_array($submod['url'], $admin) ? ADMIN.$submod['url'] : $submod['url']);?>">
+											<i class="fa <?= ($submod['ikon'] != NULL) ? $submod['ikon'] : 'fa-circle-o'?> <?php ($this->sub_modul_ini==$submod['id']) and print('text-red')?>"></i>
+											<?=$submod['modul']?>
 										</a>
 									</li>
 								<?php endforeach; ?>
@@ -107,4 +113,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</ul>
 	</section>
 </aside>
-

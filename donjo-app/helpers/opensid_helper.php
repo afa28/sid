@@ -71,6 +71,7 @@ define("LOKASI_KEUANGAN_ZIP", 'desa/upload/keuangan/');
 define("LOKASI_MEDIA", 'desa/upload/media/');
 define("LOKASI_SIMBOL_LOKASI", 'desa/upload/gis/lokasi/point/');
 define("LOKASI_SIMBOL_LOKASI_DEF", 'assets/images/gis/point/');
+define("LOKASI_TEMA", 'desa/themes/');
 
 // Kode laporan statistik
 define('JUMLAH', 666);
