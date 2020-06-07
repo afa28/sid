@@ -32,6 +32,39 @@ class Migrasi_2006_ke_2007 extends CI_model {
 	";
 	$this->db->query($query);
 
+	// Tambah Modul Tema
+	$this->tema();
+
+	}
+
+	private function tema()
+	{
+		// Tambah Modul Pengunjung pada Admin WEB
+		$data = [
+				'id' => 212,
+				'modul' => 'Tema',
+				'url' => 'tema',
+				'aktif' => 1,
+				'ikon' => 'fa-object-group',
+				'urut' => 12,
+				'level' => 2,
+				'hidden' => 0,
+				'ikon_kecil' => 'fa-object-group',
+				'parent' => 13
+		];
+		$sql = $this->db->insert_string('setting_modul', $data);
+		$sql .= " ON DUPLICATE KEY UPDATE
+				modul = VALUES(modul),
+				url = VALUES(url),
+				aktif = VALUES(aktif),
+				ikon = VALUES(ikon),
+				urut = VALUES(urut),
+				level = VALUES(level),
+				hidden = VALUES(hidden),
+				ikon_kecil = VALUES(ikon_kecil),
+				parent = VALUES(parent)
+				";
+		$this->db->query($sql);
 	}
 
 }

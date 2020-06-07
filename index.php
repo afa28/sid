@@ -131,6 +131,19 @@ switch (ENVIRONMENT)
  */
 	$view_folder = '';
 
+/*
+ *---------------------------------------------------------------
+ * ADMIN DIRECTORY NAME
+ *---------------------------------------------------------------
+*/
+	$admin_folder = 'admin';
+
+/*
+ *---------------------------------------------------------------
+ * WEB DIRECTORY NAME
+ *---------------------------------------------------------------
+*/
+	$web_folder = 'web';
 
 /*
  * --------------------------------------------------------------------
@@ -303,7 +316,13 @@ switch (ENVIRONMENT)
 		exit(3); // EXIT_CONFIG
 	}
 
+/**
+ * Custom path
+ */
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
+	define('ADMIN', $admin_folder.DIRECTORY_SEPARATOR);
+	define('WEB', $web_folder.DIRECTORY_SEPARATOR);
+
 /**
  * https://stackoverflow.com/questions/11792268/how-to-set-proper-codeigniter-base-url
  * Define APP_URL Dynamically

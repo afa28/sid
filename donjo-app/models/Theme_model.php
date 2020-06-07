@@ -18,6 +18,7 @@
 		foreach ($tema_semua as $tema){
 			$list_tema[] = str_replace('themes/', '', $tema);
 		}
+
 		return $list_tema;
 	}
 
