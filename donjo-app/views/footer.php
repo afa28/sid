@@ -44,6 +44,12 @@
 		<!-- Script-->
 		<script src="<?= base_url()?>assets/js/script.js"></script>
 
+		<!-- Script Js Permodul-->
+		<?php $path = 'assets/modul_js/'.$this->controller.'.js';?>
+		<?php if (file_exists(FCPATH . $path)): ?>
+			<script src="<?= base_url($path)?>"></script>
+		<?php endif ?>
+
 		<!-- NOTIFICATION-->
 		<script type="text/javascript">
 

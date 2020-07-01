@@ -15,6 +15,11 @@
 			</div>
 
 <script type="text/javascript">
+	$('document').ready(function()
+	{
+		setData();
+	}
+
 	function setData()
 	{
 		var tahun = $('#tahun_anggaran').val();
@@ -23,8 +28,8 @@
 			type  : 'GET',
 			url   : '<?= site_url('keuangan_manual/setdata_laporan/')?>' + tahun + "/" + semester,
 			dataType : 'json'
-    }).then(function() {
+		}).then(function() {
 			location.reload();
-	  });
+		});
 	}
 </script>

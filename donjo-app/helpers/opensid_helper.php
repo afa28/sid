@@ -936,4 +936,51 @@ function crawler()
 	return FALSE;
 }
 
+
+// Button
+
+function ubah($url = '#', $title = 'Ubah', $icon = 'fa-edit')
+{
+	$view = '<a href="'.base_url($url).'" class="btn bg-orange btn-flat btn-sm" title="'.$title.'"><i class="fa '.$icon.'"></i></a>';
+
+	return $view;
+}
+
+function hapus($url = '#', $title = 'Ubah', $icon = 'fa-trash-o')
+{
+	$view = '<a href="#" data-href="'.base_url($url).'" class="btn bg-maroon btn-flat btn-sm" title="'.$title.'" data-toggle="modal" data-target="#confirm-delete"><i class="fa '.$icon.'"></i></a>';
+
+	return $view;
+}
+
+function button_lainnya($url = '#', $title = 'Lainnya', $icon = 'fa-arrow-circle-right')
+{
+	$view = '<a href="'.base_url($url).'" class="btn btn-social btn-flat btn-block btn-sm"><i class="fa '.$icon.'"></i> '.$title.' </a>';
+
+	return $view;
+}
+
+function Lainnya($list_data = '', $title = 'Lainnya', $icon = 'fa-arrow-circle-down')
+{
+	$lainnya = '';
+	foreach ($list_data as $list => $data)
+	{
+		$lainnya .= '<li>'.button_lainnya($data[0], $data[1], $data[2]).'</li>';
+		//$lainnya .= '<li>'.button_lainnya($list[0], $list[1], $list[2]).'</li>';
+	}
+
+	$view = '';
+
+	$view .= '<div class="btn-group">
+						<button type="button" class="btn btn-social btn-flat btn-info btn-sm" data-toggle="dropdown"><i class="fa '.$icon.'"></i> '.$title.' </button>
+						<ul class="dropdown-menu" role="menu"> '.
+							$lainnya;
+
+	$view .= '</ul>
+					</div>';
+
+	return $view;
+}
+
+
 ?>

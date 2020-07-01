@@ -342,6 +342,7 @@ class Wilayah_model extends MY_Model {
 		return $data;
 	}
 
+	// TODO: Ubah yg masih menggunakan, spy menggunakan penanganan function list_wilayah()
 	public function list_dusun()
 	{
 		$data = $this->db
@@ -353,6 +354,7 @@ class Wilayah_model extends MY_Model {
 		return $data;
 	}
 
+	// TODO: Ubah yg masih menggunakan, spy menggunakan penanganan function list_wilayah()
 	public function list_rw($dusun = '')
 	{
 		$data = $this->db
@@ -366,6 +368,7 @@ class Wilayah_model extends MY_Model {
 		return $data;
 	}
 
+	// TODO: Ubah yg masih menggunakan, spy menggunakan penanganan function list_wilayah()
 	public function list_rt($dusun = '', $rw = '')
 	{
 		$data = $this->db
@@ -557,6 +560,59 @@ class Wilayah_model extends MY_Model {
 		$alamat_wilayah= "$data[alamat] RT $data[rt] / RW $data[rw] ".ucwords(strtolower($this->setting->sebutan_dusun))." ".ucwords(strtolower($data['dusun']));
 
 		return trim($alamat_wilayah);
+	}
+
+	/*
+	 * -----------------------------------------------------------------------------------------------------
+	 * Susun ulang afa28
+	 */
+	public function get_data($id = 0)
+	{
+		return $this->list_dusun();
+	}
+
+	public function list_wilayah($dusun = '', $rw = '')
+	{
+		if ($rw)
+		{
+			$this->db
+				->where('rt <>', '0')
+				->where('dusun', urldecode($dusun))
+				->where('rw', urldecode($rw))
+				->order_by('rt');
+		}
+		else if ($dusun)
+		{
+			$this->db
+				->where('rt', '0')
+				->where('dusun', urldecode($dusun))
+				->where('rw <>', '0')
+				->order_by('rw');
+		}
+		else
+		{
+			$this->db
+				->where('rt', '0')
+				->where('rw', '0')
+				->order_by('dusun');
+		}
+
+		return $this->db
+			->get('tweb_wil_clusterdesa')
+			->result_array();
+	}
+
+	public function get_wilayah($dusun = '', $rw = '', $rt = '')
+	{
+		if ($dusun) $this->db->where('dusun', urldecode($dusun));
+
+		if ($rw) $this->db->where('rw', $rw);
+
+		if ($rt) $this->db->where('rt', $rt);
+
+		return $this->db
+			->get('tweb_wil_clusterdesa')
+			->row_array();
 	}
 
 }
