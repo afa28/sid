@@ -79,32 +79,35 @@
 									<li class="footer"><a href="#">See All Messages</a></li>
 								</ul>
 							</li>
-							<!-- User Account Menu -->
 							<li class="dropdown user user-menu">
-								<!-- Menu Toggle Button -->
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<!-- The user image in the navbar-->
-									<img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-									<!-- hidden-xs hides the username on small devices so only the image appears. -->
+									<?php if ($penduduk['foto']): ?>
+										<img class="user-image" src="<?= AmbilFoto($penduduk['foto'])?>" alt="Foto">
+									<?php else: ?>
+										<img class="user-image" src="<?= base_url()?>assets/files/user_pict/kuser.png" alt="Foto">
+									<?php endif; ?>
 									<span class="hidden-xs">Alexander Pierce</span>
 								</a>
 								<ul class="dropdown-menu">
 									<!-- The user image in the menu -->
 									<li class="user-header">
-										<img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+										<?php if ($penduduk['foto']): ?>
+											<img class="penduduk profile-user-img img-responsive img-circle" src="<?= AmbilFoto($penduduk['foto'])?>" alt="Foto">
+										<?php else: ?>
+											<img class="penduduk profile-user-img img-responsive img-circle" src="<?= base_url()?>assets/files/user_pict/kuser.png" alt="Foto">
+										<?php endif; ?>
 										<p>
-											Alexander Pierce - Web Developer
-											<small>Member since Nov. 2012</small>
+											<?= $this->session->nama; ?>
+											<small>NIK : <?= $this->session->nik; ?><br>No. KK : <?= $this->session->no_kk; ?></small>
 										</p>
 									</li>
 									<!-- Menu Footer-->
 									<li class="user-footer">
 										<div class="pull-left">
-											<a href="#" class="btn btn-default btn-flat">Pengaturan</a>
+											<a href="<?= site_url('first/profil'); ?>" class="btn btn-default btn-flat">Profil</a>
 										</div>
 										<div class="pull-right">
-											<a href="#" class="btn btn-default btn-flat">Keluar</a>
+											<a href="<?= site_url('first/logout'); ?>" class="btn btn-default btn-flat">Keluar</a>
 										</div>
 									</li>
 								</ul>

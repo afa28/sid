@@ -12,7 +12,7 @@
 				<div class="box box-info">
 					<div class="box-header with-border">
 					</div>
-					<div class="box-body no-padding">
+					<div class="box-body">
 						<?php include('donjo-app/views/web/mandiri/layanan_mandiri.php'); ?>
 					</div>
 				</div>
