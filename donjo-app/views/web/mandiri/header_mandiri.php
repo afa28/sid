@@ -73,7 +73,7 @@
 									<?php else: ?>
 										<img class="user-image" src="<?= base_url()?>assets/files/user_pict/kuser.png" alt="Foto">
 									<?php endif; ?>
-									<span class="hidden-xs">Alexander Pierce</span>
+									<span class="hidden-xs"><?= $this->session->nama; ?></span>
 								</a>
 								<ul class="dropdown-menu">
 									<!-- The user image in the menu -->
