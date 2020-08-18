@@ -1,11 +1,7 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 <div class="box-header with-border">
 	<h3 class="box-title">KOTAK PESAN</h3>
-	<div class="box-tools">
-
-	</div>
 </div>
-
 <div class="box-header">
 	<a href="<?= site_url('mailbox_web/form') ?>" class="btn btn-flat btn-social btn-success btn-sm inline-block" title="Tulis Pesan"><i class="fa fa-plus"></i> Tulis Pesan</a>
 	<a href="<?= site_url("first/mandiri/1/3/1"); ?>" class="btn btn-flat btn-social btn-primary btn-sm inline-block" title="Pesan Masuk"><i class="fa fa-inbox"></i> Pesan Masuk</a>
