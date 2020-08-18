@@ -19,8 +19,17 @@
 <div class="box-header with-border">
 	<h3 class="box-title">BIODATA PENDUDUK</h3>
 	<div class="box-tools">
-		<a href="<?= site_url("first/cetak_biodata/$penduduk[id]"); ?>" class="btn btn-social btn-flat bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Cetak Biodata" target="_blank"><i class="fa fa-print"></i>Cetak Biodata</a>
-		<a href="<?= site_url("first/cetak_kk/$penduduk[id]/1"); ?>" class="btn btn-social btn-flat bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Cetak KK" target="_blank"><i class="fa fa-print"></i>Cetak KK</a>
+		<div class="btn-group-vertical">
+			<a class="btn btn-social btn-flat btn-info btn-sm" data-toggle="dropdown"><i class='fa fa-print'></i> Cetak</a>
+			<ul class="dropdown-menu" role="menu">
+				<li>
+					<a href="<?= site_url("first/cetak_biodata/$penduduk[id]"); ?>" class="btn btn-social btn-flat btn-block btn-sm" title="Cetak Biodata" target="_blank"><i class="fa fa-user"></i> Biodata</a>
+				</li>
+				<li>
+					<a href="<?= site_url("first/cetak_kk/$penduduk[id]/1"); ?>" class="btn btn-social btn-flat btn-block btn-sm" title="Cetak Kartu Keluarga" target="_blank"><i class="fa fa-group"></i> Kartu Keluarga</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>
 <div class="box-body">

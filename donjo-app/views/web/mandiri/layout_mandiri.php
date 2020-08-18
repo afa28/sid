@@ -3,7 +3,7 @@
 <div class="content-wrapper">
 	<div class="container">
 		<section class="content">
-			<div class="callout callout-danger">
+			<div class="callout callout-success">
 				<h4>Selamat Datang</h4>
 				<p>The construction of this layout differs from the normal one. In other words, the HTML markup of the navbar
 					and the content will slightly differ than that of the normal layout.</p>

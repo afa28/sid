@@ -91,7 +91,7 @@
 									<!-- Menu Footer-->
 									<li class="user-footer">
 										<div class="pull-left">
-											<a href="<?= site_url('first/profil'); ?>" class="btn btn-default btn-flat">Profil</a>
+											<a href="<?= site_url('first/mandiri'); ?>" class="btn btn-default btn-flat">Profil</a>
 										</div>
 										<div class="pull-right">
 											<a href="<?= site_url('first/logout'); ?>" class="btn btn-default btn-flat">Keluar</a>

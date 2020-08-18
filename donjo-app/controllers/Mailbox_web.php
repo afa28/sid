@@ -29,7 +29,7 @@ class Mailbox_web extends Web_Controller
 		$data['form_action'] = site_url("mailbox_web/kirim_pesan");
 		$data['views_partial_layout'] = "web/mandiri/mailbox_form";
 
-		$this->load->view('web/mandiri/layout.mandiri.php', $data);
+		$this->load->view('web/mandiri/layout_mandiri', $data);
 	}
 
 	public function kirim_pesan()

@@ -279,7 +279,7 @@ class First extends Web_Controller {
 				break;
 		}
 		$data['penduduk'] = $this->penduduk_model->get_penduduk($_SESSION['id']);
-		$this->load->view('web/mandiri/layout.mandiri.php', $data);
+		$this->load->view('web/mandiri/layout_mandiri', $data);
 	}
 
 	public function mandiri_surat($id_permohonan='')
@@ -305,7 +305,7 @@ class First extends Web_Controller {
 			$data['kk'] = $this->keluarga_model->list_anggota($data['penduduk']['id_kk']);
 		}
 
-		$this->load->view('web/mandiri/layout.mandiri.php', $data);
+		$this->load->view('web/mandiri/layout_mandiri', $data);
 	}
 
 	public function cek_syarat()
