@@ -1,54 +1,43 @@
 <?php $this->load->view('web/mandiri/header_mandiri.php') ?>
-<style type="text/css">
-	div.modal-header.bg-primary { padding: 10px; }
-	#wrapper-mandiri .tdk-permohonan { display: none !important; }
-	a.btn { color: #fff; }
-	.unread > td { background-color: #ffeeaa !important; }
-</style>
-<div class="content-wrapper" id="wrapper-mandiri">
-	<section class="content">
-		<div class="row">
-			<div class="col-sm-3">
-				<div class="box box-info">
-					<div class="box-header with-border">
-					</div>
-					<div class="box-body">
-						<?php include('donjo-app/views/web/mandiri/layanan_mandiri.php'); ?>
-					</div>
-				</div>
+
+<div class="content-wrapper">
+	<div class="container">
+		<section class="content">
+			<div class="callout callout-danger">
+				<h4>Selamat Datang</h4>
+				<p>The construction of this layout differs from the normal one. In other words, the HTML markup of the navbar
+					and the content will slightly differ than that of the normal layout.</p>
 			</div>
-			<div class="col-sm-9">
-				<div class="box box-info">
-					<?php if (empty($views_partial_layout)): ?>
-						<?php
-							switch ($m) {
-								case 1:
-									$views_partial_layout = 'web/mandiri/mandiri';
-									break;
-								case 2:
-									$views_partial_layout = 'web/mandiri/layanan';
-									break;
-								case 3:
-									$views_partial_layout = 'web/mandiri/mailbox';
-									break;
-								case 4:
-									$views_partial_layout = 'web/mandiri/bantuan';
-									break;
-								case 5:
-									$views_partial_layout = 'web/mandiri/surat';
-									break;
-								default:
-									$views_partial_layout = 'web/mandiri/mandiri';
-							}
-						?>
-					<?php else: ?>
-						<?php $data['mandiri'] = 1; ?>
-					<?php endif; ?>
-					<?php $this->load->view($views_partial_layout, $data);?>
-				</div>
+			<div class="box box-info">
+				<?php if (empty($views_partial_layout)): ?>
+					<?php
+						switch ($m) {
+							case 1:
+								$views_partial_layout = 'mandiri';
+								break;
+							case 2:
+								$views_partial_layout = 'layanan';
+								break;
+							case 3:
+								$views_partial_layout = 'mailbox';
+								break;
+							case 4:
+								$views_partial_layout = 'bantuan';
+								break;
+							case 5:
+								$views_partial_layout = 'surat';
+								break;
+							default:
+								$views_partial_layout = 'mandiri';
+						}
+					?>
+				<?php else: ?>
+					<?php $data['mandiri'] = 1; ?>
+				<?php endif; ?>
+				<?php $this->load->view("web/mandiri/$views_partial_layout", $data);?>
 			</div>
-		</div>
-	</section>
+		</section>
+	</div>
 </div>
 <?php $this->load->view('web/mandiri/footer_mandiri.php') ?>
 <script>
