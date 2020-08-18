@@ -1,137 +1,217 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>
-			<?=$this->setting->admin_title
-				. ' ' . ucwords($this->setting->sebutan_desa)
-				. (($desa['nama_desa']) ? ' ' . $desa['nama_desa']:  '')
-				. 'Layanan Mandiri';
-			?>
-		</title>
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-		<?php if (is_file(LOKASI_LOGO_DESA . "favicon.ico")): ?>
-			<link rel="shortcut icon" href="<?= base_url()?><?= LOKASI_LOGO_DESA?>favicon.ico" />
-		<?php else: ?>
-			<link rel="shortcut icon" href="<?= base_url()?>favicon.ico" />
-		<?php endif; ?>
-		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?= base_url()?>rss.xml" />
 
-		<link type='text/css' href="<?= base_url()?>assets/front/css/first.css" rel='Stylesheet' />
-		<!-- <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/bootstrap/css/bootstrap.bar.css"> -->
-
-		<!-- Bootstrap 3.3.7 -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/bootstrap.min.css">
-		<!-- Jquery UI -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/jquery-ui.min.css">
-		<!-- Font Awesome -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/font-awesome.min.css">
-		<!-- Ionicons -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/ionicons.min.css">
-		<!-- DataTables -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/dataTables.bootstrap.min.css">
-		<!-- bootstrap wysihtml5 - text editor -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/bootstrap3-wysihtml5.min.css">
-		<!-- Select2 -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/select2.min.css">
-		<!-- Bootstrap Color Picker -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/bootstrap-colorpicker.min.css">
-		<!-- Bootstrap Date time Picker -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/bootstrap-datetimepicker.min.css">
-		<!-- bootstrap datepicker -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/bootstrap-datepicker.min.css">
-		<!-- Theme style -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/css/AdminLTE.min.css">
-		<!-- AdminLTE Skins. -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/css/skins/_all-skins.min.css">
-		<!-- Jquery Confirm -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/front/css/jquery-confirm.min.css">
-
-		<!-- Style Admin Modification Css -->
-		<link rel="stylesheet" href="<?= base_url()?>assets/css/admin-style.css">
-		<!-- Diperlukan untuk global automatic base_url oleh external js file -->
-		<script type="text/javascript">
-			const BASE_URL = "<?= base_url(); ?>";
-			const SITE_URL = "<?= site_url(); ?>";
-		</script>
-		<script src="<?= base_url() ?>assets/bootstrap/js/jquery.min.js"></script>
-
-		<!-- Diperlukan untuk script jquery khusus halaman -->
-		<script src="<?= base_url() ?>assets/bootstrap/js/jquery.min.js"></script>
-
-		<style type="text/css">
-			#footer{
-				padding: 3px 0;
-				background: rgba(32,124,229,1);
-				background: -moz-linear-gradient(top, rgba(32,124,229,1) 0%, rgba(75,182,232,1) 100%);
-				background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(32,124,229,1)), color-stop(100%, rgba(75,182,232,1)));
-				background: -webkit-linear-gradient(top, rgba(32,124,229,1) 0%, rgba(75,182,232,1) 100%);
-				background: -o-linear-gradient(top, rgba(32,124,229,1) 0%, rgba(75,182,232,1) 100%);
-				background: -ms-linear-gradient(top, rgba(32,124,229,1) 0%, rgba(75,182,232,1) 100%);
-				background: linear-gradient(to bottom, rgba(32,124,229,1) 0%, rgba(75,182,232,1) 100%);
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#207ce5', endColorstr='#4bb6e8', GradientType=0 );
-			}
-			#footer-left{
-				text-align: left;
-					padding: 10px;
-					width: 53%;
-			}
-			#footer-right{
-					padding: 10px;
-					width: 47%;
-					float: right;
-					margin-top: -50px;
-			}
-			#footer a {
-					color: #fff;
-			}
-
-			#global-nav-right {
-					float: right; list-style: none;    margin-left: 0;
-			}
-			#global-nav-right a {
-					color: #444;
-					display: block;
-					font-family: "Roboto","Arial";
-					font-size: 11px;
-					font-weight: normal;
-					height: 33px;
-					line-height: 33px;
-					text-decoration: none;
-					text-shadow: 0 0 0 #444;
-					text-transform: uppercase;
-			}
-			#global-nav-right > li {
-					border-right: 0px solid #ccc;
-					float: left;
-					height: 33px;
-					padding: 0px 5px;
-					position: relative;
-					margin-left: 0;
-					position: relative;
-			}
-			#global-nav-right li:hover {
-					background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #6db3f2 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%) repeat scroll 0 0;
-			}
-			.main-header i.fa {margin-right: 10px;}
-		</style>
-		<?php $this->load->view('head_tags_front') ?>
-	</head>
-
-	<body class="skin-blue layout-top-nav">
-		<div class="wrapper">
-			<header class="main-header">
-				<nav class="navbar navbar-default">
-					<div class="container-fluid">
-						<div class="navbar-header">
-							<a class="navbar-brand" href="<?= site_url(); ?>first/">
-								<img src="<?= gambar_desa($desa['logo']);?>" alt="<?= $desa['nama_desa']?>" width="30px" style="margin:-7px"/>
-							</a>
-							<p class="navbar-brand">
-								Desa Ini <?= ucwords($this->setting->sebutan_desa).' '.$desa['nama_desa'] ?>
-							</p>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title><?=$this->setting->admin_title . ' ' . ucwords($this->setting->sebutan_desa) . (($desa['nama_desa']) ? ' ' . $desa['nama_desa']:  '') . 'Layanan Mandiri'; ?></title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<?php if (is_file(LOKASI_LOGO_DESA . "favicon.ico")): ?>
+		<link rel="shortcut icon" href="<?= base_url()?><?= LOKASI_LOGO_DESA?>favicon.ico" />
+	<?php else: ?>
+		<link rel="shortcut icon" href="<?= base_url()?>favicon.ico" />
+	<?php endif; ?>
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?= base_url()?>rss.xml" />
+	<!-- Bootstrap 3.3.7 -->
+	<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="<?= base_url()?>assets/bootstrap/css/ionicons.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="<?= base_url()?>assets/css/AdminLTE.min.css">
+	<!-- AdminLTE Skins. -->
+	<link rel="stylesheet" href="<?= base_url()?>assets/css/skins/_all-skins.min.css">
+	<script type="text/javascript">
+		const BASE_URL = "<?= base_url(); ?>";
+		const SITE_URL = "<?= site_url(); ?>";
+	</script>
+</head>
+<body class="hold-transition skin-blue layout-top-nav fixed">
+	<div class="wrapper">
+		<header class="main-header">
+			<nav class="navbar navbar-static-top">
+				<div class="container">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="<?= site_url(); ?>first/">
+							<img src="<?= gambar_desa($desa['logo']);?>" alt="<?= $desa['nama_desa']?>" width="30px" style="margin: -7px"/>
+						</a>
+						<div class="navbar-brand">
+							<?= ucwords($this->setting->sebutan_desa).' '.$desa['nama_desa'] ?>
 						</div>
 					</div>
-				</nav>
-			</header>
+					<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+							<li><a href="#">Link</a></li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Separated link</a></li>
+									<li class="divider"></li>
+									<li><a href="#">One more separated link</a></li>
+								</ul>
+							</li>
+						</ul>
+						<form class="navbar-form navbar-left" role="search">
+							<div class="form-group">
+								<input type="text" class="form-control" id="navbar-search-input" placeholder="Search">
+							</div>
+						</form>
+					</div>
+					<!-- /.navbar-collapse -->
+					<!-- Navbar Right Menu -->
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<!-- Messages: style can be found in dropdown.less-->
+							<li class="dropdown messages-menu">
+								<!-- Menu toggle button -->
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-envelope-o"></i>
+									<span class="label label-success">4</span>
+								</a>
+								<ul class="dropdown-menu">
+									<li class="header">You have 4 messages</li>
+									<li>
+										<!-- inner menu: contains the messages -->
+										<ul class="menu">
+											<li><!-- start message -->
+												<a href="#">
+													<div class="pull-left">
+														<!-- User Image -->
+														<img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+													</div>
+													<!-- Message title and timestamp -->
+													<h4>
+														Support Team
+														<small><i class="fa fa-clock-o"></i> 5 mins</small>
+													</h4>
+													<!-- The message -->
+													<p>Why not buy a new awesome theme?</p>
+												</a>
+											</li>
+											<!-- end message -->
+										</ul>
+										<!-- /.menu -->
+									</li>
+									<li class="footer"><a href="#">See All Messages</a></li>
+								</ul>
+							</li>
+							<!-- /.messages-menu -->
+
+							<!-- Notifications Menu -->
+							<li class="dropdown notifications-menu">
+								<!-- Menu toggle button -->
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-bell-o"></i>
+									<span class="label label-warning">10</span>
+								</a>
+								<ul class="dropdown-menu">
+									<li class="header">You have 10 notifications</li>
+									<li>
+										<!-- Inner Menu: contains the notifications -->
+										<ul class="menu">
+											<li><!-- start notification -->
+												<a href="#">
+													<i class="fa fa-users text-aqua"></i> 5 new members joined today
+												</a>
+											</li>
+											<!-- end notification -->
+										</ul>
+									</li>
+									<li class="footer"><a href="#">View all</a></li>
+								</ul>
+							</li>
+							<!-- Tasks Menu -->
+							<li class="dropdown tasks-menu">
+								<!-- Menu Toggle Button -->
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-flag-o"></i>
+									<span class="label label-danger">9</span>
+								</a>
+								<ul class="dropdown-menu">
+									<li class="header">You have 9 tasks</li>
+									<li>
+										<!-- Inner menu: contains the tasks -->
+										<ul class="menu">
+											<li><!-- Task item -->
+												<a href="#">
+													<!-- Task title and progress text -->
+													<h3>
+														Design some buttons
+														<small class="pull-right">20%</small>
+													</h3>
+													<!-- The progress bar -->
+													<div class="progress xs">
+														<!-- Change the css width attribute to simulate progress -->
+														<div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+															<span class="sr-only">20% Complete</span>
+														</div>
+													</div>
+												</a>
+											</li>
+											<!-- end task item -->
+										</ul>
+									</li>
+									<li class="footer">
+										<a href="#">View all tasks</a>
+									</li>
+								</ul>
+							</li>
+							<!-- User Account Menu -->
+							<li class="dropdown user user-menu">
+								<!-- Menu Toggle Button -->
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<!-- The user image in the navbar-->
+									<img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+									<!-- hidden-xs hides the username on small devices so only the image appears. -->
+									<span class="hidden-xs">Alexander Pierce</span>
+								</a>
+								<ul class="dropdown-menu">
+									<!-- The user image in the menu -->
+									<li class="user-header">
+										<img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+										<p>
+											Alexander Pierce - Web Developer
+											<small>Member since Nov. 2012</small>
+										</p>
+									</li>
+									<!-- Menu Body -->
+									<li class="user-body">
+										<div class="row">
+											<div class="col-xs-4 text-center">
+												<a href="#">Followers</a>
+											</div>
+											<div class="col-xs-4 text-center">
+												<a href="#">Sales</a>
+											</div>
+											<div class="col-xs-4 text-center">
+												<a href="#">Friends</a>
+											</div>
+										</div>
+										<!-- /.row -->
+									</li>
+									<!-- Menu Footer-->
+									<li class="user-footer">
+										<div class="pull-left">
+											<a href="#" class="btn btn-default btn-flat">Profile</a>
+										</div>
+										<div class="pull-right">
+											<a href="#" class="btn btn-default btn-flat">Sign out</a>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<!-- /.navbar-custom-menu -->
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+		</header>
