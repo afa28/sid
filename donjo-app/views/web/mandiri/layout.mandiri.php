@@ -1,4 +1,4 @@
-<?php $this->load->view('web/mandiri/header_mandiri.php') ?>
+<?php $this->load->view('web/mandiri/header_mandiri') ?>
 
 <div class="content-wrapper">
 	<div class="container">
@@ -8,68 +8,7 @@
 				<p>The construction of this layout differs from the normal one. In other words, the HTML markup of the navbar
 					and the content will slightly differ than that of the normal layout.</p>
 			</div>
-			<div class="row">
-				<div class="col-sm-3">
-					<div class="info-box bg-aqua">
-						<span class="info-box-icon"><i class="fa fa-user"></i></span>
-						<div class="info-box-content">
-							<span class="info-box-text"><b>Biodata</b></span>
-							<br>
-							<div class="progress">
-								<div class="progress-bar" style="width: 100%"></div>
-							</div>
-							<span class="progress-description">
-								<a href="<?= site_url('first/mandiri/1/1'); ?>" style="color:white">Selengkapnya</a>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="info-box bg-green">
-						<span class="info-box-icon"><i class="fa fa-envelope-o"></i></span>
-						<div class="info-box-content">
-							<span class="info-box-text"><b>Pesan</b></span>
-							<br>
-							<div class="progress">
-								<div class="progress-bar" style="width: 100%"></div>
-							</div>
-							<span class="progress-description">
-								<a href="<?= site_url('first/mandiri/1/3'); ?>" style="color:white">Selengkapnya</a>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="info-box bg-yellow">
-						<span class="info-box-icon"><i class="fa fa-history"></i></span>
-						<div class="info-box-content">
-							<span class="info-box-text"><b>Permohonan</b></span>
-							<br>
-							<div class="progress">
-								<div class="progress-bar" style="width: 100%"></div>
-							</div>
-							<span class="progress-description">
-								<a href="<?= site_url('first/mandiri/1/2'); ?>" style="color:white">Selengkapnya</a>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="info-box bg-red">
-						<span class="info-box-icon"><i class="fa fa-handshake-o"></i></span>
-						<div class="info-box-content">
-							<span class="info-box-text"><b>Bantuan</b></span>
-							<br>
-							<div class="progress">
-								<div class="progress-bar" style="width: 100%"></div>
-							</div>
-							<span class="progress-description">
-								<a href="<?= site_url('first/mandiri/1/4'); ?>" style="color:white">Selengkapnya</a>
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
+			<?php $this->load->view('web/mandiri/layanan_mandiri'); ?>
 			<div class="box box-info">
 				<?php if (empty($views_partial_layout)): ?>
 					<?php
@@ -101,7 +40,7 @@
 		</section>
 	</div>
 </div>
-<?php $this->load->view('web/mandiri/footer_mandiri.php') ?>
+<?php $this->load->view('web/mandiri/footer_mandiri') ?>
 <script>
 	$(document).ready(function() {
 		// Di form surat ubah isian admin menjadi disabled

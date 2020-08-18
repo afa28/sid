@@ -16,7 +16,6 @@
 		margin-bottom: 5px;
 	}
 </style>
-
 <div class="box-header with-border">
 	<h3 class="box-title">BIODATA PENDUDUK</h3>
 	<div class="box-tools">

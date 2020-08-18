@@ -1,20 +1,62 @@
-<table id="mandiri" width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-		<td><h4><a href="<?= site_url();?>first/mandiri/1/1" class=""><button type="button" class="btn btn-flat btn-primary btn-block"><i class="fa fa-user"></i>Profil</button></a> </h4></td>
-	</tr>
-	<tr>
-		<td><h4><a href="<?= site_url();?>first/mandiri/1/3"><button type="button" class="btn btn-flat btn-primary btn-block"><i class="fa fa-envelope-o"></i>Kotak Pesan</button></a></h4></td>
-	</tr>
-	<tr>
-		<td><h4><a href="<?= site_url();?>first/mandiri_surat" class=""><button type="button" class="btn btn-flat btn-primary btn-block"><i class="fa fa-file"></i>Permohonan Surat</button></a></h4></td>
-	</tr>
-	<tr>
-		<td><h4><a href="<?= site_url();?>first/mandiri/1/2" class=""><button type="button" class="btn btn-primary btn-block"><i class="fa fa-history"></i>Riwayat Layanan / Status Permohonan Surat</button></a> </h4></td>
-	</tr>
-	<tr>
-		<td><h4><a href="<?= site_url();?>first/mandiri/1/4" class=""><button type="button" class="btn btn-primary btn-block"><i class="fa fa-handshake-o"></i>Program Bantuan</button></a></h4></td>
-	</tr>
-	<tr>
-		<td><h4><a href="<?= site_url();?>first/logout"  class=""><button type="button" class="btn btn-danger btn-block"><i class="fa fa-sign-out"></i>Keluar</button></a></h4></td>
-	</tr>
-</table>
+<div class="row">
+	<div class="col-sm-3">
+		<div class="info-box bg-aqua">
+			<span class="info-box-icon"><i class="fa fa-envelope-o"></i></span>
+			<div class="info-box-content">
+				<span class="info-box-text"><b>Pesan</b></span>
+				<br>
+				<div class="progress">
+					<div class="progress-bar" style="width: 100%"></div>
+				</div>
+				<span class="progress-description">
+					<a href="<?= site_url('first/mandiri/1/3'); ?>" style="color:white">Selengkapnya</a>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-3">
+		<div class="info-box bg-green">
+			<span class="info-box-icon"><i class="fa fa-file"></i></span>
+			<div class="info-box-content">
+				<span class="info-box-text"><b>Persuratan</b></span>
+				<br>
+				<div class="progress">
+					<div class="progress-bar" style="width: 100%"></div>
+				</div>
+				<span class="progress-description">
+					<a href="<?= site_url('first/mandiri_surat'); ?>" style="color:white">Selengkapnya</a>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-3">
+		<div class="info-box bg-yellow">
+			<span class="info-box-icon"><i class="fa fa-history"></i></span>
+			<div class="info-box-content">
+				<span class="info-box-text"><b>Permohonan</b></span>
+				<br>
+				<div class="progress">
+					<div class="progress-bar" style="width: 100%"></div>
+				</div>
+				<span class="progress-description">
+					<a href="<?= site_url('first/mandiri/1/2'); ?>" style="color:white">Selengkapnya</a>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-3">
+		<div class="info-box bg-red">
+			<span class="info-box-icon"><i class="fa fa-handshake-o"></i></span>
+			<div class="info-box-content">
+				<span class="info-box-text"><b>Bantuan</b></span>
+				<br>
+				<div class="progress">
+					<div class="progress-bar" style="width: 100%"></div>
+				</div>
+				<span class="progress-description">
+					<a href="<?= site_url('first/mandiri/1/4'); ?>" style="color:white">Selengkapnya</a>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
