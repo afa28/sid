@@ -57,16 +57,13 @@
 <script type='text/javascript'>
 	const LOKASI_DOKUMEN = '<?= base_url().LOKASI_DOKUMEN ?>';
 </script>
-
 <form class="contact_form" id="validasi" action="<?= site_url('permohonan_surat/form/'.$permohonan[id])?>" method="POST" enctype="multipart/form-data">
-
 	<div class="box-header with-border">
-		<span style="font-size: x-large"><strong>LAYANAN PERMOHONAN SURAT</strong></span>
+		<h3 class="box-title">LAYANAN PERMOHONAN SURAT</h3>
 		<input type="hidden" name="pemohon" value="<?= $_SESSION['nama']?>"/>
 		<input type="hidden" readonly="readonly" name="nik" value="<?= $_SESSION['nik']?>"/>
 		<input type="hidden" id="id_permohonan" name="id_permohonan" value="<?= $permohonan['id']?>"/>
 	</div>
-
 	<div class="box-body">
 		<div class="form form-horizontal">
 			<?php if ($permohonan): ?>
@@ -99,62 +96,54 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="box box-info" style="margin-top: 10px;">
-		<div class="box-header with-border">
-			<h4 class="box-title">DOKUMEN / KELENGKAPAN PENDUDUK YANG DIBUTUHKAN</h4>
-			<div class="box-tools">
-				<button type="button" class="btn btn-box-tool" data-toggle="collapse" data-target="#surat"><i class="fa fa-minus"></i></button>
-			</div>
+	<hr>
+	<div class="box-header with-border">
+		<h3 class="box-title">DOKUMEN / KELENGKAPAN PENDUDUK YANG DIBUTUHKAN</h3>
+	</div>
+	<div class="box-body">
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered" id="syarat_surat">
+				<thead>
+					<tr>
+						<th width="2"><center>No</center></th>
+						<th><center>Syarat</center></th>
+						<th><center>Dokumen Melengkapi Syarat</center></th>
+					</tr>
+				</thead>
+			</table>
 		</div>
-		<div class="box-body">
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered" id="syarat_surat">
-					<thead>
-						<tr>
-							<th width="2"><center>No</center></th>
-							<th><center>Syarat</center></th>
-							<th><center>Dokumen Melengkapi Syarat</center></th>
-						</tr>
-					</thead>
-				</table>
-			</div>
-		</div>
-		<div class="box-footer">
-			<div class="col-xs-12">
-				<button type="reset" class="btn btn-social btn-flat btn-danger btn-sm invisible"><i class="fa fa-times"></i> Batal</button>
-				<button type="submit" class="btn btn-primary pull-right" id="isi_form"><i class="fa fa-sign-in"></i>Isi Form</button>
-			</div>
+	</div>
+	<div class="box-footer">
+		<div class="col-xs-12">
+			<button type="reset" class="btn btn-social btn-flat btn-danger btn-sm invisible"><i class="fa fa-times"></i> Batal</button>
+			<button type="submit" class="btn btn-social btn-flat btn-primary btn-sm pull-right" id="isi_form"><i class="fa fa-sign-in"></i>Isi Form</button>
 		</div>
 	</div>
 </form>
 
-<div class="box box-info" style="margin-top: 10px;">
-	<div class="box-header with-border">
-		<h4 class="box-title">DOKUMEN / KELENGKAPAN PENDUDUK YANG TERSEDIA</h4>
-		<div class="box-tools">
-			<button type="button" class="btn btn-box-tool" data-toggle="collapse" data-target="#dokumen"><i class="fa fa-minus"></i></button>
-		</div>
-	</div>
-	<div class="box-body">
-		<button type="button" title="Tambah Dokumen" data-remote="false" data-toggle="modal" data-target="#modal" data-title="Tambah Dokumen" class="btn btn-social btn-flat bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" id="tambah_dokumen"><i class='fa fa-plus'></i>Tambah Dokumen</button>
-		<div class="table-responsive">
-			<table class="table table-striped table-bordered" id="dokumen">
-				<thead>
-					<tr>
-						<th class="padat">No</th>
-						<th class="padat nowrap">Aksi</th>
-						<th>Judul Dokumen</th>
-						<th width="20%" nowrap>Tanggal Upload</th>
-					</tr>
-				</thead>
-				<tbody id="list_dokumen">
-				</tbody>
-			</table>
-		</div>
+<hr>
+<div class="box-header with-border">
+	<h3 class="box-title">DOKUMEN / KELENGKAPAN PENDUDUK YANG TERSEDIA</h3>
+</div>
+<div class="box-header">
+	<button type="button" title="Tambah Dokumen" data-remote="false" data-toggle="modal" data-target="#modal" data-title="Tambah Dokumen" class="btn btn-social btn-flat bg-olive btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" id="tambah_dokumen"><i class='fa fa-plus'></i>Tambah Dokumen</button>
+</div>
+<div class="box-body">
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered" id="dokumen">
+			<thead>
+				<tr>
+					<th class="padat">No</th>
+					<th class="padat nowrap">Aksi</th>
+					<th>Judul Dokumen</th>
+					<th width="20%" nowrap>Tanggal Upload</th>
+				</tr>
+			</thead>
+			<tbody id="list_dokumen">
+			</tbody>
+		</table>
 	</div>
 </div>
-
 <div class="modal fade in" id="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -173,7 +162,6 @@
 		</div>
 	</div>
 </div>
-
 <div class="modal fade" id="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class='modal-dialog'>
 		<div class='modal-content'>
@@ -206,7 +194,7 @@
 											<input type="text" class="form-control" id="file_path" name="satuan">
 											<input type="file" class="hidden" id="file" name="satuan">
 											<span class="input-group-btn">
-												<button type="button" class="btn btn-info btn-flat" id="file_browser"><i class="fa fa-search"></i> Browse</button>
+												<button type="button" class="btn btn-info btn-flat btn-sm" id="file_browser"><i class="fa fa-search"></i> Browse</button>
 											</span>
 										</div>
 										<span class="help-block"><code>Kosongkan jika tidak ingin mengubah dokumen.</code></span>
