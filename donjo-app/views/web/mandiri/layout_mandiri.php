@@ -14,28 +14,28 @@
 					<?php
 						switch ($m) {
 							case 1:
-								$views_partial_layout = 'mandiri';
+								$views_partial_layout = 'web/mandiri/mandiri';
 								break;
 							case 2:
-								$views_partial_layout = 'layanan';
+								$views_partial_layout = 'web/mandiri/layanan';
 								break;
 							case 3:
-								$views_partial_layout = 'mailbox';
+								$views_partial_layout = 'web/mandiri/mailbox';
 								break;
 							case 4:
-								$views_partial_layout = 'bantuan';
+								$views_partial_layout = 'web/mandiri/bantuan';
 								break;
 							case 5:
-								$views_partial_layout = 'surat';
+								$views_partial_layout = 'web/mandiri/surat';
 								break;
 							default:
-								$views_partial_layout = 'mandiri';
+								$views_partial_layout = 'web/mandiri/mandiri';
 						}
 					?>
 				<?php else: ?>
 					<?php $data['mandiri'] = 1; ?>
 				<?php endif; ?>
-				<?php $this->load->view("web/mandiri/$views_partial_layout", $data);?>
+				<?php $this->load->view($views_partial_layout, $data);?>
 			</div>
 		</section>
 	</div>
