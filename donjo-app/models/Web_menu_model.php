@@ -61,7 +61,7 @@ class Web_menu_model extends MY_Model {
 		return $this->autocomplete_str('nama', 'menu', $cari);
 	}
 
-	private function search_sql($tip)
+	private function search_sql()
 	{
 		if (isset($_SESSION['cari']))
 		{
@@ -85,10 +85,10 @@ class Web_menu_model extends MY_Model {
 		}
 	}
 
-	public function paging($tip=0, $p=1, $o=0)
+	public function paging($p = 1)
 	{
 		$sql = "SELECT COUNT(*) AS jml " . $this->list_data_sql();
-		$query = $this->db->query($sql,$tip);
+		$query = $this->db->query($sql);
 		$row = $query->row_array();
 		$jml_data = $row['jml'];
 
@@ -103,14 +103,14 @@ class Web_menu_model extends MY_Model {
 
 	private function list_data_sql()
 	{
-		$sql = " FROM menu WHERE tipe = ? ";
-		$sql .= $this->search_sql($tip);
+		$sql = " FROM menu WHERE parrent = 0 ";
+		$sql .= $this->search_sql();
 		$sql .= $this->filter_sql();
 
 		return $sql;
 	}
 
-	public function list_data($tip=0, $o=0, $offset=0, $limit=500)
+	public function list_data($o=0, $offset=0, $limit=500)
 	{
 		switch($o)
 		{
@@ -126,7 +126,7 @@ class Web_menu_model extends MY_Model {
 		$sql .= $order_sql;
 		$sql .= $paging_sql;
 
-		$query = $this->db->query($sql, $tip);
+		$query = $this->db->query($sql);
 		$data = $query->result_array();
 
 		$j = $offset;
@@ -141,14 +141,13 @@ class Web_menu_model extends MY_Model {
 		return $data;
 	}
 
-	public function insert($tip=1)
+	public function insert()
 	{
 		$post = $this->input->post();
-		$data['tipe'] = $tip;
-		$data['urut'] = $this->urut_model->urut_max(array('tipe' => $tip)) + 1;
+		$data['urut'] = $this->urut_model->urut_max() + 1;
 		$data['nama'] = htmlentities($post['nama']);
 		$data['link'] = $post['link'];
-		$data['link_tipe'] = $post['link_tipe'];
+		$data['tipe'] = $post['tipe'];
 
 		$outp = $this->db->insert('menu', $data);
 
@@ -296,9 +295,9 @@ class Web_menu_model extends MY_Model {
 	// $arah:
 	//		1 - turun
 	// 		2 - naik
-	public function urut($id, $arah, $tipe=1, $menu='')
+	public function urut($id, $arah, $menu = '')
 	{
-		$subset = !empty($menu) ? array("tipe" => 3, "parrent" => $menu) : array("tipe" => $tipe);
+		$subset = !empty($menu) ? array("parrent" => $menu) : array("tipe" => $tipe);
 		$this->urut_model->urut($id, $arah, $subset);
 	}
 

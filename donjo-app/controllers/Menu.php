@@ -66,11 +66,10 @@ class Menu extends Admin_Controller {
 		redirect('menu');
 	}
 
-	public function index($tip = 1, $p = 1, $o = 0)
+	public function index($p = 1, $o = 0)
 	{
 		$data['p'] = $p;
 		$data['o'] = $o;
-		$data['tip'] = $tip;
 
 		if (isset($_SESSION['cari']))
 			$data['cari'] = $_SESSION['cari'];
@@ -84,18 +83,18 @@ class Menu extends Admin_Controller {
 			$_SESSION['per_page'] = $_POST['per_page'];
 		$data['per_page'] = $_SESSION['per_page'];
 
-		$data['paging'] = $this->web_menu_model->paging($tip, $p, $o);
-		$data['main'] = $this->web_menu_model->list_data($tip, $o, $data['paging']->offset, $data['paging']->per_page);
+		$data['paging'] = $this->web_menu_model->paging($p, $o);
+		$data['main'] = $this->web_menu_model->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 		$data['keyword'] = $this->web_menu_model->autocomplete($data['cari']);
 		$header = $this->header_model->get_data();
 
 		$this->load->view('header', $header);
-		$this->load->view('nav', $nav);
+		$this->load->view('nav');
 		$this->load->view('menu/table', $data);
 		$this->load->view('footer');
 	}
 
-	public function form($tip = 1, $id = '')
+	public function form($id = '')
 	{
 		$this->load->model('program_bantuan_model');
 		$this->load->model('keuangan_model');
@@ -113,16 +112,15 @@ class Menu extends Admin_Controller {
 		if ($id)
 		{
 			$data['submenu'] = $this->web_menu_model->get_menu($id);
-			$data['form_action'] = site_url("menu/update/$tip/$id");
+			$data['form_action'] = site_url("menu/update/$id");
 		}
 		else
 		{
 			$data['submenu'] = NULL;
-			$data['form_action'] = site_url("menu/insert/$tip");
+			$data['form_action'] = site_url("menu/insert");
 		}
 
 		$header = $this->header_model->get_data();
-		$data['tip'] = $tip;
 
 		$this->load->view('header', $header);
 		$this->load->view('nav', $nav);
@@ -130,10 +128,9 @@ class Menu extends Admin_Controller {
 		$this->load->view('footer');
 	}
 
-	public function sub_menu($tip = 1, $menu = 1)
+	public function sub_menu($menu = 1)
 	{
 		$data['submenu'] = $this->web_menu_model->list_sub_menu($menu);
-		$data['tip'] = $tip;
 		$data['menu'] = $menu;
 		$header = $this->header_model->get_data();
 
@@ -143,14 +140,12 @@ class Menu extends Admin_Controller {
 		$this->load->view('footer');
 	}
 
-	public function ajax_add_sub_menu($tip = 1, $menu = '', $id = '')
+	public function ajax_add_sub_menu($menu = '', $id = '')
 	{
 		$this->load->model('program_bantuan_model');
 		$this->load->model('web_dokumen_model');
 		$this->load->model('keuangan_model');
 		$data['menu'] = $menu;
-		$data['tip'] = $tip;
-
 
 		$data['link_tipe'] = $this->referensi_model->list_ref(LINK_TIPE);
 		$data['link'] = $this->web_menu_model->list_link();
@@ -164,24 +159,24 @@ class Menu extends Admin_Controller {
 		if ($id)
 		{
 			$data['submenu'] = $this->web_menu_model->get_menu($id);
-			$data['form_action'] = site_url("menu/update_sub_menu/$tip/$menu/$id");
+			$data['form_action'] = site_url("menu/update_sub_menu/$menu/$id");
 		}
 		else
 		{
 			$data['submenu'] = NULL;
-			$data['form_action'] = site_url("menu/insert_sub_menu/$tip/$menu");
+			$data['form_action'] = site_url("menu/insert_sub_menu/$menu");
 		}
 
 		$this->load->view('menu/ajax_add_sub_menu_form', $data);
 	}
 
-	public function search($tip = 1)
+	public function search()
 	{
 		$cari = $this->input->post('cari');
 		if ($cari != '')
 			$_SESSION['cari'] = $cari;
 		else unset($_SESSION['cari']);
-		redirect("menu/index/$tip");
+		redirect("menu");
 	}
 
 	public function filter()
@@ -193,88 +188,88 @@ class Menu extends Admin_Controller {
 		redirect('menu');
 	}
 
-	public function insert($tip = 1)
+	public function insert()
 	{
-		$this->web_menu_model->insert($tip);
-		redirect("menu/index/$tip");
+		$this->web_menu_model->insert();
+		redirect("menu");
 	}
 
-	public function update($tip = 1, $id = '')
+	public function update($id = '')
 	{
 		$this->web_menu_model->update($id);
-		redirect("menu/index/$tip");
+		redirect("menu");
 	}
 
-	public function delete($tip = 1, $id = '')
+	public function delete($id = '')
 	{
-		$this->redirect_hak_akses('h', "menu/index/$tip");
+		$this->redirect_hak_akses('h');
 		$this->web_menu_model->delete($id);
-		redirect("menu/index/$tip");
+		redirect("menu");
 	}
 
-	public function delete_all($tip = 1, $p = 1, $o = 0)
+	public function delete_all($p = 1, $o = 0)
 	{
-		$this->redirect_hak_akses('h', "menu/index/$tip/$p/$o");
+		$this->redirect_hak_akses('h');
 		$this->web_menu_model->delete_all();
-		redirect("menu/index/$tip/$p/$o");
+		redirect("menu");
 	}
 
-	public function menu_lock($tip = 1, $id = '')
+	public function menu_lock($id = '')
 	{
 		$this->web_menu_model->menu_lock($id, 1);
-		redirect("menu/index/$tip/$p/$o");
+		redirect("menu");
 	}
 
-	public function menu_unlock($tip = 1, $id = '')
+	public function menu_unlock($id = '')
 	{
 		$this->web_menu_model->menu_lock($id, 2);
-		redirect("menu/index/$tip/$p/$o");
+		redirect("menu");
 	}
 
-	public function insert_sub_menu($tip = 1, $menu = '')
+	public function insert_sub_menu($menu = '')
 	{
 		$this->web_menu_model->insert_sub_menu($menu);
-		redirect("menu/sub_menu/$tip/$menu");
+		redirect("menu/sub_menu/$menu");
 	}
 
-	public function update_sub_menu($tip = 1, $menu = '', $id = '')
+	public function update_sub_menu($menu = '', $id = '')
 	{
 		$this->web_menu_model->update_sub_menu($id);
-		redirect("menu/sub_menu/$tip/$menu");
+		redirect("menu/sub_menu/$menu");
 	}
 
-	public function delete_sub_menu($tip = '', $menu = '', $id = 0)
+	public function delete_sub_menu($menu = '', $id = 0)
 	{
-		$this->redirect_hak_akses('h', "menu/sub_menu/$tip/$menu");
+		$this->redirect_hak_akses('h', "menu/sub_menu/$menu");
 		$this->web_menu_model->delete($id);
-		redirect("menu/sub_menu/$tip/$menu");
+		redirect("menu/sub_menu/$menu");
 	}
 
-	public function delete_all_sub_menu($tip = 1, $menu = '')
+	public function delete_all_sub_menu($menu = '')
 	{
-		$this->redirect_hak_akses('h', "menu/sub_menu/$tip/$menu");
+		$this->redirect_hak_akses('h', "menu/sub_menu/$menu");
 		$this->web_menu_model->delete_all();
-		redirect("menu/sub_menu/$tip/$menu");
+		redirect("menu/sub_menu/$menu");
 	}
 
-	public function menu_lock_sub_menu($tip = 1, $menu = '', $id = '')
+	public function menu_lock_sub_menu($menu = '', $id = '')
 	{
 		$this->web_menu_model->menu_lock($id, 1);
-		redirect("menu/sub_menu/$tip/$menu");
+		redirect("menu/sub_menu/$menu");
 	}
 
-	public function menu_unlock_sub_menu($tip = 1, $menu = '', $id = '')
+	public function menu_unlock_sub_menu($menu = '', $id = '')
 	{
 		$this->web_menu_model->menu_lock($id, 2);
-		redirect("menu/sub_menu/$tip/$menu");
+		redirect("menu/sub_menu/$menu");
 	}
 
-	public function urut($tip = 1, $id = 0, $arah = 0, $menu = '')
+	public function urut($id = 0, $arah = 0, $menu = '')
 	{
-		$this->web_menu_model->urut($id, $arah, $tip, $menu);
+		$this->web_menu_model->urut($id, $arah, $menu);
 		if ($menu != '')
-			redirect("menu/sub_menu/$tip/$menu");
+			redirect("menu/sub_menu/$menu");
 		else
-			redirect("menu/index/$tip");
+			redirect("menu");
 	}
 }
