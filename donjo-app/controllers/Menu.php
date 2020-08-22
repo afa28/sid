@@ -68,8 +68,7 @@ class Menu extends Admin_Controller {
 
 	public function index($p = 1, $o = 0)
 	{
-		$data['p'] = $p;
-		$data['o'] = $o;
+		$parrent = 0; // Menu utama
 
 		if (isset($_SESSION['cari']))
 			$data['cari'] = $_SESSION['cari'];
@@ -83,8 +82,8 @@ class Menu extends Admin_Controller {
 			$_SESSION['per_page'] = $_POST['per_page'];
 		$data['per_page'] = $_SESSION['per_page'];
 
-		$data['paging'] = $this->web_menu_model->paging($p, $o);
-		$data['main'] = $this->web_menu_model->list_data($o, $data['paging']->offset, $data['paging']->per_page);
+		$data['paging'] = $this->web_menu_model->paging();
+		$data['main'] = $this->web_menu_model->list_data($parrent, $data['paging']->offset, $data['paging']->per_page);
 		$data['keyword'] = $this->web_menu_model->autocomplete($data['cari']);
 		$header = $this->header_model->get_data();
 
@@ -123,20 +122,20 @@ class Menu extends Admin_Controller {
 		$header = $this->header_model->get_data();
 
 		$this->load->view('header', $header);
-		$this->load->view('nav', $nav);
+		$this->load->view('nav');
 		$this->load->view('menu/form', $data);
 		$this->load->view('footer');
 	}
 
-	public function sub_menu($menu = 1)
+	public function sub_menu($parrent = 1)
 	{
-		$data['submenu'] = $this->web_menu_model->list_sub_menu($menu);
-		$data['menu'] = $menu;
+		$data['paging'] = $this->web_menu_model->paging();
+		$data['main'] = $this->web_menu_model->list_data($parrent, $data['paging']->offset, $data['paging']->per_page);
 		$header = $this->header_model->get_data();
 
 		$this->load->view('header', $header);
-		$this->load->view('nav', $nav);
-		$this->load->view('menu/sub_menu_table', $data);
+		$this->load->view('nav');
+		$this->load->view('menu/table', $data);
 		$this->load->view('footer');
 	}
 

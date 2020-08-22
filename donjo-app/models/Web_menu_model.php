@@ -85,11 +85,11 @@ class Web_menu_model extends MY_Model {
 		}
 	}
 
-	public function paging($p = 1)
+	public function paging($p = 1, $parrent = '0')
 	{
-		$sql = "SELECT COUNT(*) AS jml " . $this->list_data_sql();
-		$query = $this->db->query($sql);
-		$row = $query->row_array();
+		$this->db->select('COUNT(id) AS jml');
+		$this->list_data_sql($parrent);
+		$row = $this->db->get()->row_array();
 		$jml_data = $row['jml'];
 
 		$this->load->library('paging');
@@ -101,39 +101,27 @@ class Web_menu_model extends MY_Model {
 		return $this->paging;
 	}
 
-	private function list_data_sql()
+	private function list_data_sql($parrent = '0')
 	{
-		$sql = " FROM menu WHERE parrent = 0 ";
-		$sql .= $this->search_sql();
-		$sql .= $this->filter_sql();
-
-		return $sql;
+		$this->db
+			->from('menu')
+			->where('parrent', $parrent);
 	}
 
-	public function list_data($o=0, $offset=0, $limit=500)
+	public function list_data($parrent = '0', $offset = 0, $limit = 500)
 	{
-		switch($o)
-		{
-			case 1: $order_sql = ' ORDER BY nama'; break;
-			case 2: $order_sql = ' ORDER BY nama DESC'; break;
-			case 3: $order_sql = ' ORDER BY enabled'; break;
-			case 4: $order_sql = ' ORDER BY enabled DESC'; break;
-			default:$order_sql = ' ORDER BY urut';
-		}
+		$this->db->select('*');
+		$this->list_data_sql($parrent);
+		$this->orderBy();
+		$this->db->limit($limit, $offset);
 
-		$paging_sql = ' LIMIT ' .$offset. ',' .$limit;
-		$sql = "SELECT * " . $this->list_data_sql();
-		$sql .= $order_sql;
-		$sql .= $paging_sql;
-
-		$query = $this->db->query($sql);
-		$data = $query->result_array();
+		$data = $this->db->get()->result_array();
 
 		$j = $offset;
 		for ($i=0; $i<count($data); $i++)
 		{
 			$data[$i]['no'] = $j + 1;
-			if ($data[$i]['link_tipe'] != 99) $data[$i]['link'] = $this->menu_slug($data[$i]['link']);
+			if ($data[$i]['tipe'] != 99) $data[$i]['link'] = $this->menu_slug($data[$i]['link']);
 
 			$j++;
 		}
@@ -190,24 +178,6 @@ class Web_menu_model extends MY_Model {
 		}
 	}
 
-	public function list_sub_menu($menu=1)
-	{
-		$data = $this->db->select('*')
-			->from('menu')
-			->where('parrent', $menu)
-			->where('tipe', 3)
-			->order_by('urut')
-			->get()->result_array();
-
-		for ($i=0; $i<count($data); $i++)
-		{
-			$data[$i]['no'] = $i + 1;
-			if ($data[$i]['link_tipe'] != 99) $data[$i]['link'] = $this->menu_slug($data[$i]['link']);
-		}
-
-		return $data;
-	}
-
 	public function list_link()
 	{
 		// '999' adalah id_kategori untuk artikel statis
@@ -222,58 +192,6 @@ class Web_menu_model extends MY_Model {
 		}
 
 		return $data;
-	}
-
-	public function insert_sub_menu($menu=0)
-	{
-		$post = $this->input->post();
-		$data = [];
-		$data['parrent'] = $menu;
-		$data['tipe'] = 3;
-		$data['urut'] = $this->urut_model->urut_max(array('tipe' => 3, 'parrent' => $menu)) + 1;
-		$data['nama'] = htmlentities($post['nama']);
-		$data['link'] = $post['link'];
-		$data['link_tipe'] = $post['link_tipe'];
-		$outp = $this->db->insert('menu', $data);
-
-		status_sukses($outp); //Tampilkan Pesan
-	}
-
-	public function update_sub_menu($id=0)
-	{
-		$post = $this->input->post();
-		$data = [];
-		$data['nama'] = htmlentities($post['nama']);
-		$data['link'] = $post['link'];
-		$data['link_tipe'] = $post['link_tipe'];
-		if ($data['link'] == "")
-		{
-			UNSET($data['link']);
-		}
-
-		$this->db->where('id', $id);
-		$outp = $this->db->update('menu', $data);
-		status_sukses($outp); //Tampilkan Pesan
-	}
-
-	public function delete_sub_menu($id='', $semua=false)
-	{
-		if (!$semua) $this->session->success = 1;
-
-		$outp = $this->db->where('id', $id)->delete('menu');
-
-		status_sukses($outp, $gagal_saja=true); //Tampilkan Pesan
-	}
-
-	public function delete_all_sub_menu()
-	{
-		$this->session->success = 1;
-
-		$id_cb = $_POST['id_cb'];
-		foreach ($id_cb as $id)
-		{
-			$this->delete_sub_menu($id, $semua=true);
-		}
 	}
 
 	public function menu_lock($id='',$val=0)
@@ -310,6 +228,26 @@ class Web_menu_model extends MY_Model {
 
 		return $ada_menu;
 	}
+
+	// Edit afa28
+
+	public function orderBy($field = '1')
+	{
+		$default = 5;
+
+		$switch = [
+			'1' => 'nama',
+			'2' => 'nama DESC',
+			'3' => 'enabled',
+			'4' => 'enabled DESC',
+			'5' => 'urut',
+			'6' => 'urut DESC'
+		];
+
+		$this->db->order_by($switch[$field] ? : $switch[$default]);
+
+	}
+
 
 }
 ?>
