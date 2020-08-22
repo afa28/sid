@@ -91,7 +91,7 @@ class Migrasi_2008_ke_2009 extends CI_model {
 		// Hapus anggota kelompok yg tdk memiliki kelompok / tdk terhapus saat menghapus kelompok
 		$kelompok = $this->db->select('id')->get('kelompok')->result_array();
 		$list_id_kelompok = sql_in_list(array_column($kelompok, 'id'));
-		$this->db->where("id_kelompok NOT IN ($list_id_kelompok)")->delete('kelompok_anggota');
+		if ($list_id_kelompok) $this->db->where("id_kelompok NOT IN ($list_id_kelompok)")->delete('kelompok_anggota');
 		// Buat FOREIGN KEY field id_kelompok jika tdk ada
 		$query = $this->db
 			->from('INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS')
@@ -104,6 +104,68 @@ class Migrasi_2008_ke_2009 extends CI_model {
 			$this->dbforge->add_column('kelompok_anggota', [
 				'CONSTRAINT `kelompok_anggota_fk` FOREIGN KEY (`id_kelompok`) REFERENCES `kelompok` (`id`) ON DELETE CASCADE ON UPDATE CASCADE'
 			]);
+		}
+
+		if ($this->db->field_exists('tipe', 'menu'))
+		{
+			// Ubah parrent menu menjadi 0 jika tipe = 1
+			$this->db->where('tipe', 1)->update('menu', ['parrent' => 0]);
+			// Hapus field tipe
+			$this->dbforge->drop_column('menu', 'tipe');
+		}
+
+		if ($this->db->field_exists('link_tipe', 'menu'))
+		{
+			// Penyesuaian ulang field pd tabel menu
+			$fields = [
+				'id' => [
+					'type' => 'INT',
+					'constraint' => 11,
+					'auto_increment' => TRUE
+				],
+
+				'nama' => [
+					'type' => 'VARCHAR',
+					'constraint' => 50,
+					'null' => TRUE
+				],
+
+				'link' => [
+					'type' => 'VARCHAR',
+					'constraint' => 500,
+					'null' => TRUE
+				],
+
+				'parrent' => [
+					'type' => 'INT',
+					'constraint' => 11,
+					'null' => FALSE,
+					'default' => 0
+				],
+
+				'link_tipe' => [
+					'name' => 'tipe',
+					'type' => 'TINYINT',
+					'constraint' => 5,
+					'null' => FALSE,
+					'default' => 99
+				],
+
+				'enabled' => [
+					'type' => 'TINYINT',
+					'constraint' => 1,
+					'null' => FALSE,
+					'default' => 1
+				],
+
+				'urut' => [
+					'type' => 'TINYINT',
+					'constraint' => 5,
+					'null' => FALSE,
+					'default' => 1
+				]
+			];
+			$this->dbforge->modify_column('menu', $fields);
 		}
 	}
 
