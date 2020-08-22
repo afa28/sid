@@ -71,14 +71,6 @@
 									<input name="nama" class="form-control input-sm required nomor_sk" maxlength="50" type="text" value="<?=$submenu['nama']?>"></input>
 								</div>
 							</div>
-							<?php if (!empty($submenu['link'])): ?>
-								<div class="form-group">
-									<label class="control-label col-sm-4" for="link_sebelumnya">Link Sebelumnya</label>
-									<div class="col-sm-6">
-										<input class="form-control input-sm" type="text" value="<?=$submenu['link']?>" disabled=""></input>
-									</div>
-								</div>
-							<?php endif; ?>
 							<div class="form-group">
 								<label class="control-label col-sm-4" for="link">Jenis Link</label>
 								<div class="col-sm-6">
@@ -91,28 +83,28 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-sm-4">Link</label>
-								<div class="col-sm-6" >
-									<select id="link" class="form-control input-sm jenis_link" name="<?php if ($submenu['link_tipe']==1): ?>link<?php endif; ?>" style="<?php if ($submenu['link_tipe']!=1): ?>display:none<?php endif; ?>" <?php if ($submenu['link_tipe']!=1): ?>disabled="disabled"<?php endif; ?>>
-										<option value="">Pilih Artikel Statis</option>
+								<label id="label_link" class="control-label col-sm-4 jenis_link" <?= jecho(!$submenu['link_tipe'], ' ', 'style="display:none;"'); ?>>Link</label>
+								<div class="col-sm-6">
+									<select id="link" class="form-control input-sm jenis_link required" name="link" <?= jecho(!$submenu['link_tipe'], 1, 'style="display:none;"'); ?>>
+										<option value="">-- Pilih Artikel Statis --</option>
 										<?php foreach ($link as $data): ?>
 											<option value="artikel/<?= $data['id']?>" <?= selected($submenu['link'], "artikel/$data[id]"); ?>><label>No link : </label><?=$data['judul']?></option>
 										<?php endforeach; ?>
 									</select>
-									<select id="statistik_penduduk" class="form-control input-sm jenis_link" name="<?php if ($submenu['link_tipe']==2): ?>link<?php endif; ?>" style="<?php if ($submenu['link_tipe']!=2): ?>display:none;<?php endif; ?>">
-										<option value="">Pilih Statistik Penduduk</option>
+									<select id="statistik_penduduk" class="form-control input-sm jenis_link required" name="link" <?= jecho(!$submenu['link_tipe'], 2, 'style="display:none;"'); ?>>
+										<option value="">-- Pilih Statistik Penduduk --</option>
 										<?php foreach ($statistik_penduduk as $id => $nama): ?>
 											<option value="<?= "statistik/$id"; ?>" <?= selected($submenu['link'], "statistik/$id"); ?>><?= $nama?></option>
 										<?php endforeach; ?>
 									</select>
-									<select id="statistik_keluarga" class="form-control jenis_link input-sm" name="<?php if ($submenu['link_tipe']==3): ?>link<?php endif; ?>" style="<?php if ($submenu['link_tipe']!=3): ?>display:none;<?php endif; ?>">
-										<option value="">Pilih Statistik Keluarga</option>
+									<select id="statistik_keluarga" class="form-control jenis_link input-sm required" name="link" <?= jecho(!$submenu['link_tipe'], 3, 'style="display:none;"'); ?>>
+										<option value="">-- Pilih Statistik Keluarga --</option>
 										<?php foreach ($statistik_keluarga as $id => $nama): ?>
 											<option value="<?= "statistik/$id"; ?>" <?= selected($submenu['link'], "statistik/$id"); ?>><?= $nama?></option>
 										<?php endforeach; ?>
 									</select>
-									<select id="statistik_program_bantuan" class="form-control input-sm jenis_link" name="<?php if ($submenu['link_tipe']==4): ?>link<?php endif; ?>" style="<?php if ($submenu['link_tipe']!=4): ?>display:none;<?php endif; ?>">
-										<option value="">Pilih Statistik Program Bantuan</option>
+									<select id="statistik_program_bantuan" class="form-control input-sm jenis_link required" name="link" <?= jecho(!$submenu['link_tipe'], 4, 'style="display:none;"'); ?>>
+										<option value="">-- Pilih Statistik Program Bantuan --</option>
 										<?php foreach ($statistik_kategori_bantuan as $id => $nama): ?>
 											<option value="<?= "statistik/$id"; ?>" <?= selected($submenu['link'], "statistik/$id"); ?>><?= $nama?></option>
 										<?php endforeach; ?>
@@ -120,30 +112,29 @@
 											<option value="<?= "statistik/$nama[lap]"; ?>" <?= selected($submenu['link'], "statistik/$nama[lap]"); ?>><?= $nama['nama']; ?></option>
 										<?php endforeach; ?>
 									</select>
-									<select id="statis_lainnya" class="form-control input-sm jenis_link" name="<?php if ($submenu['link_tipe']==5): ?>link<?php endif; ?>" style="<?php if ($submenu['link_tipe']!=5): ?>display:none;<?php endif; ?>">
-										<option value="">Pilih Halaman Statis Lainnya</option>
+									<select id="statis_lainnya" class="form-control input-sm jenis_link required" name="link" <?= jecho(!$submenu['link_tipe'], 5, 'style="display:none;"'); ?>>
+										<option value="">-- Pilih Halaman Statis Lainnya --</option>
 										<?php foreach ($statis_lainnya as $id => $nama): ?>
 											<option value="<?= $id?>" <?= selected($submenu['link'], $id) ?>><?= $nama?></option>
 										<?php endforeach; ?>
 									</select>
-									<select id="artikel_keuangan" class="form-control input-sm jenis_link" name="<?php if ($submenu['link_tipe']==6): ?>link<?php endif; ?>" style="<?php if ($submenu['link_tipe']!=6): ?>display:none;<?php endif; ?>">
-										<option value="">Pilih Artikel Keuangan</option>
+									<select id="artikel_keuangan" class="form-control input-sm jenis_link required" name="link" <?= jecho(!$submenu['link_tipe'], 6, 'style="display:none;"'); ?>>
+										<option value="">-- Pilih Artikel Keuangan --</option>
 										<?php foreach ($artikel_keuangan as $id => $nama): ?>
 											<option value="<?= $id?>" <?= selected($submenu['link'], $id) ?>><?= $nama?></option>
 										<?php endforeach; ?>
 									</select>
-									<span id="eksternal" class="jenis_link" style="<?php if ($submenu['link_tipe']!=99): ?>display:none;<?php endif; ?>">
-										<input name="<?php if ($submenu['link_tipe']==99): ?>link<?php endif; ?>" class="form-control input-sm" type="text" value="<?=$submenu['link']?>"></input>
-										<span class="text-sm text-red">(misalnya: https://opendesa.id)</span>
+									<span id="eksternal" class="jenis_link" <?= jecho(!$submenu['link_tipe'], 99, 'style="display:none;"'); ?>>
+										<input name="link" class="form-control input-sm jenis_link required" type="text" value="<?=$submenu['link']?>"></input>
+										<code>Misalnya: <b>https://opendesa.id</b> atau <b>#</b></code>
 									</span>
 								</div>
 							</div>
 						</div>
 						<div class='box-footer'>
-							<div class='col-xs-12'>
-								<button type='reset' class='btn btn-social btn-flat btn-danger btn-sm' ><i class='fa fa-times'></i> Batal</button>
-								<button type='submit' class='btn btn-social btn-flat btn-info btn-sm pull-right confirm'><i class='fa fa-check'></i> Simpan</button>
 							</div>
+							<button type='reset' class='btn btn-social btn-flat btn-danger btn-sm'><i class='fa fa-times'></i> Batal</button>
+							<button type='submit' class='btn btn-social btn-flat btn-info btn-sm pull-right confirm'><i class='fa fa-check'></i> Simpan</button>
 						</div>
 					</div>
 				</div>
@@ -152,42 +143,41 @@
 	</section>
 </div>
 <script>
+	$('document').ready(function() {
+		$('#link_tipe').change();
+	});
+
 	function ganti_jenis_link(jenis) {
 		$('.jenis_link').hide();
-		$('.jenis_link').removeAttr( "name" );
 		$('.jenis_link').attr('disabled','disabled');
-		$('#eksternal > input').attr('name', '');
+		$('#label_link').show();
 
 		if (jenis == '1') {
 			$('#link').show();
-			$('#link').attr('name', 'link');
 			$('#link').removeAttr('disabled');
 		} else if (jenis == '2') {
 			$('#statistik_penduduk').show();
-			$('#statistik_penduduk').attr('name', 'link');
 			$('#statistik_penduduk').removeAttr('disabled');
 		} else if (jenis == '3') {
 			$('#statistik_keluarga').show();
-			$('#statistik_keluarga').attr('name', 'link');
 			$('#statistik_keluarga').removeAttr('disabled');
 		} else if (jenis == '4') {
 			$('#statistik_program_bantuan').show();
-			$('#statistik_program_bantuan').attr('name', 'link');
 			$('#statistik_program_bantuan').removeAttr('disabled');
 		} else if (jenis == '5') {
 			$('#statis_lainnya').show();
-			$('#statis_lainnya').attr('name', 'link');
 			$('#statis_lainnya').removeAttr('disabled');
 		} else if (jenis == '6') {
 			$('#artikel_keuangan').show();
-			$('#artikel_keuangan').attr('name', 'link');
 			$('#artikel_keuangan').removeAttr('disabled');
 		} else if (jenis == '99') {
 			$('#eksternal').show();
 			$('#eksternal > input').show();
-			$('#eksternal > input').attr('name', 'link');
 			$('#eksternal').removeAttr('disabled');
 			$('#eksternal > input').removeAttr('disabled');
+		} else {
+			$('.jenis_link').hide();
+			$('#label_link').hide();
 		}
 	}
 </script>
