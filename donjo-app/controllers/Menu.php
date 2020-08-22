@@ -47,14 +47,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Menu extends Admin_Controller {
 
+	private $_header;
+
 	public function __construct()
 	{
 		parent::__construct();
-		session_start();
 		$this->load->model('header_model');
 		$this->load->model('web_menu_model');
 		$this->load->model('referensi_model');
 		$this->load->model('laporan_penduduk_model');
+		$this->_header = $this->header_model->get_data();
 		$this->modul_ini = 13;
 		$this->sub_modul_ini = 49;
 	}
@@ -70,27 +72,29 @@ class Menu extends Admin_Controller {
 	{
 		$parrent = 0; // Menu utama
 
-		if (isset($_SESSION['cari']))
-			$data['cari'] = $_SESSION['cari'];
-		else $data['cari'] = '';
+		$per_page = $this->input->post('per_page');
+		if (isset($per_page))
+			$this->session->per_page = $per_page;
 
-		if (isset($_SESSION['filter']))
-			$data['filter'] = $_SESSION['filter'];
-		else $data['filter'] = '';
-
-		if (isset($_POST['per_page']))
-			$_SESSION['per_page'] = $_POST['per_page'];
-		$data['per_page'] = $_SESSION['per_page'];
+		$data['func'] = 'index';
 
 		$data['paging'] = $this->web_menu_model->paging();
 		$data['main'] = $this->web_menu_model->list_data($parrent, $data['paging']->offset, $data['paging']->per_page);
-		$data['keyword'] = $this->web_menu_model->autocomplete($data['cari']);
-		$header = $this->header_model->get_data();
+		//$data['keyword'] = $this->web_menu_model->autocomplete($data['cari']);
 
-		$this->load->view('header', $header);
+		$this->load->view('header', $this->_header);
 		$this->load->view('nav');
 		$this->load->view('menu/table', $data);
 		$this->load->view('footer');
+	}
+
+	public function filter($filter)
+	{
+		$value = $this->input->post($filter);
+		if ($value != '')
+			$this->session->$filter = $value;
+		else $this->session->unset_userdata($filter);
+		redirect('menu');
 	}
 
 	public function form($id = '')
@@ -121,7 +125,7 @@ class Menu extends Admin_Controller {
 
 		$header = $this->header_model->get_data();
 
-		$this->load->view('header', $header);
+		$this->load->view('header', $this->_header);
 		$this->load->view('nav');
 		$this->load->view('menu/form', $data);
 		$this->load->view('footer');
@@ -129,11 +133,11 @@ class Menu extends Admin_Controller {
 
 	public function sub_menu($parrent = 1)
 	{
+		$data['parrent'] = $parrent;
 		$data['paging'] = $this->web_menu_model->paging();
 		$data['main'] = $this->web_menu_model->list_data($parrent, $data['paging']->offset, $data['paging']->per_page);
-		$header = $this->header_model->get_data();
 
-		$this->load->view('header', $header);
+		$this->load->view('header', $this->_header);
 		$this->load->view('nav');
 		$this->load->view('menu/table', $data);
 		$this->load->view('footer');
@@ -176,15 +180,6 @@ class Menu extends Admin_Controller {
 			$_SESSION['cari'] = $cari;
 		else unset($_SESSION['cari']);
 		redirect("menu");
-	}
-
-	public function filter()
-	{
-		$filter = $this->input->post('filter');
-		if ($filter != 0)
-			$_SESSION['filter'] = $filter;
-		else unset($_SESSION['filter']);
-		redirect('menu');
 	}
 
 	public function insert()

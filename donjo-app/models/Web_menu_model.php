@@ -90,12 +90,11 @@ class Web_menu_model extends MY_Model {
 		$this->db->select('COUNT(id) AS jml');
 		$this->list_data_sql($parrent);
 		$row = $this->db->get()->row_array();
-		$jml_data = $row['jml'];
 
 		$this->load->library('paging');
 		$cfg['page'] = $p;
 		$cfg['per_page'] = $_SESSION['per_page'];
-		$cfg['num_rows'] = $jml_data;
+		$cfg['num_rows'] = $row['jml'];
 		$this->paging->init($cfg);
 
 		return $this->paging;
@@ -103,27 +102,19 @@ class Web_menu_model extends MY_Model {
 
 	private function list_data_sql($parrent = '0')
 	{
-		$this->db
-			->from('menu')
-			->where('parrent', $parrent);
+		$this->db->from('menu')->where('parrent', $parrent);
 	}
 
 	public function list_data($parrent = '0', $offset = 0, $limit = 500)
 	{
-		$this->db->select('*');
+		//$this->db->select('*');
 		$this->list_data_sql($parrent);
 		$this->orderBy();
-		$this->db->limit($limit, $offset);
+		$data = $this->db->limit($limit, $offset)->get()->result_array();
 
-		$data = $this->db->get()->result_array();
-
-		$j = $offset;
 		for ($i=0; $i<count($data); $i++)
 		{
-			$data[$i]['no'] = $j + 1;
 			if ($data[$i]['tipe'] != 99) $data[$i]['link'] = $this->menu_slug($data[$i]['link']);
-
-			$j++;
 		}
 
 		return $data;
