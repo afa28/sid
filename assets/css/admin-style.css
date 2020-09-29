@@ -1,5 +1,12 @@
 /* Berisi CSS Modifikasi dari CSS AdminLTE */
 
+/* Berisi CSS Modifikasi dari CSS AdminLTE */
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+
+body {
+	font-family: 'Quicksand', sans-serif !important;
+}
+
 /* Modifikasi Check list dengan Tombol Botton */
 .btn-info.active,
 .btn-info.active:focus,
