@@ -19,8 +19,8 @@
 					</div>
 					<div class="box-body">
 						<div class="form-group col-sm-12 form-horizontal">
-							<label class="col-sm-4 col-lg-2 control-label kiri" for="status">DATA STAF</label>
-							<div class="btn-group col-sm-8 kiri" data-toggle="buttons">
+							<label class="col-sm-4 col-lg-2 control-label" for="status">DATA STAF</label>
+							<div class="btn-group col-sm-8" data-toggle="buttons">
 								<label for="pengurus_1" class="btn btn-info btn-flat btn-sm col-sm-3 form-check-label <?php if (empty($pamong) or !empty($individu)): ?>active<?php endif ?>">
 									<input id="pengurus_1" type="radio"  name="pengurus" class="form-check-input" type="radio" value="1" <?php if (empty($pamong) or !empty($individu)): ?>checked<?php endif; ?> autocomplete="off" onchange="pengurus_asal(this.value);"> Dari Database Penduduk
 								</label>

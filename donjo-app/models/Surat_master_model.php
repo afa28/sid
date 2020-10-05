@@ -93,8 +93,7 @@
 
 	public function insert()
 	{
-		$data = $_POST;
-		$this->validasi_surat($data);
+		$this->validasi_surat($this->input->post());
 
 		$pemohon_surat = $data['pemohon_surat'];
 		unset($data['pemohon_surat']);
@@ -106,7 +105,6 @@
 			$_SESSION['success'] = -2;
 			return;
 		}
-		$data['mandiri'] = isset($data['mandiri']) ? 1 : 0;
 		$outp = $this->db->insert('tweb_surat_format', $data);
 		$raw_path = "template-surat/raw/";
 
@@ -164,18 +162,23 @@
 		status_sukses($outp); //Tampilkan Pesan
 	}
 
-	private function validasi_surat(&$data)
+	private function validasi_surat($post)
 	{
-		$data['nama'] = alfanumerik_spasi($data['nama']);
+		$data = [];
+		$data['kode_surat'] = $post['kode_surat'];
+		$data['nama'] = alfanumerik_spasi($post['nama']);
+		$data['mandiri'] = bilangan($bil['mandiri']);
+
+		return $data;
 	}
 
 	public function update($id=0)
 	{
-		$data = $_POST;
-		$data['mandiri'] = empty($data['mandiri']) ? 0 : 1;
-		$this->validasi_surat($data);
-		$this->db->where('id', $id);
-		$outp = $this->db->update('tweb_surat_format', $data);
+		$this->validasi_surat($this->input->post());
+
+		$outp = $this->db
+			->where('id', $id)
+			->update('tweb_surat_format', $data);
 
 		status_sukses($outp); //Tampilkan Pesan
 	}
