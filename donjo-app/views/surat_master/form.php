@@ -58,12 +58,12 @@
 								<?php endif; ?>
 								<div class="form-group">
 									<label class="col-sm-3 control-label" for="mandiri">Kode/Klasifikasi Surat</label>
-									<div class="btn-group col-sm-5" data-toggle="buttons">
-										<label for="mandiri_1" class="btn btn-info btn-flat btn-sm col-sm-3 form-check-label">
-											<input id="mandiri_1" type="radio" name="mandiri" class="form-check-input" type="radio" value="1" onchange="syarat(this.value);"> Ya
+									<div class="btn-group col-sm-7" data-toggle="buttons">
+										<label id="m1" class="btn btn-info btn-flat btn-sm col-xs-6 col-sm-4 col-lg-2 form-check-label active">
+											<input id="g1" type="radio" name="mandiri" class="form-check-input" type="radio" value="1" checked  autocomplete="off" onchange="syarat(this.value);"> Ya
 										</label>
-										<label for="mandiri_2" class="btn btn-info btn-flat btn-sm col-sm-3 form-check-label">
-											<input id="mandiri_2" type="radio" name="mandiri" class="form-check-input" type="radio" value="0" onchange="syarat(this.value);"> Tidak
+										<label id="m1" class="btn btn-info btn-flat btn-sm col-xs-6 col-sm-4 col-lg-2 form-check-label ">
+											<input id="g2" type="radio" name="mandiri" class="form-check-input" type="radio" value="0"  autocomplete="off" onchange="syarat(this.value);"> Tidak
 										</label>
 									</div>
 								</div>
@@ -113,7 +113,7 @@
 
 <script type="text/javascript">
 	$('document').ready(function() {
-		syarat(2);
+		syarat(1);
 	});
 
 	function myFunction0() {
