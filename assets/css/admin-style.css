@@ -505,7 +505,7 @@ td {
 }
 
 textarea {
-	resize: none;
+	resize: vertical;
 }
 
 .input-sm {
