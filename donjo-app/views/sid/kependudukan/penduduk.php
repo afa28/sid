@@ -1,6 +1,6 @@
 <script>
 	$( function() {
-		$( "#cari" ).autocomplete( {
+		$("#cari").autocomplete( {
 			source: function( request, response ) {
 				$.ajax( {
 					type: "POST",
@@ -108,7 +108,8 @@
 										<button type="submit" class="btn btn-default" onclick="$('#'+'mainform').attr('action', '<?=site_url("penduduk/filter/cari"); ?>');$('#'+'mainform').submit();"><i class="fa fa-search"></i></button>
 									</div>
 								</div>
-							</div>
+							</form>
+							<?php $this->load->view('global/paging'); ?>
 						</div>
 						<div class="table-responsive">
 							<?php if ($judul_statistik): ?>
@@ -252,7 +253,7 @@
 		</div>
 	</section>
 </div>
-<?php $this->load->view('global/confirm_delete');?>
+<?php $this->load->view('global/confirm_delete'); ?>
 <div class='modal fade' id='confirm-status' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 	<div class='modal-dialog'>
 		<div class='modal-content'>
