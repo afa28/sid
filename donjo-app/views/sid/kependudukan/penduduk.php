@@ -181,13 +181,13 @@
 												<td nowrap><?= $data['nama_ibu']; ?></td>
 												<!-- tambah kolom orang tua-->
 												<td><a href="<?= site_url("rtm/anggota/$data[id_rtm]"); ?>"><?= $data['no_rtm']; ?></a></td>
-												<td><?= strtoupper($data['alamat']); ?></td>
+												<td nowrap><?= strtoupper($data['alamat']); ?></td>
 												<td nowrap><?= strtoupper($data['dusun']); ?></td>
 												<td><?= $data['rw']; ?></td>
 												<td><?= $data['rt']; ?></td>
 												<td><?= $data['pendidikan']; ?></td>
 												<td><?= $data['umur']; ?></td>
-												<td><?= $data['pekerjaan']; ?></td>
+												<td nowrap><?= $data['pekerjaan']; ?></td>
 												<td nowrap><?= $data['kawin']; ?></td>
 												<td><?= tgl_indo($data['created_at']); ?></td>
 											</tr>
