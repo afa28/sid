@@ -109,7 +109,6 @@
 									</div>
 								</div>
 							</form>
-							<?php $this->load->view('global/paging'); ?>
 						</div>
 						<div class="table-responsive">
 							<?php if ($judul_statistik): ?>
