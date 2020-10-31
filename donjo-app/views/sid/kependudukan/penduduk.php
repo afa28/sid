@@ -56,8 +56,8 @@
 				<a href="<?= site_url("{$this->controller}/clear"); ?>" class="btn btn-social btn-flat bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class="fa fa-refresh"></i>Bersihkan</a>
 			</div>
 			<div class="box-body">
-				<div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-					<form id="mainform" name="mainform" action="" method="post">
+				<form id="mainform" name="mainform" action="" method="post">
+					<div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 						<div class="row">
 							<div class="col-sm-9">
 								<select class="form-control input-sm" name="filter" onchange="formAction('mainform', '<?= site_url('penduduk/filter/filter'); ?>')">
@@ -245,9 +245,9 @@
 								</tbody>
 							</table>
 						</div>
-					</form>
-					<?php $this->load->view('global/paging');?>
-				</div>
+					</div>
+				</form>
+				<?php $this->load->view('global/paging');?>
 			</div>
 		</div>
 	</section>
