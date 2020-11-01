@@ -98,6 +98,9 @@ class Database_model extends CI_Model {
 	{
 		parent::__construct();
 
+		$this->load->dbutil();
+		if( ! $this->dbutil->database_exists($this->db->database)) return;
+
 		$this->cek_engine_db();
 		$this->load->dbforge();
 		$this->load->model('surat_master_model');
@@ -221,8 +224,12 @@ class Database_model extends CI_Model {
 		if ($this->db->table_exists('migrasi') )
 			$sudah = $this->db->where('versi_database', VERSI_DATABASE)
 				->get('migrasi')->num_rows();
-		if (!$sudah)
+		if ( ! $sudah)
 		{
+			// Ulangi migrasi terakhir
+			$terakhir = key(array_slice($this->versionMigrate, -1, 1, true));
+			$sebelumnya = key(array_slice($this->versionMigrate, -2, 1, true));
+			$this->versionMigrate[$terakhir]['migrate'] ?: $this->versionMigrate[$terakhir]['migrate'] = $this->versionMigrate[$sebelumnya]['migrate'];
 			$this->migrasi_db_cri();
 		}
 	}
