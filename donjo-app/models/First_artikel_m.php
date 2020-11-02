@@ -384,12 +384,16 @@ class First_artikel_m extends CI_Model {
 		return $data;
 	}
 
-	public function get_kategori($id=0)
+	public function get_kategori($id = 0)
 	{
-		$data = $this->db->select('kategori')
-			->where('id', $id)->or_where('slug', $id)
-			->limit(1)->get('kategori')
-			->row()->kategori;
+		$data = $this->db
+			->group_start()
+				->where('id', $id)
+				->or_where('slug', $id)
+			->group_end()
+			->limit(1)
+			->get('kategori')
+			->row_array();
 
 		if (empty($data))
 		{
@@ -401,6 +405,7 @@ class First_artikel_m extends CI_Model {
 			);
 			$data = $judul[$id];
 		}
+
 		// Bukan kategori yg dikenal
 		if (empty($data))
 			$data = "Artikel Kategori '$id'";
