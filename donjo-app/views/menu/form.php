@@ -93,10 +93,16 @@
 							<div class="form-group">
 								<label class="control-label col-sm-4">Link</label>
 								<div class="col-sm-6" >
-									<select id="link" class="form-control input-sm jenis_link" name="<?php if ($submenu['link_tipe']==1): ?>link<?php endif; ?>" style="<?php if ($submenu['link_tipe']!=1): ?>display:none<?php endif; ?>" <?php if ($submenu['link_tipe']!=1): ?>disabled="disabled"<?php endif; ?>>
+									<select id="artikel_statis" class="form-control input-sm jenis_link" name="<?php if ($submenu['link_tipe']==1): ?>link<?php endif; ?>" style="<?php if ($submenu['link_tipe']!=1): ?>display:none<?php endif; ?>" <?php if ($submenu['link_tipe']!=1): ?>disabled="disabled"<?php endif; ?>>
 										<option value="">Pilih Artikel Statis</option>
-										<?php foreach ($link as $data): ?>
+										<?php foreach ($artikel_statis as $data): ?>
 											<option value="artikel/<?= $data['id']?>" <?= selected($submenu['link'], "artikel/$data[id]"); ?>><label>No link : </label><?=$data['judul']?></option>
+										<?php endforeach; ?>
+									</select>
+									<select id="kategori_artikel" class="form-control input-sm jenis_link" name="<?php if ($submenu['link_tipe']==7): ?>link<?php endif; ?>" style="<?php if ($submenu['link_tipe']!=7): ?>display:none<?php endif; ?>" <?php if ($submenu['link_tipe']!=7): ?>disabled="disabled"<?php endif; ?>>
+										<option value="">Pilih Kategori Artikel</option>
+										<?php foreach ($kategori_artikel as $data): ?>
+											<option value="kategori/<?= $data['id']; ?>" <?= selected($submenu['link'], "kategori/$data[id]"); ?>><?=$data['judul']?></option>
 										<?php endforeach; ?>
 									</select>
 									<select id="statistik_penduduk" class="form-control input-sm jenis_link" name="<?php if ($submenu['link_tipe']==2): ?>link<?php endif; ?>" style="<?php if ($submenu['link_tipe']!=2): ?>display:none;<?php endif; ?>">
@@ -159,9 +165,9 @@
 		$('#eksternal > input').attr('name', '');
 
 		if (jenis == '1') {
-			$('#link').show();
-			$('#link').attr('name', 'link');
-			$('#link').removeAttr('disabled');
+			$('#artikel_statis').show();
+			$('#artikel_statis').attr('name', 'link');
+			$('#artikel_statis').removeAttr('disabled');
 		} else if (jenis == '2') {
 			$('#statistik_penduduk').show();
 			$('#statistik_penduduk').attr('name', 'link');
@@ -182,6 +188,10 @@
 			$('#artikel_keuangan').show();
 			$('#artikel_keuangan').attr('name', 'link');
 			$('#artikel_keuangan').removeAttr('disabled');
+		} else if (jenis == '7') {
+			$('#kategori_artikel').show();
+			$('#kategori_artikel').attr('name', 'link');
+			$('#kategori_artikel').removeAttr('disabled');
 		} else if (jenis == '99') {
 			$('#eksternal').show();
 			$('#eksternal > input').show();
