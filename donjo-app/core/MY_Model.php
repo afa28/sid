@@ -27,7 +27,7 @@ class MY_Model extends CI_Model {
 
 			case 'kategori':
 				$data = $this->first_artikel_m->get_kategori(1);
-				$url = ($data) ? ($cut[0] . '/' . $data['slug']) : ($url);
+				$url = ($data) ? ('artikel/' . $cut[0] . '/' . $data['slug']) : ($url);
 				break;
 
 			case 'arsip':
