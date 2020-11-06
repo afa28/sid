@@ -14,11 +14,11 @@
 			<ul class="nav navbar-nav">
 				<li><a href="<?= site_url(); ?>">Beranda</a></li>
 				<?php foreach($menu_kiri as $data): ?>
-					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="<?= site_url("artikel/kategori/$submenu[slug]"); ?>"><?php echo $data['nama']; if(count($data['submenu'])>0) { echo "<span class='caret'></span>"; } ?></a>
-						<?php if(count($data['submenu'])>0): ?>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="<?= site_url("artikel/kategori/$data[slug]"); ?>"><?= $data['kategori']; ?> <?php if(count($data['submenu']) > 0) { echo "<span class='caret'></span>"; } ?></a>
+						<?php if(count($data['submenu']) > 0): ?>
 							<ul class="dropdown-menu">
 								<?php foreach($data['submenu'] as $submenu): ?>
-									<li><a href="<?= site_url("artikel/kategori/$submenu[slug]"); ?>"><?php echo $submenu['nama']?></a></li>
+									<li><a href="<?= site_url("artikel/kategori/$submenu[slug]"); ?>"><?= $submenu['kategori']; ?></a></li>
 								<?php endforeach; ?>
 							</ul>
 						<?php endif; ?>
