@@ -163,29 +163,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$('#jenis_link').show();
 		$('.jenis_link').hide();
 		$('.jenis_link').removeAttr( "name" );
+		$('.jenis_link').removeClass('required');
 		$('#eksternal > input').attr('name', '');
 
 		if (jenis == '1') {
 			$('#artikel_statis').show();
 			$('#artikel_statis').attr('name', 'link');
+			$('#artikel_statis').addClass('required');
 		} else if (jenis == '2') {
 			$('#statistik_penduduk').show();
 			$('#statistik_penduduk').attr('name', 'link');
+			$('#statistik_penduduk').addClass('required');
 		} else if (jenis == '3') {
 			$('#statistik_keluarga').show();
 			$('#statistik_keluarga').attr('name', 'link');
+			$('#statistik_keluarga').addClass('required');
 		} else if (jenis == '4') {
 			$('#statistik_program_bantuan').show();
 			$('#statistik_program_bantuan').attr('name', 'link');
+			$('#statistik_program_bantuan').addClass('required');
 		} else if (jenis == '5') {
 			$('#statis_lainnya').show();
 			$('#statis_lainnya').attr('name', 'link');
+			$('#statis_lainnya').addClass('required');
 		} else if (jenis == '6') {
 			$('#artikel_keuangan').show();
 			$('#artikel_keuangan').attr('name', 'link');
+			$('#artikel_keuangan').addClass('required');
 		} else if (jenis == '7') {
 			$('#kategori_artikel').show();
 			$('#kategori_artikel').attr('name', 'link');
+			$('#kategori_artikel').addClass('required');
 		} else if (jenis == '99') {
 			$('#eksternal').show();
 			$('#eksternal > input').show();
