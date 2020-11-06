@@ -387,7 +387,6 @@ class First_artikel_m extends CI_Model {
 	public function get_kategori($id = 0)
 	{
 		$data = $this->db
-			->select('kategori')
 			->group_start()
 				->where('id', $id)
 				->or_where('slug', $id)

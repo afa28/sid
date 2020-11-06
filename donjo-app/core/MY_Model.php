@@ -26,7 +26,7 @@ class MY_Model extends CI_Model {
 				break;
 
 			case 'kategori':
-				$data = $this->first_artikel_m->get_kategori(1);
+				$data = $this->first_artikel_m->get_kategori();
 				$url = ($data) ? ('artikel/' . $cut[0] . '/' . $data['slug']) : ($url);
 				break;
 
