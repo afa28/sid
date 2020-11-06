@@ -60,6 +60,9 @@ $route ['ppid'] = "Api_informasi_publik/ppid";
 // Artikel
 $route['artikel/(:num)'] = 'first/artikel/$1'; // Contoh : artikel/1
 $route['artikel/(:num)/(:num)/(:num)/(:any)'] = 'first/artikel/$4'; // Contoh : artikel/2020/5/15/contoh-artikel
+// Artikel lama (Agar url lama masih dpt di akases)
+$route['first/artikel/(:num)'] = 'first/artikel/$1'; // Contoh : Contoh : first/artikel/1
+$route['first/artikel/(:num)/(:num)/(:num)/(:any)'] = 'first/artikel/$4'; // Contoh : first/artikel/2020/5/15/contoh-artikel
 
 // Kategori artikel
 $route['artikel/kategori/(:any)'] = 'first/kategori/$1'; // Contoh : Contoh : artikel/kategori/berita-desa
