@@ -77,11 +77,7 @@
 								<ul class="dropdown-menu">
 									<!-- The user image in the menu -->
 									<li class="user-header">
-										<?php if ($penduduk['foto']): ?>
-											<img class="penduduk profile-user-img img-responsive img-circle" src="<?= AmbilFoto($penduduk['foto'])?>" alt="Foto">
-										<?php else: ?>
-											<img class="penduduk profile-user-img img-responsive img-circle" src="<?= base_url()?>assets/files/user_pict/kuser.png" alt="Foto">
-										<?php endif; ?>
+										<img class="penduduk profile-user-img img-responsive img-circle" src="<?= AmbilFoto($penduduk['foto']); ?>" alt="Foto Penduduk">
 										<p>
 											<?= $this->session->nama; ?>
 											<small>NIK : <?= $this->session->nik; ?><br>No. KK : <?= $this->session->no_kk; ?></small>
