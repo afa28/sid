@@ -11,39 +11,47 @@
 		text-align: left;
 		color: #111;
 	}
+
 	.detail {
 		margin-top: 5px;
 		margin-bottom: 5px;
 	}
+
+	.box-title {
+		font-weight: bold;
+	}
 </style>
-<div class="box-header with-border">
-	<h3 class="box-title">BIODATA PENDUDUK</h3>
-	<div class="box-tools">
-		<div class="btn-group-vertical">
-			<a class="btn btn-social btn-flat btn-info btn-sm" data-toggle="dropdown"><i class='fa fa-print'></i> Cetak</a>
-			<ul class="dropdown-menu" role="menu">
-				<li>
-					<a href="<?= site_url("first/cetak_biodata/$penduduk[id]"); ?>" class="btn btn-social btn-flat btn-block btn-sm" title="Cetak Biodata" target="_blank"><i class="fa fa-user"></i> Biodata</a>
-				</li>
-				<li>
-					<a href="<?= site_url("first/cetak_kk/$penduduk[id]/1"); ?>" class="btn btn-social btn-flat btn-block btn-sm" title="Cetak Kartu Keluarga" target="_blank"><i class="fa fa-group"></i> Kartu Keluarga</a>
-				</li>
-			</ul>
+<div class="row">
+	<div class="col-md-3">
+		<div class="box box-primary">
+			<div class="box-body box-profile">
+				<img class="penduduk profile-user-img img-responsive img-circle" src="<?= AmbilFoto($penduduk['foto']); ?>" alt="Foto Penduduk">
+			</div>
+			<div class="box-body text-center">
+				<span class="input-group-btn float-center">
+					<a href="<?= site_url("mandiri_web/mandiri"); ?>" class="btn btn-info btn-flat" title="Penduduk"><i class="fa fa-user"></i> Penduduk</a>
+					<a href="<?= site_url("mandiri_web/keluarga"); ?>" class="btn btn-warning btn-flat" title="Keluarga"><i class="fa fa-users"></i> Keluarga</a>
+				</span>
+			</div>
+
+			<div class="box-body text-center">
+				<span class="input-group-btn float-center">
+					<a href="<?= site_url("layanan-mandiri/cetak_biodata/$penduduk[id]"); ?>" class="btn btn-info btn-flat" title="Penduduk" target="_blank"><i class="fa fa-user"></i> Penduduk</a>
+					<a href="<?= site_url("layanan-mandiri/cetak_kk/$penduduk[id]/1"); ?>" class="btn btn-warning btn-flat" title="Keluarga" target="_blank"><i class="fa fa-users"></i> Keluarga</a>
+				</span>
+			</div>
 		</div>
 	</div>
-</div>
-<div class="box-body">
-	<div class="table-responsive">
-		<table class="table table-bordered table-striped table-hover" >
-			<tr>
-				<td colspan="3">
-					<?php if ($penduduk['foto']): ?>
-						<img class="penduduk profile-user-img img-responsive img-circle" src="<?= AmbilFoto($penduduk['foto'])?>" alt="Foto">
-						<?php else: ?>
-							<img class="penduduk profile-user-img img-responsive img-circle" src="<?= base_url()?>assets/files/user_pict/kuser.png" alt="Foto">
-						<?php endif; ?>
-					</td>
-				</tr>
+	<div class="col-md-9">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<h5 class="box-title">DATA PENDUDUK</h5>
+				<div class="box-tools">
+					<a href="<?= site_url("mandiri_web/cetak_biodata/$penduduk[id]"); ?>" class="btn btn-info btn-flat" title="Cetak Data Penduduk" target="_blank"><i class="fa fa-print"></i> Cetak</a>
+				</div>
+			</div>
+
+			<div class="box-body">
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped table-hover" >
 						<tbody>
@@ -250,7 +258,7 @@
 						</tbody>
 					</table>
 				</div>
-			</table>
+			</div>
 		</div>
 	</div>
 </div>
