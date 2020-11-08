@@ -1,17 +1,58 @@
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+/*
+ *  File ini:
+ *
+ * Controller untuk modul Database
+ *
+ * donjo-app/controllers/Database.php
+ *
+ */
+/*
+ *  File ini bagian dari:
+ *
+ * OpenSID
+ *
+ * Sistem informasi desa sumber terbuka untuk memajukan desa
+ *
+ * Aplikasi dan source code ini dirilis berdasarkan lisensi GPL V3
+ *
+ * Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
+ * Hak Cipta 2016 - 2020 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
+ *
+ * Dengan ini diberikan izin, secara gratis, kepada siapa pun yang mendapatkan salinan
+ * dari perangkat lunak ini dan file dokumentasi terkait ("Aplikasi Ini"), untuk diperlakukan
+ * tanpa batasan, termasuk hak untuk menggunakan, menyalin, mengubah dan/atau mendistribusikan,
+ * asal tunduk pada syarat berikut:
+ *
+ * Pemberitahuan hak cipta di atas dan pemberitahuan izin ini harus disertakan dalam
+ * setiap salinan atau bagian penting Aplikasi Ini. Barang siapa yang menghapus atau menghilangkan
+ * pemberitahuan ini melanggar ketentuan lisensi Aplikasi Ini.
+ *
+ * PERANGKAT LUNAK INI DISEDIAKAN "SEBAGAIMANA ADANYA", TANPA JAMINAN APA PUN, BAIK TERSURAT MAUPUN
+ * TERSIRAT. PENULIS ATAU PEMEGANG HAK CIPTA SAMA SEKALI TIDAK BERTANGGUNG JAWAB ATAS KLAIM, KERUSAKAN ATAU
+ * KEWAJIBAN APAPUN ATAS PENGGUNAAN ATAU LAINNYA TERKAIT APLIKASI INI.
+ *
+ * @package	OpenSID
+ * @author	Tim Pengembang OpenDesa
+ * @copyright	Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
+ * @copyright	Hak Cipta 2016 - 2020 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
+ * @license	http://www.gnu.org/licenses/gpl.html	GPL V3
+ * @link 	https://github.com/OpenSID/OpenSID
+ */
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+require_once 'vendor/spout/src/Spout/Autoloader/autoload.php';
+
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Common\Entity\Row;
 
 class Database extends Admin_Controller {
-
-	private $_header;
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->dbforge();
-		$this->load->model(['header_model', 'import_model', 'export_model', 'database_model']);
-		$this->_header = $this->header_model->get_data();
+		$this->load->model(['import_model', 'export_model', 'database_model']);
+
 		$this->modul_ini = 11;
 		$this->sub_modul_ini = 45;
 	}
@@ -34,62 +75,53 @@ class Database extends Admin_Controller {
 			unset($_SESSION['siteman_timeout']);
 		}
 
-		$tab['act_tab'] = 1;
-
-		$this->load->view('header', $this->_header);
-		$this->load->view('nav');
-		$this->load->view('export/tab_menu', $tab);
-		$this->load->view('export/exp');
-		$this->load->view('footer');
+		$data['act_tab'] = 1;
+		$data['content'] = 'export/exp';
+		$this->load->view('database/database.tpl.php', $data);
 	}
 
 	public function import()
 	{
-		$tab['act_tab'] = 2;
 		$data['form_action'] = site_url("database/import_dasar");
 		$data['form_action3'] = site_url("database/ppls_individu");
 
-		$this->load->view('header', $this->_header);
-		$this->load->view('nav');
-		$this->load->view('export/tab_menu', $tab);
-		$this->load->view('import/imp', $data);
-		$this->load->view('footer');
+		$data['act_tab'] = 2;
+		$data['content'] = 'import/imp';
+		$this->load->view('database/database.tpl.php', $data);
 	}
 
 	public function import_bip()
 	{
-		$tab['act_tab'] = 3;
 		$data['form_action'] = site_url("database/import_data_bip");
 
-		$this->load->view('header', $this->_header);
-		$this->load->view('nav');
-		$this->load->view('export/tab_menu', $tab);
-		$this->load->view('import/bip', $data);
-		$this->load->view('footer');
+		$data['act_tab'] = 3;
+		$data['content'] = 'import/bip';
+		$this->load->view('database/database.tpl.php', $data);
 	}
 
 	public function migrasi_cri()
 	{
-		$tab['act_tab'] = 5;
 		$data['form_action'] = site_url("database/migrasi_db_cri");
 
-		$this->load->view('header', $this->_header);
-		$this->load->view('nav');
-		$this->load->view('export/tab_menu', $tab);
-		$this->load->view('database/migrasi_cri', $data);
-		$this->load->view('footer');
+		$data['act_tab'] = 5;
+		$data['content'] = 'database/migrasi_cri';
+		$this->load->view('database/database.tpl.php', $data);
 	}
 
 	public function backup()
 	{
-		$tab['act_tab'] = 4;
 		$data['form_action'] = site_url("database/restore");
 
-		$this->load->view('header', $this->_header);
-		$this->load->view('nav');
-		$this->load->view('export/tab_menu', $tab);
-		$this->load->view('database/backup', $data);
-		$this->load->view('footer');
+		$data['act_tab'] = 4;
+		$data['content'] = 'database/backup';
+		$this->load->view('database/database.tpl.php', $data);
+	}
+
+	public function kosongkan()
+	{
+		$data['act_tab'] = 6;
+		$data['content'] = 'database/kosongkan';
+		$this->load->view('database/database.tpl.php', $data);
 	}
 
 	/*
@@ -97,63 +129,175 @@ class Database extends Admin_Controller {
 	*/
 	public function export_excel($opendk = '')
 	{
-		$judul = array(
-			'Alamat' => 'alamat',
-			'Dusun' => 'dusun',
-			'RW' => 'rw',
-			'RT' => 'rt',
-			'Nama' => 'nama',
-			'Nomor KK' => 'nomor_kk',
-			'Nomor NIK' => 'nomor_nik',
-			'Jenis Kelamin' => 'jenis_kelamin',
-			'Tempat Lahir' => 'tempat_lahir',
-			'Tanggal Lahir' => 'tanggal_lahir',
-			'Agama' => 'agama',
-			'Pendidikan (dlm KK)' => 'pendidikan_dlm_kk',
-			'Pendidikan (sdg ditempuh)' => 'pendidikan_sdg_ditempuh',
-			'Pekerjaan' => 'pekerjaan',
-			'Kawin' => 'kawin',
-			'Hub. Keluarga' => 'hubungan_keluarga',
-			'Kewarganegaraan' => 'kewarganegaraan',
-			'Nama Ayah' => 'nama_ayah',
-			'Nama Ibu' => 'nama_ibu',
-			'Gol. Darah' => 'gol_darah',
-			'Akta Lahir' => 'akta_lahir',
-			'Nomor Dokumen Paspor' => 'nomor_dokumen_pasport',
-			'Tanggal Akhir Paspor' => 'tanggal_akhir_pasport',
-			'Nomor Dokumen KITAS' => 'nomor_dokumen_kitas',
-			'NIK Ayah' => 'nik_ayah',
-			'NIK Ibu' => 'nik_ibu',
-			'Nomor Akta Perkawinan' => 'nomor_akta_perkawinan',
-			'Tanggal Perkawinan' => 'tanggal_perkawinan',
-			'Nomor Akta Perceraian' => 'nomor_akta_perceraian',
-			'Tanggal Perceraian' => 'tanggal_perceraian',
-			'Cacat' => 'cacat',
-			'Cara KB' => 'cara_kb',
-			'Hamil' => 'hamil',
-			'KTP-el' => 'ktp_el',
-			'Status Rekam' => 'status_rekam',
-			'Alamat Sekarang' => 'alamat_sekarang'
-		);
-		$data['main'] = $this->export_model->export_excel();
+		$writer = WriterEntityFactory::createXLSXWriter();
+
+		//Nama File
 		$tgl =  date('d_m_Y');
 		if ($opendk)
 		{
-			$data['judul'] = array_values($judul);
-			// Kolom tambahan khusus OpenDK
-			$data['judul'][] = 'id';
-			$data['judul'][] = 'status_dasar';
-			$data['judul'][] = 'created_at';
-			$data['judul'][] = 'updated_at';
-			$data['nama_file'] = 'penduduk_'.$tgl.'_opendk';
+			$fileName = 'penduduk_'.$tgl.'_opendk.xlsx';
 		}
 		else
 		{
-			$data['judul'] = array_keys($judul);
-			$data['nama_file'] = 'penduduk_'.$tgl;
+			$fileName = 'penduduk_'.$tgl.'.xlsx';
 		}
-		$data['opendk'] = $opendk;
-		$this->load->view('export/penduduk_excel', $data);
+		$writer->openToBrowser($fileName); // stream data directly to the browser
+
+		//Header Tabel
+		$judul = [
+			'Alamat',
+			'Dusun',
+			'RW',
+			'RT',
+			'Nama',
+			'Nomor KK',
+			'Nomor NIK',
+			'Jenis Kelamin',
+			'Tempat Lahir',
+			'Tanggal Lahir',
+			'Agama',
+			'Pendidikan (dlm KK)',
+			'Pendidikan (sdg ditempuh)',
+			'Pekerjaan',
+			'Kawin',
+			'Hub. Keluarga',
+			'Kewarganegaraan',
+			'Nama Ayah',
+			'Nama Ibu',
+			'Gol. Darah',
+			'Akta Lahir',
+			'Nomor Dokumen Paspor',
+			'Tanggal Akhir Paspor',
+			'Nomor Dokumen KITAS',
+			'NIK Ayah',
+			'NIK Ibu',
+			'Nomor Akta Perkawinan',
+			'Tanggal Perkawinan',
+			'Nomor Akta Perceraian',
+			'Tanggal Perceraian',
+			'Cacat',
+			'Cara KB',
+			'Hamil',
+			'KTP-el',
+			'Status Rekam',
+			'Alamat Sekarang'
+		];
+		if ($opendk)
+		{
+			$judul = array_values($judul);
+			// Kolom tambahan khusus OpenDK
+			$judul[] = 'id';
+			$judul[] = 'status_dasar';
+			$judul[] = 'created_at';
+			$judul[] = 'updated_at';
+		}
+		else
+		{
+			$judul = array_values($judul);
+		}
+		$header = WriterEntityFactory::createRowFromArray($judul);
+		$writer->addRow($header);
+
+		//Isi Tabel
+		$get = $this->export_model->export_excel();
+		if ($opendk)
+		{
+			foreach ($get as $row)
+			{
+				$penduduk = array(
+					$row->alamat,
+					$row->dusun,
+					$row->rw,
+					$row->rt,
+					$row->nama,
+					$row->no_kk,
+					$row->nik,
+					$row->sex,
+					$row->tempatlahir,
+					$row->tanggallahir,
+					$row->agama_id,
+					$row->pendidikan_kk_id,
+					$row->pendidikan_sedang_id,
+					$row->pekerjaan_id,
+					$row->status_kawin,
+					$row->kk_level,
+					$row->warganegara_id,
+					$row->nama_ayah,
+					$row->nama_ibu,
+					$row->golongan_darah_id,
+					$row->akta_lahir,
+					$row->dokumen_pasport,
+					$row->tanggal_akhir_pasport,
+					$row->dokumen_kitas,
+					$row->ayah_nik,
+					$row->ibu_nik,
+					$row->akta_perkawinan,
+					$row->tanggalperkawinan,
+					$row->akta_perceraian,
+					$row->tanggalperceraian,
+					$row->cacat_id,
+					$row->cara_kb_id,
+					$row->hamil,
+					$row->ktp_el,
+					$row->status_rekam,
+					$row->alamat_sekarang,
+					$row->id,
+					$row->status_dasar,
+					$row->created_at,
+					$row->updated_at
+				);
+				$rowFromValues = WriterEntityFactory::createRowFromArray($penduduk);
+				$writer->addRow($rowFromValues);
+			}
+		}
+		else
+		{
+			foreach ($get as $row)
+			{
+				$penduduk = array(
+					$row->alamat,
+					$row->dusun,
+					$row->rw,
+					$row->rt,
+					$row->nama,
+					$row->no_kk,
+					$row->nik,
+					$row->sex,
+					$row->tempatlahir,
+					$row->tanggallahir,
+					$row->agama_id,
+					$row->pendidikan_kk_id,
+					$row->pendidikan_sedang_id,
+					$row->pekerjaan_id,
+					$row->status_kawin,
+					$row->kk_level,
+					$row->warganegara_id,
+					$row->nama_ayah,
+					$row->nama_ibu,
+					$row->golongan_darah_id,
+					$row->akta_lahir,
+					$row->dokumen_pasport,
+					$row->tanggal_akhir_pasport,
+					$row->dokumen_kitas,
+					$row->ayah_nik,
+					$row->ibu_nik,
+					$row->akta_perkawinan,
+					$row->tanggalperkawinan,
+					$row->akta_perceraian,
+					$row->tanggalperceraian,
+					$row->cacat_id,
+					$row->cara_kb_id,
+					$row->hamil,
+					$row->ktp_el,
+					$row->status_rekam,
+					$row->alamat_sekarang
+				);
+				$rowFromValues = WriterEntityFactory::createRowFromArray($penduduk);
+				$writer->addRow($rowFromValues);
+			}
+		}
+
+		$writer->close();
 	}
 
 	public function export_dasar()
@@ -179,17 +323,6 @@ class Database extends Admin_Controller {
 	{
 		$this->database_model->migrasi_db_cri();
 		redirect('database/migrasi_cri/1');
-	}
-
-	public function kosongkan()
-	{
-		$tab['act_tab'] = 6;
-
-		$this->load->view('header', $this->_header);
-		$this->load->view('nav');
-		$this->load->view('export/tab_menu', $tab);
-		$this->load->view('database/kosongkan', $data);
-		$this->load->view('footer');
 	}
 
 	public function kosongkan_db()
@@ -228,7 +361,7 @@ class Database extends Admin_Controller {
 
 	public function export_csv()
 	{
-		$data['main'] = $this->export_model->export_excel();
+		$data['main'] = $this->export_model->export_csv();
 		$this->load->view('export/penduduk_csv', $data);
 	}
 }

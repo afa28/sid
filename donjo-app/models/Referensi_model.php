@@ -65,6 +65,7 @@ define("STATUS_PERMOHONAN", serialize([
 
 define("LINK_TIPE", serialize([
 	'1' => 'Artikel Statis',
+	'7' => 'Kategori Artikel',
 	'2' => 'Statistik Penduduk',
 	'3' => 'Statistik Keluarga',
 	'4' => 'Statistik Program Bantuan',
@@ -101,19 +102,20 @@ define("STAT_KELUARGA", serialize([
 	'kelas_sosial' => 'Kelas Sosial'
 ]));
 
-// Statistik Keluarga
+// Statistik Bantuan
 define("STAT_BANTUAN", serialize([
 	'bantuan_penduduk' => 'Penerima Bantuan Penduduk',
 	'bantuan_keluarga' => 'Penerima Bantuan Keluarga'
 ]));
 
-// Statistik Keluarga
+// Statistik Lainnya
 define("STAT_LAINNYA", serialize([
 	'dpt' => 'Calon Pemilih',
 	'wilayah' => 'Wilayah Administratif',
 	'peraturan_desa' => 'Produk Hukum',
 	'informasi_publik' => 'Informasi Publik',
-	'peta' => 'Peta'
+	'peta' => 'Peta',
+	'data_analisis' => 'Data Analisis'
 ]));
 
 
@@ -135,10 +137,12 @@ class Referensi_model extends CI_Model {
 		return $list;
 	}
 
-	public function list_data($tabel, $kecuali='')
+	public function list_data($tabel, $kecuali='', $termasuk=null)
 	{
-		if (!empty($kecuali))
-			$this->db->where("id NOT IN ($kecuali)");
+		if ($kecuali) $this->db->where("id NOT IN ($kecuali)");
+
+		if ($termasuk) $this->db->where("id IN ($termasuk)");
+
 		$data = $this->db->select('*')->order_by('id')->get($tabel)->result_array();
 		return $data;
 	}

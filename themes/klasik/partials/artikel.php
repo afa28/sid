@@ -1,12 +1,10 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
-
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * File ini:
  *
  * View untuk Tema Klasik, Bagian Artikel
  *
- * artikel.php
+ * themes/klasik/partials/artikel.php
  *
  */
 
@@ -52,7 +50,7 @@
 			<i class="fa fa-user"></i> <?= $single_artikel['owner']?> |
 			<i class="fa fa-clock-o"></i><?= tgl_indo2($single_artikel['tgl_upload']);?> |
 			<?php if (trim($single_artikel['kategori']) != '') : ?>
-				<i class='fa fa-tag'></i> <a href="<?= site_url('first/kategori/'.$single_artikel['kat_slug'])?>"><?= $single_artikel['kategori']?></a> |
+				<i class='fa fa-tag'></i> <a href="<?= site_url('artikel/kategori/'.$single_artikel['kat_slug'])?>"><?= $single_artikel['kategori']?></a> |
 			<?php endif; ?>
 			<i class="fa fa-eye"></i> <?= hit($single_artikel['hit']) ?>
 		</h3>
@@ -96,7 +94,7 @@
 				<li class="sbutton" id="fb"><a name="fb_share" href="http://www.facebook.com/sharer.php?u=<?= site_url('artikel/'.buat_slug($single_artikel))?>" target="_blank"><i class="fa fa-facebook-square"></i>&nbsp;Facebook</a></li>
 				<li class="sbutton" id="rt"><a href="http://twitter.com/share?url=<?= site_url('artikel/'.buat_slug($single_artikel)) ?>" class="twitter-share-button" target="_blank"><i class="fa fa-twitter"></i>&nbsp;Tweet</a></li>
 				<li class="sbutton" id="wa_share"><a href="https://api.whatsapp.com/send?text=<?= site_url('artikel/'.buat_slug($single_artikel))?>" target="_blank"><i class="fa fa-whatsapp" style="color:green"></i>&nbsp;WhatsApp</a></li>
-				<li class="sbutton" id="tele_share"><a href="https://telegram.me/share/url?url=<?= site_url('artikel/'.buat_slug($single_artikel))?>&text=<?= $single_artikel["judul"]; ?>" target="_blank"><i class="fa fa-telegram" style="color:blue"></i>&nbsp;Telegram</a></li>
+				<li class="sbutton" id="tele_share"><a href="https://telegram.me/share/url?url=<?= site_url('artikel/'.buat_slug($single_artikel))?>&text=<?= htmlspecialchars($single_artikel["judul"]); ?>" target="_blank"><i class="fa fa-telegram" style="color:blue"></i>&nbsp;Telegram</a></li>
 			</ul>
 		</div>
 
@@ -119,12 +117,12 @@
 						<?php endforeach; ?>
 					</div>
 				</div>
-			<?php elseif($single_artikel['boleh_komentar']): ?>
+			<?php elseif ($single_artikel['boleh_komentar'] == 1): ?>
 				<div>Silakan tulis komentar dalam formulir berikut ini (Gunakan bahasa yang santun)</div>
 			<?php endif; ?>
 		</div>
 		<div class="form-group group-komentar">
-			<?php if($single_artikel['boleh_komentar']): ?>
+			<?php if ($single_artikel['boleh_komentar'] == 1): ?>
 				<div class="box box-default">
 					<div class="box-header">
 						<h3 class="box-title">Formulir Komentar (Komentar baru terbit setelah disetujui Admin)</h3>
@@ -137,30 +135,30 @@
 						<?php unset($_SESSION['validation_error']); ?>
 					<?php endif; ?>
 					<div class="box-body">
-						<form id="form-komentar" name="form" action="<?= site_url('first/add_comment/'.$single_artikel['id'])?>" method="POST" onSubmit="return validasi(this);">
+						<form id="form-komentar" class="form-validasi" name="form" action="<?= site_url('add_comment/'.$single_artikel['id'])?>" method="POST" onSubmit="return validasi(this);">
 							<table width="100%">
 								<tr class="komentar nama">
 									<td>Nama</td>
 									<td>
-										<input type="text" name="owner" maxlength="30" value="<?= !empty($_SESSION['post']['owner']) ? $_SESSION['post']['owner'] : $_SESSION['nama'] ?>">
+										<input type="text" name="owner" class="required" maxlength="50" value="<?= !empty($_SESSION['post']['owner']) ? $_SESSION['post']['owner'] : $_SESSION['nama'] ?>">
 									</td>
 								</tr>
 								<tr class="komentar alamat">
 									<td>No. HP</td>
 									<td>
-										<input type="text" name="no_hp" maxlength="30" value="<?= $_SESSION['post']['no_hp'] ?>">
+										<input type="text" class="number required" name="no_hp" maxlength="30" value="<?= $_SESSION['post']['no_hp'] ?>">
 									</td>
 								</tr>
 								<tr class="komentar alamat">
 									<td>Alamat e-mail</td>
 									<td>
-										<input type="text" name="email" maxlength="30" value="<?= $_SESSION['post']['email'] ?>">
+										<input type="text" name="email" class="email" maxlength="30" value="<?= $_SESSION['post']['email'] ?>">
 									</td>
 								</tr>
 								<tr class="komentar pesan">
 									<td valign="top">Komentar</td>
 									<td>
-										<textarea name="komentar"><?= $_SESSION['post']['komentar']?></textarea>
+										<textarea class="required" name="komentar"><?= $_SESSION['post']['komentar']?></textarea>
 									</td>
 								</tr>
 								<tr class="captcha"><td>&nbsp;</td>
@@ -172,7 +170,7 @@
 								<tr class="captcha_code">
 									<td>&nbsp;</td>
 									<td>
-										<input type="text" name="captcha_code" maxlength="6" value="<?= $_SESSION['post']['captcha_code']?>"/> Isikan kode di gambar
+										<input type="text" name="captcha_code" class="required" maxlength="6" value="<?= $_SESSION['post']['captcha_code']?>"/> Isikan kode di gambar
 									</td>
 								</tr>
 								<tr class="submit">

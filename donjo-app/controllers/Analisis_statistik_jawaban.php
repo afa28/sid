@@ -1,16 +1,59 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed');
+/*
+ *  File ini:
+ *
+ * Controller untuk modul Analisis
+ *
+ * donjo-app/controllers/Analisis_statistik_jawaban.php
+ *
+ */
+/*
+ *  File ini bagian dari:
+ *
+ * OpenSID
+ *
+ * Sistem informasi desa sumber terbuka untuk memajukan desa
+ *
+ * Aplikasi dan source code ini dirilis berdasarkan lisensi GPL V3
+ *
+ * Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
+ * Hak Cipta 2016 - 2020 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
+ *
+ * Dengan ini diberikan izin, secara gratis, kepada siapa pun yang mendapatkan salinan
+ * dari perangkat lunak ini dan file dokumentasi terkait ("Aplikasi Ini"), untuk diperlakukan
+ * tanpa batasan, termasuk hak untuk menggunakan, menyalin, mengubah dan/atau mendistribusikan,
+ * asal tunduk pada syarat berikut:
+ *
+ * Pemberitahuan hak cipta di atas dan pemberitahuan izin ini harus disertakan dalam
+ * setiap salinan atau bagian penting Aplikasi Ini. Barang siapa yang menghapus atau menghilangkan
+ * pemberitahuan ini melanggar ketentuan lisensi Aplikasi Ini.
+ *
+ * PERANGKAT LUNAK INI DISEDIAKAN "SEBAGAIMANA ADANYA", TANPA JAMINAN APA PUN, BAIK TERSURAT MAUPUN
+ * TERSIRAT. PENULIS ATAU PEMEGANG HAK CIPTA SAMA SEKALI TIDAK BERTANGGUNG JAWAB ATAS KLAIM, KERUSAKAN ATAU
+ * KEWAJIBAN APAPUN ATAS PENGGUNAAN ATAU LAINNYA TERKAIT APLIKASI INI.
+ *
+ * @package	OpenSID
+ * @author	Tim Pengembang OpenDesa
+ * @copyright	Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
+ * @copyright	Hak Cipta 2016 - 2020 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
+ * @license	http://www.gnu.org/licenses/gpl.html	GPL V3
+ * @link 	https://github.com/OpenSID/OpenSID
+ */
 
 class Analisis_statistik_jawaban extends Admin_Controller {
+
+	private $_set_page;
 
 	function __construct()
 	{
 		parent::__construct();
-		session_start();
 		$this->load->model('analisis_statistik_jawaban_model');
 		$this->load->model('analisis_respon_model');
-		$this->load->model('header_model');
+
 		$_SESSION['submenu'] = "Statistik Jawaban";
 		$_SESSION['asubmenu'] = "analisis_statistik_jawaban";
+		// TODO : Simpan di pengaturan aplikasi agar bisa disesuaikan oleh pengguna
+		$this->_set_page = ['20', '50', '100'];
 		$this->modul_ini = 5;
 	}
 
@@ -23,6 +66,7 @@ class Analisis_statistik_jawaban extends Admin_Controller {
 		unset($_SESSION['dusun']);
 		unset($_SESSION['rw']);
 		unset($_SESSION['rt']);
+		$this->session->per_page = $this->_set_page[0];
 		redirect('analisis_statistik_jawaban');
 	}
 
@@ -45,7 +89,7 @@ class Analisis_statistik_jawaban extends Admin_Controller {
 		$data['p'] = $p;
 		$data['o'] = $o;
 
-		if( isset($_SESSION['cari']))
+		if (isset($_SESSION['cari']))
 			$data['cari'] = $_SESSION['cari'];
 		else $data['cari'] = '';
 
@@ -59,8 +103,8 @@ class Analisis_statistik_jawaban extends Admin_Controller {
 			$data['kategori'] = $_SESSION['kategori'];
 		else $data['kategori'] = '';
 		if (isset($_POST['per_page']))
-			$_SESSION['per_page']=$_POST['per_page'];
-		$data['per_page'] = $_SESSION['per_page'];
+			$_SESSION['per_page'] = $_POST['per_page'];
+		$data['per_page'] = $this->session->per_page;
 
 		if (isset($_SESSION['dusun']))
 		{
@@ -72,13 +116,11 @@ class Analisis_statistik_jawaban extends Admin_Controller {
 				$data['rw'] = $_SESSION['rw'];
 				$data['list_rt'] = $this->analisis_statistik_jawaban_model->list_rt($data['dusun'], $data['rw']);
 
-			if (isset($_SESSION['rt']))
-				$data['rt'] = $_SESSION['rt'];
-			else $data['rt'] = '';
-
+				if (isset($_SESSION['rt']))
+					$data['rt'] = $_SESSION['rt'];
+				else $data['rt'] = '';
 			}
 			else $data['rw'] = '';
-
 		}
 		else
 		{
@@ -87,65 +129,18 @@ class Analisis_statistik_jawaban extends Admin_Controller {
 			$data['rt'] = '';
 		}
 
-		$data['paging']  = $this->analisis_statistik_jawaban_model->paging($p,$o);
-		$data['main']    = $this->analisis_statistik_jawaban_model->list_data($o, $data['paging']->offset, $data['paging']->per_page);
+		$data['func'] = 'index';
+		$data['set_page'] = $this->_set_page;
+		$data['paging'] = $this->analisis_statistik_jawaban_model->paging($p,$o);
+		$data['main'] = $this->analisis_statistik_jawaban_model->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 		$data['keyword'] = $this->analisis_statistik_jawaban_model->autocomplete();
 		$data['analisis_master'] = $this->analisis_statistik_jawaban_model->get_analisis_master();
 		$data['list_tipe'] = $this->analisis_statistik_jawaban_model->list_tipe();
 		$data['list_kategori'] = $this->analisis_statistik_jawaban_model->list_kategori();
 		$data['list_dusun'] = $this->analisis_statistik_jawaban_model->list_dusun();
-		$header = $this->header_model->get_data();
-		$header['minsidebar'] =1;
 
-		$this->load->view('header', $header);
-		$this->load->view('nav', $nav);
-		$this->load->view('analisis_statistik_jawaban/table', $data);
-		$this->load->view('footer');
-	}
-
-	public function form($p=1, $o=0, $id='')
-	{
-		$data['p'] = $p;
-		$data['o'] = $o;
-
-		if ($id)
-		{
-			$data['analisis_statistik_jawaban'] = $this->analisis_statistik_jawaban_model->get_analisis_indikator($id);
-			$data['form_action'] = site_url("analisis_statistik_jawaban/update/$p/$o/$id");
-		}
-		else
-		{
-			$data['analisis_statistik_jawaban'] = null;
-			$data['form_action'] = site_url("analisis_statistik_jawaban/insert");
-		}
-
-		$data['list_kategori'] = $this->analisis_statistik_jawaban_model->list_kategori();
-		$header = $this->header_model->get_data();
-		$data['analisis_master'] = $this->analisis_statistik_jawaban_model->get_analisis_master();
-
-		$this->load->view('header', $header);
-		$this->load->view('analisis_master/nav');
-		$this->load->view('analisis_statistik_jawaban/form', $data);
-		$this->load->view('footer');
-	}
-
-	public function parameter($id='')
-	{
-		$ai = $this->analisis_statistik_jawaban_model->get_analisis_indikator($id);
-		if ($ai['id_tipe'] == 3 OR $ai['id_tipe'] == 4)
-		redirect('analisis_statistik_jawaban');
-
-		$data['analisis_statistik_jawaban'] = $this->analisis_statistik_jawaban_model->get_analisis_indikator($id);
-		$data['analisis_master'] = $this->analisis_statistik_jawaban_model->get_analisis_master();
-		$data['main'] = $this->analisis_statistik_jawaban_model->list_indikator($id);
-
-		$header = $this->header_model->get_data();
-		$header['minsidebar'] = 1;
-
-		$this->load->view('header', $header);
-		$this->load->view('nav');
-		$this->load->view('analisis_statistik_jawaban/parameter/table', $data);
-		$this->load->view('footer');
+		$this->set_minsidebar(1);
+		$this->render('analisis_statistik_jawaban/table', $data);
 	}
 
 	public function grafik_parameter($id='')
@@ -164,7 +159,6 @@ class Analisis_statistik_jawaban extends Admin_Controller {
 				else $data['rt'] = '';
 			}
 			else $data['rw'] = '';
-
 		}
 		else
 		{
@@ -178,13 +172,8 @@ class Analisis_statistik_jawaban extends Admin_Controller {
 		$data['analisis_master'] = $this->analisis_statistik_jawaban_model->get_analisis_master();
 		$data['main'] = $this->analisis_statistik_jawaban_model->list_indikator($id);
 
-		$header = $this->header_model->get_data();
-		$header['minsidebar'] = 1;
-
-		$this->load->view('header', $header);
-		$this->load->view('nav');
-		$this->load->view('analisis_statistik_jawaban/parameter/grafik_table', $data);
-		$this->load->view('footer');
+		$this->set_minsidebar(1);
+		$this->render('analisis_statistik_jawaban/parameter/grafik_table', $data);
 	}
 
 	public function subjek_parameter($id='',$par='')
@@ -203,7 +192,6 @@ class Analisis_statistik_jawaban extends Admin_Controller {
 				else $data['rt'] = '';
 			}
 			else $data['rw'] = '';
-
 		}
 		else
 		{
@@ -219,13 +207,8 @@ class Analisis_statistik_jawaban extends Admin_Controller {
 		$data['analisis_master'] = $this->analisis_statistik_jawaban_model->get_analisis_master();
 		$data['main'] = $this->analisis_statistik_jawaban_model->list_subjek($par);
 
-		$header = $this->header_model->get_data();
-		$header['minsidebar'] = 1;
-		
-		$this->load->view('header', $header);
-		$this->load->view('nav');
-		$this->load->view('analisis_statistik_jawaban/parameter/subjek_table', $data);
-		$this->load->view('footer');
+		$this->set_minsidebar(1);
+		$this->render('analisis_statistik_jawaban/parameter/subjek_table', $data);
 	}
 
 	public function cetak($o=0)
@@ -380,18 +363,6 @@ class Analisis_statistik_jawaban extends Admin_Controller {
 			$_SESSION['rt'] = $rt;
 		else unset($_SESSION['rt']);
 		redirect("analisis_statistik_jawaban/grafik_parameter/$id");
-	}
-
-	public function insert()
-	{
-		$this->analisis_statistik_jawaban_model->insert();
-		redirect('analisis_statistik_jawaban');
-	}
-
-	public function update($p=1, $o=0, $id='')
-	{
-		$this->analisis_statistik_jawaban_model->update($id);
-		redirect("analisis_statistik_jawaban/index/$p/$o");
 	}
 
 	public function delete($p=1, $o=0, $id='')

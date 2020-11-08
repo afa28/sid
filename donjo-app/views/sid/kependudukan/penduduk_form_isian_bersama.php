@@ -159,7 +159,7 @@
 							<input type="hidden" name="kk_level_lama" value="<?= $penduduk['kk_level']?>">
 						<?php endif; ?>
 						<label for="kk_level">Hubungan Dalam Keluarga</label>
-						<select class="form-control input-sm" name="kk_level">
+						<select class="form-control input-sm <?= ( ! $id_kk) ?: 'required'; ?>" name="kk_level">
 							<option value="">Pilih Hubungan Keluarga</option>
 							<?php foreach ($hubungan as $data): ?>
 								<option value="<?= $data['id']?>"<?php selected($penduduk['kk_level'], $data['id']); ?>><?= strtoupper($data['nama'])?></option>
@@ -191,10 +191,11 @@
 				<div class='col-sm-5'>
 					<div class='form-group'>
 						<label for="status">Status Penduduk </label>
-						<select class="form-control input-sm required" name="status">
-							<option value="1" <?php if ($penduduk['status'] == "TETAP" OR $penduduk['status'] == "1" OR $penduduk['status'] == ""): ?>selected<?php endif; ?>>Tetap</option>
-							<option value="2" <?php if ($penduduk['status'] == "TIDAK AKTIF" OR $penduduk['status'] == "2"): ?>selected<?php endif; ?>>Tidak Tetap</option>
-							<option value="3" <?php if ($penduduk['status'] == "PENDATANG" OR $penduduk['status'] == "3"): ?>selected<?php endif; ?> >Pendatang</option>
+						<select class="form-control input-sm required" name="status" <?php ($penduduk['no_kk']) and print('disabled') ?>>
+							<option value="">Pilih Status Penduduk</option>
+							<?php foreach ($status_penduduk as $data): ?>
+								<option value="<?= $data['id']?>" <?php selected($penduduk['id_status'], $data['id']); ?>><?= strtoupper($data['nama'])?></option>
+							<?php endforeach;?>
 						</select>
 					</div>
 				</div>

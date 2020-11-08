@@ -97,6 +97,18 @@
 		}
 	}
 
+	private function kumpulan_kk_sql()
+	{
+		if (empty($this->session->kumpulan_kk)) return;
+
+		$kumpulan_kk = preg_replace('/[^0-9\,]/', '', $this->session->kumpulan_kk);
+		$kumpulan_kk = array_filter(array_slice(explode(",", $kumpulan_kk), 0, 20)); // ambil 20 saja
+		$kumpulan_kk = implode(',', $kumpulan_kk);
+		$this->session->kumpulan_kk = $kumpulan_kk;
+		$sql = " AND u.no_kk in ($kumpulan_kk)";
+		return $sql;
+	}
+
 	public function paging($p = 1)
 	{
 		$sql = "SELECT COUNT(*) AS jml ".$this->list_data_sql();
@@ -121,6 +133,7 @@
 
 		$sql .= " WHERE 1 ";
 		$sql .=	$this->search_sql();
+		$sql .=	$this->kumpulan_kk_sql();
 		$sql .=	$this->status_dasar_sql();
 
 		$kolom_kode = [
@@ -140,21 +153,24 @@
 		return $sql;
 	}
 
-	protected function get_sql_kolom_kode($kode_session, $kode_kolom)
+	protected function get_sql_kolom_kode($session, $kolom)
 	{
-		$value = $this->session->$kode_session;
-
-		if (isset($value))
+		$kf = $this->session->$session;
+		if ( ! empty($kf))
 		{
-			if ($value == BELUM_MENGISI)
-				$sql = " AND (".$kode_kolom." IS NULL OR ".$kode_kolom." = '')";
+			if ($kf == JUMLAH)
+				$sql = " AND (" . $kolom . " IS NOT NULL OR " . $kolom . " != '')";
+			else if ($kf == BELUM_MENGISI)
+				$sql = " AND (" . $kolom . " IS NULL OR " . $kolom . " = '')";
 			else
-				$sql = " AND ".$kode_kolom." = '$value'";
+				$sql = " AND " . $kolom . " = '$kf'";
+
 			return $sql;
 		}
 	}
 
-	public function list_data($o = 0, $offset = 0, $limit = 500)
+	// $limit = 0 mengambil semua
+	public function list_data($o = 0, $offset = 0, $limit = 0)
 	{
 		//Ordering SQL
 		switch ($o)
@@ -169,7 +185,7 @@
 		}
 
 		//Paging SQL
-		$paging_sql = ' LIMIT ' .$offset. ',' .$limit;
+		$paging_sql = $limit > 0 ? ' LIMIT ' . $offset . ',' . $limit : '';
 
 		$sql = "SELECT u.*, t.nama AS kepala_kk, t.nik, t.tag_id_card, t.sex, t.status_dasar, t.foto, t.id as id_pend,
 			(SELECT COUNT(id) FROM tweb_penduduk WHERE id_kk = u.id AND status_dasar = 1) AS jumlah_anggota,
@@ -598,7 +614,7 @@
 		$sql = "SELECT u.id, u.nik, u.nama, u.alamat_sekarang as alamat, w.rt, w.rw, w.dusun
 			FROM tweb_penduduk u
 			LEFT JOIN tweb_wil_clusterdesa w ON u.id_cluster = w.id
-			WHERE (status = 1 OR status = 3) AND id_kk = 0";
+			WHERE (status = 1 ) AND id_kk = 0";
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
 
@@ -869,7 +885,9 @@
 
 	public function get_judul_statistik($tipe = 0, $nomor = 1, $sex = 0)
 	{
-		if ($nomor == BELUM_MENGISI)
+		if ($nomor == JUMLAH)
+			$judul = array("nama" => "JUMLAH");
+		else if ($nomor == BELUM_MENGISI)
 			$judul = array("nama" => "BELUM MENGISI");
 		else
 		{

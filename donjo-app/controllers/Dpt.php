@@ -1,20 +1,57 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+/*
+ *  File ini:
+ *
+ * Controller untuk modul Calon Pemilih
+ *
+ * donjo-app/controllers/Dpt.php
+ *
+ */
+/*
+ *  File ini bagian dari:
+ *
+ * OpenSID
+ *
+ * Sistem informasi desa sumber terbuka untuk memajukan desa
+ *
+ * Aplikasi dan source code ini dirilis berdasarkan lisensi GPL V3
+ *
+ * Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
+ * Hak Cipta 2016 - 2020 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
+ *
+ * Dengan ini diberikan izin, secara gratis, kepada siapa pun yang mendapatkan salinan
+ * dari perangkat lunak ini dan file dokumentasi terkait ("Aplikasi Ini"), untuk diperlakukan
+ * tanpa batasan, termasuk hak untuk menggunakan, menyalin, mengubah dan/atau mendistribusikan,
+ * asal tunduk pada syarat berikut:
+ *
+ * Pemberitahuan hak cipta di atas dan pemberitahuan izin ini harus disertakan dalam
+ * setiap salinan atau bagian penting Aplikasi Ini. Barang siapa yang menghapus atau menghilangkan
+ * pemberitahuan ini melanggar ketentuan lisensi Aplikasi Ini.
+ *
+ * PERANGKAT LUNAK INI DISEDIAKAN "SEBAGAIMANA ADANYA", TANPA JAMINAN APA PUN, BAIK TERSURAT MAUPUN
+ * TERSIRAT. PENULIS ATAU PEMEGANG HAK CIPTA SAMA SEKALI TIDAK BERTANGGUNG JAWAB ATAS KLAIM, KERUSAKAN ATAU
+ * KEWAJIBAN APAPUN ATAS PENGGUNAAN ATAU LAINNYA TERKAIT APLIKASI INI.
+ *
+ * @package	OpenSID
+ * @author	Tim Pengembang OpenDesa
+ * @copyright	Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
+ * @copyright	Hak Cipta 2016 - 2020 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
+ * @license	http://www.gnu.org/licenses/gpl.html	GPL V3
+ * @link 	https://github.com/OpenSID/OpenSID
+ */
 
 class Dpt extends Admin_Controller {
 
-	private $header;
 	private $set_page;
 	private $list_session;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(['penduduk_model', 'dpt_model', 'referensi_model', 'wilayah_model', 'header_model']);
+		$this->load->model(['penduduk_model', 'dpt_model', 'referensi_model', 'wilayah_model']);
 		$this->modul_ini = 2;
 		$this->sub_modul_ini = 26;
 		$this->set_page = ['20', '50', '100'];
-		// TODO: Hapus header_model jika sudah dibuatkan librari tempalte admin
-		$this->header = $this->header_model->get_data();
 		$this->list_session = ['cari', 'sex', 'dusun', 'rw', 'rt', 'tanggal_pemilihan', 'umurx', 'umur_min', 'umur_max', 'cacatx', 'menahunx', 'pekerjaan_id', 'status', 'agama', 'pendidikan_sedang_id', 'pendidikan_kk_id', 'status_penduduk'];
 	}
 
@@ -72,12 +109,9 @@ class Dpt extends Admin_Controller {
 		$data['main'] = $this->dpt_model->list_data($o, $data['paging']->offset, $data['paging']->per_page);
 		$data['keyword'] = $this->dpt_model->autocomplete();
 
-		$header['minsidebar'] = 1;
+		$this->set_minsidebar(1);
 
-		$this->load->view('header', $this->header);
-		$this->load->view('nav',$nav);
-		$this->load->view('dpt/dpt', $data);
-		$this->load->view('footer');
+		$this->render('dpt/dpt', $data);
 	}
 
 	public function filter($filter)
@@ -162,16 +196,20 @@ class Dpt extends Admin_Controller {
 		redirect("dpt/index/1/$o");
 	}
 
-	public function cetak($o=0)
+	public function cetak($o = 0, $aksi = '', $privasi_nik = 0)
 	{
-		$data['main'] = $this->dpt_model->list_data($o, 0, 10000);
-		$this->load->view('dpt/dpt_print', $data);
+		$data['main'] = $this->dpt_model->list_data($o, 0);
+		$data['aksi'] = $aksi;
+		if ($privasi_nik == 1) $data['privasi_nik'] = true;
+		$this->load->view("dpt/dpt_$aksi", $data);
 	}
 
-	public function excel($o=0)
+	public function ajax_cetak($o = 0, $aksi = '')
 	{
-		$data['main'] = $this->dpt_model->list_data($o, 0, 10000);
-		$this->load->view('dpt/dpt_excel', $data);
+		$data['o'] = $o;
+		$data['aksi'] = $aksi;
+		$data['form_action'] = site_url("dpt/cetak/$o/$aksi");
+		$data['form_action_privasi'] = site_url("dpt/cetak/$o/$aksi/1");
+		$this->load->view("sid/kependudukan/ajax_cetak_bersama", $data);
 	}
-
 }

@@ -47,8 +47,7 @@ class Plan extends Admin_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		session_start();
-		$this->load->model('header_model');
+
 		$this->load->model('wilayah_model');
 		$this->load->model('config_model');
 		$this->load->model('plan_lokasi_model');
@@ -99,14 +98,9 @@ class Plan extends Admin_Controller {
 		$data['keyword'] = $this->plan_lokasi_model->autocomplete();
 		$data['list_point'] = $this->plan_lokasi_model->list_point();
 		$data['list_subpoint'] = $this->plan_lokasi_model->list_subpoint();
-		$header = $this->header_model->get_data();
-		$header['minsidebar'] = 1;
-		$nav['tip'] = 3;
-
-		$this->load->view('header', $header);
-		$this->load->view('nav', $nav);
-		$this->load->view('lokasi/table', $data);
-		$this->load->view('footer');
+		$this->set_minsidebar(1);
+		$data['tip'] = 3;
+		$this->render('lokasi/table', $data);
 	}
 
 	public function form($p = 1, $o = 0, $id = '')
@@ -129,14 +123,9 @@ class Plan extends Admin_Controller {
 			$data['form_action'] = site_url("plan/insert");
 		}
 
-		$header= $this->header_model->get_data();
-		$header['minsidebar'] = 1;
-		$nav['tip'] = 3;
-
-		$this->load->view('header', $header);
-		$this->load->view('nav', $nav);
-		$this->load->view('lokasi/form', $data);
-		$this->load->view('footer');
+		$data['tip'] = 3;
+		$this->set_minsidebar(1);
+		$this->render('lokasi/form', $data);
 	}
 
 	public function ajax_lokasi_maps($p = 1, $o = 0, $id = '')
@@ -159,12 +148,8 @@ class Plan extends Admin_Controller {
 		$data['all_garis'] = $this->plan_garis_model->list_data();
 		$data['all_area'] = $this->plan_area_model->list_data();
 		$data['form_action'] = site_url("plan/update_maps/$p/$o/$id");
-		$header= $this->header_model->get_data();
-
-		$this->load->view('header', $header);
-		$this->load->view('nav', $nav);
-		$this->load->view("lokasi/maps", $data);
-		$this->load->view('footer');
+		
+		$this->render("lokasi/maps", $data);
 	}
 
 	public function update_maps($p = 1, $o = 0, $id = '')

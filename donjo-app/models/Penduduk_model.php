@@ -78,6 +78,18 @@ class Penduduk_model extends MY_Model {
 		}
 	}
 
+	protected function kumpulan_nik_sql()
+	{
+		if (empty($this->session->kumpulan_nik)) return;
+
+		$kumpulan_nik = preg_replace('/[^0-9\,]/', '', $this->session->kumpulan_nik);
+		$kumpulan_nik = array_filter(array_slice(explode(",", $kumpulan_nik), 0, 20)); // ambil 20 saja
+		$kumpulan_nik = implode(',', $kumpulan_nik);
+		$this->session->kumpulan_nik = $kumpulan_nik;
+		$sql = " AND u.nik in ($kumpulan_nik)";
+		return $sql;
+	}
+
 	protected function keluarga_sql()
 	{
 		if ($_SESSION['layer_keluarga'] == 1)
@@ -120,7 +132,7 @@ class Penduduk_model extends MY_Model {
 	protected function get_sql_kolom_kode($session, $kolom)
 	{
 		$kf = $this->session->$session;
-		if (isset($kf))
+		if ( ! empty($kf))
 		{
 			if ($kf == JUMLAH)
 				$sql = " AND (" . $kolom . " IS NOT NULL OR " . $kolom . " != '')";
@@ -146,7 +158,7 @@ class Penduduk_model extends MY_Model {
 
 	protected function umur_max_sql()
 	{
-		$kf = $this->session->umur_min;
+		$kf = $this->session->umur_max;
 		if (isset($kf))
 		{
 			$umur_max_sql = " AND (SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(`tanggallahir`)), '%Y')+0 FROM tweb_penduduk WHERE id = u.id) <= $kf ";
@@ -302,6 +314,7 @@ class Penduduk_model extends MY_Model {
 
 		$sql .= " WHERE 1 ";
 		$sql .= $this->search_sql();
+		$sql .= $this->kumpulan_nik_sql();
 		$sql .= $this->dusun_sql();
 		$sql .= $this->rw_sql();
 		$sql .= $this->rt_sql();
@@ -309,9 +322,9 @@ class Penduduk_model extends MY_Model {
 		// Filter data penduduk digunakan dibeberapa tempat, termasuk untuk laporan statistik kependudukan.
 		// Filter untuk statistik kependudukan menggunakan kode yang ada di daftar STAT_PENDUDUK di referensi_model.php
 		$kolom_kode = array(
-			array('filter', 'u.status'), // Status : Hidup, Mati, Dll -> Load data awal (filtering combobox)
-			array('status_penduduk', 'u.status'), // Status : Hidup, Maati, Dll -> Hanya u/ Pencarian Spesifik
-			array('status_dasar', 'u.status_dasar'), // Kode 6
+			array('filter', 'u.status'), //  Kode 6 Tetap, Tidak Tetap, Pendatang
+			array('status_penduduk', 'u.status'), // Status Tetap, Tidak Tetap, Pendatang -> Hanya u/ Pencarian Spesifik
+			array('status_dasar', 'u.status_dasar'), // Status : Hidup, Maati, Dll -> Hanya u/ Pencarian Spesifik
 			array('sex', 'u.sex'), // Kode 4
 			array('pendidikan_kk_id', 'u.pendidikan_kk_id'), // Kode 0
 			array('cacat', 'u.cacat_id'), // Kode 9
@@ -348,7 +361,8 @@ class Penduduk_model extends MY_Model {
 		return $sql;
 	}
 
-	public function list_data($o = 1, $offset = 0, $limit = 500)
+	// $limit = 0 mengambil semua
+	public function list_data($o = 1, $offset = 0, $limit = 0)
 	{
 		$select_sql = "SELECT DISTINCT ";
 		if ($_SESSION['penerima_bantuan'])
@@ -391,7 +405,7 @@ class Penduduk_model extends MY_Model {
 		}
 
 		//Paging SQL
-		$paging_sql = ' LIMIT ' .$offset. ', ' .$limit;
+		$paging_sql = $limit > 0 ? ' LIMIT ' . $offset . ',' . $limit : '';
 
 		$sql .= $order_sql;
 		$sql .= $paging_sql;
@@ -1307,7 +1321,7 @@ class Penduduk_model extends MY_Model {
 		$this->db->query($query);
 	}
 
-	public function get_judul_statistik($tipe=0, $nomor=1, $sex=0)
+	public function get_judul_statistik($tipe = '0', $nomor = 0, $sex = NULL)
 	{
 		if ($nomor == JUMLAH)
 			$judul = array("nama" => "JUMLAH");
@@ -1319,7 +1333,7 @@ class Penduduk_model extends MY_Model {
 		{
 			switch ($tipe)
 			{
-				case 0: $table = 'tweb_penduduk_pendidikan_kk'; break;
+				case '0': $table = 'tweb_penduduk_pendidikan_kk'; break;
 				case 1: $table = 'tweb_penduduk_pekerjaan'; break;
 				case 2: $table = 'tweb_penduduk_kawin'; break;
 				case 3: $table = 'tweb_penduduk_agama'; break;

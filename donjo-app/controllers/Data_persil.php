@@ -1,17 +1,58 @@
 <?php
+/*
+ * File ini:
+ *
+ * Controller untuk Modul Persil
+ *
+ * donjo-app/controllers/Data_persil.php
+ *
+ */
+
+/*
+ *
+ * File ini bagian dari:
+ *
+ * OpenSID
+ *
+ * Sistem informasi desa sumber terbuka untuk memajukan desa
+ *
+ * Aplikasi dan source code ini dirilis berdasarkan lisensi GPL V3
+ *
+ * Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
+ * Hak Cipta 2016 - 2020 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
+ *
+ * Dengan ini diberikan izin, secara gratis, kepada siapa pun yang mendapatkan salinan
+ * dari perangkat lunak ini dan file dokumentasi terkait ("Aplikasi Ini"), untuk diperlakukan
+ * tanpa batasan, termasuk hak untuk menggunakan, menyalin, mengubah dan/atau mendistribusikan,
+ * asal tunduk pada syarat berikut:
+
+ * Pemberitahuan hak cipta di atas dan pemberitahuan izin ini harus disertakan dalam
+ * setiap salinan atau bagian penting Aplikasi Ini. Barang siapa yang menghapus atau menghilangkan
+ * pemberitahuan ini melanggar ketentuan lisensi Aplikasi Ini.
+
+ * PERANGKAT LUNAK INI DISEDIAKAN "SEBAGAIMANA ADANYA", TANPA JAMINAN APA PUN, BAIK TERSURAT MAUPUN
+ * TERSIRAT. PENULIS ATAU PEMEGANG HAK CIPTA SAMA SEKALI TIDAK BERTANGGUNG JAWAB ATAS KLAIM, KERUSAKAN ATAU
+ * KEWAJIBAN APAPUN ATAS PENGGUNAAN ATAU LAINNYA TERKAIT APLIKASI INI.
+ *
+ * @package OpenSID
+ * @author  Tim Pengembang OpenDesa
+ * @copyright Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
+ * @copyright Hak Cipta 2016 - 2020 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
+ * @license http://www.gnu.org/licenses/gpl.html  GPL V3
+ * @link  https://github.com/OpenSID/OpenSID
+ */
+
 if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Data_persil extends Admin_Controller {
 
-	private $header;
 	private $set_page;
 	private $list_session;
 
 	public function __construct()
 	{
 		parent::__construct();
-		session_start();
-		$this->load->model('header_model');
+
 		$this->load->model('config_model');
 		$this->load->model('data_persil_model');
 		$this->load->model('cdesa_model');
@@ -19,7 +60,6 @@ class Data_persil extends Admin_Controller {
 		$this->controller = 'data_persil';
 		$this->modul_ini = 7;
 		$this->set_page = ['20', '50', '100'];
-		$this->header = $this->header_model->get_data();
 		$this->list_session = ['cari'];
 	}
 
@@ -44,7 +84,7 @@ class Data_persil extends Admin_Controller {
 
 	public function index($page=1, $o=0)
 	{
-		$this->header['minsidebar'] = 1;
+		$this->set_minsidebar(1);
 		$this->tab_ini = 13;
 
 		$data['cari'] = htmlentities($_SESSION['cari']) ?: '';
@@ -59,10 +99,7 @@ class Data_persil extends Admin_Controller {
 		$data["persil_kelas"] = $this->data_persil_model->list_persil_kelas();
 		$data['keyword'] = $this->data_persil_model->autocomplete();
 
-		$this->load->view('header', $this->header);
-		$this->load->view('nav', $nav);
-		$this->load->view('data_persil/persil', $data);
-		$this->load->view('footer');
+		$this->render('data_persil/persil', $data);
 	}
 
 	public function rincian($id=0)
@@ -71,16 +108,12 @@ class Data_persil extends Admin_Controller {
 		$data = [];
 		$data['persil'] = $this->data_persil_model->get_persil($id);
 		$data['mutasi'] = $this->data_persil_model->get_list_mutasi($id);
-		$this->load->view('header', $this->header);
-		$this->load->view('nav',$nav);
-		$this->load->view('data_persil/rincian_persil', $data);
-		$this->load->view('footer');
+		$this->render('data_persil/rincian_persil', $data);
 	}
 
 	public function form($id='', $id_cdesa='')
 	{
-		$header = $this->header_model->get_data();
-		$header['minsidebar'] = 1;
+		$this->set_minsidebar(1);
 		$this->tab_ini = 13;
 
 		if ($id) $data["persil"] = $this->data_persil_model->get_persil($id);
@@ -88,10 +121,7 @@ class Data_persil extends Admin_Controller {
 		$data['list_cdesa'] = $this->cdesa_model->list_c_desa();
 		$data["persil_lokasi"] = $this->data_persil_model->list_dusunrwrt();
 		$data["persil_kelas"] = $this->data_persil_model->list_persil_kelas();
-		$this->load->view('header', $header);
-		$this->load->view('nav', $nav);
-		$this->load->view('data_persil/form_persil', $data);
-		$this->load->view('footer');
+		$this->render('data_persil/form_persil', $data);
 	}
 
 	public function simpan_persil($page=1)
@@ -137,21 +167,18 @@ class Data_persil extends Admin_Controller {
 		redirect("data_persil");
 	}
 
-	public function cetak_persil($o=0)
+	public function cetak($o=0)
 	{
-		$data['data_persil'] = $this->data_persil_model->list_persil('', $o, 0, 10000);
-		$this->load->view('data_persil/persil_print', $data);
+		$data['persil'] = $this->data_persil_model->list_data(0, 10000);
+    $data['persil_kelas'] = $this->data_persil_model->list_persil_kelas();
+		$this->load->view('data_persil/persil_cetak', $data);
 	}
 
-	public function excel($mode="", $o=0)
+	public function unduh($mode="", $o=0)
 	{
-		$data['mode'] = $mode;
-		if($mode == 'persil')
-			$data['data_persil'] = $this->data_persil_model->list_persil('', $o, 0, 10000);
-		else
-			$data['data_persil'] = $this->data_persil_model->list_c_desa('', $o, 0, 10000);
-			$data["persil_jenis"] = $this->data_persil_model->list_persil_jenis();
-		$this->load->view('data_persil/persil_excel', $data);
+		$data['persil'] = $this->data_persil_model->list_data(0, 10000);
+    $data['persil_kelas'] = $this->data_persil_model->list_persil_kelas();
+		$this->load->view('data_persil/persil_unduh', $data);
 	}
 
 	public function kelasid()
@@ -159,8 +186,9 @@ class Data_persil extends Admin_Controller {
 		$data =[];
 		$id = $this->input->post('id');
 		$kelas = $this->data_persil_model->list_persil_kelas($id);
-		foreach ($kelas as $key => $item) {
-			$data[] = array('id' => $key, 'kode' => $item[kode], 'ndesc' => $item['ndesc']);
+		foreach ($kelas as $key => $item)
+		{
+			$data[] = array('id' => $key, 'kode' => $item['kode'], 'ndesc' => $item['ndesc']);
 		}
 		echo json_encode($data);
 	}

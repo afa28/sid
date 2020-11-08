@@ -384,33 +384,33 @@ class First_artikel_m extends CI_Model {
 		return $data;
 	}
 
-	public function get_kategori($id=0)
+	public function get_kategori($id = 0)
 	{
-		$data = $this->db->select('kategori')
-			->where('id', $id)->or_where('slug', $id)
-			->limit(1)->get('kategori')
-			->row()->kategori;
+		$data = $this->db
+			->group_start()
+				->where('id', $id)
+				->or_where('slug', $id)
+			->group_end()
+			->get('kategori')
+			->row_array();
 
 		if (empty($data))
 		{
-			// untuk artikel jenis statis = "AGENDA"
-			$judul = array(
+			$judul = [
 				999 => "Halaman Statis",
 				1000 => "Agenda",
 				1001 => "Artikel Keuangan",
-			);
-			$data = $judul[$id];
+				$id => "Artikel Kategori $id"
+			];
+
+			$data['kategori'] = $judul[$id];
 		}
-		// Bukan kategori yg dikenal
-		if (empty($data))
-			$data = "Artikel Kategori '$id'";
 
 		return $data;
 	}
 
 	public function get_artikel($url)
 	{
-		$this->hit($url); // catat artikel diakses
 		$this->db->select('a.*, u.nama AS owner, k.kategori, k.slug AS kat_slug, YEAR(tgl_upload) AS thn, MONTH(tgl_upload) AS bln, DAY(tgl_upload) AS hri')
 			->from('artikel a')
 			->join('user u', 'a.id_user = u.id', 'left')
@@ -504,23 +504,23 @@ class First_artikel_m extends CI_Model {
 	 */
 	public function insert_comment($id=0)
 	{
-		$data['komentar'] = strip_tags($_POST["komentar"]);
-		$data['owner'] = strip_tags($_POST["owner"]);
-		$data['no_hp'] = strip_tags($_POST["no_hp"]);
-		$data['email'] = strip_tags($_POST["email"]);
+		$data['komentar'] = htmlentities($_POST["komentar"]);
+		$data['owner'] = htmlentities($_POST["owner"]);
+		$data['no_hp'] = bilangan($_POST["no_hp"]);
+		$data['email'] = email($_POST["email"]);
 
 		// load library form_validation
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('komentar', 'Komentar', 'required');
 		$this->form_validation->set_rules('owner', 'Nama', 'required');
-		$this->form_validation->set_rules('no_hp', 'No HP', 'required');
+		$this->form_validation->set_rules('no_hp', 'No HP', 'numeric|required');
 		$this->form_validation->set_rules('email', 'Email', 'valid_email');
 
 		if ($this->form_validation->run() == TRUE)
 		{
 			$data['status'] = 2;
 			$data['id_artikel'] = $id;
-			$outp = $this->db->insert('komentar',$data);
+			$outp = $this->db->insert('komentar', $data);
 		}
 		else
 		{
