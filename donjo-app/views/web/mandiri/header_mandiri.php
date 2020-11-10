@@ -79,8 +79,8 @@
 									<li class="user-header">
 										<img class="penduduk profile-user-img img-responsive img-circle" src="<?= AmbilFoto($penduduk['foto']); ?>" alt="Foto Penduduk">
 										<p>
-											<?= $this->session->nama; ?>
-											<small>NIK : <?= $this->session->nik; ?><br>No. KK : <?= $this->session->no_kk; ?></small>
+											<?= $this->session->nik; ?>
+											<small><?= $this->session->nama; ?></small>
 										</p>
 									</li>
 									<!-- Menu Footer-->
