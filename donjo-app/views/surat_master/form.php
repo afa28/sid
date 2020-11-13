@@ -37,7 +37,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 control-label" >Nama Layanan</label>
+									<label class="col-sm-3 control-label">Nama Layanan</label>
 									<div class="col-sm-7">
 										<div class="input-group">
 											<span class="input-group-addon input-sm">Surat</span>
@@ -57,34 +57,52 @@
 									</div>
 								<?php endif; ?>
 								<div class="form-group">
-									<label class="col-sm-3 control-label" for="mandiri">Kode/Klasifikasi Surat</label>
+									<label class="col-sm-3 control-label" for="nama">Masa Berlaku Default</label>
+									<div class="col-sm-3">
+										<div class="row">
+											<div class="col-sm-3">
+												<input type="number" class="form-control input-sm" id="masa_berlaku" name="masa_berlaku" onchange="masaBerlaku()" value="<?= $surat_master['masa_berlaku'] ? $surat_master['masa_berlaku'] : 1 ?>">
+											</div>
+											<div class="col-sm-6">
+												<select class="form-control input-sm" id="satuan_masa_berlaku" name="satuan_masa_berlaku">
+													<?php foreach ($list_ref_masa as $kode_masa => $judul_masa): ?>
+														<option value="<?= $kode_masa?>" <?= selected($surat_master['satuan_masa_berlaku'], $kode_masa); ?>><?= $judul_masa ?></option>
+													<?php endforeach; ?>
+												</select>
+											</div>
+										</div>
+										<label class="text-muted text-red" >Minimal 1 dan maksimal 31</label>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label" for="mandiri">Sediakan di Layanan Mandiri</label>
 									<div class="btn-group col-sm-7" data-toggle="buttons">
 										<label id="m1" class="btn btn-info btn-flat btn-sm col-xs-6 col-sm-4 col-lg-2 form-check-label active">
-											<input id="g1" type="radio" name="mandiri" class="form-check-input" type="radio" value="1" checked  autocomplete="off" onchange="syarat(this.value);"> Ya
+											<input id="g1" type="radio" name="mandiri" class="form-check-input" type="radio" value="1" checked autocomplete="off" onchange="syarat(this.value);"> Ya
 										</label>
 										<label id="m1" class="btn btn-info btn-flat btn-sm col-xs-6 col-sm-4 col-lg-2 form-check-label ">
-											<input id="g2" type="radio" name="mandiri" class="form-check-input" type="radio" value="0"  autocomplete="off" onchange="syarat(this.value);"> Tidak
+											<input id="g2" type="radio" name="mandiri" class="form-check-input" type="radio" value="0" autocomplete="off" onchange="syarat(this.value);"> Tidak
 										</label>
 									</div>
 								</div>
 								<div class="row" id="atur_syarat">
-									<div class="col-sm-3"></div>
-									<div class="col-sm-9">
+									<label class="col-sm-3 control-label" for="mandiri">Syarat Surat</label>
+									<div class="col-sm-7">
 										<div class="table-responsive">
 											<table class="table table-bordered dataTable table-striped table-hover tabel-daftar">
 												<thead class="bg-gray disabled color-palette">
 													<tr>
+														<th><input type="checkbox" id="checkall"/></th>
 														<th>No</th>
-														<th><input type="checkbox" id="checkall0[]" onclick="myFunction0()"/></th>
-														<th width="90%">Nama Dokumen</th>
+														<th>Nama Dokumen</th>
 													</tr>
 												</thead>
 												<tbody>
 													<?php if ($list_ref_syarat): ?>
 														<?php foreach ($list_ref_syarat as $key => $ref_syarat): ?>
 															<tr>
-																<td class="padat"><?= ($key + 1); ?></td>
 																<td class="padat"><input type="checkbox" name="syarat[]" value="<?=$ref_syarat['ref_syarat_id']?>" <?php in_array($ref_syarat['ref_syarat_id'], array_column($syarat_surat, 'ref_syarat_id')) and print('checked');?>></td>
+																<td class="padat"><?= ($key + 1); ?></td>
 																<td><?= $ref_syarat['ref_syarat_nama']?></td>
 															</tr>
 														<?php endforeach; ?>
@@ -110,34 +128,25 @@
 		</div>
 	</section>
 </div>
-
 <script type="text/javascript">
 	$('document').ready(function() {
 		syarat(1);
 	});
-
-	function myFunction0() {
-		var checkBox = document.getElementById("checkall0[]");
-		if (checkBox.checked == true){
-			var items=document.getElementsByName('syarat[]');
-			for(var i=0; i<items.length; i++){
-				if(items[i].type=='checkbox')
-				items[i].checked=true;
-			}
-		} else {
-			var items=document.getElementsByName('syarat[]');
-			for(var i=0; i<items.length; i++){
-				if(items[i].type=='checkbox')
-				items[i].checked=false;
-			}
-		}
-	}
 
 	function syarat(val){
 		if (val == 1) {
 			$('#atur_syarat').show();
 		} else {
 			$('#atur_syarat').hide();
+		}
+	}
+
+	function masaBerlaku() {
+		var masa_berlaku = document.getElementById("masa_berlaku").value;
+		if (masa_berlaku < 1) {
+			document.getElementById("masa_berlaku").value = 1;
+		} else if (masa_berlaku > 31) {
+			document.getElementById("masa_berlaku").value = 31;
 		}
 	}
 </script>
