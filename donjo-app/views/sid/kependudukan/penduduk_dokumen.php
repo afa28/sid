@@ -47,28 +47,35 @@
 								<tr>
 									<th><input type="checkbox" id="checkall"></th>
 									<th>No</th>
-									<th>Aksi</th>
+									<th >Aksi</th>
 									<th>Nama Dokumen</th>
-									<th>File</th>
+									<th>Jenis Dokumen</th>
 									<th>Tanggal Upload</th>
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach ($list_dokumen as $key => $data): ?>
+								<?php if ($list_dokumen): ?>
+									<?php foreach ($list_dokumen as $key => $data): ?>
+										<tr>
+											<td class="padat"><input type="checkbox" name="id_cb[]" value="<?= $data['id']?>" ></td>
+											<td class="padat"><?= ($key + 1); ?></td>
+											<td class="aksi">
+												<?php if(!$data['hidden']): ?>
+													<a href="<?= base_url().LOKASI_DOKUMEN?><?= urlencode($data['satuan'])?>" class="btn bg-info btn-flat btn-sm" rel=”noopener noreferrer” target="_blank" title="Buka Dokumen"><i class="fa fa-eye"></i></a>
+													<a href="<?= site_url("penduduk/dokumen_form/$penduduk[id]/$data[id]")?>" class="btn bg-orange btn-flat btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Data" title="Ubah Data" title="Ubah Data"><i class="fa fa-edit"></i></a>
+													<a href="#" data-href="<?= site_url("penduduk/delete_dokumen/$penduduk[id]/$data[id]")?>" class="btn bg-maroon btn-flat btn-sm" title="Hapus Data" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+												<?php endif ?>
+											</td>
+											<td width="40%"><?= $data['nama']?></td>
+											<td width="30%"><?= $jenis_syarat_surat[$data['id_syarat']]['ref_syarat_nama']?></a></td>
+											<td nowrap><?= tgl_indo2($data['tgl_upload'])?></td>
+										</tr>
+									<?php endforeach; ?>
+								<?php else: ?>
 									<tr>
-										<td class="padat"><input type="checkbox" name="id_cb[]" value="<?= $data['id']; ?>" ></td>
-										<td class="padat"><?= ($key + 1); ?></td>
-										<td class="aksi">
-											<?php if( ! $data['hidden']): ?>
-												<a href="<?= site_url("penduduk/dokumen_form/$penduduk[id]/$data[id]"); ?>" class="btn bg-orange btn-flat btn-sm" data-remote="false" data-toggle="modal" data-target="#modalBox" data-title="Ubah Data" title="Ubah Data"  title="Ubah Data"><i class="fa fa-edit"></i></a>
-												<a href="#" data-href="<?= site_url("penduduk/delete_dokumen/$penduduk[id]/$data[id]"); ?>" class="btn bg-maroon btn-flat btn-sm"  title="Hapus Data" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
-											<?php endif; ?>
-										</td>
-										<td width="35%"><?= $data['nama']; ?></td>
-										<td width="40%"><a href="<?= base_url() . LOKASI_DOKUMEN . '' . urlencode($data['satuan']); ?>" rel="noopener noreferrer" target="_blank" ><?= $data['satuan']; ?></a></td>
-										<td nowrap><?= tgl_indo2($data['tgl_upload']); ?></td>
+										<td class="text-center" colspan="6">Data Tidak Tersedia</td>
 									</tr>
-								<?php endforeach; ?>
+								<?php endif; ?>
 							</tbody>
 						</table>
 					</div>
