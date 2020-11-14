@@ -1,3 +1,40 @@
+
+<script>
+	function syarat(tipe) {
+		(tipe == '1' || tipe == null) ? $('.delik').show() : $('.delik').hide();
+	}
+
+	$(function() {
+		syarat($('input[name=mandiri]:checked').val());
+		$('input[name="mandiri"]').change(function()
+		{
+			syarat($(this).val());
+		});
+	});
+
+	function reset_form() {
+		$(".tipe").removeClass("active");
+		$("input[name=mandiri").prop( "checked", false );
+		<?php if ($surat_master['mandiri'] == '1' OR $surat_master['mandiri'] == NULL): ?>
+			$("#sx3").addClass('active');
+			$("#group3").prop( "checked", true );
+		<?php endif; ?>
+		<?php if ($surat_master['mandiri'] == '2'): ?>
+			$("#sx2").addClass('active');
+			$("#group2").prop( "checked", true );
+		<?php endif; ?>
+		syarat($('input[name=mandiri]:checked').val());
+	};
+
+	function masaBerlaku() {
+		var masa_berlaku = document.getElementById("masa_berlaku").value;
+		if (masa_berlaku < 1) {
+			document.getElementById("masa_berlaku").value = 1;
+		} else if (masa_berlaku > 31) {
+			document.getElementById("masa_berlaku").value = 31;
+		}
+	}
+</script>
 <div class="content-wrapper">
 	<section class="content-header">
 		<h1>Pengaturan Format Surat Desa</h1>
@@ -24,7 +61,7 @@
 									<div class="col-sm-7">
 										<select class="form-control input-sm select2-tags required" id="kode_surat" name="kode_surat" style="width: 100%;">
 											<option >
-												<?php if (!empty($surat_master['kode_surat'])): ?>
+												<?php if ( ! empty($surat_master['kode_surat'])): ?>
 													<?= $surat_master['kode_surat']?>
 												<?php else: ?>
 													-- Pilih Kode/Klasifikasi Surat --
@@ -71,21 +108,21 @@
 												</select>
 											</div>
 										</div>
-										<label class="text-muted text-red" >Minimal 1 dan maksimal 31</label>
+										<label class="text-muted text-red">Minimal 1 dan maksimal 31</label>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 control-label" for="mandiri">Sediakan di Layanan Mandiri</label>
-									<div class="btn-group col-sm-7" data-toggle="buttons">
-										<label id="m1" class="btn btn-info btn-flat btn-sm col-xs-6 col-sm-4 col-lg-2 form-check-label active">
-											<input id="g1" type="radio" name="mandiri" class="form-check-input" type="radio" value="1" checked autocomplete="off" onchange="syarat(this.value);"> Ya
+									<div class="btn-group col-xs-12 col-sm-8" data-toggle="buttons">
+										<label id="sx3" <?= jecho($analisis_master['jenis'], 1, 'disabled="disabled"'); ?> class="tipe btn btn-info btn-flat btn-sm col-xs-12 col-sm-6 col-lg-2 form-check-label <?= jecho($surat_master['mandiri'] == '1' OR $surat_master['mandiri'] == NULL, TRUE, 'active'); ?>">
+											<input id="group3" type="radio" name="mandiri" class="form-check-input" type="radio" value="1" <?= jecho($surat_master['mandiri'] =='1' OR $surat_master['mandiri'] == NULL, TRUE, 'checked'); ?> autocomplete="off">Ya
 										</label>
-										<label id="m1" class="btn btn-info btn-flat btn-sm col-xs-6 col-sm-4 col-lg-2 form-check-label ">
-											<input id="g2" type="radio" name="mandiri" class="form-check-input" type="radio" value="0" autocomplete="off" onchange="syarat(this.value);"> Tidak
+										<label id="sx2" <?= jecho($analisis_master['jenis'], 1, 'disabled="disabled"'); ?> class="tipe btn btn-info btn-flat btn-sm col-xs-12 col-sm-6 col-lg-2 form-check-label <?= jecho($surat_master['mandiri'], '2', 'active'); ?>">
+											<input id="group2" type="radio" name="mandiri" class="form-check-input" type="radio" value="2" <?= jecho($surat_master['mandiri'], '2', 'checked'); ?> autocomplete="off">Tidak
 										</label>
 									</div>
 								</div>
-								<div class="row" id="atur_syarat">
+								<div class="form-group delik">
 									<label class="col-sm-3 control-label" for="mandiri">Syarat Surat</label>
 									<div class="col-sm-7">
 										<div class="table-responsive">
@@ -118,7 +155,7 @@
 								</div>
 							</div>
 							<div class="box-footer">
-								<button type="reset" class="btn btn-social btn-flat btn-danger btn-sm"><i class="fa fa-times"></i> Batal</button>
+								<button type="reset" class="btn btn-social btn-flat btn-danger btn-sm" onclick="reset_form($(this).val());"><i class="fa fa-times"></i> Batal</button>
 								<button type="submit" class="btn btn-social btn-flat btn-info btn-sm pull-right"><i class="fa fa-check"></i> Simpan</button>
 							</div>
 						</form>
@@ -128,25 +165,3 @@
 		</div>
 	</section>
 </div>
-<script type="text/javascript">
-	$('document').ready(function() {
-		syarat(1);
-	});
-
-	function syarat(val){
-		if (val == 1) {
-			$('#atur_syarat').show();
-		} else {
-			$('#atur_syarat').hide();
-		}
-	}
-
-	function masaBerlaku() {
-		var masa_berlaku = document.getElementById("masa_berlaku").value;
-		if (masa_berlaku < 1) {
-			document.getElementById("masa_berlaku").value = 1;
-		} else if (masa_berlaku > 31) {
-			document.getElementById("masa_berlaku").value = 31;
-		}
-	}
-</script>
