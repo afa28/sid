@@ -7,26 +7,22 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-
-
-	<title>Website Resmi Pemerintah Kabupaten Luwu Utara</title>
-
-
+	<title>Website Resmi Pemerintah <?= ucwords($this->setting->sebutan_desa . ' ' . $desa['nama_desa']); ?></title>
 
 		<!-- CSS -->
 
-		<link rel="stylesheet" type="text/css" href="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/css/A.bootstrap.min.css.pagespeed.cf.ANNqluioKf.css'; ?>">
+		<link rel="stylesheet" type="text/css" href="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/css/bootstrap.min.css'; ?>">
 
-		<link rel="stylesheet" type="text/css" href="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/css/A.home.css.pagespeed.cf.AFJm0dFaUY.css'; ?>">
+		<link rel="stylesheet" type="text/css" href="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/css/home.css'; ?>">
 
-		<link rel="stylesheet" type="text/css" href="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets//css/A.loader.css.pagespeed.cf.xw0SGQDhGc.css'; ?>">
+		<link rel="stylesheet" type="text/css" href="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/css/loader.css'; ?>">
 
-		<link rel="stylesheet" type="text/css" href="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets//font-awesome/css/A.font-awesome.min.css.pagespeed.cf.jBrWCt-D4j.css'; ?>">
+		<link rel="stylesheet" type="text/css" href="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/font-awesome/css/font-awesome.min.css'; ?>">
 
 
 
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="<?= gambar_desa($desa['logo']);?>" alt="<?= $desa['nama_desa']?> />
+		<link rel="shortcut icon" href="<?= gambar_desa($desa['logo']); ?>" alt="<?= $desa['nama_desa']?> />
 
 	</head>
 
@@ -61,7 +57,7 @@
 
 		<video id="bgvid" playsinline autoplay loop muted>
 
-			<source src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/media/lutrafix.mp4" type="video/mp4'; ?>">
+			<source src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/media/lutrafix.mp4" type="video/mp4'; ?>">
 
 		</video>
 
@@ -75,9 +71,10 @@
 
 				</div>
 
-				<div class="brand">PORTAL RESMI <br>PEMERINTAH KABUPATEN LUWU UTARA</div>
+				<div class="judul-desa">PEMERINTAH <?= $this->setting->sebutan_desa . ' ' . $desa['nama_desa']; ?></div>
+				<div class="judul-wilayah"><?= $this->setting->sebutan_kecamatan_singkat . ' ' . $desa['nama_kecamatan'] . ' ' . $this->setting->sebutan_kabupaten_singkat . ' ' . $desa['nama_kabupaten'] . ' Prov. ' . $desa['nama_propinsi']; ?></div>
 
-				<div class="slogan">"Membangun dengan Hati dan Inovasi Tanpa Henti"</div>
+				<div class="slogan">" Tulis slogan atau motto desa disni "</div>
 
 				<ul class="menu">			
 
@@ -87,30 +84,12 @@
 
 							<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
 
-								<img src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/img/icon/home.png'; ?>" class="img-resonsive">
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/agenda.png'; ?>" class="img-resonsive">
 
 							</a>
 
 							<div class="title">SELAYANG PANDANG</div>
 
-							<ul class="dropdown-menu">
-
-									<li class="heading">Selayang Pandang</li>
-
-									<li>
-
-										<a href="http://portal.luwuutarakab.go.id/blog/page/visi-misi" target="_blank">Visi & Misi</a>
-
-										<a href="http://portal.luwuutarakab.go.id/blog/page/sejarah" target="_blank">Sejarah</a>
-
-										<a href="http://portal.luwuutarakab.go.id/blog/page/lambang-daerah" target="_blank">Lambang Daerah</a>
-
-										<a href="http://portal.luwuutarakab.go.id/blog/page/letak-geografis" target="_blank">Letak Geografis</a>
-
-									</li>
-
-								</ul>
-
 						</div>
 
 					</li>
@@ -121,30 +100,12 @@
 
 							<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
 
-								<img src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/img/icon/government.png'; ?>" class="img-resonsive">
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/government.png'; ?>" class="img-resonsive">
 
 							</a>
 
 							<div class="title">PEMERINTAHAN</div>
 
-							<ul class="dropdown-menu">
-
-								<li class="heading">Pemerintahan</li>
-
-								<li>
-
-									<a href="#" target="_blank">Sekertariat Daerah</a>
-
-									<a href="#" target="_blank">DPRD</a>
-
-									<a href="#" target="_blank">SKPD</a>
-
-									<a href="#" target="_blank">Kecamatan</a>
-
-								</li>
-
-							</ul>
-
 						</div>
 
 					</li>
@@ -155,31 +116,11 @@
 
 							<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
 
-								<img src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/img/icon/potensi.png'; ?>" class="img-resonsive">
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/potensi.png'; ?>" class="img-resonsive">
 
 							</a>
 
 							<div class="title">POTENSI DAERAH</div>
-
-							<ul class="dropdown-menu">
-
-								<li class="heading">Potensi Daerah</li>
-
-								<li>
-
-									<a href="http://portal.luwuutarakab.go.id/blog/page/potensi-pertanian-kab-luwu-utara" target="_blank">Pertanian</a>
-
-									<a href="http://portal.luwuutarakab.go.id/blog/page/potensi-perkebunan-kab-luwu-utara" target="_blank">Perkebunan</a>
-
-									<a href="http://portal.luwuutarakab.go.id/blog/page/potensi-peternakan-kab-luwu-utara" target="_blank">Peternakan</a>
-
-									<a href="http://portal.luwuutarakab.go.id/blog/page/potensi-perikanan-kab-luwu-utara" target="_blank">Perikanan</a>
-
-									<a href="http://portal.luwuutarakab.go.id/blog/page/potensi-pariwisata-kab-luwu-utara" target="_blank">Pariwisata</a>
-
-								</li>
-
-							</ul>
 
 						</div>
 
@@ -191,7 +132,7 @@
 
 							<a href="http://e-agenda.luwuutarakab.go.id/" target="_blank" class="icon">
 
-								<img src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/img/icon/agenda.png'; ?>" class="img-resonsive">
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/agenda.png'; ?>" class="img-resonsive">
 
 							</a>
 
@@ -207,7 +148,7 @@
 
 							<a href="https://gollum.sg.rapidplex.com:2096/" target="_blank" class="icon">
 
-								<img src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/img/icon/email.png'; ?>" class="img-resonsive">
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/email.png'; ?>" class="img-resonsive">
 
 							</a>
 
@@ -223,7 +164,7 @@
 
 							<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
 
-								<img src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/img/icon/facility.png'; ?>" class="img-resonsive">
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/facility.png'; ?>" class="img-resonsive">
 
 							</a>
 
@@ -263,7 +204,7 @@
 
 							<a href="http://www.luwuutarakab.go.id/egovernment.html" target="_blank" class="icon">
 
-								<img src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/img/icon/egov.png'; ?>" class="img-resonsive">
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/egov.png'; ?>" class="img-resonsive">
 
 							</a>
 
@@ -279,7 +220,7 @@
 
 							<a href="http://portal.luwuutarakab.go.id/news" target="_blank" class="icon">
 
-								<img src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/img/icon/news.png'; ?>" class="img-resonsive">
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/news.png'; ?>" class="img-resonsive">
 
 							</a>
 
@@ -295,7 +236,7 @@
 
 							<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
 
-								<img src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/img/icon/gallery.png'; ?>" class="img-resonsive">
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/gallery.png'; ?>" class="img-resonsive">
 
 							</a>
 
@@ -325,7 +266,7 @@
 
 							<a href="http://www.luwuutarakab.go.id/subdomain.html" target="_blank" class="icon">
 
-								<img src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/img/icon/list.png'; ?>" class="img-resonsive">
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/list.png'; ?>" class="img-resonsive">
 
 							</a>
 
@@ -341,7 +282,7 @@
 
 							<a href="http://infodesa.luwuutarakab.go.id/" target="_blank" class="icon">
 
-								<img src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/img/icon/desa.png'; ?>" class="img-resonsive">
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/desa.png'; ?>" class="img-resonsive">
 
 							</a>
 
@@ -362,11 +303,11 @@
 
 	    <!-- JS -->
 
-		<script type="text/javascript" src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/js/jquery.min.js'; ?>"></script>
+		<script type="text/javascript" src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/js/jquery.min.js'; ?>"></script>
 
-		<script type="text/javascript" src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/js/bootstrap.min.js'; ?>"></script>
+		<script type="text/javascript" src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/js/bootstrap.min.js'; ?>"></script>
 
-		<script type="text/javascript" src="<?= base_url().$this->theme_folder.'/'.$this->theme.'/assets/js/app.js'; ?>"></script>
+		<script type="text/javascript" src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/js/app.js'; ?>"></script>
 
 
 	<script data-pagespeed-no-defer>(function(){function f(b){var a=window;if(a.addEventListener)a.addEventListener("load",b,!1);else if(a.attachEvent)a.attachEvent("onload",b);else{var c=a.onload;a.onload=function(){b.call(this);c&&c.call(this)}}};window.pagespeed=window.pagespeed||{};var k=window.pagespeed;function l(b,a,c,g,h){this.h=b;this.i=a;this.l=c;this.j=g;this.b=h;this.c=[];this.a=0}l.prototype.f=function(b){for(var a=0;250>a&&this.a<this.b.length;++a,++this.a)try{document.querySelector(this.b[this.a])&&this.c.push(this.b[this.a])}catch(c){}this.a<this.b.length?window.setTimeout(this.f.bind(this),0,b):b()};
