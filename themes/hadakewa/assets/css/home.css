@@ -109,6 +109,33 @@ video {
     font-style: italic;
     text-shadow: 0 3px 0 #000;
     margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.cari {
+    width: 400px;
+    max-width: 100%;
+    margin: 0 auto 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.cari .form-control {
+    border: none;
+    background: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.cari .btn {
+    border-radius: 50% !important;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin: 2px;
 }
 
 .menu {
@@ -129,7 +156,7 @@ video {
 }
 
 .menu li:nth-child(2n) .icon:before {
-    background: #73bc0b;
+    background: #03401a;
 }
 
 .menu li:nth-child(3n) .icon:before {
@@ -137,7 +164,7 @@ video {
 }
 
 .menu li:nth-child(4n) .icon:before {
-    background: #fee30d;
+    background: #9a8b14;
 }
 
 .menu li:nth-child(5n) .icon:before {
@@ -153,7 +180,7 @@ video {
 }
 
 .menu li:nth-child(8n) .icon:before {
-    background: #6fddd4;
+    background: #0dc0b1;
 }
 
 .menu li:nth-child(9n) .icon:before {

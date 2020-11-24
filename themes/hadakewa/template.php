@@ -76,9 +76,18 @@
 
 				<div class="slogan">" Tulis slogan atau motto desa disni "</div>
 
+				<form action="https://www.denpasarkota.go.id/search/filter" method="post">
+					<div class="input-group cari">
+						<input type="text" class="form-control" name="keywords" value="" size="50" placeholder="<?= ucwords('Cari informasi seputar ' . $this->setting->sebutan_desa . ' ' . $desa['nama_desa']); ?>" required="" style="color:black;"> <span class="input-group-btn">
+							<button class="btn btn-success" style="background:#03401a;" type="submit"><i class="fa fa-search"></i></button>
+						</span>
+					</div>
+				</form>
+
 				<ul class="menu">			
 					<li>
 						<div class="menu-item dropdown">
+							<i></i>
 							<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
 								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/news.png'; ?>" class="img-resonsive">
 							</a>
