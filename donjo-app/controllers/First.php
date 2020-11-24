@@ -480,6 +480,7 @@ class First extends Web_Controller {
 		$data['artikel'] = $this->first_artikel_m->list_artikel($data['paging']->offset, $data['paging']->per_page, $id);
 
 		$this->_get_common_data($data);
+		$this->set_template('layouts/berita.tpl.php');
 		$this->load->view($this->template, $data);
 	}
 

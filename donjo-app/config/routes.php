@@ -58,7 +58,7 @@ $route['feed\.xml'] = "Feed/index";
 $route ['ppid'] = "Api_informasi_publik/ppid";
 
 // Artikel
-$route['berita'] = 'first/berita'; // Contoh : artikel/1
+$route['berita'] = 'first/berita'; // Contoh : berita
 $route['artikel/(:num)'] = 'first/berita/$1'; // Contoh : artikel/1
 $route['artikel/(:num)/(:num)/(:num)/(:any)'] = 'first/berita/$4'; // Contoh : artikel/2020/5/15/contoh-artikel
 // Artikel lama (Agar url lama masih dpt di akases)

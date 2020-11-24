@@ -69,10 +69,10 @@
 				</li>
 				<li>
 					<div class="menu-item dropdown">
-						<a href="<?= site_url('pemerintahan'); ?>" class="icon">
-							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/pemerintah.png'; ?>" class="img-resonsive">
+						<a href="<?= site_url('wilayah'); ?>" class="icon">
+							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/wilayah.png'; ?>" class="img-resonsive">
 						</a>
-						<div class="title">PEMERINTAHAN</div>
+						<div class="title">WILAYAH</div>
 					</div>
 				</li>
 				<li>

@@ -19,7 +19,7 @@
 					<i class="fa fa-user"></i><?= $single_artikel['owner']?>&nbsp;
 					<i class="fa fa-eye"></i><?= hit($single_artikel['hit']) ?> Dibaca&nbsp;
 					<?php if (trim($single_artikel['kategori']) != '') : ?>
-						<a href="<?= site_url('first/kategori/'.$single_artikel['id_kategori'])?>"><i class='fa fa-tag'></i><?= $single_artikel['kategori']?></a>
+						<a href="<?= site_url('artikel/kategori/'.$single_artikel['kategori'])?>"><i class='fa fa-tag'></i><?= $single_artikel['kategori']?></a>
 					<?php endif; ?>
 				</span>
 				<div class="fb-like" data-href="<?= site_url('artikel/'.buat_slug($single_artikel['id']))?>?>" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
