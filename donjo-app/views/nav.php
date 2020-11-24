@@ -49,10 +49,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <aside class="main-sidebar">
 	<section class="sidebar">
 		<div class="user-panel">
-			<div class="pull-left image">
-				<img src="<?= gambar_desa($desa['logo']); ?>" class="img-circle" alt="User Image">
+			<div class="image">
+				<img src="<?= gambar_desa($desa['logo']); ?>" class="img-circle" alt="Logo">
 			</div>
-			<div class="pull-left info">
+			<div class="info">
 				<strong><?= ucwords($this->setting->sebutan_desa . " " . $desa['nama_desa']); ?></strong>
 				</br>
 				<?php
@@ -61,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$seb_kab = $this->setting->sebutan_kabupaten;
 					$nam_kab = $desa['nama_kabupaten'];
 				?>
-				<?php	if (strlen($nam_kec)<=12 AND strlen($nam_kab)<=12): ?>
+				<?php if (strlen($nam_kec)<=12 AND strlen($nam_kab)<=12): ?>
 					<?= ucwords($seb_kec . " ".$nam_kec); ?>
 					</br>
 					<?= ucwords($seb_kab." ".$nam_kab); ?>
@@ -69,12 +69,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<?= ucwords(substr($seb_kec, 0, 3) . ". " . $nam_kec); ?>
 					</br>
 					<?= ucwords(substr($seb_kab, 0, 3).". " . $nam_kab); ?>
-				<?php	endif; ?>
+				<?php endif; ?>
 			</div>
 		</div>
 		<ul class="sidebar-menu" data-widget="tree">
-			<li class="header">MENU UTAMA</li>
-
 			<?php foreach ($modul AS $mod): ?>
 				<?php if ($this->CI->cek_hak_akses('b', $mod['url'])): ?>
 					<?php if (count($mod['submodul'])==0): ?>

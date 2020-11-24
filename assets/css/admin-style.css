@@ -63,13 +63,6 @@ body {
 	font-size: 1.4em;
 }
 
-/* Modifikasi size gambar mini */
-.user-panel>.image2>img {
-	width: auto;
-	max-width: 45px;
-	height: auto;
-}
-
 /* Modifikasi margin antar button */
 .btn-margin {
 	margin: 0px 5px 5px 0px;
@@ -289,9 +282,10 @@ table.table-bordered.dataTable td:last-child {
 }
 
 /* Supaya kolom tabel tidak wrap dan menggunakan spasi terkecil */
-td.nostretch, th.nostretch{
-	width:1%;
-	white-space:nowrap;
+td.nostretch,
+th.nostretch {
+	width: 1%;
+	white-space: nowrap;
 }
 
 /* Style untuk isian checkbox berkolom (input analisis, surat masuk) */
@@ -553,4 +547,30 @@ span.select2.select2-container {
 
 .paging {
 	margin-top: 5px;
+}
+
+.user-panel {
+	padding: 10px 0px 0px 0px;
+	margin: 0 10px 10px 10px;
+	width: auto;
+}
+
+.user-panel>.info {
+	left: 40px;
+	font-size: 12px;
+}
+
+.user-panel>.image>img {
+	max-width: 45px;
+	height: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.user-panel>.info {
+	padding: 5px;
+	text-align: center;
+	line-height: 1;
+	position: unset;
 }
