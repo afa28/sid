@@ -139,7 +139,6 @@
 	<!-- JS -->
 	<script src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/js/jquery.min.js'; ?>"></script>
 	<script src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/js/bootstrap.min.js'; ?>"></script>
-	<script src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/js/app.js'; ?>"></script>
 	<script src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/js/script.js'; ?>"></script>
 </body>
 </html>
