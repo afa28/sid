@@ -179,6 +179,7 @@ class First extends Web_Controller {
 		}
 
 		$this->_get_common_data($data);
+		$this->set_template('layouts/berita.tpl.php');
 		$this->load->view($this->template, $data);
 	}
 
