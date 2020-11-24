@@ -70,7 +70,7 @@
 				<li>
 					<div class="menu-item dropdown">
 						<a href="<?= site_url('pemerintahan'); ?>" class="icon">
-							<img src="<?= base_url('pemerintahan') . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/pemerintah.png'; ?>" class="img-resonsive">
+							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/pemerintah.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">PEMERINTAHAN</div>
 					</div>
@@ -78,7 +78,7 @@
 				<li>
 					<div class="menu-item dropdown">
 					<a href="<?= site_url('agenda'); ?>" class="icon">
-							<img src="<?= base_url('agenda') . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/agenda.png'; ?>" class="img-resonsive">
+							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/agenda.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">AGENDA</div>
 					</div>
@@ -86,7 +86,7 @@
 				<li>
 					<div class="menu-item">
 						<a href="<?= site_url('program-bantuan'); ?>" class="icon">
-							<img src="<?= base_url('program-bantuan') . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/bantuan-2.png'; ?>" class="img-resonsive">
+							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/bantuan-2.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">PROGRAM BANTUAN</div>
 					</div>

@@ -130,7 +130,15 @@ class First extends Web_Controller {
 		redirect('first');
 	}
 
-	public function index($p=1)
+	public function index()
+	{
+		$data = $this->includes;
+		$this->_get_common_data($data);
+		$this->track_model->track_desa('first');
+		$this->load->view($this->template, $data);
+	}
+
+	public function berita($p=1)
 	{
 		$data = $this->includes;
 
@@ -171,7 +179,6 @@ class First extends Web_Controller {
 		}
 
 		$this->_get_common_data($data);
-		$this->track_model->track_desa('first');
 		$this->load->view($this->template, $data);
 	}
 
