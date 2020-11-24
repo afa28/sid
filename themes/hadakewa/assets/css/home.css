@@ -113,11 +113,9 @@ video {
 
 .menu {
     list-style: none;
-    margin: 100px 0;
-    margin-top: 80px;
     padding: 0;
     text-align: center;
-    width: 750px
+    margin-top: 80px;
 }
 
 .menu>li {
@@ -158,22 +156,26 @@ video {
     background: #6fddd4;
 }
 
+.menu li:nth-child(9n) .icon:before {
+    background: #5b5e5d;
+}
+
 .menu-item {
     text-align: center;
     display: block;
-    margin: 0 20px -23px;
-    position: relative
+    margin: 0 20px -20px;
+    position: relative;
 }
 
 .menu-item:hover {
-    z-index: 10
+    z-index: 10;
 }
 
 .menu-item .icon {
     position: relative;
     width: 80px;
     height: 80px;
-    display: block
+    display: block;
 }
 
 .menu-item .icon img {
@@ -197,7 +199,7 @@ video {
     left: 0;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .menu-item .icon:hover:before {

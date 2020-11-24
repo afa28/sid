@@ -77,51 +77,33 @@
 				<div class="slogan">" Tulis slogan atau motto desa disni "</div>
 
 				<ul class="menu">			
-
 					<li>
-
 						<div class="menu-item dropdown">
-
 							<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
-
-								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/agenda.png'; ?>" class="img-resonsive">
-
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/news.png'; ?>" class="img-resonsive">
 							</a>
-
-							<div class="title">SELAYANG PANDANG</div>
-
+							<div class="title">Berita</div>
 						</div>
-
 					</li>
-
 					<li>
-
 						<div class="menu-item dropdown">
-
 							<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
-
 								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/government.png'; ?>" class="img-resonsive">
-
 							</a>
-
 							<div class="title">PEMERINTAHAN</div>
-
 						</div>
-
 					</li>
-
 					<li>
 
 						<div class="menu-item dropdown">
 
 							<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
 
-								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/potensi.png'; ?>" class="img-resonsive">
+								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/news.png'; ?>" class="img-resonsive">
 
 							</a>
 
-							<div class="title">POTENSI DAERAH</div>
-
+							<div class="title">Berita</div>
 						</div>
 
 					</li>
@@ -153,62 +135,6 @@
 							</a>
 
 							<div class="title">WEBMAIL</div>
-
-						</div>
-
-					</li>
-
-					<li>
-
-						<div class="menu-item dropdown">
-
-							<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
-
-								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/facility.png'; ?>" class="img-resonsive">
-
-							</a>
-
-							<div class="title">FASILITAS</div>
-
-							<ul class="dropdown-menu">
-
-								<li class="heading">Fasilitas</li>
-
-								<li>
-
-									<a href="#" target="_blank">Kesehatan</a>
-
-									<a href="#" target="_blank">Hotel</a>
-
-									<a href="#" target="_blank">Bank</a>
-
-									<a href="#" target="_blank">Rumah Makan</a>
-
-									<a href="#" target="_blank">Gedung Pertemuan</a>
-
-									<a href="#" target="_blank">Sarana Olahraga</a>
-
-									<a href="#" target="_blank">Pusat Perbelanjaan</a>
-
-								</li>
-
-							</ul>
-
-						</div>
-
-					</li>
-
-					<li>
-
-						<div class="menu-item">
-
-							<a href="http://www.luwuutarakab.go.id/egovernment.html" target="_blank" class="icon">
-
-								<img src="<?= base_url() .$this->theme_folder . '/' .$this->theme.'/assets/img/icon/egov.png'; ?>" class="img-resonsive">
-
-							</a>
-
-							<div class="title">E-GOVERNMENT</div>
 
 						</div>
 
