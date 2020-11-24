@@ -126,7 +126,7 @@ video {
     border: none;
     background: none;
     color: #fff;
-    font-weight: bold;
+    text-align: center;
 }
 
 .cari .btn {
@@ -226,7 +226,7 @@ video {
     left: 0;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .menu-item .icon:hover:before {
