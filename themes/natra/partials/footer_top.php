@@ -28,13 +28,14 @@
             <h2>Kategori</h2>
             <ul class="labels_nav">
               <?php foreach ($menu_kiri as $data): ?>
-                <li><a href="<?= site_url()."first/kategori/".$data['id']?>"><?= $data['nama']?></a></li>
+                <li><a href="<?= site_url()."artikel/kategori/".$data['id']?>"><?= $data['kategori']; ?></a></li>
               <?php endforeach; ?>
             </ul>
           </div>
         </div>
 	    <div class="col-lg-4 col-md-4 col-sm-4">
 	        <div class="single_footer_top wow fadeInRight">
+            <h2>Media Sosial</h2>
 	            <?php foreach ($sosmed As $data): ?>
 	            <?php if (!empty($data["link"])): ?>
 	            <a href="<?= $data['link']?>" rel="noopener noreferrer" target="_blank">
