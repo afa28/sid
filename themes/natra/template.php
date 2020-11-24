@@ -49,9 +49,9 @@
 			<div class="judul-wilayah"><?= $this->setting->sebutan_kecamatan_singkat . ' ' . $desa['nama_kecamatan'] . ' ' . $this->setting->sebutan_kabupaten_singkat . ' ' . $desa['nama_kabupaten'] . ' Prov. ' . $desa['nama_propinsi']; ?></div>
 			<div class="slogan">"Aman, Nyaman, Adil, Sejahtera dan Berdaya Saing di Era 4.0"</div>
 
-			<form action="https://www.denpasarkota.go.id/search/filter" method="post">
+			<form action="<?= site_url('berita'); ?>" method="get">
 				<div class="input-group cari">
-					<input type="text" class="form-control" name="keywords" value="" size="50" placeholder="<?= ucwords('Cari informasi seputar ' . $this->setting->sebutan_desa . ' ' . $desa['nama_desa']); ?>" required="" style="color:black;"> <span class="input-group-btn">
+					<input type="text" class="form-control" name="cari" value="" maxlength="50" placeholder="<?= ucwords('Cari informasi seputar ' . $this->setting->sebutan_desa . ' ' . $desa['nama_desa']); ?>" required="" style="color:black;"> <span class="input-group-btn">
 						<button class="btn btn-success" style="background:#03401a;" type="submit"><i class="fa fa-search"></i></button>
 					</span>
 				</div>
