@@ -61,7 +61,7 @@
 				<li>
 					<div class="menu-item dropdown">
 						<i></i>
-						<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
+						<a href="<?= site_url('berita'); ?>" class="icon">
 							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/berita.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">Berita</div>
@@ -69,31 +69,31 @@
 				</li>
 				<li>
 					<div class="menu-item dropdown">
-						<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
-							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/pemerintah.png'; ?>" class="img-resonsive">
+						<a href="<?= site_url('pemerintahan'); ?>" class="icon">
+							<img src="<?= base_url('pemerintahan') . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/pemerintah.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">PEMERINTAHAN</div>
 					</div>
 				</li>
 				<li>
 					<div class="menu-item dropdown">
-						<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
-							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/agenda.png'; ?>" class="img-resonsive">
+					<a href="<?= site_url('agenda'); ?>" class="icon">
+							<img src="<?= base_url('agenda') . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/agenda.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">AGENDA</div>
 					</div>
 				</li>
 				<li>
 					<div class="menu-item">
-						<a href="http://e-agenda.luwuutarakab.go.id/" target="_blank" class="icon">
-							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/bantuan-2.png'; ?>" class="img-resonsive">
+						<a href="<?= site_url('program-bantuan'); ?>" class="icon">
+							<img src="<?= base_url('program-bantuan') . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/bantuan-2.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">PROGRAM BANTUAN</div>
 					</div>
 				</li>
 				<li>
 					<div class="menu-item">
-						<a href="https://gollum.sg.rapidplex.com:2096/" target="_blank" class="icon">
+						<a href="<?= site_url('laporan-apdes'); ?>" class="icon">
 							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/apbedes.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">APBDES</div>
@@ -101,7 +101,7 @@
 				</li>
 				<li>
 					<div class="menu-item">
-						<a href="http://portal.luwuutarakab.go.id/news" target="_blank" class="icon">
+						<a href="<?= site_url('informasi-publik'); ?>" class="icon">
 							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/publik.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">INFORMASI PUBLIK</div>
@@ -109,7 +109,7 @@
 				</li>
 				<li>
 					<div class="menu-item dropdown">
-						<a href="#" class="icon dropdown-toggle" data-toggle="dropdown">
+					<a href="<?= site_url('galeri'); ?>" class="icon">
 							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/galeri.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">GALERI</div>
@@ -117,7 +117,7 @@
 				</li>
 				<li>
 					<div class="menu-item">
-						<a href="http://www.luwuutarakab.go.id/subdomain.html" target="_blank" class="icon">
+						<a href="<?= site_url('statistik'); ?>" class="icon">
 							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/statistik.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">DATA STATISTIK</div>
@@ -125,7 +125,7 @@
 				</li>
 				<li>
 					<div class="menu-item">
-						<a href="http://infodesa.luwuutarakab.go.id/" target="_blank" class="icon">
+						<a href="<?= site_url('layanan-mandiri'); ?>" class="icon">
 							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/layanan-mandiri.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">LAYANAN MANDIRI</div>
