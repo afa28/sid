@@ -49,7 +49,7 @@
 			<div class="judul-wilayah"><?= $this->setting->sebutan_kecamatan_singkat . ' ' . $desa['nama_kecamatan'] . ' ' . $this->setting->sebutan_kabupaten_singkat . ' ' . $desa['nama_kabupaten'] . ' Prov. ' . $desa['nama_propinsi']; ?></div>
 			<div class="slogan">"Aman, Nyaman, Adil, Sejahtera dan Berdaya Saing di Era 4.0"</div>
 
-			<form action="<?= site_url('berita'); ?>" method="get">
+			<form action="<?= site_url('artikel'); ?>" method="get">
 				<div class="input-group cari">
 					<input type="text" class="form-control" name="cari" value="" maxlength="50" placeholder="<?= ucwords('Cari informasi seputar ' . $this->setting->sebutan_desa . ' ' . $desa['nama_desa']); ?>" required="" style="color:black;"> <span class="input-group-btn">
 						<button class="btn btn-success" style="background:#03401a;" type="submit"><i class="fa fa-search"></i></button>
@@ -61,10 +61,10 @@
 				<li>
 					<div class="menu-item dropdown">
 						<i></i>
-						<a href="<?= site_url('berita'); ?>" class="icon">
-							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/berita.png'; ?>" class="img-resonsive">
+						<a href="<?= site_url('artikel'); ?>" class="icon">
+							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/artikel.png'; ?>" class="img-resonsive">
 						</a>
-						<div class="title">Berita</div>
+						<div class="title">ARTIKEL</div>
 					</div>
 				</li>
 				<li>

@@ -138,7 +138,7 @@ class First extends Web_Controller {
 		$this->load->view($this->template, $data);
 	}
 
-	public function berita($p=1)
+	public function artikel($p = 1)
 	{
 		$data = $this->includes;
 
@@ -187,7 +187,7 @@ class First extends Web_Controller {
 	| Artikel bisa ditampilkan menggunakan parameter pertama sebagai id, dan semua parameter lainnya dikosongkan. url artikel/:id
 	| Kalau menggunakan slug, dipanggil menggunakan url artikel/:thn/:bln/:hri/:slug
 	*/
-	public function artikel($url)
+	public function detail_artikel($url)
 	{
 		if (is_numeric($url))
 		{

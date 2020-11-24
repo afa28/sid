@@ -106,6 +106,7 @@
     </div>
     <?php endif; ?>
 </div>
+<?php $paging_page = 'artikel'; $p = $this->uri-$this->uri->segment(2) ?: 1; ?>
 <?php if ($artikel AND $paging->num_rows > $paging->per_page): ?>
 <div class="pagination_area">
     <div>Halaman <?= $p ?> dari <?= $paging->end_link ?></div>
