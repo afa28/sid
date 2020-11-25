@@ -117,7 +117,7 @@
 				</li>
 				<li>
 					<div class="menu-item">
-						<a href="<?= site_url('statistik'); ?>" class="icon">
+						<a href="<?= site_url('data-statistik'); ?>" class="icon">
 							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/statistik.png'; ?>" class="img-resonsive">
 						</a>
 						<div class="title">DATA STATISTIK</div>

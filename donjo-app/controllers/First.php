@@ -165,8 +165,8 @@ class First extends Web_Controller {
 		if ($this->setting->apbdes_footer)
 		{
 			$data['transparansi'] = $this->setting->apbdes_manual_input
-				? $this->keuangan_grafik_manual_model->grafik_keuangan_tema()
-				: $this->keuangan_grafik_model->grafik_keuangan_tema();
+			? $this->keuangan_grafik_manual_model->grafik_keuangan_tema()
+			: $this->keuangan_grafik_model->grafik_keuangan_tema();
 		}
 
 		$data['covid'] = $this->laporan_penduduk_model->list_data('covid');
@@ -280,19 +280,29 @@ class First extends Web_Controller {
 
 	public function statistik($stat=0, $tipe=0)
 	{
-		if ( ! $this->web_menu_model->menu_aktif('statistik/'.$stat)) show_404();
-
 		$data = $this->includes;
+		if ($stat)
+		{
+			if ( ! $this->web_menu_model->menu_aktif('statistik/'.$stat)) show_404();
 
-		$data['heading'] = $this->laporan_penduduk_model->judul_statistik($stat);
-		$data['title'] = 'Statistik '. $data['heading'];
-		$data['stat'] = $this->laporan_penduduk_model->list_data($stat);
-		$data['tipe'] = $tipe;
-		$data['st'] = $stat;
+			$data = $this->includes;
 
-		$this->_get_common_data($data);
+			$data['heading'] = $this->laporan_penduduk_model->judul_statistik($stat);
+			$data['title'] = 'Statistik '. $data['heading'];
+			$data['stat'] = $this->laporan_penduduk_model->list_data($stat);
+			$data['tipe'] = $tipe;
+			$data['st'] = $stat;
 
-		$this->set_template('layouts/stat.tpl.php');
+			$this->_get_common_data($data);
+			$this->set_template('layouts/statistik_detail.tpl.php');
+		}
+		else
+		{
+
+			$this->_get_common_data($data);
+			$this->set_template('layouts/statistik_list.tpl.php');
+		}
+
 		$this->load->view($this->template, $data);
 	}
 
@@ -540,8 +550,8 @@ class First extends Web_Controller {
 		if ($this->setting->apbdes_footer AND $this->setting->apbdes_footer_all)
 		{
 			$data['transparansi'] = $this->setting->apbdes_manual_input
-				? $this->keuangan_grafik_manual_model->grafik_keuangan_tema()
-				: $this->keuangan_grafik_model->grafik_keuangan_tema();
+			? $this->keuangan_grafik_manual_model->grafik_keuangan_tema()
+			: $this->keuangan_grafik_model->grafik_keuangan_tema();
 		}
 		// Pembersihan tidak dilakukan global, karena artikel yang dibuat oleh
 		// petugas terpecaya diperbolehkan menampilkan <iframe> dsbnya..
@@ -604,17 +614,17 @@ class First extends Web_Controller {
 		switch ($kd_jabatan)
 		{
 			case '1':
-				$data['jabatan'] = "Kepala Dusun";
-				break;
+			$data['jabatan'] = "Kepala Dusun";
+			break;
 			case '2':
-				$data['jabatan'] = "Ketua RW";
-				break;
+			$data['jabatan'] = "Ketua RW";
+			break;
 			case '3':
-				$data['jabatan'] = "Ketua RT";
-				break;
+			$data['jabatan'] = "Ketua RT";
+			break;
 			default:
-				$data['jabatan'] = "Kepala Dusun";
-				break;
+			$data['jabatan'] = "Kepala Dusun";
+			break;
 		}
 
 		$this->load->view('gis/aparatur_wilayah', $data);
