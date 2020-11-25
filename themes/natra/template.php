@@ -109,10 +109,10 @@
 				</li>
 				<li>
 					<div class="menu-item dropdown">
-					<a href="<?= site_url('galeri'); ?>" class="icon">
-							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/galeri.png'; ?>" class="img-resonsive">
+					<a href="<?= site_url('galery'); ?>" class="icon">
+							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/galery.png'; ?>" class="img-resonsive">
 						</a>
-						<div class="title">GALERI</div>
+						<div class="title">GALERY</div>
 					</div>
 				</li>
 				<li>

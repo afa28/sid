@@ -73,6 +73,10 @@ $route['artikel/kategori/(:any)/(:num)'] = 'first/kategori/$1/$2';
 $route['data-statistik'] = 'first/statistik';
 $route['data-statistik/(:num)'] = 'first/statistik/$1';
 
+// Galeri
+$route['galery'] = 'first/gallery';
+$route['galery/(:num)'] = 'first/gallery/$1';
+
 // Halaman lainnya
 $route['wilayah'] = 'first/wilayah';
 $route['peta'] = 'first/peta';
