@@ -58,7 +58,7 @@ $route['feed\.xml'] = "Feed/index";
 $route ['ppid'] = "Api_informasi_publik/ppid";
 
 // Daftar Artikel
-$route['artikel'] = 'first/artikel/$1';
+$route['artikel'] = 'first/artikel';
 $route['artikel/(:num)'] = 'first/artikel/$1';
 
 // Detail Artikel
@@ -69,10 +69,15 @@ $route['artikel/(:num)/(:num)/(:num)/(:any)'] = 'first/detail_artikel/$4';
 $route['artikel/kategori/(:any)'] = 'first/kategori/$1';
 $route['artikel/kategori/(:any)/(:num)'] = 'first/kategori/$1/$2';
 
+// Statistik
+$route['data-statistik'] = 'first/statistik';
+$route['data-statistik/(:num)'] = 'first/statistik/$1';
+
 // Halaman lainnya
 $route['wilayah'] = 'first/wilayah';
 $route['peta'] = 'first/peta';
 $route['informasi-publik'] = 'first/informasi_publik';
+
 
 $route['index/(:num)'] = 'first/index/$1';
 $route['(:num)'] = 'first/index/$1';
