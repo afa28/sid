@@ -11,6 +11,10 @@ RewriteBase /
 # Apabila menggunakan sub-domain atau sub-folder gunakan bentuk berikut
 # RewriteBase /nama-sub-folder/
 
+# Prevent index dirs
+RewriteCond $1
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
 # General dirs / files
 RewriteCond $1 !^(index\.php|resources|robots\.txt)
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -19,11 +23,6 @@ RewriteRule ^(.*)$ index.php/$1 [L,QSA]
 
 # Protect Folder Not Index
 Options All -Indexes
-
-RewriteRule .* - [E=noabort:1]
-RewriteRule .* - [E=noconntimeout:1]
-
-php_value max_execution_time 0
 
 # Periksa apakah full-path perlu disesuaikan untuk server anda
 # Contoh berikut untuk path seperti /home/opensidm/demo.opensid.my.id/desa/upload
