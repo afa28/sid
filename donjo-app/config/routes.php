@@ -58,16 +58,21 @@ $route['feed\.xml'] = "Feed/index";
 $route ['ppid'] = "Api_informasi_publik/ppid";
 
 // Daftar Artikel
-$route['artikel'] = 'first/artikel/$1'; // Contoh : artikel/1
-$route['artikel/(:num)'] = 'first/artikel/$1'; // Contoh : artikel/1
+$route['artikel'] = 'first/artikel/$1';
+$route['artikel/(:num)'] = 'first/artikel/$1';
 
 // Detail Artikel
-$route['(:num)/(:num)/(:num)/(:any)'] = 'first/detail_artikel/$4'; // Contoh : artikel/2020/5/15/contoh-artikel
-$route['artikel/(:num)/(:num)/(:num)/(:any)'] = 'first/detail_artikel/$4'; // Contoh : artikel/2020/5/15/contoh-artikel
+$route['(:num)/(:num)/(:num)/(:any)'] = 'first/detail_artikel/$4';
+$route['artikel/(:num)/(:num)/(:num)/(:any)'] = 'first/detail_artikel/$4';
 
 // Kategori artikel
-$route['artikel/kategori/(:any)'] = 'first/kategori/$1'; // Contoh : Contoh : artikel/kategori/berita-desa
-$route['artikel/kategori/(:any)/(:num)'] = 'first/kategori/$1/$2'; // Contoh : Contoh : artikel/kategori/berita-desa/1
+$route['artikel/kategori/(:any)'] = 'first/kategori/$1';
+$route['artikel/kategori/(:any)/(:num)'] = 'first/kategori/$1/$2';
+
+// Halaman lainnya
+$route['wilayah'] = 'first/wilayah';
+$route['peta'] = 'first/peta';
+$route['informasi-publik'] = 'first/informasi_publik';
 
 $route['index/(:num)'] = 'first/index/$1';
 $route['(:num)'] = 'first/index/$1';
@@ -84,5 +89,3 @@ $route['load_aparatur_wilayah/(.+)'] = 'first/load_aparatur_wilayah/$1';
 $route['logout'] = 'first/logout';
 $route['ganti'] = 'first/ganti';
 $route['auth'] = 'first/auth';
-$route['peta'] = 'first/peta';
-$route['informasi_publik'] = 'first/informasi_publik';

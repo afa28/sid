@@ -63,7 +63,7 @@ class First extends Web_Controller {
 			// Tampilkan 'maintenance mode' bagi pengunjung website
 			$this->load->model('user_model');
 			$grup	= $this->user_model->sesi_grup($_SESSION['sesi']);
-			if (!$this->user_model->hak_akses($grup, 'web', 'b'))
+			if ( ! $this->user_model->hak_akses($grup, 'web', 'b'))
 			{
 				redirect('main/maintenance_mode');
 			}
@@ -280,7 +280,7 @@ class First extends Web_Controller {
 
 	public function statistik($stat=0, $tipe=0)
 	{
-		if (!$this->web_menu_model->menu_aktif('statistik/'.$stat)) show_404();
+		if ( ! $this->web_menu_model->menu_aktif('statistik/'.$stat)) show_404();
 
 		$data = $this->includes;
 
@@ -323,7 +323,7 @@ class First extends Web_Controller {
 
 	public function data_analisis($stat="", $sb=0, $per=0)
 	{
-		if (!$this->web_menu_model->menu_aktif('data_analisis')) show_404();
+		if ( ! $this->web_menu_model->menu_aktif('data_analisis')) show_404();
 
 		$data = $this->includes;
 
@@ -348,7 +348,7 @@ class First extends Web_Controller {
 
 	public function dpt()
 	{
-		if (!$this->web_menu_model->menu_aktif('dpt')) show_404();
+		if ( ! $this->web_menu_model->menu_aktif('dpt')) show_404();
 
 		$this->load->model('dpt_model');
 		$data = $this->includes;
@@ -363,7 +363,7 @@ class First extends Web_Controller {
 
 	public function wilayah()
 	{
-		if (!$this->web_menu_model->menu_aktif('wilayah')) show_404();
+		if ( ! $this->web_menu_model->menu_aktif('wilayah')) show_404();
 
 		$this->load->model('wilayah_model');
 		$data = $this->includes;
@@ -382,7 +382,7 @@ class First extends Web_Controller {
 
 	public function peraturan_desa()
 	{
-		if (!$this->web_menu_model->menu_aktif('peraturan_desa')) show_404();
+		if ( ! $this->web_menu_model->menu_aktif('peraturan_desa')) show_404();
 
 		$this->load->model('web_dokumen_model');
 		$data = $this->includes;
@@ -421,7 +421,7 @@ class First extends Web_Controller {
 
 	public function informasi_publik()
 	{
-		if (!$this->web_menu_model->menu_aktif('informasi_publik')) show_404();
+		if ( ! $this->web_menu_model->menu_aktif('informasi_publik')) show_404();
 
 		$this->load->model('web_dokumen_model');
 		$data = $this->includes;
@@ -557,7 +557,7 @@ class First extends Web_Controller {
 
 	public function peta()
 	{
-		if (!$this->web_menu_model->menu_aktif('peta')) show_404();
+		if ( ! $this->web_menu_model->menu_aktif('peta')) show_404();
 
 		$this->load->model('wilayah_model');
 		$data = $this->includes;
