@@ -18,7 +18,19 @@
 	}
 
 	.card-bg {
+		width: 130px;
+		height: 130px;
 		border-radius: 10px;
+	}
+
+	.text-white {
+		margin: 5px;
+	}
+
+	.stat-title {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		font-weight: bold;
 	}
 </style>
 <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
@@ -38,13 +50,13 @@
 						<h2 class="post_titile">Data Statistik</h2>
 						<br>
 					</div>
-					<div class="box-body">
+					<div class="row">
 						<div class="col-md-2 col-xs-6 text-center">
 							<a class="text-primary" href="<?= site_url('data-statistik/13'); ?>">
 								<div class="card-bg bg-primary">
 									<div class="card-body bg-light">
 										<i class="fa fa-blind fa-4x text-white"></i>
-										<div class="stat-card-title">Usia</div>
+										<div class="stat-title">Usia</div>
 									</div>
 								</div>
 							</a>
@@ -54,7 +66,7 @@
 								<div class="card-bg bg-primary">
 									<div class="card-body bg-light">
 										<i class="fa fa-graduation-cap fa-4x text-white"></i>
-										<div class="stat-card-title">Pendidikan Dalam KK</div>
+										<div class="stat-title">Pendidikan Dalam KK</div>
 									</div>
 								</div>
 							</a>
@@ -64,65 +76,17 @@
 								<div class="card-bg bg-primary">
 									<div class="card-body bg-light">
 										<i class="fa fa-graduation-cap fa-4x text-white"></i>
-										<div class="stat-card-title">Pendidikan Ditempuh</div>
+										<div class="stat-title">Pendidikan Ditempuh</div>
 									</div>
 								</div>
 							</a>
-						</div><div class="col-md-2 col-xs-6 text-center">
+						</div>
+						<div class="col-md-2 col-xs-6 text-center">
 							<a class="text-primary" href="<?= site_url('data-statistik/1'); ?>">
 								<div class="card-bg bg-primary">
 									<div class="card-body bg-light">
 										<i class="fa fa-briefcase fa-4x text-white"></i>
-										<div class="stat-card-title">Pekerjaan</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-md-2 col-xs-6 text-center">
-							<a class="text-primary" href="<?= site_url('data-statistik/2'); ?>">
-								<div class="card-bg bg-primary">
-									<div class="card-body bg-light">
-										<i class="fa fa-bullhorn fa-4x text-white"></i>
-										<div class="stat-card-title">Perkawinan</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-md-2 col-xs-6 text-center">
-							<a class="text-primary" href="<?= site_url('data-statistik/3'); ?>">
-								<div class="card-bg bg-primary">
-									<div class="card-body bg-light">
-										<i class="fa fa-bullhorn fa-4x text-white"></i>
-										<div class="stat-card-title">Agama</div>
-									</div>
-								</div>
-							</a>
-						</div><div class="col-md-2 col-xs-6 text-center">
-							<a class="text-primary" href="<?= site_url('data-statistik/4'); ?>">
-								<div class="card-bg bg-primary">
-									<div class="card-body bg-light">
-										<i class="fa fa-venus-mars fa-4x text-white"></i>
-										<div class="stat-card-title">Jenis Kelamin</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-md-2 col-xs-6 text-center">
-							<a class="text-primary" href="<?= site_url('data-statistik/6'); ?>">
-								<div class="card-bg bg-primary">
-									<div class="card-body bg-light">
-										<i class="fa fa-check-square-o fa-4x text-white"></i>
-										<div class="stat-card-title">Status</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-md-2 col-xs-6 text-center">
-							<a class="text-primary" href="<?= site_url('data-statistik/5'); ?>">
-								<div class="card-bg bg-primary">
-									<div class="card-body bg-light">
-										<i class="fa fa-flag fa-4x text-white"></i>
-										<div class="stat-card-title">Kewarganegaraan</div>
+										<div class="stat-title">Pekerjaan</div>
 									</div>
 								</div>
 							</a>
@@ -132,17 +96,71 @@
 								<div class="card-bg bg-primary">
 									<div class="card-body bg-light">
 										<i class="fa fa-id-card-o fa-4x text-white"></i>
-										<div class="stat-card-title">KTP</div>
+										<div class="stat-title">KTP</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-xs-6 text-center">
+							<a class="text-primary" href="<?= site_url('data-statistik/2'); ?>">
+								<div class="card-bg bg-primary">
+									<div class="card-body bg-light">
+										<i class="fa fa-bullhorn fa-4x text-white"></i>
+										<div class="stat-title">Perkawinan</div>
 									</div>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-2 col-xs-6 text-center">
+							<a class="text-primary" href="<?= site_url('data-statistik/3'); ?>">
+								<div class="card-bg bg-primary">
+									<div class="card-body bg-light">
+										<i class="fa fa-bullhorn fa-4x text-white"></i>
+										<div class="stat-title">Agama</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-2 col-xs-6 text-center">
+							<a class="text-primary" href="<?= site_url('data-statistik/4'); ?>">
+								<div class="card-bg bg-primary">
+									<div class="card-body bg-light">
+										<i class="fa fa-venus-mars fa-4x text-white"></i>
+										<div class="stat-title">Jenis Kelamin</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-2 col-xs-6 text-center">
+							<a class="text-primary" href="<?= site_url('data-statistik/6'); ?>">
+								<div class="card-bg bg-primary">
+									<div class="card-body bg-light">
+										<i class="fa fa-check-square-o fa-4x text-white"></i>
+										<div class="stat-title">Status</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-2 col-xs-6 text-center">
+							<a class="text-primary" href="<?= site_url('data-statistik/5'); ?>">
+								<div class="card-bg bg-primary">
+									<div class="card-body bg-light">
+										<i class="fa fa-flag fa-4x text-white"></i>
+										<div class="stat-title">Warga Negara</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-xs-6 text-center">
 							<a class="text-primary" href="<?= site_url('data-statistik/18'); ?>">
 								<div class="card-bg bg-primary">
 									<div class="card-body bg-light">
 										<i class="fa fa-language fa-4x text-white"></i>
-										<div class="stat-card-title">Akta Kelahiran</div>
+										<div class="stat-title">Akta Kelahiran</div>
 									</div>
 								</div>
 							</a>
@@ -152,7 +170,7 @@
 								<div class="card-bg bg-primary">
 									<div class="card-body bg-light">
 										<i class="fa fa-wheelchair fa-4x text-white"></i>
-										<div class="stat-card-title">Penyandang Cacat</div>
+										<div class="stat-title">Penyandang Cacat</div>
 									</div>
 								</div>
 							</a>
@@ -162,7 +180,7 @@
 								<div class="card-bg bg-primary">
 									<div class="card-body bg-light">
 										<i class="fa fa-heartbeat fa-4x text-white"></i>
-										<div class="stat-card-title">Sakit Menahun</div>
+										<div class="stat-title">Sakit Menahun</div>
 									</div>
 								</div>
 							</a>
@@ -172,7 +190,7 @@
 								<div class="card-bg bg-primary">
 									<div class="card-body bg-light">
 										<i class="fa fa-medkit fa-4x text-white"></i>
-										<div class="stat-card-title">Golongan Darah</div>
+										<div class="stat-title">Golongan Darah</div>
 									</div>
 								</div>
 							</a>
@@ -182,7 +200,7 @@
 								<div class="card-bg bg-cyan">
 									<div class="card-bg bg-primary">
 										<i class="fa fa-check-circle-o fa-4x text-white"></i>
-										<div class="stat-card-title">Calon Pemilih</div>
+										<div class="stat-title">Calon Pemilih</div>
 									</div>
 								</div>
 							</a>
@@ -192,7 +210,7 @@
 								<div class="card-bg bg-primary">
 									<div class="card-body bg-light">
 										<i class="fa fa-search fa-4x text-white"></i>
-										<div class="stat-card-title">Analisis</div>
+										<div class="stat-title">Analisis</div>
 									</div>
 								</div>
 							</a>
@@ -202,7 +220,7 @@
 								<div class="card-bg bg-primary">
 									<div class="card-body bg-light">
 										<i class="fa fa-users fa-4x text-white"></i>
-										<div class="stat-card-title">Kelas Sosial</div>
+										<div class="stat-title">Kelas Sosial</div>
 									</div>
 								</div>
 							</a>
