@@ -11,6 +11,10 @@ RewriteBase /
 # Apabila menggunakan sub-domain atau sub-folder gunakan bentuk berikut
 # RewriteBase /nama-sub-folder/
 
+# Prevent index dirs
+RewriteCond $1
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
 # General dirs / files
 RewriteCond $1 !^(index\.php|resources|robots\.txt)
 RewriteCond %{REQUEST_FILENAME} !-f
