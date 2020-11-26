@@ -30,11 +30,14 @@ class MY_Model extends CI_Model {
 				$url = ($data) ? ('artikel/' . $cut[0] . '/' . $data['slug']) : ($url);
 				break;
 
+			case 'informasi_publik':
+				$url = 'informasi-publik';
+				break;
+
 			case 'arsip':
 			case 'peraturan_desa':
 			case 'data_analisis':
 			case 'ambil_data_covid':
-			case 'informasi_publik':
 			case 'load_aparatur_desa':
 			case 'load_apbdes':
 			case 'load_aparatur_wilayah':
@@ -42,7 +45,7 @@ class MY_Model extends CI_Model {
 				break;
 
 			default:
-				$url = 'first/'.$url;
+				$url = 'first/' . $url;
 				break;
 		}
 
