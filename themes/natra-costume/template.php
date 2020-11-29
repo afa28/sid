@@ -38,7 +38,7 @@
 
 
 	<video id="bgvid" playsinline autoplay loop muted>
-		<source src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/media/lutrafix.mp4" type="video/mp4'; ?>" />
+		<source src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/video/komsel.mp4" type="video/mp4'; ?>" />
 	</video>
 	<section id="wrapper">
 		<div class="content">
