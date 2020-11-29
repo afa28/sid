@@ -316,7 +316,7 @@ switch (ENVIRONMENT)
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
 
 	// Custom path.
-	define('WEB', $web_folder);
+	define('FWEB', $web_folder);
 
 	/**
 	 * https://stackoverflow.com/questions/11792268/how-to-set-proper-codeigniter-base-url
