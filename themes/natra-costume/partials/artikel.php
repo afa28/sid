@@ -117,7 +117,7 @@
 				<?php if($single_artikel['boleh_komentar']): ?>
 					<div class="fb-comments" data-href="<?= site_url(buat_slug($single_artikel)); ?>" width="100%" data-numposts="5"></div>
 				<?php endif; ?>
-				<div class="contact_bottom">
+				<div class="contact_bottom" id="kolom-komentar">
 					<?php if(!empty($komentar)): ?>
 						<div class="contact_bottom">
 							<div class="box-body">
@@ -155,7 +155,7 @@
 									<div class="box-header <?= $label?>"><?= $flash_message?></div>
 								<?php endif; ?>
 								<div class="contact_bottom">
-									<form class="contact_form form-validasi" id="form-komentar" name="form" action="<?= site_url('first/add_comment/'.$single_artikel['id'])?>" method="POST" onSubmit="return validasi(this);">
+									<form class="contact_form form-validasi" id="form-komentar" name="form" action="<?= site_url('add_comment/' . $single_artikel['id']); ?>" method="POST" onSubmit="return validasi(this);">
 										<table width="100%">
 											<tr class="komentar nama">
 												<td width="20%">Nama</td>

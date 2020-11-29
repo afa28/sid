@@ -65,6 +65,9 @@ $route['berita/(:num)'] = FWEB . '/post/index/$1';
 $route['(:num)/(:num)/(:any)'] = FWEB . '/post/detail/$3';
 $route['artikel/(:num)/(:num)/(:num)/(:any)'] = FWEB . '/post/detail/$4';
 
+// Komentar Berita
+$route['add_comment/(:any)'] = FWEB . '/post/add_comment/$1';
+
 // Kategori Berita
 $route['berita/kategori/(:any)'] = FWEB . '/kategori/$1';
 $route['berita/kategori/(:any)/(:num)'] = FWEB . '/kategori/$1/$2';
@@ -90,7 +93,6 @@ $route['arsip'] = 'first/arsip';
 $route['arsip/(:num)'] = 'first/arsip/$1';
 $route['data_analisis'] = 'first/data_analisis';
 $route['data_analisis/(.+)'] = 'first/data_analisis/$1';
-$route['add_comment/(:any)'] = 'first/add_comment/$1';
 $route['ambil_data_covid'] = 'first/ambil_data_covid';
 $route['load_aparatur_desa'] = 'first/load_aparatur_desa';
 $route['load_apbdes'] = 'first/load_apbdes';

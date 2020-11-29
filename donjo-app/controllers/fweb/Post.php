@@ -167,7 +167,8 @@ class Post extends Web_Controller {
 		}
 
 		$_SESSION['sukses'] = 1;
-		redirect($data['thn']."/".$data['bln']."/".$data['hri']."/".$data['slug']."#kolom-komentar");
+
+		redirect(buat_slug($data) . '/#kolom-komentar');
 	}
 
 }
