@@ -58,16 +58,15 @@ $route['feed\.xml'] = "Feed/index";
 $route ['ppid'] = "Api_informasi_publik/ppid";
 
 // Daftar Artikel
-$route['artikel'] = 'first/artikel';
-$route['artikel/(:num)'] = 'first/artikel/$1';
+$route['berita'] = WEB . '/post/index';
+$route['berita/(:num)'] = WEB . '/post/index/$1';
 
 // Detail Artikel
-$route['(:num)/(:num)/(:num)/(:any)'] = 'first/detail_artikel/$4';
-$route['artikel/(:num)/(:num)/(:num)/(:any)'] = 'first/detail_artikel/$4';
+$route['(:num)/(:num)/(:num)/(:any)'] = WEB . '/post/detail/$4';
 
 // Kategori artikel
-$route['artikel/kategori/(:any)'] = 'first/kategori/$1';
-$route['artikel/kategori/(:any)/(:num)'] = 'first/kategori/$1/$2';
+$route['berita/kategori/(:any)'] = WEB . '/kategori/$1';
+$route['berita/kategori/(:any)/(:num)'] = WEB . '/kategori/$1/$2';
 
 // Statistik
 $route['data-statistik'] = 'first/statistik';

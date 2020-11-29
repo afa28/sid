@@ -161,6 +161,55 @@ class Web_Controller extends MY_Controller {
 		parent::__construct();
 		$this->includes['folder_themes'] = '../../'.$this->theme_folder.'/'.$this->theme;
 		$this->controller = strtolower($this->router->fetch_class());
+
+		mandiri_timeout();
+		$this->load->model('config_model');
+		$this->load->model('first_m');
+		$this->load->model('first_artikel_m');
+		$this->load->model('teks_berjalan_model');
+		$this->load->model('first_gallery_m');
+		$this->load->model('first_menu_m');
+		$this->load->model('web_menu_model');
+		$this->load->model('first_penduduk_m');
+		$this->load->model('penduduk_model');
+		$this->load->model('surat_model');
+		$this->load->model('keluarga_model');
+		$this->load->model('web_widget_model');
+		$this->load->model('web_gallery_model');
+		$this->load->model('laporan_penduduk_model');
+		$this->load->model('track_model');
+		$this->load->model('keluar_model');
+		$this->load->model('referensi_model');
+		$this->load->model('keuangan_model');
+		$this->load->model('keuangan_manual_model');
+		$this->load->model('web_dokumen_model');
+		$this->load->model('mailbox_model');
+		$this->load->model('lapor_model');
+		$this->load->model('program_bantuan_model');
+		$this->load->model('keuangan_manual_model');
+		$this->load->model('keuangan_grafik_model');
+		$this->load->model('keuangan_grafik_manual_model');
+		$this->load->model('plan_lokasi_model');
+		$this->load->model('plan_area_model');
+		$this->load->model('plan_garis_model');
+
+		// Jika offline_mode dalam level yang menyembunyikan website,
+		// tidak perlu menampilkan halaman website
+		if ($this->setting->offline_mode == 2)
+		{
+			redirect('main');
+		}
+		elseif ($this->setting->offline_mode == 1)
+		{
+			// Hanya tampilkan website jika user mempunyai akses ke menu admin/web
+			// Tampilkan 'maintenance mode' bagi pengunjung website
+			$this->load->model('user_model');
+			$grup	= $this->user_model->sesi_grup($_SESSION['sesi']);
+			if ( ! $this->user_model->hak_akses($grup, 'web', 'b'))
+			{
+				redirect('main/maintenance_mode');
+			}
+		}
 	}
 
 	/*
@@ -179,6 +228,38 @@ class Web_Controller extends MY_Controller {
 		}
 
 		return $theme_view;
+	}
+
+	public function _get_common_data(&$data)
+	{
+		$data['desa'] = $this->config_model->get_data();
+		$data['menu_atas'] = $this->first_menu_m->list_menu_atas();
+		$data['menu_atas'] = $this->first_menu_m->list_menu_atas();
+		$data['menu_kiri'] = $this->first_menu_m->list_menu_kiri();
+		$data['teks_berjalan'] = $this->teks_berjalan_model->list_data(TRUE);
+		$data['slide_artikel'] = $this->first_artikel_m->slide_show();
+		$data['slider_gambar'] = $this->first_artikel_m->slider_gambar();
+		$data['w_cos'] = $this->web_widget_model->get_widget_aktif();
+
+		$this->web_widget_model->get_widget_data($data);
+		$data['data_config'] = $this->config_model->get_data();
+		$data['flash_message'] = $this->session->flashdata('flash_message');
+		if ($this->setting->apbdes_footer AND $this->setting->apbdes_footer_all)
+		{
+			$data['transparansi'] = $this->setting->apbdes_manual_input
+			? $this->keuangan_grafik_manual_model->grafik_keuangan_tema()
+			: $this->keuangan_grafik_model->grafik_keuangan_tema();
+		}
+		// Pembersihan tidak dilakukan global, karena artikel yang dibuat oleh
+		// petugas terpecaya diperbolehkan menampilkan <iframe> dsbnya..
+		$list_kolom = array(
+			'arsip',
+			'w_cos'
+		);
+		foreach ($list_kolom as $kolom)
+		{
+			$data[$kolom] = $this->security->xss_clean($data[$kolom]);
+		}
 	}
 
 }

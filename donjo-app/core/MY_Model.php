@@ -22,7 +22,7 @@ class MY_Model extends CI_Model {
 			case 'artikel':
 
 				$data = $this->first_artikel_m->get_artikel($cut[1]);
-				$url = ($data) ? ($cut[0] . '/' . buat_slug($data)) : ($url);
+				$url = ($data) ? (buat_slug($data)) : ($url);
 				break;
 
 			case 'kategori':

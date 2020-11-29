@@ -940,7 +940,9 @@ function alamat_web($str)
 
 function buat_slug($data_slug)
 {
-	$slug = $data_slug['thn'].'/'.$data_slug['bln'].'/'.$data_slug['hri'].'/'.$data_slug['slug'];
+	//$slug = $data_slug['thn'].'/'.$data_slug['bln'].'/'.$data_slug['hri'].'/'.$data_slug['slug'];
+	$slug = $data_slug['thn'].'/'.$data_slug['bln'].'/'.$data_slug['slug'];
+
 	return $slug;
 }
 
