@@ -69,8 +69,8 @@ $route['artikel/(:num)/(:num)/(:num)/(:any)'] = FWEB . '/post/detail/$4';
 $route['add_comment/(:any)'] = FWEB . '/post/add_comment/$1';
 
 // Kategori Berita
-$route['berita/kategori/(:any)'] = FWEB . '/kategori/$1';
-$route['berita/kategori/(:any)/(:num)'] = FWEB . '/kategori/$1/$2';
+$route['berita/kategori/(:any)'] = FWEB . '/post/kategori/$1';
+$route['berita/kategori/(:any)/(:num)'] = FWEB . '/post/kategori/$1/$2';
 
 // Statistik
 $route['data-statistik'] = 'first/statistik';

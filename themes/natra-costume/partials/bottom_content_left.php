@@ -74,7 +74,7 @@
 																<i class="fa fa-comments"></i><?php $baca_komentar = $this->db->query("SELECT * FROM komentar WHERE id_artikel = '".$data['id']."'"); $komentarku = $baca_komentar->num_rows();
 																echo number_format($komentarku,0,',','.'); ?> |
 																<?php if (trim($data['kategori']) != '') : ?>
-																	<a href="<?= site_url('berita/kategori/'.$data['kategori'])?>"><i class='fa fa-tag'></i><?= $data['kategori']?></a>
+																	<a href="<?= site_url('berita/kategori/'.$data['kat_slug'])?>"><i class='fa fa-tag'></i><?= $data['kategori']?></a>
 																<?php endif; ?>
 																</span>
 														</div>

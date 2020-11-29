@@ -30,7 +30,7 @@
 						<h2>Kategori</h2>
 						<ul class="labels_nav">
 							<?php foreach ($menu_kiri as $data): ?>
-								<li><a href="<?= site_url()."artikel/kategori/".$data['id']?>"><?= $data['kategori']; ?></a></li>
+								<li><a href="<?= site_url()."berita/kategori/".$data['slug']?>"><?= $data['kategori']; ?></a></li>
 							<?php endforeach; ?>
 						</ul>
 					</div>

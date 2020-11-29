@@ -337,26 +337,6 @@ class First extends Web_Controller {
 		echo json_encode($output);
 	}
 
-	public function kategori($id, $p = 1)
-	{
-		$data = $this->includes;
-
-		$data['p'] = $p;
-		$data["judul_kategori"] = $this->first_artikel_m->get_kategori($id);
-		$data['title'] = 'Artikel ' . $data['judul_kategori']['kategori'];
-		$data['paging'] = $this->first_artikel_m->paging_kat($p, $id);
-		$data['paging_page'] = 'kategori/' . $id;
-		$data['paging_range'] = 3;
-		$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
-		$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
-		$data['pages'] = range($data['start_paging'], $data['end_paging']);
-		$data['artikel'] = $this->first_artikel_m->list_artikel($data['paging']->offset, $data['paging']->per_page, $id);
-
-		$this->_get_common_data($data);
-		$this->set_template('layouts/berita.tpl.php');
-		$this->load->view($this->template, $data);
-	}
-
 	public function peta()
 	{
 		if ( ! $this->web_menu_model->menu_aktif('peta')) show_404();
