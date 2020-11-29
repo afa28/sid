@@ -56,3 +56,5 @@ version.json
 Obfuscator.php
 make_obfuscate.php
 
+.htaccess
+
