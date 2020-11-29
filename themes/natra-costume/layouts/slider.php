@@ -19,7 +19,7 @@
 						overflow: hidden;
 					}
 				</style>
-				<img class="tlClogo" src="<?= base_url($file_gambar); ?>" onclick="location.href='<?= 'artikel/'.buat_slug($gambar); ?>'">
+				<img class="tlClogo" src="<?= base_url($file_gambar); ?>" onclick="location.href='<?= buat_slug($gambar); ?>'">
 			</div>
 		<?php endif; ?>
 	<?php endforeach; ?>

@@ -27,15 +27,19 @@ class MY_Model extends CI_Model {
 
 			case 'kategori':
 				$data = $this->first_artikel_m->get_kategori($cut[1]);
-				$url = ($data) ? ('artikel/' . $cut[0] . '/' . $data['slug']) : ($url);
+				$url = ($data) ? ('berita/' . $cut[0] . '/' . $data['slug']) : ($url);
 				break;
 
 			case 'informasi_publik':
 				$url = 'informasi-publik';
 				break;
 
-			case 'arsip':
 			case 'peraturan_desa':
+				$url = 'peraturan-desa';
+				break;
+
+
+			case 'arsip':
 			case 'data_analisis':
 			case 'ambil_data_covid':
 			case 'load_aparatur_desa':

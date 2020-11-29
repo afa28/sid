@@ -64,7 +64,7 @@
 						<a href="<?= site_url('berita'); ?>" class="icon">
 							<img src="<?= base_url() . $this->theme_folder . '/' . $this->theme . '/assets/img/icon/berita.png'; ?>" class="img-resonsive">
 						</a>
-						<div class="title">BERITA <?= WEB; ?></div>
+						<div class="title">BERITA</div>
 					</div>
 				</li>
 				<li>

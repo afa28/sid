@@ -57,14 +57,15 @@ $route['sitemap\.xml'] = "Sitemap/index";
 $route['feed\.xml'] = "Feed/index";
 $route ['ppid'] = "Api_informasi_publik/ppid";
 
-// Daftar Artikel
+// Daftar Berita
 $route['berita'] = FWEB . '/post/index';
 $route['berita/(:num)'] = FWEB . '/post/index/$1';
 
-// Detail Artikel
-$route['(:num)/(:num)/(:num)/(:any)'] = FWEB . '/post/detail/$4';
+// Detail Berita
+$route['(:num)/(:num)/(:any)'] = FWEB . '/post/detail/$3';
+$route['artikel/(:num)/(:num)/(:num)/(:any)'] = FWEB . '/post/detail/$4';
 
-// Kategori artikel
+// Kategori Berita
 $route['berita/kategori/(:any)'] = FWEB . '/kategori/$1';
 $route['berita/kategori/(:any)/(:num)'] = FWEB . '/kategori/$1/$2';
 
@@ -80,13 +81,13 @@ $route['galery/(:num)'] = 'first/gallery/$1';
 $route['wilayah'] = 'first/wilayah';
 $route['peta'] = 'first/peta';
 $route['informasi-publik'] = 'first/informasi_publik';
+$route['peraturan-desa'] = 'first/peraturan_desa';
 
 
 $route['index/(:num)'] = 'first/index/$1';
 $route['(:num)'] = 'first/index/$1';
 $route['arsip'] = 'first/arsip';
 $route['arsip/(:num)'] = 'first/arsip/$1';
-$route['peraturan_desa'] = 'first/peraturan_desa';
 $route['data_analisis'] = 'first/data_analisis';
 $route['data_analisis/(.+)'] = 'first/data_analisis/$1';
 $route['add_comment/(:any)'] = 'first/add_comment/$1';

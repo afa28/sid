@@ -1,4 +1,4 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
 <?php if($single_artikel["id"]) : ?>
 	<div class="single_page_area" id="<?= 'artikel-'.$single_artikel['judul']?>">
@@ -15,14 +15,14 @@
 		<div id="printableArea">
 			<h4 class="catg_titile" style="font-family: Oswald"><font color="#FFFFFF"><?= $single_artikel["judul"]?></font></h4>
 			<div class="post_commentbox">
-				<span class="meta_date"><?= tgl_indo2($single_artikel['tgl_upload']);?>&nbsp;
-					<i class="fa fa-user"></i><?= $single_artikel['owner']?>&nbsp;
-					<i class="fa fa-eye"></i><?= hit($single_artikel['hit']) ?> Dibaca&nbsp;
+				<span class="meta_date"><?= tgl_indo2($single_artikel['tgl_upload']);?> |
+					<i class="fa fa-user"></i><?= $single_artikel['owner']?> |
+					<i class="fa fa-eye"></i><?= hit($single_artikel['hit']) ?> Dibaca |
 					<?php if (trim($single_artikel['kategori']) != '') : ?>
-						<a href="<?= site_url('artikel/kategori/'.$single_artikel['kategori'])?>"><i class='fa fa-tag'></i><?= $single_artikel['kategori']?></a>
+						<a href="<?= site_url('berita/kategori/'.$single_artikel['kategori'])?>"><i class='fa fa-tag'></i><?= $single_artikel['kategori']?></a>
 					<?php endif; ?>
 				</span>
-				<div class="fb-like" data-href="<?= site_url('artikel/'.buat_slug($single_artikel['id']))?>?>" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+				<div class="fb-like" data-href="<?= site_url(buat_slug($single_artikel['id'])); ?>?>" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
 			</div>
 			<div class="single_page_content" style="margin-bottom:10px;">
 				<?php if($single_artikel['id_kategori'] == 1000) : ?>
@@ -115,7 +115,7 @@
 					</div>
 				</div>
 				<?php if($single_artikel['boleh_komentar']): ?>
-					<div class="fb-comments" data-href="<?= site_url('artikel/'.buat_slug($single_artikel))?>" width="100%" data-numposts="5"></div>
+					<div class="fb-comments" data-href="<?= site_url(buat_slug($single_artikel)); ?>" width="100%" data-numposts="5"></div>
 				<?php endif; ?>
 				<div class="contact_bottom">
 					<?php if(!empty($komentar)): ?>

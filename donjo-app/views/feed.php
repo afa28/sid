@@ -14,7 +14,7 @@ xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
 	<?php foreach ($feeds as $key): ?>
 		<item>
 			<title><?= htmlspecialchars($key->judul); ?></title>
-			<link><?= site_url("artikel/".buat_slug((array) $key)); ?></link>
+			<link><?= site_url(buat_slug((array) $key)); ?></link>
 			<pubdate><?= date(DATE_RSS, strtotime($key->tgl_upload)); ?></pubdate>
 			<description><?= htmlentities(strip_tags(substr($key->isi, 0, max(strpos($key->isi, " ", 260), 200))) . '[...]'); ?></description>
 		</item>

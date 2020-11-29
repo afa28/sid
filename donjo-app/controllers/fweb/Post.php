@@ -1,4 +1,7 @@
 <?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /**
  * File ini:
  *
@@ -41,8 +44,6 @@
  * @license http://www.gnu.org/licenses/gpl.html GPL V3
  * @link https://github.com/OpenSID/OpenSID
  */
-
-defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Post extends Web_Controller {
 
@@ -100,19 +101,9 @@ class Post extends Web_Controller {
 	| Artikel bisa ditampilkan menggunakan parameter pertama sebagai id, dan semua parameter lainnya dikosongkan. url artikel/:id
 	| Kalau menggunakan slug, dipanggil menggunakan url artikel/:thn/:bln/:hri/:slug
 	*/
-	public function detail($url)
+	public function detail($url = '')
 	{
 		$this->load->model('shortcode_model');
-
-		if (is_numeric($url))
-		{
-			$data_artikel = $this->first_artikel_m->get_artikel_by_id($url);
-			if ($data_artikel)
-			{
-				$data_artikel['slug'] = $this->security->xss_clean($data_artikel['slug']);
-				redirect(buat_slug($data_artikel));
-			}
-		}
 
 		$data = $this->includes;
 		$this->first_artikel_m->hit($url); // catat artikel diakses
