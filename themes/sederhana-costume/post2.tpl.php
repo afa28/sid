@@ -26,12 +26,12 @@
 										<div class="dlab-post-info bg-white">
 											<div class="dlab-post-title">
 												<a href="<?= site_url(buat_slug($data)); ?>">
-													<h2 class="post-title"><b><?= potong_teks($data['judul'], 75); ?></b></h2>
+													<h2 class="post-title"><b><?= $data['judul']; ?></b></h2>
 												</a>
 											</div>
 											<hr>
 											<div class="dlab-post-text">
-												<p Style="text-align: Justify;"><?= potong_teks($data['isi'], 280); ?>
+												<p Style="text-align: Justify;"><?= potong_teks($data['isi'], 250); ?>
 											</div>
 											<hr>
 											<div class="bottom-meta-article-list">

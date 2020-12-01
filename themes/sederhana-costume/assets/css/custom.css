@@ -172,7 +172,7 @@ a:hover, a:focus {
     color: #333;
     text-decoration: none;
 }
-/* 
+/*
 ** STYLE OF GENERAL
 */
 :root a:hover {
@@ -1086,11 +1086,11 @@ table a:not(.btn), .table a:not(.btn) {
     font-size: 14px;
     line-height: 1.2em;
 }
-.blog-md, 
+.blog-md,
 .blog-md .dlab-post-info {
     overflow: hidden;
 }
-.blog-md .dlab-post-info, 
+.blog-md .dlab-post-info,
 .blog-md .dlab-post-media {
     display: table-cell;
 }
@@ -1135,7 +1135,7 @@ table a:not(.btn), .table a:not(.btn) {
     -webkit-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.05);
     -o-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.05);
     -ms-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.05);
-    
+
 }
 /* Blog Share */
 .blog-share{
@@ -1177,12 +1177,12 @@ table a:not(.btn), .table a:not(.btn) {
 .share-btn ul:hover li.share-button a.site-button{
     background:#A0A0A0;
 }
-    
+
 .share-btn ul:hover li{
     margin-left: 4px;
 }
 .share-button{
-    
+
 }
 @media only screen and (max-width: 767px) {
     .blog-md.blog-post .dlab-pfost-media,
@@ -1597,7 +1597,7 @@ table a:not(.btn), .table a:not(.btn) {
     margin-left: -15px;
     margin-right: -15px;
 }
-.team-box-type, 
+.team-box-type,
 .team-info-box {
     overflow: hidden;
 }
@@ -1689,16 +1689,16 @@ table a:not(.btn), .table a:not(.btn) {
     height: 100%;
     opacity: 0;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.65+100 */
-    
+
     background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 100%);
     /* FF3.6-15 */
-    
+
     background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 100%);
     /* Chrome10-25,Safari5.1-6 */
-    
+
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 100%);
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    
+
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000', GradientType=0);
     /* IE6-9 */
 }
@@ -2101,7 +2101,7 @@ table a:not(.btn), .table a:not(.btn) {
     color: #fff;
     text-shadow: 1px 1px 1px #000;
 }
- /* 
+ /*
 }
 }
 ** STYLE OF SIDEBAR
@@ -2972,7 +2972,7 @@ hr {
     vertical-align: middle;
 }
 .table td:hover {
-	background: #daf5f5;	
+	background: #daf5f5;
 }
 .sub-kat-apbdes {
 	font-weight: bold;
@@ -3391,7 +3391,7 @@ hr {
 .slider-potensi {
     background: #0000008c;
 }
-/*  Hover Effects 
+/*  Hover Effects
     > Box Shadow Hover
 
 */
@@ -3405,7 +3405,7 @@ hr {
      -webkit-transition:all 0.5s;
 }
 .fly-box{
-     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1); 
+     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
 }
 .icon-bx-wraper:hover .fly-box-ho,
 .fly-box-ho:hover,
@@ -3525,13 +3525,13 @@ hr {
 .carousel .testimonial {
     padding: 10px;
 }
-.carousel .overview {   
+.carousel .overview {
     font-weight: bold;
     font-size: 14px;
     text-transform: uppercase;
     color: #7AA641;
 }
-.carousel .meta {   
+.carousel .meta {
     font-size: 12px;
 }
 .media {
@@ -3588,7 +3588,7 @@ hr {
     background: #fff;
     padding: 20px;
     box-shadow: 0px 1px 10px #7777775c;
-    border-radius: 10px;    
+    border-radius: 10px;
     border: 1px solid #ddd;
     margin-bottom: 15px;
 }
@@ -4215,7 +4215,7 @@ blockquote:before{
 blockquote:after{
     content: "\f10e";
     margin-left: 13px;
-    left: 100%;  
+    left: 100%;
 }
 .page-pemerintah {
 	padding: 0 15px;;
@@ -4489,7 +4489,7 @@ code {
     color: #3498db;
     text-align: center;
 }
-.nik-finder .field-cari-nik {   
+.nik-finder .field-cari-nik {
     padding-top: 15px;
 }
 .input-group .cari-nik {
@@ -4531,7 +4531,6 @@ code {
 .article-list-card {
     padding: 15px;
     margin-bottom: 15px;
-    border-radius: 10px;
     background-color: #fff;
 }
 .top-block-article-list {
@@ -4744,7 +4743,7 @@ code {
 /* STATISTIK */
 .box-statistik {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    margin-bottom: 15px;    
+    margin-bottom: 15px;
     background-color: #fff;
     border-radius: 10px;
 }
@@ -4752,21 +4751,21 @@ code {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
-    text-transform: uppercase;    
+    text-transform: uppercase;
 }
 .box-statistik .body-statistik {
     border-radius: 10px;
-    padding: 15px;    
+    padding: 15px;
 }
 .box-statistik .body-statistik .btn-statistik{
     border-radius: 25px;
     padding: 5px 10px;
-    margin-top: 10px;   
+    margin-top: 10px;
 }
 @media only screen and (max-width: 767px) {
     .box-statistik .body-statistik .btn-statistik{
         margin-bottom: 10px;
-        margin-left: 10px;   
+        margin-left: 10px;
     }
 }
 tspan {
@@ -4988,7 +4987,7 @@ tspan {
 }
 /* Indeks Desa Membangun */
 .content-wrapper .content-header .page-header {
-    font-size: 20px; 
+    font-size: 20px;
     font-weight: bold;
     text-transform: uppercase;
     margin: 0;
@@ -5008,7 +5007,7 @@ tspan {
     .content-wrapper .content-header .select-tahun {
         margin-left: 80%;
         margin-bottom:10px;
-    } 
+    }
 }
 .idm-poin .label-idm {
     width: 50%;
