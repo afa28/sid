@@ -93,7 +93,7 @@ class Post extends Web_Controller {
 		}
 
 		$this->_get_common_data($data);
-		$this->set_template('post.tpl');
+		$this->set_template('post2.tpl');
 		$this->load->view($this->template, $data);
 	}
 
