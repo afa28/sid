@@ -85,7 +85,7 @@ class First extends Web_Controller {
 		$data = $this->includes;
 		$this->_get_common_data($data);
 		$this->track_model->track_desa('first');
-		$this->set_template('portal');
+		$this->set_template('template');
 		$this->load->view($this->template, $data);
 	}
 
