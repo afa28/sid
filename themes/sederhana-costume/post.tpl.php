@@ -25,7 +25,7 @@
 											<div class="top-block-article-list">
 												<div class="brand-wrapper article-list-title">
 													<a href="<?= site_url(buat_slug($data)); ?>">
-														<?= ucwords($data['judul']); ?>
+														<p Style="text-align: Justify;"><b><?= ucwords($data['judul']); ?></b></p>
 													</a>
 												</div>
 												<div class="top-meta-article-list">
@@ -45,7 +45,7 @@
 											</div>
 
 											<div class="card-body artice-list-body hidden-xs">
-												<p class="description-artice-list">
+												<p class="description-artice-list" Style="text-align: Justify;">
 													<?= potong_teks($data['isi'], 280); ?>
 												</p>
 											</div>
@@ -86,51 +86,8 @@
 			</div>
 
 			<!-- Sidebar -->
-			<div class="col-md-4">
-				<div class="widget bg-white p-a20 recent-posts-entry homepage-widget">
-					<div class="widget-title style-1">Peta Wilayah <?= ucwords($this->setting->sebutan_desa)." "?><?= ucwords($desa['nama_desa'])?></div>
-					<div class="widget-post-bx">
-						<?php include('widgets/peta_wilayah_desa.php'); ?>
-					</div>
-				</div>
-				<div class="widget bg-white p-a20 recent-posts-entry homepage-widget">
-					<div class="widget-title style-1">Agenda <?= ucwords($this->setting->sebutan_desa)." "?><?= ucwords($desa['nama_desa'])?></div>
-					<div class="widget-post-bx">
-						<?php include('widgets/agenda.php'); ?>
-					</div>
-				</div>
-				<div class="widget bg-white p-a20 recent-posts-entry homepage-widget">
-					<div class="widget-title style-1">Kategori</div>
-					<div class="widget-post-bx">
-						<?php //include('widgets/menu_kategori.php'); ?>
-					</div>
-				</div>
-				<div class="widget bg-white p-a20 recent-posts-entry homepage-widget">
-					<div class="widget-title style-1">Arsip Publik</div>
-					<div class="widget-post-bx">
-						<?php include('widgets/download.php'); ?>
-					</div>
-				</div>
-				<div class="widget bg-white p-a20 recent-posts-entry homepage-widget">
-					<div class="widget-title style-1">Polling</div>
-					<div class="widget-post-bx">
-						<?php include('widgets/polling.php'); ?>
-					</div>
-				</div>
-				<div class="widget bg-white p-a20 recent-posts-entry homepage-widget">
-					<div class="widget-title style-1">Artikel Popular</div>
-					<div class="widget-post-bx">
-						<?php //include('widgets/popular_artikel.php'); ?>
-					</div>
-				</div>
-				<div class="widget bg-white p-a20 recent-posts-entry homepage-widget">
-					<div class="widget-title style-1">Statistik Pengunjung</div>
-					<div class="widget-post-bx">
-						<?php include('widgets/statistik_pengunjung.php'); ?>
-					</div>
-				</div>
-			</div>
-			<!-- Sidebar -->
+			<?php include('partials/sidebar.php'); ?>
+			<!-- End Sidebar -->
 		</div>
 	</div>
 </div>
