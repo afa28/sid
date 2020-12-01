@@ -85,6 +85,7 @@ class First extends Web_Controller {
 		$data = $this->includes;
 		$this->_get_common_data($data);
 		$this->track_model->track_desa('first');
+		$this->set_template('portal');
 		$this->load->view($this->template, $data);
 	}
 
@@ -97,7 +98,7 @@ class First extends Web_Controller {
 
 		$this->_get_common_data($data);
 
-		$this->set_template('layouts/arsip.tpl.php');
+		$this->set_template('layouts/arsip.tpl');
 		$this->load->view($this->template, $data);
 	}
 
