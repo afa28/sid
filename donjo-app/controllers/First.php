@@ -251,7 +251,7 @@ class First extends Web_Controller {
 		$data['st'] = 1;
 		$this->_get_common_data($data);
 
-		$this->set_template('layouts/stat.tpl.php');
+		$this->set_template('layouts/wilayah.tpl.php');
 		$this->load->view($this->template, $data);
 	}
 
