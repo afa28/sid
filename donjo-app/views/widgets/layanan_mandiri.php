@@ -1,6 +1,6 @@
 <!-- widget Layanan Mandiri -->
 <?php
-if(!isset($_SESSION['mandiri']) OR $_SESSION['mandiri']<>1){
+if(!isset($_SESSION['mandiri']) OR $_SESSION['mandiri'] != 1 OR $this->setting->layanan_mandiri){
 
   if($_SESSION['mandiri_wait']==1){
   ?>
