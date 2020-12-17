@@ -35,11 +35,11 @@
  * KEWAJIBAN APAPUN ATAS PENGGUNAAN ATAU LAINNYA TERKAIT APLIKASI INI.
  *
  * @package OpenSID
- * @author  Tim Pengembang OpenDesa
+ * @author Tim Pengembang OpenDesa
  * @copyright Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
  * @copyright Hak Cipta 2016 - 2020 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
- * @license http://www.gnu.org/licenses/gpl.html  GPL V3
- * @link  https://github.com/OpenSID/OpenSID
+ * @license http://www.gnu.org/licenses/gpl.html GPL V3
+ * @link https://github.com/OpenSID/OpenSID
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -114,20 +114,20 @@ class First extends Web_Controller {
 		}
 		else
 		{
-			redirect('first');
+			redirect();
 		}
 	}
 
 	public function logout()
 	{
 		$this->first_m->logout();
-		redirect('first');
+		redirect();
 	}
 
 	public function ganti()
 	{
 		$this->first_m->ganti();
-		redirect('first');
+		redirect();
 	}
 
 	public function index($p=1)
@@ -198,6 +198,7 @@ class First extends Web_Controller {
 
 		// replace isi artikel dengan shortcodify
 		$data['single_artikel']['isi'] = $this->shortcode_model->shortcode($data['single_artikel']['isi']);
+		$data['title'] = ucwords($data['single_artikel']['judul']);
 		$data['detail_agenda'] = $this->first_artikel_m->get_agenda($id);//Agenda
 		$data['komentar'] = $this->first_artikel_m->list_komentar($id);
 		$this->_get_common_data($data);
@@ -220,7 +221,7 @@ class First extends Web_Controller {
 	{
 		$data = $this->includes;
 		$data['p'] = $p;
-		$data['paging']  = $this->first_artikel_m->paging_arsip($p);
+		$data['paging'] = $this->first_artikel_m->paging_arsip($p);
 		$data['farsip'] = $this->first_artikel_m->full_arsip($data['paging']->offset,$data['paging']->per_page);
 
 		$this->_get_common_data($data);
@@ -276,6 +277,7 @@ class First extends Web_Controller {
 		$data = $this->includes;
 
 		$data['heading'] = $this->laporan_penduduk_model->judul_statistik($stat);
+		$data['title'] = 'Statistik '. $data['heading'];
 		$data['stat'] = $this->laporan_penduduk_model->list_data($stat);
 		$data['tipe'] = $tipe;
 		$data['st'] = $stat;
@@ -342,6 +344,7 @@ class First extends Web_Controller {
 
 		$this->load->model('dpt_model');
 		$data = $this->includes;
+		$data['title'] = 'Daftar Calon Pemilih Berdasarkan Wilayah';
 		$data['main'] = $this->dpt_model->statistik_wilayah();
 		$data['total'] = $this->dpt_model->statistik_total();
 		$data['tanggal_pemilihan'] = $this->dpt_model->tanggal_pemilihan();
@@ -358,8 +361,9 @@ class First extends Web_Controller {
 		$this->load->model('wilayah_model');
 		$data = $this->includes;
 
-		$data['main']    = $this->first_penduduk_m->wilayah();
-		$data['heading']="Populasi Per Wilayah";
+		$data['main'] = $this->first_penduduk_m->wilayah();
+		$data['heading'] = "Populasi Per Wilayah";
+		$data['title'] = $data['heading'];
 		$data['tipe'] = 3;
 		$data['total'] = $this->wilayah_model->total();
 		$data['st'] = 1;
@@ -379,7 +383,8 @@ class First extends Web_Controller {
 		$data['cek'] = $cek;
 		$data['kategori'] = $this->referensi_model->list_data('ref_dokumen', 1);
 		$data['tahun'] = $this->web_dokumen_model->tahun_dokumen();
-		$data['heading']="Produk Hukum";
+		$data['heading'] = "Produk Hukum";
+		$data['title'] = $data['heading'];
 		$data['halaman_statis'] = 'web/halaman_statis/peraturan_desa';
 		$this->_get_common_data($data);
 
@@ -417,6 +422,7 @@ class First extends Web_Controller {
 		$data['kategori'] = $this->referensi_model->list_data('ref_dokumen', 1);
 		$data['tahun'] = $this->web_dokumen_model->tahun_dokumen();
 		$data['heading'] ="Informasi Publik";
+		$data['title'] = $data['heading'];
 		$data['halaman_statis'] = 'web/halaman_statis/informasi_publik';
 		$this->_get_common_data($data);
 
@@ -451,14 +457,15 @@ class First extends Web_Controller {
 		echo json_encode($output);
 	}
 
-	public function kategori($id, $p=1)
+	public function kategori($id, $p = 1)
 	{
 		$data = $this->includes;
 
 		$data['p'] = $p;
 		$data["judul_kategori"] = $this->first_artikel_m->get_kategori($id);
-		$data['paging']  = $this->first_artikel_m->paging_kat($p, $id);
-		$data['paging_page']  = 'kategori/'.$id;
+		$data['title'] = 'Artikel ' . $data['judul_kategori']['kategori'];
+		$data['paging'] = $this->first_artikel_m->paging_kat($p, $id);
+		$data['paging_page'] = 'kategori/' . $id;
 		$data['paging_range'] = 3;
 		$data['start_paging'] = max($data['paging']->start_link, $p - $data['paging_range']);
 		$data['end_paging'] = min($data['paging']->end_link, $p + $data['paging_range']);
@@ -471,7 +478,7 @@ class First extends Web_Controller {
 
 	public function add_comment($id=0, $slug = NULL)
 	{
-		$sql = "SELECT *, YEAR(tgl_upload) AS thn, MONTH(tgl_upload) AS bln, DAY(tgl_upload) AS hri, slug AS slug  FROM artikel a WHERE id=$id ";
+		$sql = "SELECT *, YEAR(tgl_upload) AS thn, MONTH(tgl_upload) AS bln, DAY(tgl_upload) AS hri, slug AS slug FROM artikel a WHERE id=$id ";
 		$query = $this->db->query($sql,1);
 		$data = $query->row_array();
 		// Periksa isian captcha
@@ -550,6 +557,7 @@ class First extends Web_Controller {
 		$data['list_dusun'] = $this->penduduk_model->list_dusun();
 		$data['wilayah'] = $this->penduduk_model->list_wil();
 		$data['desa'] = $this->config_model->get_data();
+		$data['title'] = 'Peta ' . ucwords($this->setting->sebutan_desa . ' ' . $data['desa']['nama_desa']);
 		$data['penduduk'] = $this->penduduk_model->list_data_map();
 		$data['dusun_gis'] = $this->wilayah_model->list_dusun();
 		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
