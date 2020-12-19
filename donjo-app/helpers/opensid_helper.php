@@ -1061,3 +1061,13 @@ function crawler()
 
 	return FALSE;
 }
+
+// Kode Wilayah Dengan Titik
+// Dari 5201142005 --> 52.01.14.2005
+function kode_wilayah($kode_wilayah)
+{
+	$kode_prov_kab_kec = str_split(substr($kode_wilayah, 0, 6), 2);
+	$kode_desa = (strlen($kode_wilayah) > 6) ? '.' . substr($kode_wilayah, 6) : '';
+	$kode_standar = implode('.', $kode_prov_kab_kec) . $kode_desa;
+	return $kode_standar;
+}
