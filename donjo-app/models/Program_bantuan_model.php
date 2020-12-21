@@ -53,7 +53,7 @@ class Program_bantuan_model extends MY_Model {
 
 	public function __construct()
 	{
-		$this->load->model(['rtm_model', 'kelompok_model', 'wilayah_model']);
+		$this->load->model(['penduduk_model', 'rtm_model', 'kelompok_model', 'wilayah_model']);
 	}
 
 	public function autocomplete($id, $cari)
@@ -1220,5 +1220,38 @@ class Program_bantuan_model extends MY_Model {
 		return $kk;
 	}
 
+	public function import_data($program_id = '', $data_tambah = [], $kosongkan = 0)
+	{
+		$this->session->success = 1;
+
+		if ($kosongkan == 1) $this->db->where('program_id', $program_id)->delete('program_peserta');
+
+		$outp = $this->db->insert_batch('program_peserta', $data_tambah);
+		status_sukses($outp, true);
+	}
+
+	public function cek_data($peserta = NULL, $nik = NULL)
+	{
+		$cek_peserta = $this->penduduk_model->get_penduduk_by_nik($peserta);
+		if ( ! $cek_peserta) return "Data peserta tidak ditemukan";
+
+		$cek_penduduk = $this->penduduk_model->get_penduduk_by_nik($nik);
+		if ($cek_penduduk)
+		{
+			$data = [
+				'id' => $cek_penduduk['id'],
+				'nama' => $cek_penduduk['nama'],
+				'tempatlahir' => $cek_penduduk['tempatlahir'],
+				'tanggallahir' => $cek_penduduk['tanggallahir'],
+				'alamat' => $cek_penduduk['alamat']
+			];
+
+			return $data;
+		}
+		else
+		{
+			return "NIK penduduk tidak ditemukan";
+		}
+	}
 }
 ?>
