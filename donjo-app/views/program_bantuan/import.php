@@ -10,10 +10,14 @@
 					<button type="button" class="btn btn-info btn-flat" id="file_browser"><i class="fa fa-search"></i> Browse</button>
 				</span>
 			</div>
-			<p class="help-block"><input type="checkbox" name="kosongkan" value="1"/>	Hapus data peserta sebelum Impor</p>
 			<br/>
-			<p>Contoh format file import data peserta bantuan (.xlsx) : </p>
-			<a href="<?= base_url("assets/import/format_import_peserta_bantuan.xlsx"); ?>" class="btn btn-social btn-flat bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block text-center"><i class="fa fa-file-excel-o"></i> Format Import Peserta Bantuan</a>
+			<label class="control-label">Aturan tambahan :
+				<p class="help-block">&emsp;<input type="checkbox" name="kosongkan" value="1"/> Kosongkan data peserta program bantuan</p>
+				<p class="help-block">&emsp;<input type="checkbox" name="ganti" value="1"/> Ganti data lama jika data ditemukan sama</p>
+				<p class="help-block">&emsp;<input type="checkbox" name="rand_kartu" value="1"/> Acak No. Kartu Peserta Jika Kosong</p>
+			</label>
+			<br/>
+			<a href="<?= base_url("assets/import/format_import_peserta_bantuan.xlsx"); ?>" class="btn btn-social btn-flat bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block text-center"><i class="fa fa-file-excel-o"></i> Contoh Format Import Peserta Bantuan</a>
 		</div>
 	</div>
 	<div class="modal-footer">

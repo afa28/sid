@@ -327,8 +327,10 @@ class Program_bantuan extends Admin_Controller {
 
 	public function proses_import($program_id = '')
 	{
-		$ganti = 0;
 		$kosongkan = $this->input->post('kosongkan');
+		$ganti = $this->input->post('ganti');
+		$rand_kartu = $this->input->post('rand_kartu');
+
 
 		// Data Program Bantuan
 		$bantuan = $this->program_bantuan_model->get_program(1, $program_id);
@@ -361,7 +363,7 @@ class Program_bantuan extends Admin_Controller {
 
 				if ($kosongkan == 1)
 				{
-					$pesan = $pesan . "- Total <b>" . count($terdaftar) . " data peserta </b> berhasil dikosongkan sebelum melakukan import<br>";
+					$pesan = $pesan . "- Total <b>" . count($terdaftar) . " data peserta </b> berhasil dikosongkan<br>";
 					$terdaftar = NULL;
 				}
 
@@ -372,16 +374,17 @@ class Program_bantuan extends Admin_Controller {
 					$peserta = (string) $cells[0];
 					$nik = (string) $cells[2];
 
-					// Baris dengan kolom peserta = '###' menunjukkan telah sampai pada baris data terakhir
+					// Data terakhir
 					if ($peserta == '###') break;
 
-					// Abaikan baris pertama yg berisi nama kolom
+					// Abaikan baris pertama / judul
 					if ($pertama == false)
 					{
 						$pertama = true;
 						continue;
 					}
 
+					// Cek valid data peserta sesuai sasasaran
 					$cek_peserta = $this->penduduk_model->get_penduduk_by_nik($peserta);
 					if ( ! $cek_peserta)
 					{
@@ -390,6 +393,7 @@ class Program_bantuan extends Admin_Controller {
 						continue;
 					}
 
+					// Cek valid data penduduk sesuai nik
 					$cek_penduduk = $this->penduduk_model->get_penduduk_by_nik($nik);
 					if ( ! $cek_peserta)
 					{
@@ -398,6 +402,7 @@ class Program_bantuan extends Admin_Controller {
 						continue;
 					}
 
+					// Cek data peserta yg akan dimport dan yg sudah ada, ganti atau lewati
 					if (in_array($peserta, $terdaftar) && $ganti != 1)
 					{
 						$no_gagal++;
@@ -405,10 +410,17 @@ class Program_bantuan extends Admin_Controller {
 						continue;
 					}
 
+					// Random no. kartu peserta
+					if ($rand_kartu == 1)
+					{
+						$no_id_kartu = random_int(1, 100);
+					}
+
+					// Simpan data peserta yg diimport dalam bentuk array
 					$simpan = [
 						'peserta' => $peserta,
 						'program_id' => $program_id,
-						'no_id_kartu' => ((string) $cells[1]) ? $cells[1] : random_int(1, 100),
+						'no_id_kartu' => ((string) $cells[1]) ? $cells[1] : $no_id_kartu,
 						'kartu_nik' => $nik,
 						'kartu_nama' => ((string) $cells[3]) ? $cells[3] : $cek_penduduk['nama'],
 						'kartu_tempat_lahir' => ((string) $cells[4]) ? $cells[4] : $cek_penduduk['tempatlahir'],
