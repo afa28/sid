@@ -159,14 +159,14 @@
 						<table class="table table-bordered table-striped table-hover tabel-rincian">
 							<tbody>
 								<tr>
-									<td width="30%">Jumlah Data Yang Gagal</td>
+									<td width="30%">Data Gagal</td>
 									<td width="1">:</td>
 									<td><?= $data['gagal']; ?></td>
 								</tr>
 								<tr>
-									<td>Jumlah Data Yang Berhasil</td>
+									<td>Data Sukses</td>
 									<td> : </td>
-									<td><?= $data['berhasil']; ?></td>
+									<td><?= $data['sukses']; ?></td>
 								</tr>
 								<tr>
 									<td>Informasi Tambahan </td>
@@ -174,7 +174,7 @@
 									<td><?= $data['pesan']; ?></td>
 								</tr>
 								<tr>
-									<td>Total Data Yang Diimport</td>
+									<td>Data Import</td>
 									<td> : </td>
 									<td><?= $data['total']; ?></td>
 								</tr>

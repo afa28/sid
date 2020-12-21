@@ -1220,38 +1220,55 @@ class Program_bantuan_model extends MY_Model {
 		return $kk;
 	}
 
-	public function import_data($program_id = '', $data_tambah = [], $kosongkan = 0)
+	public function import_data($program_id = '', $data_tambah = [], $kosongkan = 0, $data_ganti = '')
 	{
 		$this->session->success = 1;
 
 		if ($kosongkan == 1) $this->db->where('program_id', $program_id)->delete('program_peserta');
 
+		if ($data_ganti)
+		{
+			$data_ganti = explode(", ", ltrim($data_ganti, ", "));
+
+			$this->db->where_in('peserta', $data_ganti)->where('program_id', $program_id)->delete('program_peserta');
+		}
+
 		$outp = $this->db->insert_batch('program_peserta', $data_tambah);
 		status_sukses($outp, true);
 	}
 
-	public function cek_data($peserta = NULL, $nik = NULL)
+	public function cek_peserta($peserta = '', $sasaran = 1)
 	{
-		$cek_peserta = $this->penduduk_model->get_penduduk_by_nik($peserta);
-		if ( ! $cek_peserta) return "Data peserta tidak ditemukan";
-
-		$cek_penduduk = $this->penduduk_model->get_penduduk_by_nik($nik);
-		if ($cek_penduduk)
+		switch ($sasaran)
 		{
-			$data = [
-				'id' => $cek_penduduk['id'],
-				'nama' => $cek_penduduk['nama'],
-				'tempatlahir' => $cek_penduduk['tempatlahir'],
-				'tanggallahir' => $cek_penduduk['tanggallahir'],
-				'alamat' => $cek_penduduk['alamat']
-			];
+			case 1:
+				// Penduduk
+				$data = $this->db->where('nik', $peserta)->get('penduduk_hidup')->result_array();
+				break;
 
-			return $data;
+			case 2:
+				// Keluarga
+				$data = $this->db->where('no_kk', $peserta)->get('keluarga_aktif')->result_array();
+				break;
+
+			case 3:
+				// RTM
+				// no_rtm = no_kk
+				$data = $this->db->where('no_kk', $peserta)->get('tweb_rtm')->result_array();
+				break;
+
+			case 4:
+				// Kelompok
+				$data = $this->db->where('kode', $peserta)->get('kelompok')->result_array();
+				break;
+
+			default:
+				// Lainnya
+				break;
 		}
-		else
-		{
-			return "NIK penduduk tidak ditemukan";
-		}
+
+		return $data;
 	}
+
 }
 ?>

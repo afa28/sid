@@ -334,6 +334,7 @@ class Program_bantuan extends Admin_Controller {
 
 		// Data Program Bantuan
 		$bantuan = $this->program_bantuan_model->get_program(1, $program_id);
+		$sasaran = $bantuan[0]['sasaran'];
 		$terdaftar = str_replace("'", "", explode (", ", sql_in_list(array_column($bantuan[1], 'peserta'))));
 
 		$this->load->library('upload');
@@ -341,7 +342,7 @@ class Program_bantuan extends Admin_Controller {
 		$config['upload_path']		= LOKASI_DOKUMEN;
 		$config['allowed_types']	= 'xls|xlsx';
 		//$config['max_size']				= max_upload() * 100024;
-		$config['file_name']			= namafile('Import cari_peserta Bantuan');
+		$config['file_name']			= namafile('Import Peserta Program Bantuan');
 
 		$this->upload->initialize($config);
 
@@ -355,15 +356,16 @@ class Program_bantuan extends Admin_Controller {
 			foreach ($reader->getSheetIterator() as $sheet)
 			{
 				$pertama = false;
-				$no_gagal = 0;
-				$pesan_gagal ='';
 				$no_baris = 0;
-				$no_data = 0;
+				$no_gagal = 0;
+				$no_sukses = 0;
+				$pesan_gagal ='';
+				$data_ganti = '';
 				$tambah = [];
 
 				if ($kosongkan == 1)
 				{
-					$pesan = $pesan . "- Total <b>" . count($terdaftar) . " data peserta </b> berhasil dikosongkan<br>";
+					$pesan .= "- Total <b>" . count($terdaftar) . " data peserta </b> sukses dikosongkan<br>";
 					$terdaftar = NULL;
 				}
 
@@ -384,37 +386,40 @@ class Program_bantuan extends Admin_Controller {
 						continue;
 					}
 
-					// Cek valid data peserta sesuai sasasaran
-					$cek_peserta = $this->penduduk_model->get_penduduk_by_nik($peserta);
+					// Cek valid data peserta sesuai sasaran
+					$cek_peserta = $this->program_bantuan_model->cek_peserta($peserta, $sasaran);
 					if ( ! $cek_peserta)
 					{
 						$no_gagal++;
-						$pesan = $pesan . "Baris <b> Ke-" . ($baris) . "</b> => (Data peserta tidak ditemukan) <br>";
+						$pesan .= "- Data baris <b> Ke-" . ($no_baris - 1) . "</b> => (Data peserta tidak ditemukan) <br>";
 						continue;
 					}
 
 					// Cek valid data penduduk sesuai nik
 					$cek_penduduk = $this->penduduk_model->get_penduduk_by_nik($nik);
-					if ( ! $cek_peserta)
+					if ( ! $cek_penduduk['id'])
 					{
 						$no_gagal++;
-						$pesan = $pesan . "Baris <b> Ke-" . ($baris) . "</b> => (NIK penduduk tidak ditemukan) <br>";
+						$pesan .= "- Data baris <b> Ke-" . ($no_baris - 1) . "</b> => (NIK penduduk tidak ditemukan) <br>";
 						continue;
 					}
 
-					// Cek data peserta yg akan dimport dan yg sudah ada, ganti atau lewati
+					// Cek data peserta yg akan dimport dan yg sudah ada
 					if (in_array($peserta, $terdaftar) && $ganti != 1)
 					{
 						$no_gagal++;
-						$pesan = $pesan . "Baris <b> Ke-" . ($baris) . "</b> => (Data peserta sudah ada) <br>";
+						$pesan .= "- Data baris <b> Ke-" . ($no_baris - 1) . "</b> => (Data peserta sudah ada) <br>";
 						continue;
 					}
 
-					// Random no. kartu peserta
-					if ($rand_kartu == 1)
+					if (in_array($peserta, $terdaftar) && $ganti == 1)
 					{
-						$no_id_kartu = random_int(1, 100);
+						$data_ganti .= ", " . $peserta;
+						$pesan .= "- Data baris <b> Ke-" . ($no_baris - 1) . "</b> => (Data ditambahkan menggantikan data lama) <br>";
 					}
+
+					// Random no. kartu peserta
+					if ($rand_kartu == 1) $no_id_kartu = random_int(1, 100);
 
 					// Simpan data peserta yg diimport dalam bentuk array
 					$simpan = [
@@ -430,30 +435,31 @@ class Program_bantuan extends Admin_Controller {
 					];
 
 					array_push($tambah, $simpan);
-					$no_data++;
+					$no_sukses++;
 				}
 			}
 
 			$reader->close();
 			unlink(LOKASI_DOKUMEN . $file['file_name']);
 
-			$this->program_bantuan_model->import_data($program_id, $tambah, $kosongkan);
+			$total = ($no_sukses + $no_gagal);
 
-			if ($no_data <= 0)
+			if ($total <= 0)
 			{
 				$this->session->error_msg = " -> Tidak ada data yang bisa diimport";
 				$this->session->success = -1;
 			}
 			else
 			{
-				$this->session->success = 1;
-				if ($no_gagal == 0) $pesan = $pesan . "- Semua data berhasil di import";
+				$this->program_bantuan_model->import_data($program_id, $tambah, $kosongkan, $data_ganti);
+
+				if ($no_gagal == 0) $pesan .= "- Semua data sukses di import";
 
 				$notif = [
 					'gagal' => $no_gagal,
-					'berhasil' => ($no_data - $no_gagal),
+					'sukses' => $no_sukses,
 					'pesan' => $pesan,
-					'total' => $no_data
+					'total' => $total . ' => ' . $cek_peserta,
 				];
 
 				$this->session->set_flashdata('notif', $notif);
@@ -480,8 +486,8 @@ class Program_bantuan extends Admin_Controller {
 
 		//Header Tabel
 		$daftar_kolom = [
-			['cari_peserta', 'cari_peserta'],
-			['No. cari_peserta', 'no_id_kartu'],
+			['Peserta', 'peserta'],
+			['No. Peserta', 'no_id_kartu'],
 			['NIK', 'kartu_nik'],
 			['Nama', 'kartu_nama'],
 			['Tempat Lahir', 'kartu_tempat_lahir'],
@@ -493,10 +499,11 @@ class Program_bantuan extends Admin_Controller {
 		$header = WriterEntityFactory::createRowFromArray($judul);
 		$writer->addRow($header);
 
-			//Isi Tabel
+		//Isi Tabel
 		foreach ($bantuan[1] as $row)
 		{
-			$cari_peserta = array(
+			$peserta = array(
+				$row['peserta'],
 				$row['no_id_kartu'],
 				$row['kartu_nik'],
 				$row['kartu_nama'],
@@ -504,7 +511,7 @@ class Program_bantuan extends Admin_Controller {
 				$row['kartu_tanggal_lahir'],
 				$row['kartu_alamat'],
 			);
-			$rowFromValues = WriterEntityFactory::createRowFromArray($cari_peserta);
+			$rowFromValues = WriterEntityFactory::createRowFromArray($peserta);
 			$writer->addRow($rowFromValues);
 		}
 		$writer->close();
