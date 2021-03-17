@@ -47,9 +47,9 @@ class Permohonan_surat extends Mandiri_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		if ( ! isset($_SESSION['mandiri'])) {
-			redirect('first');
-		}
+		if ($this->session->mandiri != 1)
+		{
+			redirect('mandiri_web');
 		else
 		{
 			$this->load->model('penduduk_model');

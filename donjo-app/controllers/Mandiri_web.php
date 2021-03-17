@@ -144,6 +144,9 @@ class Mandiri_web extends Mandiri_Controller
 
 	public function mandiri($p=1, $m=0, $kat=1)
 	{
+
+		//if ($this->session->mandiri != 1) redirect('mandiri_web/masuk');
+
 		$data = $this->includes;
 		$data['p'] = $p;
 		$data['menu_surat_mandiri'] = $this->surat_model->list_surat_mandiri();
