@@ -56,4 +56,9 @@ version.json
 Obfuscator.php
 make_obfuscate.php
 cache/*
-
+.htaccess
+!desa-contoh/arsip/.htaccess
+test/
+vendor/
+composer.lock
+.php-cs-fixer.cache

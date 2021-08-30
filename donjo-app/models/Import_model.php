@@ -1,5 +1,7 @@
 <?php
 
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+
 define("KOLOM_IMPOR_KELUARGA", serialize(array(
   "alamat" => "0",
   "dusun" => "1",
@@ -36,11 +38,8 @@ define("KOLOM_IMPOR_KELUARGA", serialize(array(
   "hamil" => "32",
   "ktp_el" => "33",
   "status_rekam" => "34",
-  "alamat_sekarang" => "35")));
-
-  require_once 'vendor/spout/src/Spout/Autoloader/autoload.php';
-  use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
-
+  "alamat_sekarang" => "35"))
+);
 
 class Import_model extends CI_Model {
 

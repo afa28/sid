@@ -1,0 +1,28 @@
+{
+	"description": "OpenSID",
+	"name": "opensid/opensid",
+	"type": "project",
+	"homepage": "https://github.com/OpenSID/",
+	"license": "MIT",
+	"require": {
+		"php": ">=5.3.7",
+		"codeigniter/framework": "^3.1",
+		"vlucas/phpdotenv": "^4.1.8",
+		"box/spout": "^3.3",
+		"spipu/html2pdf": "^5.2",
+		"dapphp/securimage": "^4.0"
+	},
+	"require-dev": {
+		"mikey179/vfsstream": "1.1.*",
+		"phpunit/phpunit": "4.* || 5.*",
+		"friendsofphp/php-cs-fixer": "^3.0"
+	},
+	"suggest": {
+		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
+	},
+	"support": {
+		"forum": "https://www.facebook.com/groups/opensid",
+		"slack": "https://opensid.slack.com",
+		"source": "https://github.com/OpenSID"
+	}
+}

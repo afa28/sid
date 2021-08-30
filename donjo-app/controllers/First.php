@@ -486,7 +486,6 @@ class First extends Web_Controller {
 			->get_where("artikel a",["id" => $id ])
 			->row_array();
 		// Periksa isian captcha
-		include FCPATH . 'securimage/securimage.php';
 		$securimage = new Securimage();
 		$_SESSION['validation_error'] = false;
 

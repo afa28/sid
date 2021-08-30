@@ -54,9 +54,21 @@
  * NOTE: If you change these, also change the error_reporting() code below
  */
 
-  // Setting $_SERVER['CI_ENV'] dilakukan di file .env (di .gitignore	)
-	if (file_exists('.env')) include '.env';
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
+// Load composer
+if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+	echo 'Your folder path does not appear to be set correctly. Please open the following file and correct this: ' . pathinfo(__FILE__, PATHINFO_BASENAME);
+	exit();
+}
+
+require_once(__DIR__ . '/vendor/autoload.php');
+
+if (file_exists('.env')) {
+	// Load dotenv ke $_SERVER
+	$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+	$dotenv->load();
+}
+
+define('ENVIRONMENT', $_SERVER['CI_ENV'] ?? 'development');
 
 /*
  *---------------------------------------------------------------
@@ -100,7 +112,7 @@ switch (ENVIRONMENT)
  * This variable must contain the name of your "system" directory.
  * Set the path if it is not in the same directory as this file.
  */
-	$system_path = 'system';
+	$system_path = 'vendor/codeigniter/framework/system';
 
 /*
  *---------------------------------------------------------------

@@ -1,4 +1,6 @@
-<?php class Surat_model extends CI_Model {
+<?php
+
+class Surat_model extends CI_Model {
 
 	public function __construct()
 	{
@@ -1029,7 +1031,6 @@
     $content = ob_get_clean();
 
     // convert in PDF
-    require_once(FCPATH.'vendor/html2pdf/html2pdf.class.php');
     try
     {
       $html2pdf = new HTML2PDF();

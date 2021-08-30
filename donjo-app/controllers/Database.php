@@ -40,10 +40,7 @@
  * @link 	https://github.com/OpenSID/OpenSID
  */
 
-require_once 'vendor/spout/src/Spout/Autoloader/autoload.php';
-
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
-use Box\Spout\Common\Entity\Row;
 
 class Database extends Admin_Controller {
 
